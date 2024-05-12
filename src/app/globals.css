@@ -2,32 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+* {
+  user-select: none;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .header-video {
+    position: relative;
+    top: 0;
+  }
+  .header-video::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: linear-gradient(
+        rgba(18, 18, 18, 0) 10vw,
+        rgb(18, 18, 18) 46.875vw
+      ),
+      linear-gradient(to left, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0) 50%);
+    opacity: 0.8;
+    bottom: -190px;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .active {
+    @apply text-[#6eb8ff];
+  }
+
+  .footer-menu {
+    color: white;
+    border-top: 1px solid rgb(55, 56, 62);
+  }
+
+  .namava-logo {
+    background: linear-gradient(
+      to bottom,
+      rgba(25, 147, 255, 1),
+      rgba(0, 95, 180, 1)
+    );
+    text-align: center;
+    border-radius: 8px;
+  }
+}
+
+.swiper-button-next::after {
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: all 0.7s ease !important;
+  padding: 500px 20px !important;
+}
+
+.swiper-button-prev::after {
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.7s ease !important;
+  padding: 500px 20px !important;
+}
+
+.swiper-button-disabled {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.video-player {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+  position: absolute;
+  min-height: 100%;
+  object-fit: cover;
+}
+@layer base {
+  @font-face {
+    font-family: "Iran";
+    src: url("/fonts/IRANSans/IRANSans.ttf");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "IranMedium";
+    src: url("/fonts/IRANSans/IRANSans_Medium.ttf");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Dana";
+    src: url("/fonts/Dana/woff2/DanaFaNum-Regular.woff2");
+    font-display: swap;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 12px !important;
+    left: 0;
+    right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper:hover .swiper-button-next::after,
+  .swiper:hover .swiper-button-prev::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .swiper:hover .swiper-button-next::after {
+    background: linear-gradient(90deg, #000, #ffffff00);
+  }
+
+  .swiper:hover .swiper-button-prev::after {
+    background: linear-gradient(-90deg, #000, #ffffff00);
+  }
+}
+
+@media (max-width: 576px) {
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    opacity: 0;
+    visibility: hidden;
   }
 }
