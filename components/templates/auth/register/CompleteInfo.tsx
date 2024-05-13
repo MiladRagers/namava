@@ -1,4 +1,8 @@
 "use client";
+import Button from "@/components/modules/auth/Button/Button";
+import Input from "@/components/modules/auth/Input/Input";
+import Label from "@/components/modules/auth/Label/Label";
+import Desc from "@/components/modules/auth/desc/desc";
 import OtpIcon from "@/icons/OtpIcon";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -14,44 +18,33 @@ function CompleteInfo() {
         <OtpIcon />
         <span className="text-white text-sm md:text-base">ثبت نام</span>
       </div>
-      <p className="text-[#ccc] text-xs md:text-sm my-6">
-        لطفا اطلاعات زیر را تکمیل کنید.
-      </p>
+      <Desc title="لطفا اطلاعات زیر را تکمیل کنید." />
       <div className="space-y-[24px]">
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">
-            نام و نام خانوادگی
-          </label>
+          <Label title="نام و نام خانوادگی" />
           <div
             className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
           >
-            <input
+            <Input
               type="email"
               placeholder="نام و نام خانوادگی خود وارد کنید"
-              className={`h-[52px] font-Dana w-full text-[13px] md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
             />
             <FaRegCircleUser className={`text-xl ml-4`} />
           </div>
         </div>
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">
-            نام کاربری
-          </label>
+          <Label title="نام کاربری" />
           <div
             className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
           >
-            <input
-              type="email"
-              placeholder="نام کاربری خود را وارد کنید"
-              className={`h-[52px] font-Dana w-full text-[13px] md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
-            />
+            <Input type="email" placeholder="نام کاربری خود را وارد کنید" />
             <FaLaptop className={`text-xl ml-4`} />
           </div>
         </div>
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">رمز عبور</label>
+          <Label title="رمز عبور" />
           <div className="bg-[#121212] rounded-xl flex items-center justify-between">
-            <input
+            <Input
               type={isShowPass ? "password" : "text"}
               onChange={(e) => {
                 if (e.target.value.trim()) {
@@ -62,9 +55,7 @@ function CompleteInfo() {
               }}
               dir={isActivePassword ? "ltr" : "rtl"}
               placeholder="رمز عبور خود را وارد کنید."
-              className={`h-[52px] ${
-                isActivePassword ? "text-left" : "text-right"
-              } appearance-none  font-Dana w-full text-[13px]  md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
+              className={isActivePassword ? "text-left" : "text-right"}
             />
             {isShowPass ? (
               <FiEye
@@ -87,12 +78,7 @@ function CompleteInfo() {
             <li>رمز باید ترکیبی از حروف و اعداد باشد</li>
           </ul>
         </div>
-        <button
-          className="text-sm w-full  bg-namava font-IranMedium disabled:bg-namava py-3 rounded-xl !mt-10"
-          disabled
-        >
-          ادامه
-        </button>
+        <Button>ادامه</Button>
 
         <p className="text-sm md:text-center">
           با زدن دکمه ادامه{" "}

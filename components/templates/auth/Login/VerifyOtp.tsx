@@ -1,4 +1,8 @@
 "use client";
+import Button from "@/components/modules/auth/Button/Button";
+import Input from "@/components/modules/auth/Input/Input";
+import Label from "@/components/modules/auth/Label/Label";
+import Desc from "@/components/modules/auth/desc/desc";
 import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa6";
 import { FiCode } from "react-icons/fi";
@@ -13,18 +17,14 @@ function VerifyOtp() {
           ورود از طریق کد یکبار مصرف
         </span>
       </div>
-      <p className="text-[#ccc] text-xs md:text-sm my-6">
-        لطفا کد ارسال شده را وارد نمایید
-      </p>
+      <Desc title="لطفا کد ارسال شده را وارد نمایید" />
       <div className="space-y-[24px]">
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">
-            کد یکبار مصرف
-          </label>
+          <Label title="کد یکبار مصرف" />
           <div
             className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
           >
-            <input
+            <Input
               type="text"
               minLength={11}
               maxLength={11}
@@ -37,23 +37,15 @@ function VerifyOtp() {
                 }
               }}
               dir={isActiveMobileNumber ? "ltr" : "rtl"}
-              className={`h-[52px] font-Dana ${
-                isActiveMobileNumber ? "text-left" : "text-right"
-              }  w-full text-[13px] md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
+              className={isActiveMobileNumber ? "text-left" : "text-right"}
             />
             <FiCode className={`text-xl ml-4`} />
           </div>
         </div>
-        <button
-          className="text-sm w-full  bg-namava font-IranMedium disabled:bg-namava py-3 rounded-xl !mt-10"
-          disabled
-        >
-          ورود
-        </button>
+        <Button>ورود</Button>
       </div>
     </>
   );
 }
-
 
 export default VerifyOtp;

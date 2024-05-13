@@ -1,4 +1,8 @@
 "use client";
+import Button from "@/components/modules/auth/Button/Button";
+import Input from "@/components/modules/auth/Input/Input";
+import Label from "@/components/modules/auth/Label/Label";
+import Desc from "@/components/modules/auth/desc/desc";
 import Mobile from "@/icons/Mobile";
 import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiPhone } from "react-icons/fi";
@@ -15,18 +19,14 @@ function MobileLogin() {
           ورود از طریق شماره تلفن همراه
         </span>
       </div>
-      <p className="text-[#ccc] text-xs md:text-sm my-6">
-        کاربر گرامی ، لطفا شما همراه خود را با دقت وارد نمایید
-      </p>
+      <Desc title="کاربر گرامی ، لطفا شما همراه خود را با دقت وارد نمایید"/>
       <div className="space-y-[24px]">
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">
-            شماره تلفن همراه
-          </label>
+          <Label title="شماره تلفن همراه" />
           <div
             className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
           >
-            <input
+            <Input
               type="text"
               minLength={11}
               maxLength={11}
@@ -39,17 +39,15 @@ function MobileLogin() {
                 }
               }}
               dir={isActiveMobileNumber ? "ltr" : "rtl"}
-              className={`h-[52px] font-Dana ${
-                isActiveMobileNumber ? "text-left" : "text-right"
-              }  w-full text-[13px] md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
+              className={isActiveMobileNumber ? "text-left" : "text-right"}
             />
             <FiPhone className={`text-xl ml-4`} />
           </div>
         </div>
         <div className="flex flex-col gap-y-3">
-          <label className="text-xs md:text-sm font-IranMedium">رمز عبور</label>
+          <Label title="رمز عبور" />
           <div className="bg-[#121212] rounded-xl flex items-center justify-between">
-            <input
+            <Input
               type={isShowPass ? "password" : "text"}
               onChange={(e) => {
                 if (e.target.value.trim()) {
@@ -60,9 +58,7 @@ function MobileLogin() {
               }}
               dir={isActivePassword ? "ltr" : "rtl"}
               placeholder="رمز عبور خود را وارد کنید."
-              className={`h-[52px] ${
-                isActivePassword ? "text-left" : "text-right"
-              } appearance-none  font-Dana w-full text-[13px]  md:text-sm placeholder:text-gray-200 px-2.5 outline-none bg-transparent`}
+              className={isActivePassword ? "text-left" : "text-right"}
             />
             {isShowPass ? (
               <FiEye
@@ -77,12 +73,7 @@ function MobileLogin() {
             )}
           </div>
         </div>
-        <button
-          className="text-sm w-full  bg-namava font-IranMedium disabled:bg-namava py-3 rounded-xl !mt-10"
-          disabled
-        >
-          ورود
-        </button>
+        <Button>ورود</Button>
       </div>
     </>
   );
