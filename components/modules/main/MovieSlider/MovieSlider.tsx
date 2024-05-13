@@ -20,7 +20,6 @@ function MovieSlider() {
           className="mySwiper"
           modules={[Navigation, Autoplay]}
           navigation={true}
-          
           breakpoints={{
             0: {
               slidesPerView: 3,

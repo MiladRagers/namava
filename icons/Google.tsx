@@ -54,12 +54,12 @@ function Google() {
           y2="-2.40285"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#00A0FF"></stop>
-          <stop offset="0.01" stop-color="#00A1FF"></stop>
-          <stop offset="0.26" stop-color="#00BEFF"></stop>
-          <stop offset="0.51" stop-color="#00D2FF"></stop>
-          <stop offset="0.76" stop-color="#00DFFF"></stop>
-          <stop offset="1" stop-color="#00E3FF"></stop>
+          <stop stopColor="#00A0FF"></stop>
+          <stop offset="0.01" stopColor="#00A1FF"></stop>
+          <stop offset="0.26" stopColor="#00BEFF"></stop>
+          <stop offset="0.51" stopColor="#00D2FF"></stop>
+          <stop offset="0.76" stopColor="#00DFFF"></stop>
+          <stop offset="1" stopColor="#00E3FF"></stop>
         </linearGradient>
         <linearGradient
           id="paint1_linear_21485_166848"
@@ -69,10 +69,10 @@ function Google() {
           y2="9.66758"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE000"></stop>
-          <stop offset="0.41" stop-color="#FFBD00"></stop>
-          <stop offset="0.78" stop-color="#FFA500"></stop>
-          <stop offset="1" stop-color="#FF9C00"></stop>
+          <stop stopColor="#FFE000"></stop>
+          <stop offset="0.41" stopColor="#FFBD00"></stop>
+          <stop offset="0.78" stopColor="#FFA500"></stop>
+          <stop offset="1" stopColor="#FF9C00"></stop>
         </linearGradient>
         <linearGradient
           id="paint2_linear_21485_166848"
@@ -82,8 +82,8 @@ function Google() {
           y2="40.1858"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF3A44"></stop>
-          <stop offset="1" stop-color="#C31162"></stop>
+          <stop stopColor="#FF3A44"></stop>
+          <stop offset="1" stopColor="#C31162"></stop>
         </linearGradient>
         <linearGradient
           id="paint3_linear_21485_166848"
@@ -93,11 +93,11 @@ function Google() {
           y2="15.9344"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#32A071"></stop>
-          <stop offset="0.07" stop-color="#2DA771"></stop>
-          <stop offset="0.48" stop-color="#15CF74"></stop>
-          <stop offset="0.8" stop-color="#06E775"></stop>
-          <stop offset="1" stop-color="#00F076"></stop>
+          <stop stopColor="#32A071"></stop>
+          <stop offset="0.07" stopColor="#2DA771"></stop>
+          <stop offset="0.48" stopColor="#15CF74"></stop>
+          <stop offset="0.8" stopColor="#06E775"></stop>
+          <stop offset="1" stopColor="#00F076"></stop>
         </linearGradient>
       </defs>
     </svg>

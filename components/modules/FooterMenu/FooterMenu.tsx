@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import More from "@/icons/More";
@@ -5,8 +6,14 @@ import Folder from "@/icons/Folder";
 import Category from "@/icons/Category";
 import Magni from "@/icons/Magni";
 import Home from "@/icons/Home";
+import { usePathname } from "next/navigation";
 
 function FooterMenu() {
+  const pathname = usePathname();
+  if (pathname.includes("/login") || pathname.includes("/register")) {
+    return null;
+  }
+
   return (
     <div className="block md:hidden sticky bottom-0 h-[60px] left-0 right-0 px-4 py-2 z-30 footer-menu bg-namavaBlack">
       <ul className="flex items-center justify-between  ">

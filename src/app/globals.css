@@ -50,6 +50,7 @@
     text-align: center;
     border-radius: 8px;
   }
+
 }
 
 .swiper-button-next::after {
@@ -122,13 +123,13 @@
     opacity: 1 !important;
     visibility: visible !important;
   }
-  .swiper:hover .swiper-button-next::after {
+  /* .swiper:hover .swiper-button-next::after {
     background: linear-gradient(90deg, #000, #ffffff00);
   }
 
   .swiper:hover .swiper-button-prev::after {
     background: linear-gradient(-90deg, #000, #ffffff00);
-  }
+  } */
 }
 
 @media (max-width: 576px) {

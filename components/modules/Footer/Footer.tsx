@@ -1,3 +1,4 @@
+"use client";
 import Apple from "@/icons/Apple";
 import Bazar from "@/icons/Bazar";
 import Google from "@/icons/Google";
@@ -7,10 +8,16 @@ import Telegram from "@/icons/Telegram";
 import Tiwter from "@/icons/Tiwter";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { FaChevronUp } from "react-icons/fa6";
 
 function Footer() {
+  const pathname = usePathname();
+  if (pathname.includes("/login") || pathname.includes("/register")) {
+    return null;
+  }
+
   return (
     <>
       <div className="text-[#ccc]  sticky bottom-0 z-30 my-auto h-[40px] hidden md:flex-center bg-namavaBlack">
@@ -60,27 +67,31 @@ function Footer() {
                 <div className="bg-[#37383e]  p-1.5 rounded-md flex items-center gap-x-1.5 md:gap-x-2 text-white">
                   <Bazar />
                   <div className="flex flex-col">
-                    <span className="text-[9px] text-gray-100">دریافت از</span>
-                    <span className="text-[12px] font-IranMedium hidden md:block">بازار</span>
+                    <span className="text-[9px] text-gray-100">دریافت</span>
+                    <span className="text-[12px] font-IranMedium line-clamp-1">
+                      بازار
+                    </span>
                   </div>
                 </div>
                 <div className="bg-[#37383e]  p-1.5 rounded-md flex items-center gap-x-1.5 md:gap-x-2 text-white">
                   <Apple />
                   <div className="flex flex-col">
                     <span className="text-[9px] text-gray-100">دریافت از</span>
-                    <span className="text-[12px] font-IranMedium hidden md:block">سیب اپ</span>
+                    <span className="text-[12px] font-IranMedium line-clamp-1">
+                      سیب اپ
+                    </span>
                   </div>
                 </div>
                 <div className="bg-[#37383e]  p-1.5 rounded-md flex items-center gap-x-1.5 md:gap-x-2 text-white">
                   <Google />
                   <div className="flex flex-col">
                     <span className="text-[9px] text-gray-100">دریافت از</span>
-                    <span className="text-[12px] font-IranMedium hidden md:block">
+                    <span className="text-[12px] font-IranMedium line-clamp-1">
                       گوگل پلی
                     </span>
                   </div>
                 </div>
-                <span className="font-IranMedium hidden md:block text-[#6eb8ff] text-sm">
+                <span className="font-IranMedium hidden md:hidden text-[#6eb8ff] text-sm">
                   بیشتر
                 </span>
               </div>
