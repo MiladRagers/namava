@@ -14,7 +14,7 @@ import { FaChevronUp } from "react-icons/fa6";
 
 function Footer() {
   const pathname = usePathname();
-  if (pathname.includes("/login") || pathname.includes("/register")) {
+  if (pathname.includes("/login") || pathname.includes("/register") || pathname.includes("forgot")) {
     return null;
   }
 

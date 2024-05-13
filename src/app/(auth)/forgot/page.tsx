@@ -1,24 +1,24 @@
-import CompleteInfo from "@/components/templates/auth/register/CompleteInfo";
-import SendPhone from "@/components/templates/auth/register/SendPhone";
-import VerifyOtp from "@/components/templates/auth/register/VerifyOtp";
+import ChangePassword from "@/components/templates/auth/forgot/ChangePassword";
+import SendPhone from "@/components/templates/auth/forgot/SendPhone";
+import VerifyOtp from "@/components/templates/auth/forgot/VerifyOtp";
 import Logo from "@/icons/Logo";
 import Link from "next/link";
 import React from "react";
 
-export type ResgisterProps = {
+export type ForgotProps = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-function RegisterPage({ searchParams }: ResgisterProps) {
+function ForgotPage({ searchParams }: ForgotProps) {
   return (
-    <div className="bg-namavaBlack md:bg-[#121212] flex-center min-h-screen text-white py-10">
-      <div className="login-form relative  md:shadow w-[500px]  bg-namavaBlack px-[40px] md:px-[60px] py-[20px] md:py-[30px] rounded-lg">
+    <div className="bg-namavaBlack md:bg-[#121212] flex-center min-h-screen text-white">
+      <div className="login-form relative  md:shadow w-[500px] max-h-[641px] bg-namavaBlack px-[40px] md:px-[60px] py-[20px] md:py-[30px] rounded-lg">
         <Logo className="fill-namava !w-[96px] !h-[61px] mx-auto" />
         <Link
-          href={"/login"}
+          href={"/register"}
           className="text-namava absolute left-10 md:left-20 top-10 md:top-12"
         >
-          ورود
+          ثبت نام
         </Link>
         {searchParams?.type === "verify" && (
           <>
@@ -28,7 +28,7 @@ function RegisterPage({ searchParams }: ResgisterProps) {
             </div>
           </>
         )}
-        {searchParams?.type === "detail" && <CompleteInfo />}
+        {searchParams?.type === "finally" && <ChangePassword />}
         {(!searchParams?.type || searchParams?.type === "phone") && (
           <SendPhone />
         )}
@@ -37,12 +37,12 @@ function RegisterPage({ searchParams }: ResgisterProps) {
   );
 }
 
-export async function generateMetadata({ searchParams }: ResgisterProps) {
+export async function generateMetadata({ searchParams }: ForgotProps) {
   const registerType =
     searchParams?.type === "verify"
       ? "کد یکبار مصرف"
-      : searchParams?.type === "detail"
-      ? "اطلاعات بیشتر"
+      : searchParams?.type === "finally"
+      ? "رمز عبور جدید"
       : "شماره همراه";
 
   return {
@@ -50,4 +50,4 @@ export async function generateMetadata({ searchParams }: ResgisterProps) {
   };
 }
 
-export default RegisterPage;
+export default ForgotPage;

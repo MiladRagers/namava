@@ -10,16 +10,16 @@ function VerifyOtp() {
       <div className="flex items-center gap-x-4 mt-5">
         <FaEnvelope className="text-xl text-namava" />
         <span className="text-white text-sm md:text-base">
-          ورود از طریق کد یکبار مصرف
+          ثبت نام با شماره تلفن همراه
         </span>
       </div>
       <p className="text-[#ccc] text-xs md:text-sm my-6">
-        لطفا کد ارسال شده را وارد نمایید
+        یک کد به شماره 09336084013 ارسال شد ، لطفا کد را وارد کنید.
       </p>
       <div className="space-y-[24px]">
         <div className="flex flex-col gap-y-3">
           <label className="text-xs md:text-sm font-IranMedium">
-            کد یکبار مصرف
+            کد فعال سازی
           </label>
           <div
             className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
@@ -28,7 +28,7 @@ function VerifyOtp() {
               type="text"
               minLength={11}
               maxLength={11}
-              placeholder="کد یکبار مصرف را وارد نمایید"
+              placeholder="کد فعال سازی را وارد نمایید"
               onChange={(e) => {
                 if (e.target.value.trim()) {
                   setIsActiveMobileNumber(true);
@@ -48,12 +48,17 @@ function VerifyOtp() {
           className="text-sm w-full  bg-namava font-IranMedium disabled:bg-namava py-3 rounded-xl !mt-10"
           disabled
         >
+          ارسال مجدد
+        </button>
+        <button
+          className="text-sm w-full  bg-namava font-IranMedium disabled:bg-namava py-3 rounded-xl !mt-10"
+          disabled
+        >
           ورود
         </button>
       </div>
     </>
   );
 }
-
 
 export default VerifyOtp;
