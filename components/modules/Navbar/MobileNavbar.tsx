@@ -104,7 +104,7 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
         </div>
       </div>
 
-      <Overlay isOpen={isOpen} onClose={onOpen} />
+      <Overlay isOpen={isOpen} onClose={onOpen} className="z-40" />
     </>
   );
 }

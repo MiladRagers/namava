@@ -6,13 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { HiMiniBars3 } from "react-icons/hi2";
 import MobileNavbar from "./MobileNavbar";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   let navBar = useRef<any>(null);
-  console.log(navBar);
-  
+
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     let lastScroll = 0;
@@ -22,11 +22,14 @@ function Navbar() {
       if (navBar.current !== null) {
         if (newScroll === 0) {
           navBar.current.style.backgroundColor = "transparent";
+          navBar.current.position = "fixed";
         } else if (newScroll > lastScroll) {
           navBar.current.style.top = "-80px";
           navBar.current.style.backgroundColor = "#121212";
+          navBar.current.position = "fixed";
         } else {
           navBar.current.style.top = "0px";
+          navBar.current.position = "sticky";
         }
       }
       lastScroll = newScroll;
@@ -36,7 +39,11 @@ function Navbar() {
     return () => document.removeEventListener("scroll", scrollHandler);
   }, []);
 
-  if (pathname.includes("/login") || pathname.includes("/register") || pathname.includes("forgot")) {
+  if (
+    pathname.includes("/login") ||
+    pathname.includes("/register") ||
+    pathname.includes("forgot")
+  ) {
     return null;
   }
 
@@ -44,7 +51,7 @@ function Navbar() {
     <>
       <div
         ref={navBar}
-        className={`fixed  z-40  right-0  transition-all duration-500 left-0 py-2 px-[20px] lg:px-[43px] flex items-center justify-between`}
+        className={`fixed top-0  z-40  right-0  transition-all duration-500 left-0 py-2 px-[20px] lg:px-[43px] flex items-center justify-between`}
       >
         <div className="flex items-center md:gap-x-5 lg:gap-x-8">
           <div className="flex items-center gap-x-2">
@@ -52,7 +59,9 @@ function Navbar() {
               className="text-white text-2xl block md:hidden"
               onClick={() => setIsOpen(true)}
             />
-            <Logo />
+            <Link href={"/"}>
+              <Logo />
+            </Link>
           </div>
           <ul className="hidden md:flex child:block items-center md:gap-x-5 lg:gap-x-8 text-xs text-white hover:child:text-namava">
             <li>
@@ -67,10 +76,10 @@ function Navbar() {
               <Link href={"/"}>سریال ها</Link>
             </li>
             <li>
-              <Link href={"/"}>دسته بندی</Link>
+              <Link href={"/category"}>دسته بندی</Link>
             </li>
             <li>
-              <Link href={"/"}>دسته بندی</Link>
+              <Link href={"/category"}>دسته بندی</Link>
             </li>
             <li>
               <Link href={"/"}>کودکان</Link>
@@ -84,7 +93,9 @@ function Navbar() {
           </ul>
         </div>
         <div className="flex items-center gap-x-5">
-          <Search />
+          <Link href={"/search"}>
+            <Search />
+          </Link>
           <Link href={""}>
             <Image
               src={"/images/user.png"}
