@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  let navBar = useRef<any>(null);
+  let navBar = useRef<any>("");
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -19,7 +19,7 @@ function Navbar() {
     const scrollHandler = () => {
       let newScroll = document.documentElement.scrollTop;
 
-      if (navBar.current !== null) {
+      if (navBar.current !== "") {
         if (newScroll === 0) {
           navBar.current.style.backgroundColor = "transparent";
           navBar.current.position = "fixed";

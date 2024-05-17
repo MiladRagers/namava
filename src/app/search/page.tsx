@@ -1,22 +1,14 @@
 import Filter from "@/components/templates/search/Filter";
-import Search from "@/icons/Search";
+import SearchBox from "@/components/templates/search/Search";
 import SearchMovie from "@/icons/SearchMovie";
 import React from "react";
 
-
-function page() {
+function SearchPage() {
   return (
     <div className="flex container pt-24 pb-20 gap-x-8 min-h-screen text-white">
       <Filter />
       <div className="w-full h-96 md:mr-[350px]">
-        <div className="bg-[#37383e] w-full py-4 px-6 rounded-xl flex items-center gap-x-2">
-          <Search className="!w-[30px] !h-[30px]" />
-          <input
-            type="text"
-            placeholder="فیلم ، سریال ، بازیگر و ژانر"
-            className="bg-transparent outline-none text-[#cccc] w-full"
-          />
-        </div>
+        <SearchBox />
         <div className="flex-center flex-col gap-y-4 mt-10">
           <SearchMovie />
           <p className="text-[#bab8b8] max-w-[400px] text-sm/6 text-center px-[18px]">
@@ -35,4 +27,4 @@ export async function generateMetadata() {
   };
 }
 
-export default page;
+export default SearchPage;

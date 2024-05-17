@@ -55,6 +55,20 @@
   .movie-overlay {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
   }
+
+  .radio-input {
+    width: 15px;
+    height: 15px;
+    appearance: none;
+    border: 1px solid white;
+    border-radius: 100%;
+  }
+
+  .radio-input:checked {
+    background-color: #1993ff;
+    border: 1px solid #1993ff;
+    padding: 5px;
+  }
 }
 
 .swiper-button-next::after {

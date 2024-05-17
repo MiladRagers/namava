@@ -1,9 +1,8 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { BiSolidChevronDown } from "react-icons/bi";
 import FilterItem from "./FilterItem";
-import { genres, voiceType } from "../../../public/db";
+import { genres, voiceType, orderType, date } from "../../../public/db";
 import { country } from "../../../public/db";
 
 function Filter() {
@@ -78,18 +77,23 @@ function Filter() {
           title="صدا و زیر نویس"
           slug="voice"
         />
-        <div className="flex items-center justify-between py-4">
-          <span>سال ساخت</span>
-          <span>
-            <BiSolidChevronDown className="text-xl font-bold" />
-          </span>
-        </div>
-        <div className="flex items-center justify-between py-4">
-          <span>مرتب سازی</span>
-          <span>
-            <BiSolidChevronDown className="text-xl font-bold" />
-          </span>
-        </div>
+        <FilterItem
+          curOpen={curOpen}
+          onOpen={setCurOpen}
+          items={[]}
+          title="سال ساخت"
+          slug="year"
+          type="date"
+          date={date}
+        />
+        <FilterItem
+          onOpen={setCurOpen}
+          curOpen={curOpen}
+          items={orderType}
+          slug="order"
+          title="مرتب سازی"
+          type="selectBox"
+        />
       </section>
     </div>
   );

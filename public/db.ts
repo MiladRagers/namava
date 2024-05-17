@@ -64,3 +64,30 @@ export let voiceType = [
   { name: "زیرنویس انگلیسی", id: 16 },
   { name: "مخصوص ناشنوایان", id: 17 },
 ];
+
+export let orderType = [
+  { name: "پیش فرض (مرتبط ترین)", id: 1, slug: "default" },
+  { name: "تازه های نماوا", id: 2, slug: "movie-desc" },
+  { name: "امتیاز IMDB", id: 3, slug: "score-desc" },
+  { name: "سال ساخت (جدید ترین)", id: 4, slug: "created-desc" },
+  { name: "سال ساخت (قدیمی ترین)", id: 5, slug: "created-asc" },
+];
+
+export let date: { shamsi: number[]; miladi: number[] } = {
+  shamsi: [],
+  miladi: [],
+};
+
+const generateShamsi = () => {
+  for (let i = 1300; i <= 1403; i++) {
+    date.shamsi.push(i);
+  }
+};
+
+const generateMiladi = () => {
+  for (let i = 1900; i <= 2024; i++) {
+    date.miladi.push(i);
+  }
+};
+generateMiladi();
+generateShamsi();
