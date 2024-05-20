@@ -9,7 +9,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
 function Slider() {
   return (
-    <div className="px-4 md:px-0 my-10">
+    <div className="px-4 md:px-0 mt-5 md:mt-10 relative bottom-[47px]">
       <Swiper
         slidesPerView={3}
         spaceBetween={15}

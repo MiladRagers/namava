@@ -13,7 +13,7 @@ function StarsSlider({ title }: StarsSlider) {
       <h3 className="font-IranMedium text-base md:text-lg">{title}</h3>
       <div className="my-10">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={7}
           spaceBetween={20}
           autoplay={true}
           className="mySwiper"

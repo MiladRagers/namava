@@ -23,13 +23,16 @@ function Navbar() {
         if (newScroll === 0) {
           navBar.current.style.backgroundColor = "transparent";
           navBar.current.position = "fixed";
+          navBar.current.style.boxShadow = "none";
         } else if (newScroll > lastScroll) {
           navBar.current.style.top = "-80px";
           navBar.current.style.backgroundColor = "#121212";
           navBar.current.position = "fixed";
+          navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
         } else {
           navBar.current.style.top = "0px";
           navBar.current.position = "sticky";
+          navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
         }
       }
       lastScroll = newScroll;
@@ -51,7 +54,7 @@ function Navbar() {
     <>
       <div
         ref={navBar}
-        className={`fixed top-0  z-40  right-0  transition-all duration-500 left-0 py-2 px-[20px] lg:px-[43px] flex items-center justify-between`}
+        className={`fixed navbar-container top-0  z-40  right-0  transition-all duration-500 left-0 py-2 px-[20px] lg:px-[43px] flex items-center justify-between`}
       >
         <div className="flex items-center md:gap-x-5 lg:gap-x-8">
           <div className="flex items-center gap-x-2">

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Dislike() {
+function Dislike({ className }: { className: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ function Dislike() {
       width="25"
       height="25"
       preserveAspectRatio="xMidYMid meet"
+      className={className}
     >
       <g>
         <g transform="matrix(1,0,0,1,0,0)" opacity="1">

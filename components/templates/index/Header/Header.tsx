@@ -4,13 +4,37 @@ import React from "react";
 import IMBD from "../../../../icons/IMBD";
 import { GrCircleInformation } from "react-icons/gr";
 import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
-function Header() {
+
+type Header = {
+  isImage?: boolean;
+  isTitle?: boolean;
+};
+function Header({ isImage, isTitle }: Header) {
   return (
     <>
-      <header className="header-video min-h-[67vh] md:min-h-[90vh]">
-        <video className="video-player " autoPlay muted loop>
-          <source src="/images/okazion.mp4" />
-        </video>
+      <header className="header-video min-h-[67vh] md:min-h-[93vh]">
+        {isImage ? (
+          <>
+            <Image
+              className="w-full title-image hidden lg:block"
+              src="/images/havieee.jpg"
+              alt="havieee.jpg"
+              width={1920}
+              height={1080}
+            />
+            <Image
+              className="w-full title-image block lg:hidden"
+              src="/images/okamobile.jpg"
+              alt="havieee.jpg"
+              width={1920}
+              height={1080}
+            />
+          </>
+        ) : (
+          <video className="video-player " autoPlay muted loop>
+            <source src="/images/okazion.mp4" />
+          </video>
+        )}
         <div className="px-[43px] top-52 md:top-28  absolute z-20">
           <Image
             src={"/images/ocazionTitle.png"}
@@ -69,14 +93,16 @@ function Header() {
             </p>
           </div>
         </div>
-        <div className="absolute left-10 bottom-6 hidden md:flex items-center gap-x-3 z-20">
-          <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-            <FaChevronRight className="text-[16px] text-gray-400" />
-          </button>
-          <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-            <FaChevronLeft className="text-[16px] text-gray-400" />
-          </button>
-        </div>
+        {!isTitle && (
+          <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
+            <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+              <FaChevronRight className="text-[16px] text-gray-400" />
+            </button>
+            <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+              <FaChevronLeft className="text-[16px] text-gray-400" />
+            </button>
+          </div>
+        )}
       </header>
     </>
   );

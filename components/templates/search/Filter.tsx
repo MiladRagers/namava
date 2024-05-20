@@ -4,8 +4,14 @@ import React, { useState } from "react";
 import FilterItem from "./FilterItem";
 import { genres, voiceType, orderType, date } from "../../../public/db";
 import { country } from "../../../public/db";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-function Filter() {
+type Filter = {
+  className?: string;
+  onShow?: any;
+};
+
+function Filter({ className, onShow }: Filter) {
   const [curOpen, setCurOpen] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -21,10 +27,20 @@ function Filter() {
     router.replace(`${pathname}?${params}`);
   };
 
+  
+
   return (
-    <div className="w-[300px] hidden md:block fixed  bg-[#37383e] rounded-xl  py-4 px-6">
-      <section className="flex items-center justify-between">
-        <span className="text-white">فیلترها</span>
+    <div
+      className={`w-[300px] fixed  bg-[#37383e] rounded-xl  py-4 px-6 ${className}`}
+    >
+      <section className="flex items-center justify-between pb-5 md:pb-0">
+        <div className="flex items-center gap-x-2">
+          <BiChevronRight
+            className="block md:hidden text-white text-2xl"
+            onClick={() => onShow(false)}
+          />
+          <span className="text-white">فیلترها</span>
+        </div>
         <span
           className="text-namava text-sm"
           onClick={() => router.replace(pathname)}

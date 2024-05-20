@@ -11,12 +11,13 @@ import { FaPlay } from "react-icons/fa6";
 import IMBD from "@/icons/IMBD";
 import Heart from "@/icons/Heart";
 import MicroPhone from "@/icons/MicroPhone";
-function MovieSlider() {
+
+function MovieSlider({ title }: { title: string }) {
   const [movieId, setMovieId] = useState<number | null>(null);
   return (
     <div>
       <div className="container">
-        <SliderTitle title="ویژه" link="/" key={crypto.randomUUID()} />
+        <SliderTitle title={title} link="/" key={crypto.randomUUID()} />
         <div className="my-10  md:h-[21rem]">
           <Swiper
             slidesPerView={3}
@@ -101,7 +102,9 @@ function MovieSlider() {
                       </div>
                       <div className="flex  gap-x-1">
                         <MicroPhone />
-                        <span className="font-Dana mt-[1px]">زیرنویس انگلیسی</span>
+                        <span className="font-Dana mt-[1px]">
+                          زیرنویس انگلیسی
+                        </span>
                       </div>
                     </div>
                   </div>
