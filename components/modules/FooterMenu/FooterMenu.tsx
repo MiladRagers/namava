@@ -10,7 +10,12 @@ import { usePathname } from "next/navigation";
 
 function FooterMenu() {
   const pathname = usePathname();
-  if (pathname.includes("/login") || pathname.includes("/register")) {
+  if (
+    pathname.includes("/login") ||
+    pathname.includes("/register") ||
+    pathname.includes("/profile-list") ||
+    pathname.includes("/add-profile")
+  ) {
     return null;
   }
 

@@ -45,7 +45,9 @@ function Navbar() {
   if (
     pathname.includes("/login") ||
     pathname.includes("/register") ||
-    pathname.includes("forgot")
+    pathname.includes("forgot") ||
+    pathname.includes("/profile-list") ||
+    pathname.includes("/add-profile")
   ) {
     return null;
   }
