@@ -34,6 +34,7 @@ const config: Config = {
         namava: "#1993ff",
         namavaBlack: "#222327",
         customGray: "#ccc",
+        namavaGreen : "rgb(153, 193, 77)"
       },
     },
     fontFamily: {

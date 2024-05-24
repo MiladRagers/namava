@@ -1,16 +1,19 @@
 "use client";
+import "swiper/css";
+import "swiper/css/navigation";
 import React, { useState } from "react";
 import SliderTitle from "./SiderTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import { GrCircleInformation } from "react-icons/gr";
 import { FaPlay } from "react-icons/fa6";
 import IMBD from "@/icons/IMBD";
 import Heart from "@/icons/Heart";
 import MicroPhone from "@/icons/MicroPhone";
+import Plus from "@/icons/Plus";
+import Like from "@/icons/Like";
+import Dislike from "@/icons/Dislike";
 
 function MovieSlider({ title }: { title: string }) {
   const [movieId, setMovieId] = useState<number | null>(null);
@@ -262,10 +265,19 @@ function MovieSlider({ title }: { title: string }) {
                 <p className="my-3 text-white text-xs/6  text-center md:text-right">
                   اکازیون، چهارشنبه ها ساعت ۸ صبح به صورت اختصاصی در نماوا
                 </p>
-                <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
+                <div className="flex items-center justify-center w-[500px] md:justify-start gap-x-4 mt-4">
                   <button className="bg-white text-namavaBlack hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
                     <FaPlay />
                     خرید اشتراک
+                  </button>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Plus />
+                  </button>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Like />
+                  </button>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Dislike />
                   </button>
                   <button className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava">
                     <GrCircleInformation className="text-3xl" />

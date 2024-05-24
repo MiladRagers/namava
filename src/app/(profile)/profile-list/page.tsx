@@ -18,7 +18,7 @@ function ProfileList() {
       </div>
       <div className="flex items-center justify-center flex-col mt-10 md:mt-24">
         <h1 className="text-xl md:text-3xl">چه کسی تماشا می‌کند؟</h1>
-        <div className="flex items-center justify-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
+        <div className="flex-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
           <div>
             <Image
               src="/images/user.png"
@@ -56,7 +56,7 @@ function ProfileList() {
             <h2 className="text-center mt-3">افزودن پروفایل</h2>
           </div>
         </div>
-        <Button className="w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
+        <Button className="!w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
           <IoMdSettings className="text-xl" />
           <span className="text-xs">تنظیمات پروفایل</span>
         </Button>

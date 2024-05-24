@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <Slider />
       <div className="text-white">
-        <MovieSlider />
+        <MovieSlider title="" />
         <StarsSlider title="ستارگان" />
         <Collections title="مجموعه فیلم ها" />
       </div>
