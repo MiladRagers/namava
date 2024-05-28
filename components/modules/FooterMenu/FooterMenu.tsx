@@ -14,7 +14,9 @@ function FooterMenu() {
     pathname.includes("/login") ||
     pathname.includes("/register") ||
     pathname.includes("/profile-list") ||
-    pathname.includes("/add-profile")
+    pathname.includes("/add-profile") ||
+    pathname.includes("/pin-lock") ||
+    pathname.includes("/kids")
   ) {
     return null;
   }

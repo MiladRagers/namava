@@ -16,24 +16,15 @@ import Overlay from "../Overlay/Overlay";
 function Footer() {
   const [isShowMoreMenu, setIsShowMoreMenu] = useState(false);
 
-  // useEffect(() => {
-  //   const clickHandler = (e: any) => {
-  //     if (e.target.id !== "more-menu") {
-  //       setIsShowMoreMenu(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("click", (e) => clickHandler(e));
-
-  //   return () => document.removeEventListener("click", clickHandler);
-  // }, []);
   const pathname = usePathname();
   if (
     pathname.includes("/login") ||
     pathname.includes("/register") ||
     pathname.includes("forgot") ||
     pathname.includes("/profile-list") ||
-    pathname.includes("/add-profile")
+    pathname.includes("/add-profile") ||
+    pathname.includes("/pin-lock") ||
+    pathname.includes("/kids")
   ) {
     return null;
   }
