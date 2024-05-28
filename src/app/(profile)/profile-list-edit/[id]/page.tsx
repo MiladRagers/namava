@@ -1,14 +1,8 @@
-import Ages from "@/components/templates/profile/Ages";
-import EditProfile from "@/components/templates/profile/EditProfile";
+import WatchLimit from "@/components/templates/profile/WatchLimit";
 import React from "react";
 
 function page() {
-  return (
-    <>
-      <EditProfile />
-      <Ages />
-    </>
-  );
+  return <WatchLimit />;
 }
 
 export default page;

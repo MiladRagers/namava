@@ -2,13 +2,16 @@
 import React, { useState } from "react";
 import { FaCheck, FaCircleInfo } from "react-icons/fa6";
 
-function Ages() {
-  const [age, setAge] = useState(+3);
+type Ages = {
+  setAge: React.Dispatch<React.SetStateAction<number>>;
+  age: number;
+};
+function Ages({ setAge, age }: Ages) {
   return (
     <div className="max-w-[700px] mx-auto text-white flex flex-col items-center md:items-start gap-x-3 md:gap-x-8 px-4 md:px-10 py-6 md:py-[30px] bg-namavaBlack rounded-xl mt-10">
       <div className="flex items-center gap-x-3">
         <FaCircleInfo className="text-xl" />
-        <span>لطفا رده سنی را مشخص کنید</span>
+        <span className="text-lg">لطفا رده سنی را مشخص کنید</span>
       </div>
       <div className="w-full flex mt-8" dir="ltr">
         <div

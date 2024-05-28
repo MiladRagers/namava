@@ -12,7 +12,7 @@ function EditProfile() {
       </div>
       <div className="max-w-[700px] mx-auto">
         <div className="flex items-center md:items-start gap-x-3 md:gap-x-8 px-4 md:px-10 py-6 md:py-[30px] bg-namavaBlack rounded-xl mt-10">
-          <div className="relative flex-center group cursor-pointer w-[100px] md:w-[150px] h-[100px] md:h-[150px]">
+          <label htmlFor="profile-uploader" className="relative flex-center group cursor-pointer w-[100px] md:w-[150px] h-[100px] md:h-[150px]">
             <Image
               src="/images/customProfile.jpg"
               alt="user.svg"
@@ -23,16 +23,17 @@ function EditProfile() {
             <div className="absolute opacity-0  md:group-hover:opacity-100 group-hover:visible transition-all invisible bg-black/50 inset-0 rounded-full flex-center">
               <FaPencil className="text-lg" />
             </div>
-          </div>
+          </label>
+          <input type="file" id="profile-uploader" hidden />
           <div className="grow md:pt-4 space-y-5">
             <input
               type="text"
               placeholder="نام پروفایل"
               className="w-full text-sm md:text-base outline-none bg-gray-500/30 h-[52px] rounded-xl px-4 placeholder:text-white"
             />
-            <span className="text-[#6eb8ff] block text-xs md:text-base font-IranMedium">
+            <label htmlFor="profile-uploader" className="text-[#6eb8ff] block text-xs md:text-base font-IranMedium">
               انتخاب تصویر
-            </span>
+            </label>
           </div>
         </div>
       </div>
