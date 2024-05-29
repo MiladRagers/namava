@@ -1,7 +1,7 @@
 import React from "react";
 
 function Kids() {
-  return <div>Kids</div>;
+  return <div></div>;
 }
 
 export default Kids;
