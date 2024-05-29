@@ -9,10 +9,12 @@ import MobileNavbar from "./MobileNavbar";
 import { usePathname, useRouter } from "next/navigation";
 import KidLogo from "@/icons/KidLogo";
 import Button from "../auth/Button/Button";
+import ProfileMenu from "../profileMenu/ProfileMenu";
 
 function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
 
   const isKid = pathname.includes("/kids");
@@ -29,8 +31,10 @@ function Navbar() {
           navBar.current.position = "fixed";
           navBar.current.style.boxShadow = "none";
         } else if (newScroll > lastScroll) {
-          navBar.current.style.top = "-80px";
-          navBar.current.style.backgroundColor = "#121212";
+          navBar.current.style.top = "-100px";
+          isKid
+            ? (navBar.current.style.backgroundColor = "#fff")
+            : (navBar.current.style.backgroundColor = "#121212");
           navBar.current.position = "fixed";
           navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
         } else {
@@ -73,7 +77,9 @@ function Navbar() {
                 onClick={() => setIsOpen(true)}
               />
             )}
-            <Link  href={isKid ? "/kids" : "/"}>{isKid ? <KidLogo /> : <Logo />}</Link>
+            <Link href={isKid ? "/kids" : "/"}>
+              {isKid ? <KidLogo /> : <Logo />}
+            </Link>
           </div>
           <ul className="hidden md:flex child:block items-center md:gap-x-5 lg:gap-x-8 text-xs hover:child:text-namava">
             {!isKid ? (
@@ -119,22 +125,25 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-x-5">
           {isKid && (
-            <Button className="w-[120px] text-xs text-white !font-Iran">
+            <Button className="!w-[120px] text-xs text-white !font-Iran">
               تنظیمات کودک
             </Button>
           )}
           <Link href={isKid ? "/kids/search" : "/search"}>
-            <Search />
+            <Search className={isKid ? "fill-gray-600" : "fill-white"} />
           </Link>
-          <Link href={""}>
-            <Image
-              src={"/images/user.png"}
-              alt="user.png"
-              width={40}
-              height={40}
-              className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
-            />
-          </Link>
+          <div className="relative">
+            <Link href={""} onMouseEnter={() => setIsShowProfile(true)}>
+              <Image
+                src={"/images/user.png"}
+                alt="user.png"
+                width={40}
+                height={40}
+                className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
+              />
+            </Link>
+            <ProfileMenu isShow={isShowProfile} onShow={setIsShowProfile} />
+          </div>
           {!isKid && (
             <Link
               href={"/login"}
