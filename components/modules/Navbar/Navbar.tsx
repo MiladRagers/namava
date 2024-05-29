@@ -125,7 +125,7 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-x-5">
           {isKid && (
-            <Button className="!w-[120px] text-xs text-white !font-Iran">
+            <Button className="!w-[120px] !hidden md:!block text-xs text-white !font-Iran">
               تنظیمات کودک
             </Button>
           )}

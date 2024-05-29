@@ -11,15 +11,18 @@ import Gift from "@/icons/gift";
 import User from "@/icons/User";
 import Phone from "@/icons/Phone";
 import Power from "@/icons/Power";
+import { usePathname } from "next/navigation";
 
 type TProfileMenu = {
   isShow: boolean;
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function ProfileMenu({ isShow, onShow }: TProfileMenu) {
+  const url = usePathname();
+
   return (
     <div
-      className={`absolute ${
+      className={`absolute profile-container rounded-[12px] ${
         isShow ? "opacity-100 visible" : "opacity-0 invisible"
       } w-[272px] -left-4 top-14 hidden md:block`}
       onMouseLeave={() => onShow(false)}
@@ -31,7 +34,7 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
         <div className="rounded-[12px] overflow-hidden">
           {/* profile header */}
           <div className="bg-[#D95C5C] p-4">
-            <h1 className="text-center">اشتراک فعال ندارید</h1>
+            <h1 className="text-center !text-white">اشتراک فعال ندارید</h1>
             <Button className="h-[32px] !text-xs text-black shadow-xl !font-Iran bg-white  hover:bg-namava hover:text-white mt-2">
               خرید اشتراک
             </Button>
@@ -89,26 +92,30 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
               </div>
             </div>
             <div className="space-y-4 mt-4 mb-2">
-              <div className="flex items-center gap-x-2 my-2">
-                <Folder2 />
-                <Link href={"/"}>لیست من</Link>
-              </div>
-              <div className="flex items-center gap-x-2 my-2">
-                <Star />
-                <Link href={"/"}>خرید اشتراک</Link>
-              </div>
-              <div className="flex items-center gap-x-2 my-2">
-                <Gift />
-                <Link href={"/"}>کارت هدیه</Link>
-              </div>
-              <div className="flex items-center gap-x-2 my-2">
-                <User />
-                <Link href={"/"}>حساب کاربری</Link>
-              </div>
-              <div className="flex items-center gap-x-2 my-2">
-                <Phone />
-                <Link href={"/"}>تماس با ما</Link>
-              </div>
+              {!url.includes("/kids") && (
+                <>
+                  <div className="flex items-center gap-x-2 my-2">
+                    <Folder2 />
+                    <Link href={"/"}>لیست من</Link>
+                  </div>
+                  <div className="flex items-center gap-x-2 my-2">
+                    <Star />
+                    <Link href={"/"}>خرید اشتراک</Link>
+                  </div>
+                  <div className="flex items-center gap-x-2 my-2">
+                    <Gift />
+                    <Link href={"/"}>کارت هدیه</Link>
+                  </div>
+                  <div className="flex items-center gap-x-2 my-2">
+                    <User />
+                    <Link href={"/"}>حساب کاربری</Link>
+                  </div>
+                  <div className="flex items-center gap-x-2 my-2">
+                    <Phone />
+                    <Link href={"/"}>تماس با ما</Link>
+                  </div>
+                </>
+              )}
               <div className="flex items-center gap-x-2 my-2">
                 <Power />
                 <Link href={"/"}>خروج</Link>

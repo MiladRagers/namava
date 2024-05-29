@@ -8,14 +8,14 @@ import "swiper/css/navigation";
 
 function AnimsSlider() {
   return (
-    <div className="py-20 container">
+    <div className="pt-16 pb-5 md:py-20 container">
       <Swiper
         slidesPerView={3}
-        spaceBetween={20}
+        spaceBetween={30}
         // centeredSlides={true}
         autoplay={true}
         // loop={true}
-        className="mySwiper h-[18rem]"
+        className="mySwiper !py-5"
         modules={[Navigation, Autoplay]}
         navigation={true}
         breakpoints={{
@@ -40,7 +40,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -49,7 +49,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -58,7 +58,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -67,7 +67,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -76,7 +76,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -85,7 +85,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -94,7 +94,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -103,7 +103,7 @@ function AnimsSlider() {
             alt="cars"
             width={500}
             height={500}
-            className="w-[267px] anim-collection h-[267px] rounded-full shadow-sm"
+            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
           />
         </SwiperSlide>
       </Swiper>
