@@ -94,6 +94,18 @@
   .active {
     @apply visible opacity-100;
   }
+
+  .bookmarkItem {
+    @apply py-2 px-3 rounded-md md:cursor-pointer;
+  }
+
+  .bookmark--active {
+    @apply bg-white text-black;
+  }
+
+  .action-btn {
+    @apply flex-center p-2.5  bg-gray-500/35  rounded-full text-[13px];
+  }
 }
 
 .swiper-button-next::after {
@@ -338,6 +350,17 @@ input:checked + .slider:before {
 .profile-container {
   box-shadow: 0 -3px 10px 0 rgba(0, 0, 0, 0.16);
 }
+
+/* start kid page custom styles */
+
+.kid-title {
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.6)
+  );
+}
+
 
 /* key frames */
 @keyframes loading {

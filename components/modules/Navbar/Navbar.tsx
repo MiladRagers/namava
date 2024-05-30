@@ -65,8 +65,10 @@ function Navbar() {
     <>
       <div
         ref={navBar}
-        className={`fixed ${
-          isKid ? "text-black" : "navbar-container text-white"
+        className={`fixed  ${
+          isKid ? "text-black py-5 md:py-1" : "navbar-container text-white"
+        } ${
+          isKid ? "bg-white" : ""
         } top-0  z-40  right-0  transition-all duration-500 left-0 py-2 px-[20px] lg:px-[43px] flex items-center justify-between`}
       >
         <div className="flex items-center md:gap-x-5 lg:gap-x-8">
