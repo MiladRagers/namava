@@ -11,7 +11,7 @@ function Comments() {
       <h3 className="text-center text-xl text-white font-IranMedium">
         نظرات کاربران
       </h3>
-      <div className="flex items-center gap-x-9 rounded-lg mx-auto mt-10  w-[484px] bg-[#37383e] p-4">
+      <div className="flex flex-col md:flex-row items-center gap-y-4 gap-x-9 rounded-lg mx-auto mt-10 w-full  md:w-[484px] bg-[#37383e] p-4">
         <div className="flex items-center">
           <Message />
           <p className="text-white text-xs">برای ثبت نظر ابتدا وارد شوید.</p>
@@ -34,9 +34,9 @@ function Comments() {
         />
         <input
           placeholder="نظرتان درباره این فیلم چیست ؟"
-          className="w-full h-[52px]  outline-none placeholder:text-namavaBlack text-sm px-6 py-3 rounded-xl"
+          className="w-full h-[52px]  outline-none placeholder:text-namavaBlack text-xs md:text-sm px-6 py-3 rounded-xl"
         />
-        <Send />
+        <Send  />
       </div>
       <div className="text-white pt-5 pr-14">
         <div className="flex items-center gap-x-2">

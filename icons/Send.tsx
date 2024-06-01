@@ -7,7 +7,7 @@ function Send() {
       width="40"
       height="40"
       viewBox="0 0 40 40"
-      className="fill-[#666666] w-[30px] md:w-[45px] h-[30px] md:h-[45px]"
+      className="fill-[#666666] w-[30px] md:w-[45px] h-[30px] md:h-[45px] shrink-0"
     >
       <defs></defs>
       <g
