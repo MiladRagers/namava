@@ -47,12 +47,12 @@ function SearchBox() {
           isShow ? "opacity-100 visible" : "opacity-0 invisible"
         }  z-50 text-white`}
       >
-        <Filter className="w-full h-full rounded-none" onShow={setIsShow} />
+        <Filter className="w-full h-full !rounded-none" onShow={setIsShow} />
         <div
           className="absolute bottom-10 flex-center w-full"
           onClick={() => setIsShow(false)}
         >
-          <Button className="w-[290px]">اعمال فیلتر</Button>
+          <Button className="!w-[300px]">اعمال فیلتر</Button>
         </div>
       </div>
     </div>
