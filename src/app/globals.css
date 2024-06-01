@@ -199,7 +199,7 @@
 .film-checkbox:checked,
 .series-checkbox:checked {
   background-color: #1993ff !important;
-  border: 1px solid #1993ff;
+  border: 1px solid #1993ff !important;
 }
 
 .submenu {

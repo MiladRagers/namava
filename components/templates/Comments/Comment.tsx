@@ -1,13 +1,21 @@
+"use client";
 import Chevron from "@/icons/Chevron";
 import Dislike from "@/icons/Dislike";
 import Information from "@/icons/Information";
 import Like from "@/icons/Like";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 function Comment() {
+  const path = usePathname();
+  const isKid = path.includes("/kids");
   return (
-    <div className="text-xs text-customGray pt-10 pb-5">
+    <div
+      className={`text-xs ${
+        isKid ? "text-[#666]" : "text-customGray"
+      } pt-10 pb-5`}
+    >
       <div className="flex items-center gap-x-4">
         <Image
           src="/images/prof.jpg"
@@ -19,21 +27,35 @@ function Comment() {
         <p>میلاد سلامیان - یک‌شنبه ۳۰ اردیبهشت ۱۴۰۳</p>
       </div>
       <div className="pr-14 pt-1.5">
-        <p className="text-white text-justify text-xs/[20px]">
+        <p
+          className={`${
+            isKid ? "text-black" : "text-white"
+          } text-justify text-xs/[20px]`}
+        >
           با سلام ، بسیار فیلم جالب و سرگرم کننده ای بود ، عوامل فوق العاده ای
           در ساخت این فیلم تلاش کردند ، تشکر ❤️
         </p>
         <div className="flex items-center gap-x-8 mt-6">
           <div className="flex items-center gap-x-2">
-            <Like fill="white" className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer" />
+            <Like
+              fill={isKid ? "gray" : "white"}
+              className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
+            />
             <span className="font-Dana text-sm">2</span>
           </div>
           <div className="flex items-center gap-x-2">
-            <Dislike fill="white" className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer" />
+            <Dislike
+              fill={isKid ? "gray" : "white"}
+              className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
+            />
             <span className="font-Dana text-sm">2</span>
           </div>
         </div>
-        <div className="!max-w-[500px] py-3 px-4 bg-[#37383e] rounded-xl flex items-center justify-between mt-5 md:cursor-pointer">
+        <div
+          className={`!max-w-[500px] py-3 px-4 rounded-xl ${
+            isKid ? "bg-[#666666]" : "bg-[#37383e] "
+          } flex items-center justify-between mt-5 md:cursor-pointer`}
+        >
           <div className="flex items-center gap-x-3">
             <Information />
             <p className="text-white text-xs">

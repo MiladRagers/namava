@@ -27,7 +27,9 @@ function Navbar() {
 
       if (navBar.current !== "") {
         if (newScroll === 0) {
-          navBar.current.style.backgroundColor = "transparent";
+          if (!isKid) {
+            navBar.current.style.backgroundColor = "transparent";
+          }
           navBar.current.position = "fixed";
           navBar.current.style.boxShadow = "none";
         } else if (newScroll > lastScroll) {
