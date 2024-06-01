@@ -1,8 +1,11 @@
-import React from "react";
-
-function Like({ className, fill }: { className?: string; fill?: string }) {
+import React, { ComponentProps } from "react";
+type TLike = ComponentProps<"svg"> & {
+  fill?: string;
+};
+function Like({ className, fill, ...rest }: TLike) {
   return (
     <svg
+      {...rest}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 40 40"
       width="25"

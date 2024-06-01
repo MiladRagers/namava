@@ -1,13 +1,15 @@
 "use client";
+import LoginModal from "@/components/modules/modals/LoginModal";
 import Chevron from "@/icons/Chevron";
 import Dislike from "@/icons/Dislike";
 import Information from "@/icons/Information";
 import Like from "@/icons/Like";
+import { TComment } from "@/libs/types";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-function Comment() {
+function Comment({ onShow }: TComment) {
   const path = usePathname();
   const isKid = path.includes("/kids");
   return (
@@ -38,6 +40,7 @@ function Comment() {
         <div className="flex items-center gap-x-8 mt-6">
           <div className="flex items-center gap-x-2">
             <Like
+              onClick={() => onShow(true)}
               fill={isKid ? "gray" : "white"}
               className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
             />
@@ -45,6 +48,7 @@ function Comment() {
           </div>
           <div className="flex items-center gap-x-2">
             <Dislike
+              onClick={() => onShow(true)}
               fill={isKid ? "gray" : "white"}
               className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
             />

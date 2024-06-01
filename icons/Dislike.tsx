@@ -1,6 +1,8 @@
-import React from "react";
-
-function Dislike({ className, fill }: { className?: string; fill?: string }) {
+import React, { ComponentProps } from "react";
+type TDislike = ComponentProps<"svg"> & {
+  fill?: string;
+};
+function Dislike({ className, fill, ...rest }: TDislike) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +11,7 @@ function Dislike({ className, fill }: { className?: string; fill?: string }) {
       height="25"
       preserveAspectRatio="xMidYMid meet"
       className={className}
+      {...rest}
     >
       <g>
         <g transform="matrix(1,0,0,1,0,0)" opacity="1">

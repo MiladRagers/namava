@@ -6,14 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { HiMiniBars3 } from "react-icons/hi2";
 import MobileNavbar from "./MobileNavbar";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import KidLogo from "@/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
 
 function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
 
@@ -23,29 +22,31 @@ function Navbar() {
   useEffect(() => {
     let lastScroll = 0;
     const scrollHandler = () => {
-      let newScroll = document.documentElement.scrollTop;
+      if (navBar.current) {
+        let newScroll = document.documentElement.scrollTop;
 
-      if (navBar.current !== "") {
-        if (newScroll === 0) {
-          if (!isKid) {
-            navBar.current.style.backgroundColor = "transparent";
+        if (navBar.current !== "") {
+          if (newScroll === 0) {
+            if (!isKid) {
+              navBar.current.style.backgroundColor = "transparent";
+            }
+            navBar.current.position = "fixed";
+            navBar.current.style.boxShadow = "none";
+          } else if (newScroll > lastScroll) {
+            navBar.current.style.top = "-100px";
+            isKid
+              ? (navBar.current.style.backgroundColor = "#fff")
+              : (navBar.current.style.backgroundColor = "#121212");
+            navBar.current.position = "fixed";
+            navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
+          } else {
+            navBar.current.style.top = "0px";
+            navBar.current.position = "sticky";
+            navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
           }
-          navBar.current.position = "fixed";
-          navBar.current.style.boxShadow = "none";
-        } else if (newScroll > lastScroll) {
-          navBar.current.style.top = "-100px";
-          isKid
-            ? (navBar.current.style.backgroundColor = "#fff")
-            : (navBar.current.style.backgroundColor = "#121212");
-          navBar.current.position = "fixed";
-          navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
-        } else {
-          navBar.current.style.top = "0px";
-          navBar.current.position = "sticky";
-          navBar.current.style.boxShadow = "0 5px 10px rgba(0, 0, 0, 0.3)";
         }
+        lastScroll = newScroll;
       }
-      lastScroll = newScroll;
     };
     document.addEventListener("scroll", scrollHandler);
 

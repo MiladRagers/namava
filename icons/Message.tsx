@@ -1,13 +1,13 @@
 import React from "react";
 
-function Message() {
+function Message({ className }: { className?: string }) {
   return (
     <svg
       width="120"
       height="120"
       viewBox="0 0 120 120"
       fill="none"
-      className="w-[40px] h-[40px]"
+      className={`w-[40px] h-[40px] ${className ? className : ""}`}
     >
       <g clipPath="url(#clip0_34511_33035)">
         <path

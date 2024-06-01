@@ -1,4 +1,5 @@
 import MovieSlider from "@/components/modules/main/MovieSlider/MovieSlider";
+import LoginModal from "@/components/modules/modals/LoginModal";
 import Comments from "@/components/templates/Comments/Comments";
 import Header from "@/components/templates/index/Header/Header";
 import Image from "next/image";
