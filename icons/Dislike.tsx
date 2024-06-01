@@ -1,6 +1,6 @@
 import React from "react";
 
-function Dislike({ className, fill }: { className?: string; fill: string }) {
+function Dislike({ className, fill }: { className?: string; fill?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

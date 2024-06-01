@@ -275,10 +275,10 @@ function MovieSlider({ title, link }: TMovieSlider) {
                     <Plus />
                   </button>
                   <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Like />
+                    <Like fill="white" />
                   </button>
                   <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Dislike />
+                    <Dislike fill="white" />
                   </button>
                   <button className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava">
                     <GrCircleInformation className="text-3xl" />
