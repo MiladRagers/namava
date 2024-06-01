@@ -11,7 +11,7 @@ function HeaderDetail({ isKid }: { isKid: boolean | undefined }) {
   return (
     <>
       {isKid ? (
-        <div className="max-w-[90%] mx-auto md:mx-0 md:max-w-[590px] space-y-4 md:h-[461px] p-4  rounded-md kid-title top-80 md:top-44 md:right-10 relative z-20">
+        <div className="max-w-[90%] mx-auto md:mx-0 md:max-w-[590px] space-y-4 md:h-[461px] p-4  rounded-md kid-title top-64 md:top-44 md:right-10 relative z-20">
           <Image
             src={"/images/tomTitle.png"}
             width={450}
@@ -30,20 +30,22 @@ function HeaderDetail({ isKid }: { isKid: boolean | undefined }) {
           </p>
 
           <div className="flex-center flex-col">
-            <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
+            <div className="flex items-center flex-col md:flex-row gap-y-5 justify-center md:justify-start gap-x-4 mt-4">
               <button className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
                 <FaPlay />
                 خرید اشتراک
               </button>
-              <button className="action-btn !bg-white">
-                <Plus className="!fill-zinc-700" />
-              </button>
-              <button className="action-btn !bg-white">
-                <Like fill="black" />
-              </button>
-              <button className="action-btn !bg-white">
-                <Dislike fill="black" />
-              </button>
+              <div className="flex items-center gap-x-4">
+                <button className="action-btn !bg-white">
+                  <Plus className="!fill-zinc-700" />
+                </button>
+                <button className="action-btn !bg-white">
+                  <Like fill="black" />
+                </button>
+                <button className="action-btn !bg-white">
+                  <Dislike fill="black" />
+                </button>
+              </div>
             </div>
             <div className="flex items-center gap-x-2 mt-5">
               <div className="w-[20px] h-[20px]  rounded-md flex-center font-bold text-sm seven font-Dana">

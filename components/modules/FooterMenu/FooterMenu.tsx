@@ -10,26 +10,30 @@ import { usePathname } from "next/navigation";
 
 function FooterMenu() {
   const pathname = usePathname();
+  const isKid = pathname.includes("/kids");
   if (
     pathname.includes("/login") ||
     pathname.includes("/register") ||
     pathname.includes("/profile-list") ||
     pathname.includes("/add-profile") ||
-    pathname.includes("/pin-lock") ||
-    pathname.includes("/kids")
+    pathname.includes("/pin-lock")
   ) {
     return null;
   }
 
   return (
-    <div className="block md:hidden sticky bottom-0 h-[60px] left-0 right-0 px-4 py-2 z-30 footer-menu bg-namavaBlack">
+    <div
+      className={`block md:hidden sticky bottom-0 h-[60px] left-0 right-0 px-4 py-2 z-30 footer-menu ${
+        isKid ? "bg-white text-black" : "bg-namavaBlack text-white"
+      }`}
+    >
       <ul className="flex items-center justify-between  ">
         <li>
           <Link
             href=""
             className="flex items-center flex-col text-lg relative "
           >
-            <Home />
+            <Home fill={isKid ? "#6d6c6c" : "#aaa"} />
             <span className="block text-[10px] mb-2 text-gray-400 absolute -bottom-8">
               خانه
             </span>
@@ -40,7 +44,7 @@ function FooterMenu() {
             href=""
             className="flex items-center flex-col text-lg relative "
           >
-            <Magni />
+            <Magni fill={isKid ? "#6d6c6c" : "#aaa"} />
             <span className="block text-[10px] mb-2 text-gray-400 absolute -bottom-8">
               جستجو
             </span>
@@ -51,7 +55,7 @@ function FooterMenu() {
             href=""
             className="flex items-center flex-col text-lg relative "
           >
-            <Category />
+            <Category fill={isKid ? "#6d6c6c" : "#aaa"} />
             <span className="block text-[10px] mb-2 text-gray-400 absolute -bottom-8 w-[50px]">
               دسته بندی
             </span>
@@ -62,7 +66,7 @@ function FooterMenu() {
             href=""
             className="flex items-center flex-col text-lg relative "
           >
-            <Folder />
+            <Folder fill={isKid ? "#6d6c6c" : "#aaa"} />
             <span className="block text-[10px] w-[40px] mb-2 text-gray-400 absolute -bottom-8">
               لیست من
             </span>
@@ -73,7 +77,7 @@ function FooterMenu() {
             href=""
             className="flex items-center flex-col text-lg relative "
           >
-            <More />
+            <More fill={isKid ? "#6d6c6c" : "#aaa"} />
             <span className="block text-[10px] mb-2 text-gray-400 absolute -bottom-8">
               بیشتر
             </span>

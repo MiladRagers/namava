@@ -15,12 +15,13 @@ import Plus from "@/icons/Plus";
 import Like from "@/icons/Like";
 import Dislike from "@/icons/Dislike";
 
-function MovieSlider({ title }: { title: string }) {
+type TMovieSlider = { title: string; link?: string };
+function MovieSlider({ title, link }: TMovieSlider) {
   const [movieId, setMovieId] = useState<number | null>(null);
   return (
     <div>
       <div className="container">
-        <SliderTitle title={title} link="/" key={crypto.randomUUID()} />
+        <SliderTitle title={title} link={link} key={crypto.randomUUID()} />
         <div className="my-10  md:h-[21rem]">
           <Swiper
             slidesPerView={3}
@@ -61,7 +62,7 @@ function MovieSlider({ title }: { title: string }) {
                     height={500}
                     className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
                   />
-                  <div className="flex transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
+                  <div className="flex transition-all text-white group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
                     <div className="pb-6 px-2 space-y-3">
                       <p className="text-[13px]">
                         سریال - <span className="font-Dana">1403</span>

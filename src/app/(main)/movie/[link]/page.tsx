@@ -10,7 +10,7 @@ function page() {
   return (
     <>
       <section className="relative">
-        <Header isImage={true} isTitle />
+        <Header isImage={true} isTitle img="havieee.jpg" mobileImage="okamobile.jpg" />
         <div className="absolute inset-0 title-overlay"></div>
       </section>
       <section className="text-white mt-10 container relative bottom-16 md:bottom-24 z-20 space-y-6">
@@ -20,7 +20,7 @@ function page() {
       <section className="text-white">
         <StarsSlider title="بازیگران فیلم هاوایی" />
         <StarsSlider title="عوامل فیلم هاوایی" />
-        <MovieSlider title="بر اساس هاوایی" />
+        <MovieSlider title="بر اساس هاوایی" link="/" />
       </section>
 
       <section className="pb-20">
