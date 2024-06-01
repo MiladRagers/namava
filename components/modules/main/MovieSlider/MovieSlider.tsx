@@ -60,7 +60,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                     alt="slide1.jpg"
                     width={490}
                     height={500}
-                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
                   />
                   <div className="flex transition-all text-white group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
                     <div className="pb-6 px-2 space-y-3">
@@ -89,7 +89,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                     alt="slide1.jpg"
                     width={490}
                     height={500}
-                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                   />
                   <div className="flex transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
                     <div className="pb-6 px-2 space-y-3">
@@ -127,7 +127,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="havaie.jpg"
                   width={500}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">هاوایی</h3>
               </div>
@@ -143,7 +143,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="okazion.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">اکازیون</h3>
               </div>
@@ -159,7 +159,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="slide1.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">داوینچیز</h3>
               </div>
@@ -175,7 +175,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="slide1.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">همزاد من</h3>
               </div>
@@ -191,7 +191,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="slide1.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">شوگان</h3>
               </div>
@@ -207,7 +207,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="slide1.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">اربابان آسمان</h3>
               </div>
@@ -223,7 +223,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
                   alt="slide1.jpg"
                   width={490}
                   height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[160px] md:h-auto"
+                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[180px] md:h-auto"
                 />
                 <h3 className="text-xs mt-3 mr-3">کافه کنار جاده</h3>
               </div>
