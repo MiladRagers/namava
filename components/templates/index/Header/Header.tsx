@@ -9,7 +9,7 @@ type Header = {
   isTitle?: boolean;
   isKid?: boolean;
   img?: string;
-  mobileImage: string;
+  mobileImage?: string;
 };
 function Header({ isImage, isTitle, isKid, img, mobileImage }: Header) {
   return (
