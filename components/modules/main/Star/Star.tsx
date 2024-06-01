@@ -15,7 +15,7 @@ function Star({ src, title, link }: Star) {
         width={400}
         height={500}
         alt={title}
-        className="rounded-full w-auto h-auto md:w-[190px] md:h-[190px]"
+        className="rounded-full w-[116px] h-[116px] md:w-[190px] md:h-[190px]"
       />
       <h3 className="text-center mt-3 text-xs md:text-sm">{title}</h3>
     </Link>
