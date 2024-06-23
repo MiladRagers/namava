@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
 import HeaderDetail from "./HeaderDetail";
+import { usePathname } from "next/navigation";
 
 type Header = {
   isImage?: boolean;
@@ -10,23 +11,24 @@ type Header = {
   isKid?: boolean;
   img?: string;
   mobileImage?: string;
+  className?: string
 };
-function Header({ isImage, isTitle, isKid, img, mobileImage }: Header) {
+function Header({ isImage, isTitle, isKid, img, mobileImage, className }: Header) {
+  const pathname = usePathname();
+  const isAboutPage = pathname.includes("/about");
   return (
     <>
       <header
-        className={`header-video  ${
-          isKid
-            ? "min-h-screen md:min-h-screen"
-            : "min-h-[67vh] md:min-h-[93vh]"
-        }`}
+        className={`${className} header-video  ${isKid || isAboutPage && !className
+          ? "min-h-screen md:min-h-screen"
+          : "min-h-[67vh] md:min-h-[93vh]"
+          }`}
       >
         {isImage ? (
           <>
             <Image
-              className={`w-full title-image hidden lg:block ${
-                isKid ? "mt-20 min-h-screen" : ""
-              }`}
+              className={`w-full title-image hidden lg:block ${isKid ? "mt-20 min-h-screen" : ""
+                }`}
               src={`/images/${img}`}
               alt="havieee.jpg"
               width={1920}
@@ -45,7 +47,7 @@ function Header({ isImage, isTitle, isKid, img, mobileImage }: Header) {
             <source src="/images/okazion.mp4" />
           </video>
         )}
-        <HeaderDetail isKid={isKid} />
+        {!isAboutPage && <HeaderDetail isKid={isKid} />}
         {!isTitle && (
           <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
             <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
