@@ -59,7 +59,8 @@ function Navbar() {
     pathname.includes("/forgot") ||
     pathname.includes("/profile-list") ||
     pathname.includes("/add-profile") ||
-    pathname.includes("/pin-lock")
+    pathname.includes("/pin-lock") ||
+    pathname.includes("/p-admin")
   ) {
     return null;
   }

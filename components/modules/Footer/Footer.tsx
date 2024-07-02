@@ -24,7 +24,8 @@ function Footer() {
     pathname.includes("/profile-list") ||
     pathname.includes("/add-profile") ||
     pathname.includes("/pin-lock") ||
-    pathname.includes("/kids")
+    pathname.includes("/kids") ||
+    pathname.includes("/p-admin")
   ) {
     return null;
   }
