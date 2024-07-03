@@ -378,7 +378,7 @@ input:checked + .slider:before {
 
 @layer components {
   .nav-item {
-    @apply text-base flex items-center gap-x-3 px-4 py-[0.6rem] rounded-md group-hover:bg-zinc-700  text-gray-300 transition-all;
+    @apply text-sm md:text-base flex items-center gap-x-3 px-4 py-[0.6rem] rounded-md group-hover:bg-zinc-700  text-gray-300 transition-all;
   }
 }
 

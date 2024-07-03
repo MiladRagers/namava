@@ -53,8 +53,10 @@ function DurationChart() {
     },
   ];
 
+  const windowWidth: any = typeof window !== "undefined" && window.innerWidth;
+
   return (
-    <div className="bg-namavaBlack  rounded-md border border-gray-800 shadow py-6 px-8">
+    <div className="bg-namavaBlack  rounded-md border border-gray-800 shadow py-4 md:py-6 px-8">
       <h2 className="text-xl">تعداد خرید اشتراک</h2>
       <ResponsiveContainer height={267}>
         <PieChart>
@@ -63,8 +65,8 @@ function DurationChart() {
             dataKey="value"
             nameKey="duration"
             paddingAngle={2}
-            cx="40%"
-            cy="50%"
+            cx={windowWidth >= 768 ? "40%" : ""}
+            cy={windowWidth >= 768 ? "50%" : ""}
             outerRadius={110}
             innerRadius={85}
           >
@@ -77,15 +79,22 @@ function DurationChart() {
             ))}
           </Pie>
 
-          <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            layout="horizontal"
-            align="right"
-            width={135}
-            iconSize={12}
-            iconType="circle"
+          <Tooltip
+            wrapperStyle={{
+              fontSize: windowWidth > 768 ? "16px" : "12px",
+            }}
           />
+
+          {windowWidth >= 768 && (
+            <Legend
+              verticalAlign="middle"
+              layout="horizontal"
+              align="right"
+              width={135}
+              iconSize={12}
+              iconType="circle"
+            />
+          )}
         </PieChart>
       </ResponsiveContainer>
     </div>

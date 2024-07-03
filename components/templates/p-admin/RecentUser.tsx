@@ -3,10 +3,10 @@ import { FaEye, FaTrash } from "react-icons/fa6";
 
 function RecentUser() {
   return (
-    <div className="bg-namavaBlack rounded-md border border-gray-800 shadow py-6 px-6">
-      <h2 className="text-xl pb-2">کاربران اخیر</h2>
-      <div className="overflow-hidden max-h-[250px] overflow-y-auto table-container">
-        <table className="w-full mt-5 recent-table">
+    <div className="bg-namavaBlack rounded-md border border-gray-800 shadow py-4 md:py-6 px-3 md:px-6">
+      <h2 className="text-lg md:text-xl pb-2 font-IranMedium">کاربران اخیر</h2>
+      <div className="overflow-hidden max-h-[225px] md:max-h-[250px] overflow-y-auto table-container">
+        <table className="w-full mt-5 recent-table text-xs md:text-sm lg:text-base">
           <thead>
             <tr>
               <td>شماره</td>
@@ -22,7 +22,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -38,7 +38,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -54,7 +54,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -70,7 +70,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -86,7 +86,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -102,7 +102,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -118,7 +118,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -134,7 +134,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -150,7 +150,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>
@@ -166,7 +166,7 @@ function RecentUser() {
               <td>
                 <img
                   src="/images/user.png"
-                  className="w-10 h-10 rounded-full mx-auto"
+                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
                   alt=""
                 />
               </td>

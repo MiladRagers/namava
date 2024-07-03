@@ -1,14 +1,28 @@
+"use client";
+import Logo from "@/icons/Logo";
+import { useAdminPanel } from "@/src/context/AdminPanelProvider";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { HiMenu } from "react-icons/hi";
 import { HiArrowLeftOnRectangle, HiOutlineUser } from "react-icons/hi2";
+import { RiMovie2Line } from "react-icons/ri";
 
 function TopBar() {
+  const { toggleMenu } = useAdminPanel();
+  const router = useRouter();
   return (
-    <div className="sticky z-40 top-0 border-b border-b-gray-700 bg-namavaBlack py-[0.8rem] px-[2.5rem] flex items-center justify-between flex-row-reverse gap-x-6">
-      <div className="flex items-center gap-x-5">
+    <div className="sticky z-10 top-0 border-b border-b-gray-700 bg-namavaBlack py-[0.5rem] md:py-[0.8rem] px-[1.2rem] md:px-[2.5rem] flex items-center justify-between flex-row-reverse gap-x-6">
+      <div className="hidden md:flex items-center gap-x-5">
         <HiArrowLeftOnRectangle className="text-namava text-2xl" />
         <HiOutlineUser className="text-namava text-2xl" />
       </div>
-      <div className="flex items-center gap-x-4 text-gray-300">
+      <div className="block md:hidden" onClick={() => router.push("/")}>
+        <RiMovie2Line className="text-white text-3xl" />
+      </div>
+      <div className="block md:hidden">
+        <Logo className="w-[60px]" />
+      </div>
+      <div className="hidden md:flex items-center gap-x-4 text-gray-300">
         <img
           src="/images/user.png"
           className="w-[36px] h-[36px] rounded-full"
@@ -18,6 +32,9 @@ function TopBar() {
           <h2>میلاد سلامیان</h2>
           <h6 className="text-xs text-gray-400">مدیریت اصلی</h6>
         </div>
+      </div>
+      <div className="block md:hidden" onClick={() => toggleMenu()}>
+        <HiMenu className="text-white text-3xl" />
       </div>
     </div>
   );
