@@ -5,6 +5,7 @@ import React from "react";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaPerson } from "react-icons/fa6";
 import {
+  HiArrowLeftOnRectangle,
   HiOutlineHomeModern,
   HiOutlineNewspaper,
   HiOutlineSquare2Stack,
@@ -14,12 +15,88 @@ import {
 import { GoCommentDiscussion } from "react-icons/go";
 import { IoImageOutline, IoTicketOutline } from "react-icons/io5";
 import { MdOutlineShoppingCart, MdContentPaste } from "react-icons/md";
-import { RiMenuSearchLine } from "react-icons/ri";
 import { useAdminPanel } from "@/src/context/AdminPanelProvider";
 import Overlay from "../Overlay/Overlay";
+import { usePathname } from "next/navigation";
 
 function Sidebar() {
   const { isShowMenu, toggleMenu } = useAdminPanel();
+  const pathname = usePathname();
+  const menus = [
+    {
+      id: 1,
+      title: "داشبورد",
+      icon: <HiOutlineHomeModern className="icon-item" />,
+      href: "/p-admin",
+    },
+    {
+      id: 2,
+      title: "فیلم و سریال",
+      icon: <AiOutlineProduct className="icon-item" />,
+      href: "/p-admin/movies",
+    },
+    {
+      id: 3,
+      title: "دسته بندی ها",
+      icon: <HiOutlineSquare2Stack className="icon-item" />,
+      href: "/p-admin/categories",
+    },
+    {
+      id: 4,
+      title: "کاربران",
+      icon: <HiUser className="icon-item" />,
+      href: "/p-admin/users",
+    },
+    {
+      id: 5,
+      title: "اسلایدر ها",
+      icon: <IoImageOutline className="icon-item" />,
+      href: "/p-admin/sliders",
+    },
+    {
+      id: 6,
+      title: "مقاله ها",
+      icon: <HiOutlineNewspaper className="icon-item" />,
+      href: "/p-admin/articles",
+    },
+    {
+      id: 7,
+      title: "اشتراک ها",
+      icon: <MdOutlineShoppingCart className="icon-item" />,
+      href: "/p-admin/shares",
+    },
+    {
+      id: 8,
+      title: "ستارگان",
+      icon: <FaPerson className="icon-item" />,
+      href: "/p-admin/actors",
+    },
+    {
+      id: 9,
+      title: "منو ها",
+      icon: <HiOutlineNewspaper className="icon-item" />,
+      href: "/p-admin/menus",
+    },
+    {
+      id: 10,
+      title: "کامنت ها",
+      icon: <GoCommentDiscussion className="icon-item" />,
+      href: "/p-admin/comments",
+    },
+    {
+      id: 10,
+      title: "تیکت ها",
+      icon: <IoTicketOutline className="icon-item" />,
+      href: "/p-admin/tickets",
+    },
+    {
+      id: 11,
+      title: "محتوای استاتیک",
+      icon: <MdContentPaste className="icon-item" />,
+      href: "/p-admin/static",
+    },
+  ];
+
   return (
     <>
       <div className="md:w-[260px] bg-namavaBlack">
@@ -37,76 +114,21 @@ function Sidebar() {
           </div>
           <div>
             <ul className="text-[#4b5563] space-y-2">
-              <li className="group">
-                <Link href="/dashboard" className="nav-item">
-                  <HiOutlineHomeModern className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>داشبورد</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/product" className="nav-item">
-                  <AiOutlineProduct className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>فیلم و سریال ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/category" className="nav-item">
-                  <HiOutlineSquare2Stack className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>دسته بندی ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/category" className="nav-item">
-                  <HiUser className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>کاربران</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/slider" className="nav-item">
-                  <IoImageOutline className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>اسلایدر ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/article" className="nav-item">
-                  <HiOutlineNewspaper className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>مقاله ها</span>
-                </Link>
-              </li>
-              <li className="group">
+              {menus.map((menu) => (
+                <li key={menu.id} className="group">
+                  <Link
+                    href={menu.href}
+                    className={`nav-item ${menu.href === pathname ? "active" :""}`}
+                  >
+                    {menu.icon}
+                    <span>{menu.title}</span>
+                  </Link>
+                </li>
+              ))}
+              <li className="group block md:hidden">
                 <Link href="/orders" className="nav-item">
-                  <MdOutlineShoppingCart className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>اشتراک ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/orders" className="nav-item">
-                  <FaPerson className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>بازیگران</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/orders" className="nav-item">
-                  <RiMenuSearchLine className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>منو ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/orders" className="nav-item">
-                  <GoCommentDiscussion className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>کامنت ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/orders" className="nav-item">
-                  <IoTicketOutline className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>تیکت ها</span>
-                </Link>
-              </li>
-              <li className="group">
-                <Link href="/orders" className="nav-item">
-                  <MdContentPaste className="text-[#9ca3af] text-2xl group-hover:text-namava icon" />
-                  <span>محتوا استاتیک</span>
+                  <HiArrowLeftOnRectangle className="icon-item" />
+                  <span>خروج</span>
                 </Link>
               </li>
             </ul>

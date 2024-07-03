@@ -4,6 +4,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -79,9 +80,10 @@ function SalesChart() {
             contentStyle={{
               backgroundColor: colors.background,
               fontSize: windowWidth <= 768 ? "12px" : "16px",
-              fontFamily:"Dana"
+              fontFamily: "Dana",
             }}
           />
+
           <CartesianGrid strokeDasharray={3} />
           <Area
             type="monotone"
@@ -100,6 +102,14 @@ function SalesChart() {
             strokeWidth="2"
             name="مقدار اضافی"
             unit="تومان"
+          />
+
+          <Legend
+            verticalAlign="bottom"
+            layout="horizontal"
+            align="right"
+            wrapperStyle={{ marginTop: "20px" }}
+            iconType="circle"
           />
         </AreaChart>
       </ResponsiveContainer>

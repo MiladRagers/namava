@@ -56,7 +56,7 @@ function DurationChart() {
   const windowWidth: any = typeof window !== "undefined" && window.innerWidth;
 
   return (
-    <div className="bg-namavaBlack  rounded-md border border-gray-800 shadow py-4 md:py-6 px-8">
+    <div className="bg-namavaBlack duration-chart  rounded-md border border-gray-800 shadow py-4 md:py-6 px-8">
       <h2 className="text-xl">تعداد خرید اشتراک</h2>
       <ResponsiveContainer height={267}>
         <PieChart>
@@ -82,6 +82,7 @@ function DurationChart() {
           <Tooltip
             wrapperStyle={{
               fontSize: windowWidth > 768 ? "16px" : "12px",
+              fontFamily :"Dana"
             }}
           />
 
@@ -93,8 +94,17 @@ function DurationChart() {
               width={135}
               iconSize={12}
               iconType="circle"
+              wrapperStyle={{fontFamily :"Dana"}}
             />
           )}
+
+          <Legend
+            verticalAlign="bottom"
+            layout="horizontal"
+            align="right"
+            wrapperStyle={{ marginTop: "20px", fontSize: "14px" , fontFamily :"Dana" }}
+            iconType="circle"
+          />
         </PieChart>
       </ResponsiveContainer>
     </div>

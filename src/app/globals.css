@@ -380,21 +380,33 @@ input:checked + .slider:before {
   .nav-item {
     @apply text-sm md:text-base flex items-center gap-x-3 px-4 py-[0.6rem] rounded-md group-hover:bg-zinc-700  text-gray-300 transition-all;
   }
+
+  .nav-item.active {
+    @apply bg-zinc-700 text-gray-300 ;
+  }
+
+  .nav-item.active .icon-item {
+    @apply text-namava;
+  }
+
+  .icon-item {
+    @apply text-[#9ca3af] text-2xl group-hover:text-namava;
+  }
 }
 
-.recharts-legend-item-text{
+.recharts-legend-item-text {
   margin-right: 10px;
 }
 
-.recharts-surface{
+.recharts-surface {
   direction: ltr !important;
 }
 
-.recent-table td{
+.recent-table td {
   text-align: center;
 }
 
-.recent-table tbody td{
+.recent-table tbody td {
   padding: 15px 0;
 }
 
@@ -410,6 +422,14 @@ input:checked + .slider:before {
 .table-container::-webkit-scrollbar-track {
   /* background-color: #ffffff; */
   height: 0.1vw !important;
+}
+
+.duration-chart .recharts-responsive-container {
+  @apply !h-[366px] md:!h-[250px];
+}
+
+.duration-chart .recharts-wrapper {
+  @apply !min-h-[360px] md:!min-h-[250px];
 }
 
 /* key frames */

@@ -10,8 +10,10 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
         <Sidebar />
         <div className="flex-1">
           <TopBar />
-          <div className="h-full px-[1.2rem] md:px-[2.5rem] py-[2rem]">
-            {children}
+          <div className="px-[1.2rem] md:px-[2.5rem] py-[2rem]">{children}</div>
+          <div className="text-white flex flex-col gap-y-4 md:hidden items-center justify-center h-24 bg-namavaBlack">
+            <p>داشبورد مدیریت سایت نماوا</p>
+            <p className="text-gray-300 text-sm">توسعه داده شده با ❤️ توسط میلاد سلامیان</p>
           </div>
         </div>
       </div>
