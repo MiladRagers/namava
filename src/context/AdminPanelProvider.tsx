@@ -1,5 +1,6 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type TAdminPanelProvider = {
   children: React.ReactNode;
@@ -14,8 +15,13 @@ const AdminPanelContext = createContext({} as TAdminPanelContext);
 
 function AdminPanelProvider({ children }: TAdminPanelProvider) {
   const [isShowMenu, setIsShowMenu] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => setIsShowMenu((prev) => !prev);
+
+  useEffect(() => {
+    setIsShowMenu(false);
+  }, [pathname]);
   return (
     <AdminPanelContext.Provider value={{ isShowMenu, toggleMenu }}>
       {children}

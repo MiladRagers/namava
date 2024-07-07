@@ -1,11 +1,13 @@
 import Title from "@/components/modules/p-admin/Title";
+import UsersList from "@/components/templates/p-admin/users/UsersList";
 import React from "react";
 
 function UsersPage() {
   return (
-    <div>
-      <Title name="کاربران" />
-    </div>
+    <>
+      <Title name="لیست کاربران" />
+      <UsersList />
+    </>
   );
 }
 

@@ -101,7 +101,7 @@ function Sidebar() {
     <>
       <div className="md:w-[260px] bg-namavaBlack">
         <div
-          className={`fixed ${
+          className={`fixed md:sticky ${
             isShowMenu ? "right-0" : "right-[-260px] "
           } md:right-0 overflow-y-auto z-40 bottom-0 transition-all top-0  border-l bg-namavaBlack border-l-gray-700 w-[260px] gap-2  flex flex-col  md:py-[1.2rem] p-2 md:px-[1rem] text-lg`}
         >

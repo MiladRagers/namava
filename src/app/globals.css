@@ -444,3 +444,28 @@ input:checked + .slider:before {
     opacity: 0;
   }
 }
+
+
+
+/* admin panel */
+
+.users-list table thead th{
+  padding: 15px;
+}
+.users-list table tbody td{
+  padding: 20px;
+}
+
+
+
+.table-container {
+  overflow-x: auto !important;
+}
+
+.table-container::-webkit-scrollbar{
+  height: 10px !important;
+}
+table {
+  width: 100% !important;
+  white-space: nowrap !important;
+}

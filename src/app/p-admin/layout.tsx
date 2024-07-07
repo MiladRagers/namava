@@ -8,7 +8,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
     <AdminPanelProvider>
       <div className="flex min-h-screen font-Poppins">
         <Sidebar />
-        <div className="flex-1">
+        <div className="w-full">
           <TopBar />
           <div className="px-[1.2rem] md:px-[2.5rem] py-[2rem]">{children}</div>
           <div className="text-white flex flex-col gap-y-4 md:hidden items-center justify-center h-24 bg-namavaBlack">
