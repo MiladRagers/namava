@@ -7,7 +7,7 @@ import { FaEnvelope, FaInfo, FaLock, FaPhone, FaUser } from "react-icons/fa6";
 
 function AddUser() {
   return (
-    <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-y-6">
+    <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
       <div className="flex flex-col gap-y-3 text-white">
         <Label title="نام و نام خانوادگی" className="!text-base md:!text-lg" />
         <div
