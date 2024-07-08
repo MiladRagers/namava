@@ -1,11 +1,14 @@
 import Title from "@/components/modules/p-admin/Title";
+import AddCategories from "@/components/templates/p-admin/categories/AddCategory";
 import React from "react";
 
 function CategoriesPage() {
   return (
-    <div>
-      <Title name="دسته بندی ها" />
-    </div>
+    <>
+      <Title name="ایجاد دسته بندی" />
+      <AddCategories />
+      <Title name="لیست دسته بندی ها" />
+    </>
   );
 }
 
