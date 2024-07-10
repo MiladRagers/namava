@@ -21,10 +21,79 @@ function CategoriesList() {
         <Table.Body>
           <Table.Row>
             <td>1</td>
-            <td>
+            <td className="!p-0 md:!p-5">
               <Image
                 src="/images/categories/animation.jpg"
-                className="w-14 md:w-24 object-cover h-14 md:h-14 rounded-md mx-auto"
+                className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
+                alt=""
+                width={1920}
+                height={1080}
+              />
+            </td>
+            <td>علمی تخیلی</td>
+            <td>non-fiction</td>
+            <td>----</td>
+            <td>علمی ، تخیلی ، هیجانی</td>
+            <td>1403/04/15</td>
+            <td>
+              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                <FaTrash className="text-red-600 text-base md:text-lg" />
+                <FaPencil className="text-sky-600 text-base md:text-lg" />
+              </div>
+            </td>
+          </Table.Row>
+          <Table.Row>
+            <td>1</td>
+            <td className="!p-0 md:!p-5">
+              <Image
+                src="/images/categories/lovely.jpg"
+                className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
+                alt=""
+                width={1920}
+                height={1080}
+              />
+            </td>
+            <td>علمی تخیلی</td>
+            <td>non-fiction</td>
+            <td>----</td>
+            <td>علمی ، تخیلی ، هیجانی</td>
+            <td>1403/04/15</td>
+            <td>
+              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                <FaTrash className="text-red-600 text-base md:text-lg" />
+                <FaPencil className="text-sky-600 text-base md:text-lg" />
+              </div>
+            </td>
+          </Table.Row>
+          <Table.Row>
+            <td>1</td>
+            <td className="!p-0 md:!p-5">
+              <Image
+                src="/images/categories/iranian.jpg"
+                className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
+                alt=""
+                width={1920}
+                height={1080}
+              />
+            </td>
+            <td>علمی تخیلی</td>
+            <td>non-fiction</td>
+            <td>----</td>
+            <td>علمی ، تخیلی ، هیجانی</td>
+            <td>1403/04/15</td>
+            <td>
+              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                <FaTrash className="text-red-600 text-base md:text-lg" />
+                <FaPencil className="text-sky-600 text-base md:text-lg" />
+              </div>
+            </td>
+          </Table.Row>
+          <Table.Row>
+            <td>1</td>
+            <td className="!p-0 md:!p-5">
+              <Image
+                src="/images/categories/crime.jpg"
+                className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
                 alt=""
                 width={1920}
                 height={1080}

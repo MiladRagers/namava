@@ -6,7 +6,7 @@ type TableProps = {
 
 const Table = ({ children }: TableProps) => {
   return (
-    <div className="table-container bg-secondary-100 font-Dana  text-center text-white">
+    <div className="table-container text-sm md:text-base bg-secondary-100 font-Dana  text-center text-white">
       <table>{children}</table>
     </div>
   );
