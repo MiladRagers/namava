@@ -8,6 +8,7 @@ function MoviesPage() {
     <div>
       <Title name="ایجاد فیلم و سریال" />
       <AddNewFilm/>
+      <Title name="لیست فیلم و سریال ها" />
       <FilmList/>
     </div>
   );
