@@ -19,7 +19,7 @@ function CommentsList() {
         </Table.Header>
         <Table.Body>
           <Table.Row>
-            <td className="bg-red-600 text-white">1</td>
+            <td className="bg-red-700 text-white">1</td>
             <td>میلاد سلامیان</td>
             <td>کاپیتان آمریکا</td>
             <td>
