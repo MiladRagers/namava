@@ -30,7 +30,7 @@ function TicketsList() {
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                 <FaTrash className="text-red-600 text-base md:text-lg" />
                 <FaCheck className="text-green-500 text-base md:text-lg" />
-                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-amber-400 text-base md:text-lg" /></Link>
+                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-namava text-base md:text-lg" /></Link>
               </div>
             </td>
           </Table.Row>
@@ -46,7 +46,7 @@ function TicketsList() {
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                 <FaTrash className="text-red-600 text-base md:text-lg" />
                 <FaCheck className="text-green-500 text-base md:text-lg" />
-                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-amber-400 text-base md:text-lg" /></Link>
+                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-namava text-base md:text-lg" /></Link>
               </div>
             </td>
           </Table.Row>
@@ -62,7 +62,7 @@ function TicketsList() {
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                 <FaTrash className="text-red-600 text-base md:text-lg" />
                 <FaCheck className="text-green-500 text-base md:text-lg" />
-                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-amber-400 text-base md:text-lg" /></Link>
+                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-namava text-base md:text-lg" /></Link>
               </div>
             </td>
           </Table.Row>
@@ -78,7 +78,7 @@ function TicketsList() {
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                 <FaTrash className="text-red-600 text-base md:text-lg" />
                 <FaCheck className="text-green-500 text-base md:text-lg" />
-                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-amber-400 text-base md:text-lg" /></Link>
+                <Link href={"/p-admin/tickets/njbsnbxsb"}><FaEye className="text-namava text-base md:text-lg" /></Link>
               </div>
             </td>
           </Table.Row>
