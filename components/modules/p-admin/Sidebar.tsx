@@ -91,9 +91,9 @@ function Sidebar() {
     },
     {
       id: 11,
-      title: "محتوای استاتیک",
+      title: "پیغام ها",
       icon: <MdContentPaste className="icon-item" />,
-      href: "/p-admin/static",
+      href: "/p-admin/contacts",
     },
   ];
 
