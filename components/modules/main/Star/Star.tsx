@@ -9,7 +9,7 @@ interface Star {
 }
 function Star({ src, title, link }: Star) {
   return (
-    <Link href={link} className="block" title={title}>
+    <Link href={link} className="block rounded-full w-[116px] h-[116px] md:w-[190px] md:h-[190px]" title={title}>
       <Image
         src={src}
         width={400}

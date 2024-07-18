@@ -21,7 +21,7 @@ function Header({ isImage, isTitle, isKid, img, mobileImage, className }: Header
       <header
         className={`${className} header-video  ${isKid || isAboutPage && !className
           ? "min-h-screen md:min-h-screen"
-          : "min-h-[67vh] md:min-h-[93vh]"
+          : "min-h-[67vh] md:min-h-[95vh]"
           }`}
       >
         {isImage ? (
