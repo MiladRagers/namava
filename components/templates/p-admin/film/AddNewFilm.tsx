@@ -9,7 +9,6 @@ import { FaImage, FaLink, FaRegFileImage, FaRegImages } from "react-icons/fa6";
 import { LuCalendarRange } from "react-icons/lu";
 import {
   MdAccessTime,
-  MdOutlineKeyboardVoice,
   MdOutlineWbIncandescent,
 } from "react-icons/md";
 import { RiArticleLine, RiImageAddFill, RiMovie2Line } from "react-icons/ri";
@@ -207,7 +206,6 @@ function AddNewFilm() {
         <Button>ایجاد اثر</Button>
         <Button className="bg-amber-500">صفحه سریال</Button>
       </div>
-
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button className="bg-red-700">لغو</Button>
         <div className="w-full"></div>
