@@ -382,7 +382,7 @@ input:checked + .slider:before {
   }
 
   .nav-item.active {
-    @apply bg-zinc-700 text-gray-300 ;
+    @apply bg-zinc-700 text-gray-300;
   }
 
   .nav-item.active .icon-item {
@@ -391,6 +391,10 @@ input:checked + .slider:before {
 
   .icon-item {
     @apply text-[#9ca3af] text-2xl group-hover:text-namava;
+  }
+
+  .show-hover {
+    @apply opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all;
   }
 }
 
@@ -445,24 +449,20 @@ input:checked + .slider:before {
   }
 }
 
-
-
 /* admin panel */
 
-.users-list table thead th{
+.users-list table thead th {
   padding: 15px;
 }
-.users-list table tbody td{
+.users-list table tbody td {
   padding: 20px;
 }
-
-
 
 .table-container {
   overflow-x: auto !important;
 }
 
-.table-container::-webkit-scrollbar{
+.table-container::-webkit-scrollbar {
   height: 10px !important;
 }
 table {

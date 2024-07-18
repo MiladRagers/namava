@@ -41,7 +41,7 @@ function Comments({ isKid }: TComments) {
           <div className="flex items-center gap-x-4">
             <Button
               className={`!m-0 bg-white !w-[108px] text-xs ${
-                isKid ? "!bg-namava hover:!bg-sky-600 text-white" : ""
+                isKid ? "!bg-namava hover:!bg-sky-600 text-white" : "text-zinc-700"
               }`}
               onClick={() => router.push("/register")}
             >

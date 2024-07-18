@@ -48,35 +48,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
               },
             }}
           >
-            <SwiperSlide onClick={() => setMovieId(1)}>
-              <div
-                className={`transition-all group ${
-                  movieId === 1 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <div className="relative">
-                  <Image
-                    src={"/images/jangalAsphalt.jpg"}
-                    alt="slide1.jpg"
-                    width={490}
-                    height={500}
-                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                  />
-                  <div className="flex transition-all text-white group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
-                    <div className="pb-6 px-2 space-y-3">
-                      <p className="text-[13px]">
-                        سریال - <span className="font-Dana">1403</span>
-                      </p>
-                      <div className="flex  gap-x-1">
-                        <Heart />
-                        <span className="font-Dana mt-[1px]">%80</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="text-xs mt-3 mr-3">جنگل آسفالت</h3>
-              </div>
-            </SwiperSlide>
+
             <SwiperSlide onClick={() => setMovieId(2)}>
               <div
                 className={`transition-all group ${
