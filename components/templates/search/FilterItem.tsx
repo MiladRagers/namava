@@ -221,7 +221,7 @@ function FilterItem({
           <>
             <div className="bg-[#121212] mb-2 w-full py-2 pl-3 pr-2  rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-x-2">
-                <Search className="!w-[30px] !h-[30px]" />
+                <Search className="!w-[30px] !h-[30px] !fill-white" />
                 <input
                   ref={inputRef}
                   value={search}
