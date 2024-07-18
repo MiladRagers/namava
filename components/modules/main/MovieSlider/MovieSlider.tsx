@@ -38,10 +38,10 @@ function MovieSlider({ title, link }: TMovieSlider) {
                 spaceBetween: 10,
               },
               568: {
-                slidesPerView: 4,
+                slidesPerView: 3,
               },
               800: {
-                slidesPerView: 6,
+                slidesPerView: 3,
               },
               1260: {
                 slidesPerView: 7,
