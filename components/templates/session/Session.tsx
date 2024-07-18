@@ -1,8 +1,24 @@
+"use client";
 import Image from "next/image";
-import React from "react";
-import { FaPlay } from "react-icons/fa6";
+import React, { useEffect, useRef, useState } from "react";
+import { FaChevronDown, FaPlay } from "react-icons/fa6";
 
 function Session() {
+  const subMenuRef = useRef<any>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      const height = subMenuRef.current.scrollHeight;
+      subMenuRef.current.style.height = height + "px";
+    } else {
+      subMenuRef.current.style.height = 0 + "px";
+    }
+  }, [isOpen]);
   return (
     <>
       <div className="md:cursor-pointer hidden md:block">
@@ -31,19 +47,36 @@ function Session() {
           </p>
         </div>
       </div>
-      <div className="md:hidden flex items-center h-[108px] rounded-md overflow-hidden">
-        <div className="w-full h-full bg-[#222327] py-4 pr-4 space-y-3">
-          <h3 className="text-[13px] text-white font-Dana">بن ۱۰ - فصل ۴ قسمت ۱</h3>
-          <h5 className="font-Dana text-[#aaa] text-[13px]">22 دقیقه</h5>
+      <div className="block md:hidden bg-[#222327] rounded-md">
+        <div className={`flex items-center h-[108px] ${isOpen ? "border-b-[0.3px] border-b-[#454444]" :"rounded-md"} overflow-hidden`}>
+          <div className="w-full h-full bg-[#222327] py-4 pr-4 space-y-3">
+            <h3 className="text-[13px] text-white font-Dana">
+              بن ۱۰ - فصل ۴ قسمت ۱
+            </h3>
+            <h5 className="font-Dana text-[#575757] text-[13px]">22 دقیقه</h5>
+          </div>
+          <div className="w-full h-full  py-4 pl-4 relative">
+            <Image
+              src="/images/session1.jpg"
+              alt="session1"
+              fill
+              className="object-cover"
+            />
+            <div className="toggle-menu" onClick={handleToggle}>
+              <FaChevronDown
+                className={`text-xs text-white transition-all ${
+                  isOpen ? "rotate-180" : "rotate-0"
+                }`}
+              />
+            </div>
+            <div className="absolute w-[68px] right-0 top-0 bottom-0 session-overlay"></div>
+          </div>
         </div>
-        <div className="w-full h-full  py-4 pl-4 relative">
-          <Image
-            src="/images/session1.jpg"
-            alt="session1"
-            fill
-            className="object-cover rounded-md"
-          />
-          <div className="absolute w-[68px] right-0 top-0 bottom-0 session-overlay"></div>
+        <div ref={subMenuRef} className="submenu">
+          <p className="text-xs/[25px] text-[#aaaaaa] px-4 py-4">
+            اولد جرج که یک شوالیه بزرگ است، در موقعیت قبلی خود قرار می گیرد و به
+            شوالیه ها دستور می دهد تا همه بیگانگان...
+          </p>
         </div>
       </div>
     </>

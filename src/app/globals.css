@@ -397,6 +397,20 @@ input:checked + .slider:before {
     @apply opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all;
   }
 
+  .toggle-menu {
+    left: 10px;
+    width: 24px;
+    bottom: 10px;
+    height: 24px;
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
   .session-overlay {
     background-image: linear-gradient(
       -90deg,
