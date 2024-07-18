@@ -396,6 +396,14 @@ input:checked + .slider:before {
   .show-hover {
     @apply opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all;
   }
+
+  .session-overlay {
+    background-image: linear-gradient(
+      -90deg,
+      rgb(34, 35, 39) 0%,
+      rgba(34, 35, 39, 0) 100%
+    );
+  }
 }
 
 .recharts-legend-item-text {

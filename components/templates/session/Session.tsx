@@ -31,8 +31,20 @@ function Session() {
           </p>
         </div>
       </div>
-      <div className="block md:hidden">
-        
+      <div className="md:hidden flex items-center h-[108px] rounded-md overflow-hidden">
+        <div className="w-full h-full bg-[#222327] py-4 pr-4 space-y-3">
+          <h3 className="text-[13px] text-white font-Dana">بن ۱۰ - فصل ۴ قسمت ۱</h3>
+          <h5 className="font-Dana text-[#aaa] text-[13px]">22 دقیقه</h5>
+        </div>
+        <div className="w-full h-full  py-4 pl-4 relative">
+          <Image
+            src="/images/session1.jpg"
+            alt="session1"
+            fill
+            className="object-cover rounded-md"
+          />
+          <div className="absolute w-[68px] right-0 top-0 bottom-0 session-overlay"></div>
+        </div>
       </div>
     </>
   );
