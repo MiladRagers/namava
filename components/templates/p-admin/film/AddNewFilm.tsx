@@ -1,14 +1,21 @@
+"use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/auth/Input/Input";
 import Label from "@/components/modules/auth/Label/Label";
-import React from "react";
+import { voiceType } from "@/public/db";
+import React, { useState } from "react";
 import { BiCameraMovie } from "react-icons/bi";
-import { FaImage, FaRegFileImage, FaRegImages } from "react-icons/fa6";
+import { FaImage, FaLink, FaRegFileImage, FaRegImages } from "react-icons/fa6";
 import { LuCalendarRange } from "react-icons/lu";
-import { MdAccessTime, MdOutlineWbIncandescent } from "react-icons/md";
+import {
+  MdAccessTime,
+  MdOutlineKeyboardVoice,
+  MdOutlineWbIncandescent,
+} from "react-icons/md";
 import { RiArticleLine, RiImageAddFill, RiMovie2Line } from "react-icons/ri";
 
 function AddNewFilm() {
+  const [movieType, setMovieType] = useState("");
   return (
     <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
       <div className="flex flex-col gap-y-3 text-white">
@@ -36,6 +43,15 @@ function AddNewFilm() {
         >
           <Input type="text" placeholder="مدت زمان اثر را وارد کنید" />
           <MdAccessTime className={`text-2xl`} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-y-3 text-white">
+        <Label title="لینک " className="!text-base md:!text-lg" />
+        <div
+          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
+        >
+          <Input type="text" placeholder="لینک اثر  را وارد کنید" />
+          <FaLink className={`text-2xl ml-4`} />
         </div>
       </div>
       <div className="flex flex-col gap-y-3 text-white">
@@ -80,16 +96,40 @@ function AddNewFilm() {
           <div className="text-white text-sm flex items-center gap-x-4 pr-2">
             <div className="flex items-center gap-x-2">
               <label htmlFor="فیلم">فیلم</label>
-              <Input name="type" type="radio" id="film" />
+              <Input
+                name="type"
+                type="radio"
+                id="film"
+                onChange={() => setMovieType("film")}
+              />
             </div>
             <div className="flex items-center gap-x-2">
               <label htmlFor="سریال">سریال</label>
-              <Input name="type" type="radio" id="series" />
+              <Input
+                name="type"
+                type="radio"
+                id="series"
+                onChange={() => setMovieType("series")}
+              />
             </div>
           </div>
           <BiCameraMovie className={`text-2xl`} />
         </div>
       </div>
+      {movieType === "series" && (
+        <div className="flex flex-col gap-y-3 text-white">
+          <Label title="تعداد فصل" className="!text-base md:!text-lg" />
+          <div
+            className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
+          >
+            <Input
+              type="text"
+              placeholder="لطفا تعداد فصل این سریال را وارد کنید"
+            />
+            <MdOutlineWbIncandescent className={`text-2xl`} />
+          </div>
+        </div>
+      )}
       <div className="flex flex-col gap-y-3 text-white">
         <Label title="توضیحات اثر" className="!text-base md:!text-lg" />
         <div
@@ -97,6 +137,21 @@ function AddNewFilm() {
         >
           <Input type="text" placeholder="توضیحات اثر را بنویسید" />
           <RiArticleLine className={`text-2xl`} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-y-3 text-white">
+        <Label title="زبان" className="!text-base md:!text-lg" />
+        <div
+          className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
+        >
+          <select className="bg-[#121212] outline-none w-full">
+            <option value="-1">نوع گویش را انتخاب کنید</option>
+            {voiceType.map((voice) => (
+              <option key={voice.id} value={voice.name}>
+                {voice.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className="flex flex-col  gap-y-3 text-white">
@@ -147,15 +202,16 @@ function AddNewFilm() {
           <FaRegImages className={`text-2xl`} />
         </div>
       </div>
+      {movieType === "series" && <div className="hidden md:block"></div>}
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button>ایجاد اثر</Button>
         <Button className="bg-amber-500">صفحه سریال</Button>
       </div>
+
       <div className="flex items-center gap-x-8 mt-5 text-white">
-      <Button className="bg-red-700">لغو</Button>
+        <Button className="bg-red-700">لغو</Button>
         <div className="w-full"></div>
       </div>
-
     </div>
   );
 }
