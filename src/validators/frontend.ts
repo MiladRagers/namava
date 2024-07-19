@@ -2,7 +2,7 @@ import * as z from "zod";
 
 export const User = z.object({
   name: z
-    .string({required_error :"نام کاربری را وارد کنید"})
+    .string({ required_error: "نام کاربری را وارد کنید" })
     .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
   username: z
@@ -37,3 +37,30 @@ export const User = z.object({
 });
 
 export type TUser = z.infer<typeof User>;
+
+// categories schema
+
+export const Category = z.object({
+  title: z
+    .string({ required_error: "عنوان دسته بندی را وارد کنید" })
+    .min(3, { message: "عنوان دسته بندی حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "عنوان دسته باید 30 کاراکتر داشته باشد" }),
+  link: z
+    .string({ required_error: "لینک دسته بندی را وارد کنید" })
+    .min(3, { message: "لینک دسته بندی  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک دسته بندی  باید 30 کاراکتر داشته باشد" }),
+  desc: z
+    .string({ required_error: "توضیحات دسته بندی را وارد کنید" })
+    .min(3, { message: "توضیحات دسته بندی  حداقل باید 3 کارکتر باشد" })
+    .max(1000, { message: "توضیحات دسته بندی  باید 1000 کاراکتر داشته باشد" }),
+  parent: z
+    .string({ required_error: "پرنت دسته بندی را وارد کنید" })
+    .optional(),
+  image: z.any(),
+  tags: z
+    .string({ required_error: "تگ های دسته بندی را بنویسید" })
+    .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })
+    .max(150, { message: "تگ باید حداکثر 150 کارکتر باشد" }),
+});
+
+export type TCategory = z.infer<typeof Category>;
