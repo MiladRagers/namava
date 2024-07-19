@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
-import Label from "@/components/modules/auth/Label/Label";
 import { TUser, User } from "@/src/validators/frontend";
 import React from "react";
 import { useForm } from "react-hook-form";
