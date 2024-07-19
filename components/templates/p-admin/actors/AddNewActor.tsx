@@ -1,7 +1,11 @@
+"use client";
 import Button from "@/components/modules/auth/Button/Button";
-import Input from "@/components/modules/auth/Input/Input";
+import Input from "@/components/modules/p-admin/Input";
 import Label from "@/components/modules/auth/Label/Label";
+import { Actor, TActor } from "@/src/validators/frontend";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   FaImage,
   FaInstagram,
@@ -13,73 +17,89 @@ import {
 import { RiArticleLine } from "react-icons/ri";
 
 function AddNewActor() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<TActor>({
+    resolver: zodResolver(Actor),
+  });
+
+  const createNewActor = async (data: TActor) => {
+    console.log(data);
+  };
   return (
-    <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="نام و نام خانوادگی" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input
-            type="text"
-            placeholder="نام و نام خانوادگی بازیگر را بنویسید"
-          />
-          <FaUser className={`text-xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="بیوگرافی " className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="درباره  این بازیگر بنویسید" />
-          <RiArticleLine className={`text-2xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="لینک " className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="لینک بازیگر را وارد کنید" />
-          <FaLink className={`text-2xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="توییتر" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="درباره  این بازیگر بنویسید" />
-          <FaTwitter className={`text-2xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="اینستاگرام" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="درباره  این بازیگر بنویسید" />
-          <FaInstagram className={`text-2xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="آپلودر عکس " className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="file" hidden id="image-uploader" />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود عکس کلیک کنید
-          </label>
-          <FaImage className={`text-2xl ml-4`} />
-        </div>
-      </div>
+    <form
+      onSubmit={handleSubmit(createNewActor)}
+      className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
+    >
+      <Input
+        register={register}
+        errors={errors}
+        icon={<FaUser className={`text-xl`} />}
+        name="name"
+        title="نام و نام خانوادگی"
+        type="text"
+        placeholder="نام و نام خانوادگی بازیگر را بنویسید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<RiArticleLine className={`text-xl`} />}
+        name="bio"
+        title="بیوگرافی"
+        type="text"
+        placeholder="درباره  این بازیگر بنویسید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<RiArticleLine className={`text-xl`} />}
+        name="link"
+        title="لینک "
+        type="text"
+        placeholder="لینک بازیگر را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<FaTwitter className={`text-xl`} />}
+        name="twitter"
+        title="توییتر"
+        type="text"
+        placeholder="توییتر بازیگر را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<FaInstagram className={`text-xl`} />}
+        name="instagram"
+        title="اینستاگرام"
+        type="text"
+        placeholder="اینستاگرام بازیگر را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="image"
+        title="آپلودر عکس"
+        type="file"
+      />
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button>ایجاد دسته بندی</Button>
-        <Button className="bg-red-700">لغو</Button>
+        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
+          ایجاد دسته بندی
+        </Button>
+        <Button onClick={() => reset()} type="reset" className="bg-red-700">
+          لغو
+        </Button>
       </div>
-    </div>
+    </form>
   );
 }
 
