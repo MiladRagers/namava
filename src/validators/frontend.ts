@@ -44,7 +44,7 @@ export const Category = z.object({
   title: z
     .string({ required_error: "عنوان دسته بندی را وارد کنید" })
     .min(3, { message: "عنوان دسته بندی حداقل باید 3 کارکتر باشد" })
-    .max(30, { message: "عنوان دسته باید 30 کاراکتر داشته باشد" }),
+    .max(30, { message: "عنوان دسته بندی باید 30 کاراکتر داشته باشد" }),
   link: z
     .string({ required_error: "لینک دسته بندی را وارد کنید" })
     .min(3, { message: "لینک دسته بندی  حداقل باید 3 کارکتر باشد" })
@@ -53,10 +53,8 @@ export const Category = z.object({
     .string({ required_error: "توضیحات دسته بندی را وارد کنید" })
     .min(3, { message: "توضیحات دسته بندی  حداقل باید 3 کارکتر باشد" })
     .max(1000, { message: "توضیحات دسته بندی  باید 1000 کاراکتر داشته باشد" }),
-  parent: z
-    .string({ required_error: "پرنت دسته بندی را وارد کنید" })
-    .optional(),
-  image: z.any({required_error :"عکس را آپلود کنید"}),
+  parent: z.string().optional(),
+  image: z.any({ required_error: "عکس را آپلود کنید" }),
   tags: z
     .string({ required_error: "تگ های دسته بندی را بنویسید" })
     .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })
@@ -64,3 +62,17 @@ export const Category = z.object({
 });
 
 export type TCategory = z.infer<typeof Category>;
+
+// menus schema
+
+export const Menus = z.object({
+  title: z
+    .string()
+    .min(3, { message: "عنوان منو حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "عنوان منو باید 30 کاراکتر داشته باشد" }),
+  link: z
+    .string({ required_error: "لینک منو را وارد کنید" })
+    .min(3, { message: "لینک منو  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک منو  باید 30 کاراکتر داشته باشد" }),
+  parent: z.string().optional(),
+});

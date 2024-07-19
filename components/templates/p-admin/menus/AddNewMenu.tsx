@@ -8,7 +8,7 @@ import { FaLink } from "react-icons/fa6";
 function AddNewMenu() {
   return (
     <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
-      <div className="flex flex-col gap-y-3 text-white">
+      {/* <div className="flex flex-col gap-y-3 text-white">
         <Label title="عنوان" className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
@@ -16,7 +16,7 @@ function AddNewMenu() {
           <Input type="text" placeholder="عنوان منو را وارد کنید" />
           <AiOutlineProduct className={`text-2xl ml-4`} />
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-y-3 text-white">
         <Label title="لینک " className="!text-base md:!text-lg" />
         <div

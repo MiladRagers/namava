@@ -20,9 +20,8 @@ function AddCategories() {
     resolver: zodResolver(Category),
   });
 
-
   console.log(errors);
-  
+
   const fakeOptions = [
     { id: 1, label: "اکشن", value: "Action" },
     { id: 2, label: "کمدی", value: "Comedy" },
@@ -77,19 +76,6 @@ function AddCategories() {
         placeholder="تگ های دسته بندی را بنویسید"
       />
 
-      {/* <div className="flex flex-col gap-y-3 text-white">
-        <Label title="پرنت دسته بندی" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <select className="bg-[#121212] outline-none w-full">
-            <option value="-1">پرنت دسته بندی را انتخاب کنید</option>
-            <option value="1">اکشن</option>
-            <option value="2">کمدی</option>
-            <option value="3">علمی تخیلی</option>
-          </select>
-        </div>
-      </div> */}
       <SelectBox
         register={register}
         errors={errors}
@@ -110,7 +96,9 @@ function AddCategories() {
         <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
           ایجاد دسته بندی
         </Button>
-        <Button className="bg-red-700">لغو</Button>
+        <Button onClick={() => reset()} className="bg-red-700">
+          لغو
+        </Button>
       </div>
     </form>
   );
