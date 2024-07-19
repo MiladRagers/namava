@@ -6,14 +6,7 @@ import { Actor, TActor } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import {
-  FaImage,
-  FaInstagram,
-  FaLink,
-  FaTag,
-  FaTwitter,
-  FaUser,
-} from "react-icons/fa6";
+import { FaInstagram, FaLink, FaTwitter, FaUser } from "react-icons/fa6";
 import { RiArticleLine } from "react-icons/ri";
 
 function AddNewActor() {
@@ -57,7 +50,7 @@ function AddNewActor() {
       <Input
         register={register}
         errors={errors}
-        icon={<RiArticleLine className={`text-xl`} />}
+        icon={<FaLink className={`text-xl`} />}
         name="link"
         title="لینک "
         type="text"
