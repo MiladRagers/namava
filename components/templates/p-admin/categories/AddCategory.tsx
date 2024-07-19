@@ -90,7 +90,9 @@ function AddCategories() {
       />
 
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button>ایجاد دسته بندی</Button>
+        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
+          ایجاد دسته بندی
+        </Button>
         <Button className="bg-red-700">لغو</Button>
       </div>
     </form>
