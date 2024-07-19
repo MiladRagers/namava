@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
-import Label from "@/components/modules/auth/Label/Label";
 import { Category, TCategory } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
@@ -20,7 +19,6 @@ function AddCategories() {
     resolver: zodResolver(Category),
   });
 
-  console.log(errors);
 
   const fakeOptions = [
     { id: 1, label: "اکشن", value: "Action" },

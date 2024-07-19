@@ -1,53 +1,77 @@
+"use client";
 import Button from "@/components/modules/auth/Button/Button";
-import Input from "@/components/modules/auth/Input/Input";
-import Label from "@/components/modules/auth/Label/Label";
+import { Menu, TMenu } from "@/src/validators/frontend";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { AiOutlineProduct } from "react-icons/ai";
+import Input from "@/components/modules/p-admin/Input";
 import { FaLink } from "react-icons/fa6";
+import SelectBox from "@/components/modules/p-admin/SelectBox";
 
 function AddNewMenu() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<TMenu>({
+    resolver: zodResolver(Menu),
+  });
+
+  const fakeOptions = [
+    { id: 1, label: "اکشن", value: "Action" },
+    { id: 2, label: "کمدی", value: "Comedy" },
+    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
+  ];
+
+  const createNewMenu = async (data: TMenu) => {
+    console.log(data);
+  };
   return (
-    <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
-      {/* <div className="flex flex-col gap-y-3 text-white">
-        <Label title="عنوان" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="عنوان منو را وارد کنید" />
-          <AiOutlineProduct className={`text-2xl ml-4`} />
-        </div>
-      </div> */}
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="لینک " className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="لینک منو را وارد کنید" />
-          <FaLink className={`text-2xl ml-4`} />
-        </div>
-      </div>
- 
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="پرنت منو" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <select className="bg-[#121212] text-sm outline-none w-full">
-            <option value="-1">پرنت منو را انتخاب کنید</option>
-            <option value="1">اکشن</option>
-            <option value="2">کمدی</option>
-            <option value="3">علمی تخیلی</option>
-          </select>
-        </div>
-      </div>
+    <form
+      onSubmit={handleSubmit(createNewMenu)}
+      className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
+    >
+      <Input
+        register={register}
+        errors={errors}
+        icon={<AiOutlineProduct className={`text-xl`} />}
+        name="title"
+        title="عنوان"
+        type="text"
+        placeholder="عنوان منو را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<FaLink className={`text-xl`} />}
+        name="link"
+        title="لینک"
+        type="text"
+        placeholder="لینک منو را وارد کنید"
+      />
+
+      <SelectBox
+        register={register}
+        errors={errors}
+        name="parent"
+        options={fakeOptions}
+        title="پرنت منو"
+      />
 
       <div className="hidden md:block"></div>
 
       <div className="flex items-center gap-x-3 md:gap-x-8 mt-5 text-white">
-        <Button>ایجاد منو</Button>
-        <Button className="bg-red-700">لغو</Button>
+        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
+          ایجاد منو
+        </Button>
+        <Button onClick={() => reset()} type="reset" className="bg-red-700">
+          لغو
+        </Button>
       </div>
-    </div>
+    </form>
   );
 }
 

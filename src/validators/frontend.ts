@@ -65,7 +65,7 @@ export type TCategory = z.infer<typeof Category>;
 
 // menus schema
 
-export const Menus = z.object({
+export const Menu = z.object({
   title: z
     .string()
     .min(3, { message: "عنوان منو حداقل باید 3 کارکتر باشد" })
@@ -76,3 +76,5 @@ export const Menus = z.object({
     .max(30, { message: "لینک منو  باید 30 کاراکتر داشته باشد" }),
   parent: z.string().optional(),
 });
+
+export type TMenu = z.infer<typeof Menu>;
