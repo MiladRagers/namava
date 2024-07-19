@@ -6,6 +6,7 @@ import { voiceType } from "@/public/db";
 import React, { useState } from "react";
 import { BiCameraMovie } from "react-icons/bi";
 import { FaImage, FaLink, FaRegFileImage, FaRegImages } from "react-icons/fa6";
+import { FiVideo } from "react-icons/fi";
 import { LuCalendarRange } from "react-icons/lu";
 import {
   MdAccessTime,
@@ -36,7 +37,7 @@ function AddNewFilm() {
         </div>
       </div>
       <div className="flex flex-col gap-y-3 text-white">
-        <Label title="رده سنی" className="!text-base md:!text-lg" />
+        <Label title="زمان" className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
         >
@@ -166,6 +167,18 @@ function AddNewFilm() {
         </div>
       </div>
       <div className="flex flex-col  gap-y-3 text-white">
+        <Label title="ویدیو" className="!text-base md:!text-lg" />
+        <div
+          className={`bg-[#121212] h-[52px] px-2 md:px-4 rounded-xl flex items-center justify-between gap-x-2`}
+        >
+          <Input type="file" hidden id="image-uploader"  />
+          <label className="text-[13px] w-full" htmlFor="image-uploader">
+            برای آپلود ویدیو کلیک کنید
+          </label>
+          <FiVideo className={`text-2xl`} />
+        </div>
+      </div>
+      <div className="flex flex-col  gap-y-3 text-white">
         <Label title="بنر دسکتاپ" className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
@@ -202,6 +215,7 @@ function AddNewFilm() {
         </div>
       </div>
       {movieType === "series" && <div className="hidden md:block"></div>}
+      <div className="hidden md:block"></div>
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button>ایجاد اثر</Button>
         <Button className="bg-amber-500">صفحه سریال</Button>
