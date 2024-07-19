@@ -8,6 +8,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FaImage, FaLink, FaTag, FaVuejs } from "react-icons/fa6";
 import { RiArticleLine } from "react-icons/ri";
+import SelectBox from "@/components/modules/p-admin/SelectBox";
 
 function AddCategories() {
   const {
@@ -18,6 +19,15 @@ function AddCategories() {
   } = useForm<TCategory>({
     resolver: zodResolver(Category),
   });
+
+
+  console.log(errors);
+  
+  const fakeOptions = [
+    { id: 1, label: "اکشن", value: "Action" },
+    { id: 2, label: "کمدی", value: "Comedy" },
+    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
+  ];
 
   const createNewCtegory = async (data: TCategory) => {
     console.log(data);
@@ -67,7 +77,7 @@ function AddCategories() {
         placeholder="تگ های دسته بندی را بنویسید"
       />
 
-      <div className="flex flex-col gap-y-3 text-white">
+      {/* <div className="flex flex-col gap-y-3 text-white">
         <Label title="پرنت دسته بندی" className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
@@ -79,7 +89,14 @@ function AddCategories() {
             <option value="3">علمی تخیلی</option>
           </select>
         </div>
-      </div>
+      </div> */}
+      <SelectBox
+        register={register}
+        errors={errors}
+        name="parent"
+        options={fakeOptions}
+        title="پرنت دسته بندی"
+      />
 
       <Input
         register={register}

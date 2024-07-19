@@ -1,6 +1,5 @@
 import React from "react";
 import Label from "../auth/Label/Label";
-import InputElem from "@/components/modules/auth/Input/Input";
 import { FaImage } from "react-icons/fa6";
 
 type TInput = {
@@ -53,7 +52,9 @@ function Input({
         >
           <input
             name={name}
-            {...register(`${name}`)}
+            {...register(`${name}`, {
+              required: "لطفا تصویر را آپلود کنید",
+            })}
             type="file"
             hidden
             id={`image-uploader-${name}`}

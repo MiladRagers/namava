@@ -56,7 +56,7 @@ export const Category = z.object({
   parent: z
     .string({ required_error: "پرنت دسته بندی را وارد کنید" })
     .optional(),
-  image: z.any(),
+  image: z.any({required_error :"عکس را آپلود کنید"}),
   tags: z
     .string({ required_error: "تگ های دسته بندی را بنویسید" })
     .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })
