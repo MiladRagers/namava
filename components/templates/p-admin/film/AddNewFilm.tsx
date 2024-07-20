@@ -1,230 +1,220 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
-import Input from "@/components/modules/auth/Input/Input";
-import Label from "@/components/modules/auth/Label/Label";
-import { voiceType } from "@/public/db";
+import Input from "@/components/modules/p-admin/Input";
+import Radio from "@/components/modules/p-admin/Radio";
+import SelectBox from "@/components/modules/p-admin/SelectBox";
+import { RadioOptions, voiceType } from "@/public/db";
+import { Movie, TMovie } from "@/src/validators/frontend";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
-import { BiCameraMovie } from "react-icons/bi";
-import { FaImage, FaLink, FaRegFileImage, FaRegImages } from "react-icons/fa6";
+import { useForm } from "react-hook-form";
+import { BiCameraMovie, BiMovie } from "react-icons/bi";
+import { FaLink, FaRegFileImage } from "react-icons/fa6";
 import { FiVideo } from "react-icons/fi";
 import { LuCalendarRange } from "react-icons/lu";
-import {
-  MdAccessTime,
-  MdOutlineWbIncandescent,
-} from "react-icons/md";
+import { MdAccessTime, MdOutlineWbIncandescent } from "react-icons/md";
 import { RiArticleLine, RiImageAddFill, RiMovie2Line } from "react-icons/ri";
+import { SlCalender } from "react-icons/sl";
 
 function AddNewFilm() {
   const [movieType, setMovieType] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<TMovie>({
+    resolver: zodResolver(Movie),
+  });
+
+  const fakeOptions = [
+    { id: 1, label: "اکشن", value: "Action" },
+    { id: 2, label: "کمدی", value: "Comedy" },
+    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
+  ];
+
+  const voices = voiceType.map((voice) => ({
+    label: voice.name,
+    value: voice.name,
+    id: voice.id,
+  }));
+
+  const createNewMovie = async (data: TMovie) => {
+    console.log("hello");
+
+    console.log(data);
+  };
   return (
-    <div className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6">
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="نام اثر" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 pl-2`}
-        >
-          <Input type="text" placeholder="نام اثر را وارد کنید" />
-          <RiMovie2Line className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="رده سنی" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between pl-2 gap-x-2`}
-        >
-          <Input type="text" placeholder="رده سنی مورد نظر را وارد کنید" />
-          <LuCalendarRange className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="زمان" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="مدت زمان اثر را وارد کنید" />
-          <MdAccessTime className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="لینک " className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="لینک اثر  را وارد کنید" />
-          <FaLink className={`text-2xl ml-4`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="درباره اثر (خلاصه)" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-        >
-          <Input
-            type="text"
-            placeholder="در مورد اثر به شکل خلاصه توضیح دهید"
-          />
-          <MdOutlineWbIncandescent className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="زمان پخش" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="زمان پخش اثر را بنویسید" />
-          <MdOutlineWbIncandescent className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="دسته بندی اثر" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <select className="bg-[#121212] outline-none w-full">
-            <option value="-1">پرنت دسته بندی را انتخاب کنید</option>
-            <option value="1">اکشن</option>
-            <option value="2">کمدی</option>
-            <option value="3">علمی تخیلی</option>
-          </select>
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="نوع اثر" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-        >
-          <div className="text-white text-sm flex items-center gap-x-4 pr-2">
-            <div className="flex items-center gap-x-2">
-              <label htmlFor="فیلم">فیلم</label>
-              <Input
-                name="type"
-                type="radio"
-                id="film"
-                onChange={() => setMovieType("film")}
-              />
-            </div>
-            <div className="flex items-center gap-x-2">
-              <label htmlFor="سریال">سریال</label>
-              <Input
-                name="type"
-                type="radio"
-                id="series"
-                onChange={() => setMovieType("series")}
-              />
-            </div>
-          </div>
-          <BiCameraMovie className={`text-2xl`} />
-        </div>
-      </div>
+    <form
+      onSubmit={handleSubmit(createNewMovie)}
+      className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
+    >
+      <Input
+        register={register}
+        errors={errors}
+        icon={<RiMovie2Line className={`text-xl`} />}
+        name="title"
+        title="عنوان"
+        type="text"
+        placeholder="نام اثر را وارد کنید"
+      />
+      <Input
+        register={register}
+        errors={errors}
+        icon={<LuCalendarRange className={`text-xl`} />}
+        name="ageRange"
+        title="رده سنی"
+        type="text"
+        placeholder="رده سنی مورد نظر را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<MdAccessTime className={`text-xl`} />}
+        name="time"
+        title="زمان"
+        type="text"
+        placeholder="مدت زمان اثر را وارد کنید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<FaLink className={`text-xl`} />}
+        name="link"
+        title="لینک "
+        type="text"
+        placeholder="لینک اثر  را وارد کنید"
+      />
+
+      <Radio
+        register={register}
+        errors={errors}
+        name="type"
+        icon={<BiCameraMovie className={`text-2xl`} />}
+        title="نوع اثر"
+        options={RadioOptions}
+        onType={setMovieType}
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<MdOutlineWbIncandescent className={`text-xl`} />}
+        name="shortDesc"
+        title="درباره اثر (خلاصه)"
+        type="text"
+        placeholder="در مورد اثر به شکل خلاصه توضیح دهید"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<SlCalender className={`text-xl`} />}
+        name="showTime"
+        title="زمان پخش"
+        type="text"
+        placeholder="زمان پخش اثر را بنویسید"
+      />
+
+      <SelectBox
+        register={register}
+        errors={errors}
+        name="category"
+        options={fakeOptions}
+        title="دسته بندی"
+      />
+
       {movieType === "series" && (
-        <div className="flex flex-col gap-y-3 text-white">
-          <Label title="تعداد فصل" className="!text-base md:!text-lg" />
-          <div
-            className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-          >
-            <Input
-              type="text"
-              placeholder="لطفا تعداد فصل این سریال را وارد کنید"
-            />
-            <MdOutlineWbIncandescent className={`text-2xl`} />
-          </div>
-        </div>
+        <Input
+          register={register}
+          errors={errors}
+          icon={<BiMovie className={`text-xl`} />}
+          name="season"
+          title="تعداد فصل"
+          type="text"
+          placeholder="لطفا تعداد فصل این سریال را وارد کنید"
+        />
       )}
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="توضیحات اثر" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] rounded-xl flex items-center pl-2 justify-between gap-x-2`}
-        >
-          <Input type="text" placeholder="توضیحات اثر را بنویسید" />
-          <RiArticleLine className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-3 text-white">
-        <Label title="زبان" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <select className="bg-[#121212] outline-none w-full">
-            <option value="-1">نوع گویش را انتخاب کنید</option>
-            {voiceType.map((voice) => (
-              <option key={voice.id} value={voice.name}>
-                {voice.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="تصویر اصلی" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="file" hidden id="image-uploader" />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود تصویر اصلی کلیک کنید
-          </label>
-          <FaImage className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="ویدیو" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2 md:px-4 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="file" hidden id="image-uploader"  />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود ویدیو کلیک کنید
-          </label>
-          <FiVideo className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="بنر دسکتاپ" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="file" hidden id="image-uploader" />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود بنر دسکتاپ کلیک کنید
-          </label>
-          <RiImageAddFill className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="بنر موبایل" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input type="file" hidden id="image-uploader" />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود بنر موبایل کلیک کنید
-          </label>
-          <FaRegFileImage className={`text-2xl`} />
-        </div>
-      </div>
-      <div className="flex flex-col  gap-y-3 text-white">
-        <Label title="بنر موبایل" className="!text-base md:!text-lg" />
-        <div
-          className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
-        >
-          <Input multiple type="file" hidden id="image-uploader" />
-          <label className="text-[13px] w-full" htmlFor="image-uploader">
-            برای آپلود جزییات (چند تصویر) کلیک کنید
-          </label>
-          <FaRegImages className={`text-2xl`} />
-        </div>
-      </div>
+
+      <Input
+        register={register}
+        errors={errors}
+        icon={<RiArticleLine className={`text-xl`} />}
+        name="longDesc"
+        title="توضیحات کامل"
+        type="text"
+        placeholder="توضیحات اثر را بنویسید"
+      />
+
+      <SelectBox
+        register={register}
+        errors={errors}
+        name="language"
+        options={voices}
+        title="زبان"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="mainImage"
+        title="تصویر اصلی"
+        type="file"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="video"
+        title="ویدیو"
+        type="file"
+        icon={<FiVideo className={`text-2xl`} />}
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="deskBanner"
+        title="بنر دسکتاپ"
+        type="file"
+        icon={<RiImageAddFill className={`text-2xl`} />}
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="mobileBanner"
+        title="بنر موبایل"
+        type="file"
+        icon={<FaRegFileImage className={`text-2xl`} />}
+      />
+
+      <Input
+        register={register}
+        errors={errors}
+        name="detailImage"
+        title="تصاویر جزییات"
+        type="file"
+        icon={<FaRegFileImage className={`text-2xl`} />}
+      />
+
       {movieType === "series" && <div className="hidden md:block"></div>}
       <div className="hidden md:block"></div>
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button>ایجاد اثر</Button>
+        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
+          ایجاد اثر
+        </Button>
         <Button className="bg-amber-500">صفحه سریال</Button>
       </div>
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button className="bg-red-700">لغو</Button>
         <div className="w-full"></div>
       </div>
-    </div>
+    </form>
   );
 }
 

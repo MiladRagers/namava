@@ -103,3 +103,50 @@ export const Actor = z.object({
 });
 
 export type TActor = z.infer<typeof Actor>;
+
+// movie schema
+
+export const Movie = z.object({
+  title: z
+    .string()
+    .min(3, { message: "عنوان اثر حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "عنوان اثر باید 30 کاراکتر داشته باشد" }),
+  ageRange: z
+    .string()
+    .min(1, { message: "رده سنی حداقل باید 1 کارکتر باشد" })
+    .max(3, { message: "رده سنی باید حداکثر 3  کاراکتر داشته باشد" }),
+  time: z
+    .string()
+    .min(1, { message: "مدت زمان حداقل باید 1 کارکتر باشد" })
+    .max(10, { message: "مدت زمان باید 10 کاراکتر داشته باشد" }),
+
+  link: z
+    .string({ required_error: "لینک را وارد کنید" })
+    .min(3, { message: "لینک  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک  باید 30 کاراکتر داشته باشد" }),
+  shortDesc: z
+    .string({ required_error: "توضیحات اثر را وارد کنید" })
+    .min(3, { message: "توضیحات اثر  حداقل باید 3 کارکتر باشد" })
+    .max(1000, { message: "توضیحات اثر  باید 1000 کاراکتر داشته باشد" }),
+  showTime: z
+    .string({ required_error: "توضیحات اثر را وارد کنید" })
+    .min(3, { message: "توضیحات اثر  حداقل باید 3 کارکتر باشد" })
+    .max(1000, { message: "توضیحات اثر  باید 1000 کاراکتر داشته باشد" }),
+  category: z.string().min(1, { message: "دسته بندی اثر را انتخاب کنید" }),
+  type: z.string().min(1, { message: "لطفا نوع اثر را انتخاب کنید" }),
+  season: z
+    .string({ required_error: "تعداد فصل های این اثر را وارد کنید" })
+    .min(1, { message: "تعداد فصل های این اثر را وارد کنید" }),
+  longDesc: z
+    .string()
+    .min(3, { message: "توضیحات اثر  حداقل باید 3 کارکتر باشد" })
+    .max(10000, { message: "توضیحات اثر  باید 10000 کاراکتر داشته باشد" }),
+  language: z.string().min(1, { message: "زبان اثر را انتخاب کنید" }),
+  mainImage: z.any({ required_error: "عکس را آپلود کنید" }),
+  video: z.any({ required_error: "ویدیو را آپلود کنید" }),
+  deskBanner: z.any({ required_error: "بنر دسکتاپ را آپلود کنید" }),
+  mobileBanner: z.any({ required_error: "بنر موبایل را آپلود کنید" }),
+  detailImage: z.any({ required_error: "تصاویر را وارد آپلود کنید" }),
+});
+
+export type TMovie = z.infer<typeof Movie>;

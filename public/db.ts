@@ -21,6 +21,11 @@ export let genres = [
   { name: "کلاسیک", id: 20 },
 ];
 
+export const RadioOptions = [
+  { id: "series", name: "سریال", isActive: false },
+  { id: "film", name: "فیلم", isActive: true },
+];
+
 export let country = [
   { name: "ایران", id: 1 },
   { name: "هند", id: 2 },

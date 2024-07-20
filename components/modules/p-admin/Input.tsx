@@ -9,6 +9,7 @@ type TInput = {
   icon?: React.ReactNode;
   placeholder?: string;
   name: string;
+  miltiple?: boolean;
   type: "text" | "number" | "email" | "password" | "file";
 };
 function Input({
@@ -19,6 +20,7 @@ function Input({
   placeholder,
   name,
   type,
+  miltiple,
 }: TInput) {
   if (type !== "file") {
     return (
@@ -58,6 +60,7 @@ function Input({
             type="file"
             hidden
             id={`image-uploader-${name}`}
+            multiple={miltiple ? true : false}
           />
           <label
             className="text-[13px] w-full"
@@ -65,7 +68,7 @@ function Input({
           >
             برای آپلود {title} کلیک کنید
           </label>
-          <FaImage className={`text-2xl`} />
+          {icon ? icon : <FaImage className={`text-2xl`} />}
         </div>
         {errors[name] && (
           <span className="absolute top-24 text-xs md:text-sm text-red-600">
