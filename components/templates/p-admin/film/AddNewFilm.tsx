@@ -25,7 +25,6 @@ function AddNewFilm() {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors, isValid },
   } = useForm<TMovie>({
     resolver: zodResolver(Movie),
