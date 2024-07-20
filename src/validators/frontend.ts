@@ -54,7 +54,12 @@ export const Category = z.object({
     .min(3, { message: "توضیحات دسته بندی  حداقل باید 3 کارکتر باشد" })
     .max(1000, { message: "توضیحات دسته بندی  باید 1000 کاراکتر داشته باشد" }),
   parent: z.string().optional(),
-  image: z.any({ required_error: "عکس را آپلود کنید" }),
+  image: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "عکس را آپلود کنید" }
+  ),
   tags: z
     .string({ required_error: "تگ های دسته بندی را بنویسید" })
     .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })
@@ -99,7 +104,12 @@ export const Actor = z.object({
     .max(30, { message: "لینک  باید 30 کاراکتر داشته باشد" }),
   twitter: z.string().optional(),
   instagram: z.string().optional(),
-  image: z.any({ required_error: "عکس را آپلود کنید" }),
+  image: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "عکس را آپلود کنید" }
+  ),
 });
 
 export type TActor = z.infer<typeof Actor>;
@@ -134,19 +144,42 @@ export const Movie = z.object({
     .max(1000, { message: "توضیحات اثر  باید 1000 کاراکتر داشته باشد" }),
   category: z.string().min(1, { message: "دسته بندی اثر را انتخاب کنید" }),
   type: z.string().min(1, { message: "لطفا نوع اثر را انتخاب کنید" }),
-  season: z
-    .string({ required_error: "تعداد فصل های این اثر را وارد کنید" })
-    .min(1, { message: "تعداد فصل های این اثر را وارد کنید" }),
+  season: z.string().optional(),
   longDesc: z
     .string()
     .min(3, { message: "توضیحات اثر  حداقل باید 3 کارکتر باشد" })
     .max(10000, { message: "توضیحات اثر  باید 10000 کاراکتر داشته باشد" }),
   language: z.string().min(1, { message: "زبان اثر را انتخاب کنید" }),
-  mainImage: z.any({ required_error: "عکس را آپلود کنید" }),
-  video: z.any({ required_error: "ویدیو را آپلود کنید" }),
-  deskBanner: z.any({ required_error: "بنر دسکتاپ را آپلود کنید" }),
-  mobileBanner: z.any({ required_error: "بنر موبایل را آپلود کنید" }),
-  detailImage: z.any({ required_error: "تصاویر را وارد آپلود کنید" }),
+  mainImage: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "تصویر اصلی را آپلود کنید" }
+  ),
+  video: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "ویدیو باید آپلود شود" }
+  ),
+  deskBanner: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "بنر دسکتاپ باید آپلود شود" }
+  ),
+  mobileBanner: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "بنر موبایل باید آپلود شود" }
+  ),
+  detailImage: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "تصویر جزییات را آپلود کنید" }
+  ),
 });
 
 export type TMovie = z.infer<typeof Movie>;

@@ -6,6 +6,7 @@ import SelectBox from "@/components/modules/p-admin/SelectBox";
 import { RadioOptions, voiceType } from "@/public/db";
 import { Movie, TMovie } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiCameraMovie, BiMovie } from "react-icons/bi";
@@ -18,6 +19,7 @@ import { SlCalender } from "react-icons/sl";
 
 function AddNewFilm() {
   const [movieType, setMovieType] = useState("");
+  const router = useRouter();
 
   const {
     register,
@@ -199,6 +201,7 @@ function AddNewFilm() {
         name="detailImage"
         title="تصاویر جزییات"
         type="file"
+        multiple
         icon={<FaRegFileImage className={`text-2xl`} />}
       />
 
@@ -208,10 +211,17 @@ function AddNewFilm() {
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
           ایجاد اثر
         </Button>
-        <Button className="bg-amber-500">صفحه سریال</Button>
+        <Button
+          className="bg-amber-500"
+          onClick={() => router.push("/p-admin/series")}
+        >
+          صفحه سریال
+        </Button>
       </div>
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button className="bg-red-700">لغو</Button>
+        <Button onClick={() => reset()} className="bg-red-700">
+          لغو
+        </Button>
         <div className="w-full"></div>
       </div>
     </form>

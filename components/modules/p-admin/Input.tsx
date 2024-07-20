@@ -9,7 +9,7 @@ type TInput = {
   icon?: React.ReactNode;
   placeholder?: string;
   name: string;
-  miltiple?: boolean;
+  multiple?: boolean;
   type: "text" | "number" | "email" | "password" | "file";
 };
 function Input({
@@ -20,7 +20,7 @@ function Input({
   placeholder,
   name,
   type,
-  miltiple,
+  multiple,
 }: TInput) {
   if (type !== "file") {
     return (
@@ -60,7 +60,7 @@ function Input({
             type="file"
             hidden
             id={`image-uploader-${name}`}
-            multiple={miltiple ? true : false}
+            multiple={multiple ? true : false}
           />
           <label
             className="text-[13px] w-full"
