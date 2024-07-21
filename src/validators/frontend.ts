@@ -220,3 +220,33 @@ export const Session = z.object({
 });
 
 export type TSession = z.infer<typeof Session>;
+
+// article schema
+
+export const Article = z.object({
+  title: z
+    .string()
+    .min(3, { message: "عنوان مقاله حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "عنوان مقاله باید 30 کاراکتر داشته باشد" }),
+  readingTime: z
+    .string()
+    .min(1, { message: "مدت زمان خواندن حداقل باید 1 کارکتر باشد" })
+    .max(10, { message: "مدت زمان خواندن باید 10 کاراکتر داشته باشد" }),
+  link: z
+    .string()
+    .min(3, { message: "لینک  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک  باید 30 کاراکتر داشته باشد" }),
+  tags: z
+    .string({ required_error: "تگ های دسته بندی را بنویسید" })
+    .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })
+    .max(150, { message: "تگ باید حداکثر 150 کارکتر باشد" }),
+  image: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "عکس را آپلود کنید" }
+  ),
+  movie: z
+    .string()
+    .min(1, { message: "لطفا فیلم مربوط به این مقاله را انتخاب کنید" }),
+});
