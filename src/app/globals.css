@@ -505,3 +505,18 @@ table {
 .swiper-pagination {
   top: 23rem !important;
 }
+
+
+/* article page */
+
+.article-content img{
+  max-height: 480px;
+  margin: 40px auto;
+  border-radius: 8px;
+}
+
+.article-content p{
+  margin: 30px 0;
+  line-height: 30px;
+  font-size: 15px;
+}

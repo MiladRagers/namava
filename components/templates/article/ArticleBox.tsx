@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type TArticle = {
@@ -10,7 +11,7 @@ type TArticle = {
 
 function ArticleBox({ title, image, createdAt, readingTime }: TArticle) {
   return (
-    <div className="shadow-2xl">
+    <Link href="/blog/1" className="shadow-2xl">
       <Image
         src={`/images/article/${image}`}
         alt={image}
@@ -25,7 +26,7 @@ function ArticleBox({ title, image, createdAt, readingTime }: TArticle) {
         </div>
         <h2 className="line-clamp-1">{title}</h2>
       </div>
-    </div>
+    </Link>
   );
 }
 
