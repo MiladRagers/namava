@@ -51,7 +51,7 @@ function Navbar() {
     document.addEventListener("scroll", scrollHandler);
 
     return () => document.removeEventListener("scroll", scrollHandler);
-  }, []);
+  }, [pathname]);
 
   if (
     pathname.includes("/login") ||
