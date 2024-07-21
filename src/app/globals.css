@@ -491,3 +491,17 @@ table {
   width: 100% !important;
   white-space: nowrap !important;
 }
+
+
+
+/* customize pagination swiper */
+
+.swiper-pagination-bullet{
+  width: 13px !important;
+  height: 13px !important;
+  background-color: white !important;
+}
+
+.swiper-pagination {
+  top: 23rem !important;
+}
