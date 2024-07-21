@@ -250,3 +250,5 @@ export const Article = z.object({
     .string()
     .min(1, { message: "لطفا فیلم مربوط به این مقاله را انتخاب کنید" }),
 });
+
+export type TArticle = z.infer<typeof Article>;

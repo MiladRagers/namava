@@ -27,7 +27,7 @@ function Input({
       <div className="flex flex-col gap-y-3 text-white relative">
         <Label title={title} className="!text-base md:!text-lg" />
         <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-2 md:px-4`}
+          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-2 md:pl-4 md:pr-2`}
         >
           <input
             className="h-[52px] font-Dana  w-full text-[13px] md:text-sm lg:text-[15px] placeholder:text-gray-200 px-2.5 outline-none bg-transparent"

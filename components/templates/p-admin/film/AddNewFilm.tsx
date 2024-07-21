@@ -206,7 +206,7 @@ function AddNewFilm() {
 
       {movieType === "series" && <div className="hidden md:block"></div>}
       <div className="hidden md:block"></div>
-      <div className="flex items-center gap-x-8 mt-5 text-white">
+      <div className="flex items-center gap-x-3 md:gap-x-4 mt-5 text-white">
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
           ایجاد اثر
         </Button>
@@ -217,12 +217,9 @@ function AddNewFilm() {
         >
           ایجاد قسمت
         </Button>
-      </div>
-      <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button onClick={() => reset()} className="bg-red-700">
           لغو
         </Button>
-        <div className="w-full"></div>
       </div>
     </form>
   );

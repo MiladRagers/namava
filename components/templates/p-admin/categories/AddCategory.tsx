@@ -37,7 +37,7 @@ function AddCategories() {
       <Input
         register={register}
         errors={errors}
-        icon={<FaVuejs className={`text-xl`} />}
+        icon={<FaVuejs className={`text-2xl`} />}
         name="title"
         title="عنوان"
         type="text"
