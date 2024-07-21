@@ -22,9 +22,9 @@ function ArticlePage() {
             alt="user.png"
             width={1920}
             height={1080}
-            className="w-10 h-10 rounded-full"
+            className="md:w-10 w-8 h-8 md:h-10 rounded-full"
           />
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center flex-wrap gap-y-2 gap-x-2">
             <span>نویسنده : </span>
             <Link href="/" className="text-namava">
               میلاد سلامیان
