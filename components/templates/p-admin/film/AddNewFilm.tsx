@@ -211,10 +211,11 @@ function AddNewFilm() {
           ایجاد اثر
         </Button>
         <Button
+          type="button"
           className="bg-amber-500"
           onClick={() => router.push("/p-admin/series")}
         >
-          صفحه سریال
+          ایجاد قسمت
         </Button>
       </div>
       <div className="flex items-center gap-x-8 mt-5 text-white">
