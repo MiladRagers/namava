@@ -8,13 +8,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 function MainSlider() {
   return (
-    <div className="max-w-[1200px] container mx-auto  my-24">
+    <>
       <Swiper pagination={{ clickable: true }} modules={[Pagination]}>
         <SwiperSlide>
           <Image
             src={"/images/article/shogan.jpg"}
             alt="shogan.jpg"
-                       className="rounded-t-md"
+            className="rounded-t-md"
             width={1920}
             height={1080}
           />
@@ -41,10 +41,9 @@ function MainSlider() {
           <Image
             src={"/images/article/article2.jpg"}
             alt="shogan.jpg"
-                       className="rounded-t-md"
+            className="rounded-t-md"
             width={1920}
             height={1080}
-
           />
           <div className="px-4 py-3 space-y-4 md:space-y-2 bg-namavaBlack rounded-b-md">
             <h2 className="text-white text-sm md:text-base font-IranMedium">
@@ -66,7 +65,7 @@ function MainSlider() {
           </div>
         </SwiperSlide>
       </Swiper>
-    </div>
+    </>
   );
 }
 
