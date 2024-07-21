@@ -105,16 +105,16 @@ function Navbar() {
                   <Link href={"/category"}>دسته بندی</Link>
                 </li>
                 <li>
-                  <Link href={"/category"}>دسته بندی</Link>
+                  <Link href={"/p-admin"}>پنل مدیریت</Link>
                 </li>
                 <li>
-                  <Link href={"/"}>کودکان</Link>
+                  <Link href={"/kids"}>کودکان</Link>
                 </li>
                 <li>
                   <Link href={"/"}>پردیس نماوا</Link>
                 </li>
                 <li>
-                  <Link href={"/"}>نماوا مگ</Link>
+                  <Link href={"/blog"}>نماوا مگ</Link>
                 </li>
               </>
             ) : (

@@ -54,10 +54,10 @@ function Footer() {
             <Link href={""}>کارت هدیه</Link>
           </li>
           <li className="hover:text-white">
-            <Link href={""}>سوالات متداول</Link>
+            <Link href={"/about#questions"}>سوالات متداول</Link>
           </li>
           <li className="hover:text-white">
-            <Link href={""}>درباره نماوا</Link>
+            <Link href={"/about"}>درباره نماوا</Link>
           </li>
           <li className="relative">
             <span

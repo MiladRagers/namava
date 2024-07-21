@@ -31,7 +31,7 @@ function FooterMenu() {
       <ul className="flex items-center justify-between  ">
         <li>
           <Link
-            href=""
+            href="/"
             className="flex items-center flex-col text-lg relative "
           >
             <Home fill={isKid ? "#6d6c6c" : "#aaa"} />
@@ -42,7 +42,7 @@ function FooterMenu() {
         </li>
         <li>
           <Link
-            href=""
+            href="/search"
             className="flex items-center flex-col text-lg relative "
           >
             <Magni fill={isKid ? "#6d6c6c" : "#aaa"} />
@@ -53,7 +53,7 @@ function FooterMenu() {
         </li>
         <li>
           <Link
-            href=""
+            href="/category"
             className="flex items-center flex-col text-lg relative "
           >
             <Category fill={isKid ? "#6d6c6c" : "#aaa"} />
