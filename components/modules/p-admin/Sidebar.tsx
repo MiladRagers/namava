@@ -63,7 +63,7 @@ function Sidebar() {
       id: 7,
       title: "اشتراک ها",
       icon: <MdOutlineShoppingCart className="icon-item" />,
-      href: "/p-admin/shares",
+      href: "/p-admin/subscription",
     },
     {
       id: 8,
@@ -84,13 +84,13 @@ function Sidebar() {
       href: "/p-admin/comments",
     },
     {
-      id: 10,
+      id: 11,
       title: "تیکت ها",
       icon: <IoTicketOutline className="icon-item" />,
       href: "/p-admin/tickets",
     },
     {
-      id: 11,
+      id: 12,
       title: "پیغام ها",
       icon: <MdContentPaste className="icon-item" />,
       href: "/p-admin/contacts",
