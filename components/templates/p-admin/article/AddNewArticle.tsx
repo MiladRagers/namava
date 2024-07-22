@@ -1,7 +1,7 @@
 "use client";
 import { Article, TArticle } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineProduct } from "react-icons/ai";
 import Input from "@/components/modules/p-admin/Input";
@@ -9,8 +9,13 @@ import { FaLink, FaTag } from "react-icons/fa6";
 import { MdAccessTime } from "react-icons/md";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import Button from "@/components/modules/auth/Button/Button";
+import Label from "@/components/modules/auth/Label/Label";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("./Editor"), { ssr: false });
 
 function AddNewArticle() {
+  const [articleBody, setArticleBody] = useState("");
   const {
     register,
     handleSubmit,
@@ -89,6 +94,11 @@ function AddNewArticle() {
         title="آپلودر عکس"
         type="file"
       />
+
+      <div className="md:col-span-2 space-y-3 text-white">
+        <Label title={"محتوای مقاله"} className="!text-base md:!text-lg" />
+        <Editor article={articleBody} onArticle={setArticleBody} />
+      </div>
 
       <div className="flex items-center gap-x-4 mt-5 text-white">
         <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>

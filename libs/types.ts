@@ -6,3 +6,5 @@ export type TModal = {
 export type TComment = {
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+

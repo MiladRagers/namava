@@ -5,12 +5,12 @@ import React from "react";
 
 function ArticlesPage() {
   return (
-    <div>
+    <>
       <Title name="ایجاد مقاله جدید" />
       <AddNewArticle />
       <Title name="لیست مقاله ها" />
       <ArticleList />
-    </div>
+    </>
   );
 }
 
