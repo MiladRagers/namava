@@ -444,6 +444,11 @@ input:checked + .slider:before {
   width: 0.5vw;
   height: 0.1vw !important;
 }
+
+.recent-box::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
 .table-container::-webkit-scrollbar-thumb {
   background-color: #6a6a6e;
   border-radius: 5px;

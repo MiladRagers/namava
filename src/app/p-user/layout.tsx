@@ -1,4 +1,4 @@
-import Sidebar from "@/components/templates/p-user/Sidebar";
+import Sidebar from "@/components/modules/p-user/Sidebar";
 import React from "react";
 
 function UserLayout({ children }: { children: React.ReactNode }) {

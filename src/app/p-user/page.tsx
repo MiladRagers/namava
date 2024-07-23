@@ -1,4 +1,6 @@
 import StatBox from "@/components/modules/p-admin/StatBox";
+import LastFavList from "@/components/templates/p-user/LastFavList";
+import LastTickets from "@/components/templates/p-user/LastTickets";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi";
@@ -37,6 +39,10 @@ function page() {
           color="bg-red-600"
           value={29232}
         />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+        <LastTickets />
+        <LastFavList />
       </div>
     </div>
   );
