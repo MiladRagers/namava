@@ -24,8 +24,14 @@ function Form() {
     { id: 3, label: "واحد تولید", value: "non-fiction" },
   ];
 
+  const sendNewMessage = async (data: TContactUs) => {
+    console.log(data);
+  };
   return (
-    <form className="bg-namavaBlack text-white p-[15px] md:p-[22px] rounded-xl max-w-[700px] mx-auto space-y-6 mt-10">
+    <form
+      onSubmit={handleSubmit(sendNewMessage)}
+      className="bg-namavaBlack text-white p-[15px] md:p-[22px] rounded-xl max-w-[700px] mx-auto space-y-6 mt-10"
+    >
       <p className="text-sm/[26px]">
         کاربر گرامی، برای پیگیری خرید اشتراک، موارد محتوایی و یا ارسال پیشنهادات
         و انتقادات می توانید از فرم زیر نیز استفاده نمایید.
@@ -68,7 +74,7 @@ function Form() {
         placeholder="متن پیغام خود را وارد کنید"
       />
 
-      <Button type="submit">ارسال پیغام</Button>
+      <Button type="submit" className={`${isValid ? "" :"!bg-slate-600 "}`}>ارسال پیغام</Button>
     </form>
   );
 }
