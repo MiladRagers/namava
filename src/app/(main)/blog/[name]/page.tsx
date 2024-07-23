@@ -74,7 +74,12 @@ function ArticlePage() {
 
           <img src="/images/article/ar10.jpg" />
         </div>
-
+        {/* tags */}
+          <div className="text-sm flex items-center flex-wrap gap-x-4 mb-6">
+            <span className="font-IranMedium">واژگان کلیدی : </span>
+            <p className="text-xs/[26px]">میلاد سلامیان ، هیرو احمدی ، کیومرث رضوی ، جلال رضوی ، مهدی سلامیان</p>
+          </div>
+        {/* share */}
         <div className="text-sm flex md:items-center gap-4 flex-col md:flex-row">
           <span className="text-sm">اشتراک گذاری : </span>
           <div className="flex items-center flex-wrap gap-4">
