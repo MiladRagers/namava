@@ -18,7 +18,7 @@ function Sidebar() {
           />
         </div>
         <div className="flex  flex-col gap-y-1 font-DanaDemiBold">
-          <span className="text-blue-600">حساب کاربری من</span>
+          <span className="text-namava">حساب کاربری من</span>
           <span className="">میلاد سلامیان</span>
         </div>
       </div>
