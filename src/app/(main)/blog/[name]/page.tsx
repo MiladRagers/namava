@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaLink, FaTelegram, FaTwitter, FaWhatsapp } from "react-icons/fa6";
 
 function ArticlePage() {
   return (
@@ -71,7 +72,29 @@ function ArticlePage() {
             وحشیانه با آن‌ها دارند.
           </p>
 
-          <img src="/images/article/ar10.jpg"/>
+          <img src="/images/article/ar10.jpg" />
+        </div>
+
+        <div className="text-sm flex md:items-center gap-4 flex-col md:flex-row">
+          <span className="text-sm">اشتراک گذاری : </span>
+          <div className="flex items-center flex-wrap gap-4">
+            <div className="bg-[#121212] w-[120px] flex-center gap-x-2 py-3 rounded-md cursor-pointer">
+              <FaTelegram className="text-xl" />
+              تلگرام
+            </div>
+            <div className="bg-[#121212] w-[120px] flex-center gap-x-2 py-3 rounded-md cursor-pointer">
+              <FaWhatsapp className="text-xl" />
+              واتس اپ
+            </div>
+            <div className="bg-[#121212] w-[120px] flex-center gap-x-2 py-3 rounded-md cursor-pointer">
+              <FaTwitter className="text-xl" />
+              توییتر
+            </div>
+            <div className="bg-[#121212] w-[120px] flex-center gap-x-2 py-3 rounded-md cursor-pointer">
+              <FaLink className="text-xl" />
+              ارسال لینک
+            </div>
+          </div>
         </div>
       </div>
     </div>
