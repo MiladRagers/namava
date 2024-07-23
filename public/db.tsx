@@ -1,3 +1,13 @@
+import {
+  IoHomeOutline,
+  IoSettingsSharp,
+  IoTicketOutline,
+} from "react-icons/io5";
+import { LiaComments } from "react-icons/lia";
+import { MdArticle } from "react-icons/md";
+
+import { FaRegCircleUser, FaRegHeart, FaStar } from "react-icons/fa6";
+
 export let genres = [
   { name: "ایرانی", id: 1 },
   { name: " انیمه و انیمیشن", id: 2 },
@@ -96,3 +106,54 @@ const generateMiladi = () => {
 };
 generateMiladi();
 generateShamsi();
+
+export const sidebarLinks = [
+  {
+    id: 1,
+    title: "صفحه اصلی",
+    icon: <IoHomeOutline className="text-[22px]"/>,
+    link: "/p-user",
+  },
+  {
+    id: 2,
+    title: "حساب کاربری",
+    icon: <FaRegCircleUser className="text-[22px]" />,
+    link: "/p-user/account",
+  },
+  {
+    id: 3,
+    title: "وضعیت اشتراک",
+    icon: <FaStar className="text-[22px]" />,
+    link: "/p-user/subscriptions",
+  },
+  {
+    id: 4,
+    title: "لیست سفارش ها",
+    icon: <MdArticle className="text-[22px]" />,
+    link: "/p-user/subscriptions",
+  },
+  {
+    id: 5,
+    title: "تنظیمات پروفایل",
+    icon: <IoSettingsSharp className="text-[22px]" />,
+    link: "/p-user/subscriptions",
+  },
+  {
+    id: 6,
+    title: "کامنت ها",
+    icon: <LiaComments className="text-[22px]" />,
+    link: "/p-user/comments",
+  },
+  {
+    id: 7,
+    title: "تیکت ها",
+    icon: <IoTicketOutline className="text-[22px]" />,
+    link: "/p-user/tickets",
+  },
+  {
+    id: 8,
+    title: "مورد علاقه ها",
+    icon: <FaRegHeart className="text-[22px]" />,
+    link: "/p-user/favlist",
+  },
+];

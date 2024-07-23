@@ -385,6 +385,10 @@ input:checked + .slider:before {
     @apply bg-zinc-700 text-gray-300;
   }
 
+  .user-link.active-menu {
+    @apply bg-zinc-700 text-gray-300;
+  }
+
   .nav-item.active .icon-item {
     @apply text-namava;
   }
@@ -492,11 +496,9 @@ table {
   white-space: nowrap !important;
 }
 
-
-
 /* customize pagination swiper */
 
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   width: 13px !important;
   height: 13px !important;
   background-color: white !important;
@@ -506,23 +508,19 @@ table {
   top: 23rem !important;
 }
 
-
 /* article page */
 
-.article-content img{
+.article-content img {
   max-height: 480px;
   margin: 40px auto;
   border-radius: 8px;
 }
 
-.article-content p{
+.article-content p {
   margin: 30px 0;
   @apply text-[13px]/[25px] md:text-[15px]/[30px] text-[#eee];
-
 }
 
-.ck-editor__main{
+.ck-editor__main {
   color: black;
 }
-
-

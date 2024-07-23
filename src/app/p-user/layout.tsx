@@ -1,9 +1,13 @@
-import React from 'react'
+import Sidebar from "@/components/templates/p-user/Sidebar";
+import React from "react";
 
-function UserLayout() {
+function UserLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>UserLayout</div>
-  )
+    <div className="flex  gap-x-5 container my-28">
+      <Sidebar />
+      <div className="w-full rounded-md">{children}</div>
+    </div>
+  );
 }
 
-export default UserLayout
+export default UserLayout;
