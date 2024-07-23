@@ -60,7 +60,7 @@ function Form() {
       <SelectBox
         register={register}
         errors={errors}
-        name="parent"
+        name="department"
         options={fakeOptions}
         title="دپارتمان"
       />

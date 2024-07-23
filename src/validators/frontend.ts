@@ -264,6 +264,11 @@ export const ContactUs = z.object({
     .string()
     .email({ message: "فرمت ایمیل را صحیح وارد کنید" })
     .max(100, { message: "ایمیل حداکثر باید 100 کارکتر داشته باشد" }),
+  department: z.string().min(1, { message: "دپارتمان مورد نظر را وارد کنید" }),
+  content: z
+    .string()
+    .min(3, { message: "متن پیغام حداقل باید 3 کاراکتر باشد" })
+    .max(1000, { message: "متن پیغام حداکثر باید 1000 کارکتر باشد" }),
 });
 
 export type TContactUs = z.infer<typeof Article>;
