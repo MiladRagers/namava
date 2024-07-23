@@ -10,7 +10,7 @@ type TInput = {
   placeholder?: string;
   name: string;
   multiple?: boolean;
-  type: "text" | "number" | "email" | "password" | "file";
+  type: "text" | "number" | "email" | "password" | "file" | "textarea";
 };
 function Input({
   title,
@@ -22,12 +22,12 @@ function Input({
   type,
   multiple,
 }: TInput) {
-  if (type !== "file") {
+  if (type !== "file" && type !== "textarea") {
     return (
       <div className="flex flex-col gap-y-3 text-white relative">
         <Label title={title} className="!text-base md:!text-lg" />
         <div
-          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-2 md:pl-4 md:pr-2`}
+          className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-3 md:pl-4 md:pr-2`}
         >
           <input
             className="h-[52px] font-Dana  w-full text-[13px] md:text-sm lg:text-[15px] placeholder:text-gray-200 px-2.5 outline-none bg-transparent"
@@ -45,7 +45,7 @@ function Input({
         )}
       </div>
     );
-  } else {
+  } else if (type === "file") {
     return (
       <div className="flex flex-col  gap-y-3 text-white relative">
         <Label title={title} className="!text-base md:!text-lg" />
@@ -69,6 +69,27 @@ function Input({
             برای آپلود {title} کلیک کنید
           </label>
           {icon ? icon : <FaImage className={`text-2xl`} />}
+        </div>
+        {errors[name] && (
+          <span className="absolute top-24 text-xs md:text-sm text-red-600">
+            {errors[name].message}
+          </span>
+        )}
+      </div>
+    );
+  } else if (type === "textarea") {
+    return (
+      <div className="flex flex-col gap-y-3 text-white relative">
+        <Label title={title} className="!text-base md:!text-lg" />
+        <div
+          className={`bg-[#121212] rounded-xl flex items-center pt-4 justify-between gap-x-2 px-2 md:pl-4 md:pr-2`}
+        >
+          <textarea
+            className="h-[52px] font-Dana  w-full text-[13px] h-[200px] md:text-sm lg:text-[15px] placeholder:text-gray-200 px-2.5 outline-none bg-transparent"
+            name={name}
+            {...register(`${name}`)}
+            placeholder={placeholder}
+          />
         </div>
         {errors[name] && (
           <span className="absolute top-24 text-xs md:text-sm text-red-600">

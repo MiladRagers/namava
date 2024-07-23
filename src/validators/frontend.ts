@@ -252,3 +252,18 @@ export const Article = z.object({
 });
 
 export type TArticle = z.infer<typeof Article>;
+
+// contact us schema
+
+export const ContactUs = z.object({
+  name: z
+    .string()
+    .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
+  email: z
+    .string()
+    .email({ message: "فرمت ایمیل را صحیح وارد کنید" })
+    .max(100, { message: "ایمیل حداکثر باید 100 کارکتر داشته باشد" }),
+});
+
+export type TContactUs = z.infer<typeof Article>;

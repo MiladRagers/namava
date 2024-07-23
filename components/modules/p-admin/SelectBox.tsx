@@ -23,7 +23,7 @@ function SelectBox({ title, register, errors, name, options }: TSelectBox) {
         className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
       >
         <select
-          className="bg-[#121212] outline-none w-full"
+          className="bg-[#121212] outline-none w-full text-sm md:text-base"
           {...register(`${name}`)}
           name={name}
         >
