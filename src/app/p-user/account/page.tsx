@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function page() {
@@ -6,7 +7,7 @@ function page() {
       <div className="bg-namavaBlack rounded-md p-6 text-white">
         <div className="flex items-center justify-between">
           <h1 className="text-xl">اطلاعات شخصی</h1>
-          <h6 className="text-namava">ویرایش اطلاعات</h6>
+          <Link href={"account/information"} className="text-namava">ویرایش اطلاعات</Link>
         </div>
         <div className="mt-8">
           <ul className="space-y-5 text-base">

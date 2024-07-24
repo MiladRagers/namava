@@ -7,7 +7,8 @@ import { LiaComments } from "react-icons/lia";
 import { MdArticle } from "react-icons/md";
 
 import { FaRegCircleUser, FaRegHeart, FaStar } from "react-icons/fa6";
-
+export const day: any = [];
+export const year: any = [];
 export let genres = [
   { name: "ایرانی", id: 1 },
   { name: " انیمه و انیمیشن", id: 2 },
@@ -60,6 +61,21 @@ export let country = [
   { name: "تایلند", id: 20 },
 ];
 
+const monthName = [
+  "فروردین",
+  "اردیبهشت",
+  "خرداد",
+  "تیر",
+  "مرداد",
+  "شهریور",
+  "مهر",
+  "آبان",
+  "آذر",
+  "دی",
+  "بهمن",
+  "اسفند",
+];
+
 export let voiceType = [
   { name: "صدای فارسی", id: 1 },
   { name: "صدای انگلیسی", id: 2 },
@@ -104,14 +120,12 @@ const generateMiladi = () => {
     date.miladi.push(i);
   }
 };
-generateMiladi();
-generateShamsi();
 
 export const sidebarLinks = [
   {
     id: 1,
     title: "صفحه اصلی",
-    icon: <IoHomeOutline className="text-[22px]"/>,
+    icon: <IoHomeOutline className="text-[22px]" />,
     link: "/p-user",
   },
   {
@@ -157,3 +171,28 @@ export const sidebarLinks = [
     link: "/p-user/favlist",
   },
 ];
+
+const generateDate = () => {
+  for (let i = 1; i <= 31; i++) {
+    day.push({ id: i, label: i, value: i });
+  }
+};
+
+export const generateMonth = () => {
+  return monthName.map((month, index) => ({
+    id: index + 1,
+    label: month,
+    value: month,
+  }));
+};
+
+export const generateYear = () => {
+  for (let i = 1300; i <= 1403; i++) {
+    year.push({ id: i, label: i, value: i });
+  }
+};
+
+generateMiladi();
+generateShamsi();
+generateDate();
+generateYear();

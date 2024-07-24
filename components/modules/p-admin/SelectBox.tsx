@@ -13,12 +13,20 @@ type TSelectBox = {
   errors: any;
   name: string;
   options: TOption[];
+  dateName?: string;
 };
 
-function SelectBox({ title, register, errors, name, options }: TSelectBox) {
+function SelectBox({
+  title,
+  register,
+  errors,
+  name,
+  options,
+  dateName,
+}: TSelectBox) {
   return (
-    <div className="flex flex-col gap-y-3 text-white relative">
-      <Label title={title} className="!text-base md:!text-lg" />
+    <div className="flex w-full flex-col gap-y-3 text-white relative">
+      <Label title={title} className="!text-base md:!text-lg min-h-[28px]" />
       <div
         className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
       >
@@ -27,7 +35,11 @@ function SelectBox({ title, register, errors, name, options }: TSelectBox) {
           {...register(`${name}`)}
           name={name}
         >
-          <option value="">گزینه مورد نظر را انتخاب کنید</option>
+          {dateName ? (
+            <option value="">{dateName}</option>
+          ) : (
+            <option value="">گزینه مورد نظر را انتخاب کنید</option>
+          )}
           {options.map((option) => (
             <option value={option.value} key={option.value}>
               {option.label}

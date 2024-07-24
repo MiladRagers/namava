@@ -2,7 +2,7 @@ import * as z from "zod";
 
 export const User = z.object({
   name: z
-    .string({ required_error: "نام کاربری را وارد کنید" })
+    .string()
     .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
   username: z
@@ -272,3 +272,22 @@ export const ContactUs = z.object({
 });
 
 export type TContactUs = z.infer<typeof Article>;
+
+// update user schema
+export const UpdateUser = z.object({
+  name: z
+    .string()
+    .min(5, { message: "نام و نام خانوادگی حداقل باید 5 کارکتر باشد" })
+    .max(30, { message: "نام و نام خانوادگی باید 30 کاراکتر داشته باشد" }),
+  bio: z
+    .string()
+    .min(1, { message: "بیوگرافی خودتان را وارد کنید" })
+    .max(1000, { message: "حداکثر تعداد کارکتر بیو 1000 کاراکتر است" }),
+  province: z.string().optional(),
+  birthDay: z.string().optional(),
+  birthMouth: z.string().optional(),
+  birthYear: z.string().optional(),
+  gender: z.string().optional(),
+});
+
+export type TUpdateUser = z.infer<typeof UpdateUser>;
