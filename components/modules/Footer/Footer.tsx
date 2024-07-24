@@ -9,7 +9,7 @@ import Tiwter from "@/icons/Tiwter";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { FaChevronUp } from "react-icons/fa6";
 import Overlay from "../Overlay/Overlay";
 
@@ -98,7 +98,7 @@ function Footer() {
           </li>
         </ul>
       </div>
-      {!pathname.includes("/search") && (
+      {!pathname.includes("/search") && !pathname.includes("/p-user") && (
         <footer className="md:px-[160px] pb-4 bg-[#1A1A1A] relative z-30">
           <div className="container">
             <div className="flex items-center justify-between">
