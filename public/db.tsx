@@ -144,13 +144,13 @@ export const sidebarLinks = [
     id: 4,
     title: "لیست سفارش ها",
     icon: <MdArticle className="text-[22px]" />,
-    link: "/p-user/subscriptions",
+    link: "/p-user/orders",
   },
   {
     id: 5,
     title: "تنظیمات پروفایل",
     icon: <IoSettingsSharp className="text-[22px]" />,
-    link: "/p-user/subscriptions",
+    link: "/p-user/settings",
   },
   {
     id: 6,
