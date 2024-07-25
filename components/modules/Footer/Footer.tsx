@@ -48,7 +48,7 @@ function Footer() {
             <Link href={""}>تبلیغات در نماوا</Link>
           </li>
           <li className="hover:text-white">
-            <Link href={""}>خرید اشتراک</Link>
+            <Link href={"/plans"}>خرید اشتراک</Link>
           </li>
           <li className="hover:text-white">
             <Link href={""}>کارت هدیه</Link>
