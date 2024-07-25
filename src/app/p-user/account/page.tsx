@@ -42,7 +42,7 @@ function page() {
       <div className="bg-namavaBlack rounded-md p-6 text-white mt-5 ">
         <div className="flex items-center justify-between">
           <h1 className="text-xl">اطلاعات کاربری</h1>
-          <h6 className="text-namava">ویرایش اطلاعات کاربری</h6>
+          <Link href={"account/information"} className="text-namava">ویرایش اطلاعات کاربری</Link>
         </div>
         <div className="mt-8">
           <ul className="space-y-5 text-base">

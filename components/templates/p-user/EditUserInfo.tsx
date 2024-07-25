@@ -3,7 +3,7 @@ import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import { generateFavriteGenres } from "@/public/db";
-import { TUserAccount, UpdateUser } from "@/src/validators/frontend";
+import { TUserAccount, UpdateUser, UserAccount } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ function EditUserInfo() {
     reset,
     formState: { errors, isValid },
   } = useForm<TUserAccount>({
-    resolver: zodResolver(UpdateUser),
+    resolver: zodResolver(UserAccount),
   });
   const updateUserAccount = async (data: TUserAccount) => {};
   return (
@@ -47,7 +47,7 @@ function EditUserInfo() {
       <SelectBox
         register={register}
         errors={errors}
-        name="genres"
+        name="genre"
         options={generateFavriteGenres()}
         title="ژانر مورد علاقه"
       />
@@ -58,7 +58,7 @@ function EditUserInfo() {
         errors={errors}
         register={register}
         icon={<FaLock className={`text-lg md:text-2xl`} />}
-        name="password"
+        name="curPassword"
         title="رمز عبور"
       />
       <Input
@@ -67,7 +67,7 @@ function EditUserInfo() {
         errors={errors}
         register={register}
         icon={<FaLock className={`text-lg md:text-2xl`} />}
-        name="password"
+        name="newPassword"
         title="رمز عبور جدید"
       />
       <div className="hidden md:block"></div>

@@ -299,6 +299,15 @@ export const UserAccount = z.object({
     .string()
     .email({ message: "فرمت ایمیل را صحیح وارد کنید" })
     .max(100, { message: "ایمیل حداکثر باید 100 کارکتر داشته باشد" }),
+  phone: z
+    .string()
+    .min(11, { message: "شماره تلفن باید حداقل 11 کاراکتر داشته باشد " })
+    .max(11, {
+      message: "شماره تلفن باید حداکثر 11 کاراکتر داشته باشد",
+    }),
+    genre: z.string(),
+  curPassword: z.string().optional(),
+  newPassword: z.string().optional(),
 });
 
 export type TUserAccount = z.infer<typeof UserAccount>;
