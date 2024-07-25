@@ -178,6 +178,14 @@ const generateDate = () => {
   }
 };
 
+export const generateFavriteGenres = () => {
+  return genres.map((genre) => ({
+    id: genre.id,
+    label: genre.name,
+    value: genre.name,
+  }));
+};
+
 export const generateMonth = () => {
   return monthName.map((month, index) => ({
     id: index + 1,

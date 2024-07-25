@@ -89,7 +89,7 @@ function EditUser() {
         />
       </div>
 
-      <div className="flex items-center gap-x-8 mt-5 text-white">
+      <div className="flex items-center gap-x-3 md:gap-x-8 mt-5 text-white">
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
           ویرایش کردن
         </Button>

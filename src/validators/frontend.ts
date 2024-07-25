@@ -291,3 +291,14 @@ export const UpdateUser = z.object({
 });
 
 export type TUpdateUser = z.infer<typeof UpdateUser>;
+
+// update user account schema
+
+export const UserAccount = z.object({
+  email: z
+    .string()
+    .email({ message: "فرمت ایمیل را صحیح وارد کنید" })
+    .max(100, { message: "ایمیل حداکثر باید 100 کارکتر داشته باشد" }),
+});
+
+export type TUserAccount = z.infer<typeof UserAccount>;
