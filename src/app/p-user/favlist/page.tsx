@@ -1,9 +1,11 @@
-import React from 'react'
+import FavList from "@/components/templates/p-user/FavList";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <>
+      <FavList />
+    </>
+  );
 }
 
-export default page
+export default page;
