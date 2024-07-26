@@ -4,25 +4,20 @@ import { FaEye, FaPencil, FaRegCircleXmark, FaTrash } from "react-icons/fa6";
 import Pagination from "@/components/modules/pagination/Pagination";
 import { MdCheckCircleOutline } from "react-icons/md";
 import Link from "next/link";
+import Filter from "@/components/modules/Filter/Filter";
 
 function page() {
   return (
     <div className="text-white">
-      <div className="flex items-center justify-between gap-x-2 font-Dana bg-namavaBlack p-1 child:transition-all child:cursor-pointer text-xs md:text-sm rounded-md w-[250px]">
-        <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-          همه
-        </div>
-        <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-          موفق
-        </div>
-        <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-          ناموفق
-        </div>
-        <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-          پرداخت شده
-        </div>
-      </div>
-
+      <Filter
+        filterField="status"
+        options={[
+          { label: "همه", slug: "all" },
+          { label: "موفق", slug: "success" },
+          { label: "ناموفق", slug: "unsuccess" },
+          { label: "پرداخت", slug: "paid" },
+        ]}
+      />
       <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
         <Table>
           <Table.Header>
@@ -48,7 +43,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
             <Table.Row>
@@ -64,7 +61,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
             <Table.Row>
@@ -80,7 +79,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
             <Table.Row>
@@ -96,7 +97,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
             <Table.Row>
@@ -112,7 +115,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
             <Table.Row>
@@ -128,7 +133,9 @@ function page() {
                 </div>
               </td>
               <td>
-                <Link href={"/p-user/orders/1"}><FaEye className="text-xl text-namava"/></Link>
+                <Link href={"/p-user/orders/1"}>
+                  <FaEye className="text-xl text-namava" />
+                </Link>
               </td>
             </Table.Row>
           </Table.Body>
