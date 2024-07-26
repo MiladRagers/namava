@@ -3,7 +3,7 @@ import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import Image from "next/image";
 import React from "react";
-import { FaEye, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
+import {FaRegStar, FaStar } from "react-icons/fa6";
 
 function FavList() {
   return (
