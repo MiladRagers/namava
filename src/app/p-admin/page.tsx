@@ -1,3 +1,4 @@
+import Filter from "@/components/modules/Filter/Filter";
 import StatBox from "@/components/modules/p-admin/StatBox";
 import Title from "@/components/modules/p-admin/Title";
 import DurationChart from "@/components/templates/p-admin/DurationChart";
@@ -25,20 +26,15 @@ function MainPage() {
           </div>
         </div>
         <Title name="داشبورد اطلاعات" />
-        <div className="flex items-center gap-x-2 font-Dana bg-namavaBlack p-1 child:transition-all child:cursor-pointer text-xs md:text-sm rounded-md">
-          <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-            7 روز گذشته
-          </div>
-          <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-            30 روز گذشته
-          </div>
-          <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md">
-            90 روز گذشته
-          </div>
-          <div className="hover:bg-namava hover:text-white py-1 px-1 rounded-md hidden md:block">
-            120 روز گذشته
-          </div>
-        </div>
+        <Filter
+          filterField="status"
+          options={[
+            { label: "7 روز گذشته", slug: "7" },
+            { label: "30 روز گذشته", slug: "30" },
+            { label: "90 روز گذشته", slug: "90" },
+            { label: "120 روز گذشته", slug: "120" },
+          ]}
+        />
       </div>
       <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 mt-10">
         <StatBox
