@@ -34,7 +34,7 @@ function TicketsList() {
             </td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <Link href={"/p-admin/tickets/njbsnbxsb"}>
+                <Link href={"/p-user/tickets/1"}>
                   <FaEye className="text-namava text-base md:text-lg" />
                 </Link>
               </div>
@@ -55,7 +55,7 @@ function TicketsList() {
             </td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <Link href={"/p-admin/tickets/njbsnbxsb"}>
+                <Link href={"/p-user/tickets/1"}>
                   <FaEye className="text-namava text-base md:text-lg" />
                 </Link>
               </div>
@@ -76,7 +76,7 @@ function TicketsList() {
             </td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <Link href={"/p-admin/tickets/njbsnbxsb"}>
+                <Link href={"/p-user/tickets/1"}>
                   <FaEye className="text-namava text-base md:text-lg" />
                 </Link>
               </div>
