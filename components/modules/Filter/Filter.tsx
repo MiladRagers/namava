@@ -18,6 +18,7 @@ function Filter({ filterField, options }: TFilter) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
+  const paramValue = searchParams.get(filterField) || options.at(0)?.slug;
 
   const handleFilterParm = (slug: string) => {
     params.set(filterField, slug);
@@ -29,9 +30,7 @@ function Filter({ filterField, options }: TFilter) {
         <div
           key={index}
           className={`text-white hover:bg-namava ${
-            option.slug === searchParams.get(filterField)
-              ? "bg-namava"
-              : ""
+            option.slug === paramValue ? "bg-namava" : ""
           } hover:text-white py-1 px-1 rounded-md`}
           onClick={() => handleFilterParm(option.slug)}
         >
