@@ -5,7 +5,6 @@ import DurationChart from "@/components/templates/p-admin/DurationChart";
 import RecentUser from "@/components/templates/p-admin/RecentUser";
 import SalesChart from "@/components/templates/p-admin/SalesChart";
 import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineBanknotes, HiOutlineBriefcase } from "react-icons/hi2";
 import { LuUsers } from "react-icons/lu";
 import { RiMovie2Line } from "react-icons/ri";

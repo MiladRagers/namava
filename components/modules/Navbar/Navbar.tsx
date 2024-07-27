@@ -96,10 +96,10 @@ function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={"/"}>فیلم ها</Link>
+                  <Link href={"/movie"}>فیلم ها</Link>
                 </li>
                 <li>
-                  <Link href={"/"}>سریال ها</Link>
+                  <Link href={"/series"}>سریال ها</Link>
                 </li>
                 <li>
                   <Link href={"/category"}>دسته بندی</Link>
