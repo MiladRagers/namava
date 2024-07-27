@@ -91,17 +91,27 @@ function Navbar() {
             {!isKid ? (
               <>
                 <li>
-                  <Link href={"/"} className="active">
+                  <Link href={"/"} className={pathname === "/" ? "active" : ""}>
                     خانه
                   </Link>
                 </li>
                 <li>
-                  <Link href={"/movie"}>فیلم ها</Link>
+                  <Link
+                    href={"/movie"}
+                    className={pathname.includes("movie") ? "active" : ""}
+                  >
+                    فیلم ها
+                  </Link>
                 </li>
                 <li>
-                  <Link href={"/series"}>سریال ها</Link>
+                  <Link
+                    href={"/series"}
+                    className={pathname.includes("series") ? "active" : ""}
+                  >
+                    سریال ها
+                  </Link>
                 </li>
-                <li>
+                <li className={pathname.includes("category") ? "active" : ""}>
                   <Link href={"/category"}>دسته بندی</Link>
                 </li>
                 <li>
@@ -111,10 +121,12 @@ function Navbar() {
                   <Link href={"/kids"}>کودکان</Link>
                 </li>
                 <li>
-                  <Link href={"/"}>پردیس نماوا</Link>
-                </li>
-                <li>
-                  <Link href={"/blog"}>نماوا مگ</Link>
+                  <Link
+                    href={"/blog"}
+                    className={pathname.includes("blog") ? "active" : ""}
+                  >
+                    نماوا مگ
+                  </Link>
                 </li>
               </>
             ) : (
