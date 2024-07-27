@@ -48,13 +48,23 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
         <div className="my-5 border-b-2 border-b-gray-600 pb-5">
           <ul className="text-white space-y-6">
             <li>
-              <Link href="/" className="flex items-center gap-x-3 text-lg">
+              <Link
+                href="/"
+                className={`flex items-center gap-x-3 text-lg ${
+                  pathname === "/" ? "active" : ""
+                }`}
+              >
                 <IoHomeOutline />
                 <span className="text-sm">خانه</span>
               </Link>
             </li>
             <li>
-              <Link href="/movie" className="flex items-center gap-x-3 text-lg">
+              <Link
+                href="/movie"
+                className={`flex items-center gap-x-3 text-lg ${
+                  pathname === "/movie" ? "active" : ""
+                }`}
+              >
                 <FiFilm />
                 <span className="text-sm">فیلم ها</span>
               </Link>
@@ -62,7 +72,9 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
             <li>
               <Link
                 href="/series"
-                className="flex items-center gap-x-3 text-lg"
+                className={`flex items-center gap-x-3 text-lg ${
+                  pathname === "/series" ? "active" : ""
+                }`}
               >
                 <FiYoutube />
                 <span className="text-sm">سریال ها</span>
@@ -87,7 +99,12 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
               </Link>
             </li>
             <li>
-              <Link href="/blog" className="flex items-center gap-x-3 text-lg">
+              <Link
+                href="/blog"
+                className={`flex items-center gap-x-3 text-lg ${
+                  pathname === "/blog" ? "active" : ""
+                }`}
+              >
                 <GiFilmStrip />
                 <span className="text-sm">نماوا مگ</span>
               </Link>
@@ -99,7 +116,9 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
             <li>
               <Link
                 href={"/login"}
-                className="flex items-center gap-x-2 text-2xl"
+                className={`flex items-center gap-x-2 text-2xl ${
+                  pathname === "/login" ? "active" : ""
+                }`}
               >
                 <TbLogin2 />
                 <span className="text-sm">ورود | ثبت نام</span>
@@ -108,7 +127,9 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
             <li>
               <Link
                 href={"/plans"}
-                className="flex items-center gap-x-2 text-2xl"
+                className={`flex items-center gap-x-2 text-2xl ${
+                  pathname === "/plans" ? "active" : ""
+                }`}
               >
                 <CiShoppingBasket />
                 <span className="text-sm">خرید اشتراک</span>
