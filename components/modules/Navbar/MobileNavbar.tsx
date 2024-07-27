@@ -1,6 +1,6 @@
 import Logo from "@/icons/Logo";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { CiShoppingBasket } from "react-icons/ci";
 import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
 import { FiFilm, FiYoutube } from "react-icons/fi";
@@ -10,6 +10,7 @@ import { LuBaby, LuPopcorn } from "react-icons/lu";
 import { PiFilmReel } from "react-icons/pi";
 import { TbLogin2 } from "react-icons/tb";
 import Overlay from "../Overlay/Overlay";
+import { usePathname } from "next/navigation";
 
 interface MobileNavbar {
   isOpen: boolean;
@@ -17,6 +18,10 @@ interface MobileNavbar {
 }
 
 function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
+  const pathname = usePathname();
+  useEffect(() => {
+    onOpen(false);
+  }, [pathname]);
   return (
     <>
       <div
@@ -49,13 +54,16 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
               </Link>
             </li>
             <li>
-              <Link href="" className="flex items-center gap-x-3 text-lg">
+              <Link href="/movie" className="flex items-center gap-x-3 text-lg">
                 <FiFilm />
                 <span className="text-sm">فیلم ها</span>
               </Link>
             </li>
             <li>
-              <Link href="" className="flex items-center gap-x-3 text-lg">
+              <Link
+                href="/series"
+                className="flex items-center gap-x-3 text-lg"
+              >
                 <FiYoutube />
                 <span className="text-sm">سریال ها</span>
               </Link>
@@ -89,13 +97,19 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
         <div>
           <ul className="text-white space-y-6">
             <li>
-              <Link href={"/login"} className="flex items-center gap-x-2 text-2xl">
+              <Link
+                href={"/login"}
+                className="flex items-center gap-x-2 text-2xl"
+              >
                 <TbLogin2 />
                 <span className="text-sm">ورود | ثبت نام</span>
               </Link>
             </li>
             <li>
-              <Link href={""} className="flex items-center gap-x-2 text-2xl">
+              <Link
+                href={"/plans"}
+                className="flex items-center gap-x-2 text-2xl"
+              >
                 <CiShoppingBasket />
                 <span className="text-sm">خرید اشتراک</span>
               </Link>
