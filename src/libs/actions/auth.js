@@ -8,7 +8,6 @@ import {
 import { cookies } from "next/headers";
 import connectToDB from "@/src/configs/db";
 import { Login, User } from "@/src/validators/frontend";
-import toast from "react-hot-toast";
 
 export const signUp = async (body) => {
   try {
