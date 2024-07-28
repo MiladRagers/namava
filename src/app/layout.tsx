@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/modules/Navbar/Navbar";
 import FooterMenu from "@/components/modules/FooterMenu/FooterMenu";
 import Footer from "@/components/modules/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "تماشای آنلاین فیلم و سریال | نماوا",
@@ -25,6 +26,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <FooterMenu />
+        <Toaster/>
       </body>
     </html>
   );

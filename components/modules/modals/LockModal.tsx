@@ -3,7 +3,7 @@ import { FaXmark } from "react-icons/fa6";
 import useCloseOutSideClick from "@/hooks/useOutSideClick";
 import Button from "../auth/Button/Button";
 import ModalContainer from "./ModalContainer";
-import { TModal } from "@/libs/types";
+import { TModal } from "@/src/libs/types";
 
 function LockModal({ onClose, isShow }: TModal) {
   const { ref } = useCloseOutSideClick(onClose, false);

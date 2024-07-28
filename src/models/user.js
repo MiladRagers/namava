@@ -35,13 +35,11 @@ const schema = mongoose.Schema(
     },
     birthday: {
       type: String,
-      required: true,
       trim: true,
     },
 
     province: {
       type: String,
-      required: true,
       trim: true,
     },
     favGenre: {
@@ -56,7 +54,7 @@ const schema = mongoose.Schema(
     },
 
     profiles: [
-      { type: mongoose.Types.ObjectId, ref: "Profile", required: true },
+      { type: mongoose.Types.ObjectId, ref: "Profile", required: false },
     ],
   },
   { timestamps: true }

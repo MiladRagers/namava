@@ -7,20 +7,32 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaGlobe, FaPhone, FaUser } from "react-icons/fa6";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { signUpUser } from "@/src/libs/actions/auth";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function Register() {
   const [isPassword, setIsPassword] = useState(true);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<TUser>({ resolver: zodResolver(User) });
 
-  const regsiterWithPhone = async (data: TUser) => {
-    console.log(data);
+  const resgisterUserHandler = async (data: TUser) => {
+    const res = await signUpUser(data);
+    if (res?.status === 201) {
+      toast.success("کاربر با موفقیت ثبت نام شد");
+      router.replace("/");
+    } else if (res?.status === 419) {
+      toast.error("کاربری با این مشخصات وجود دارد");
+    } else {
+      toast.error("از اتصال اینترنت خود مطمئن شوید");
+    }
   };
   return (
-    <form onSubmit={handleSubmit(regsiterWithPhone)}>
+    <form onSubmit={handleSubmit(resgisterUserHandler)}>
       <div className="flex items-center gap-x-4 mt-5">
         <OtpIcon />
         <span className="text-white text-sm md:text-base">
@@ -105,7 +117,12 @@ function Register() {
           </ul>
         </div>
 
-        <Button type="submit" className={isValid ?"bg-namava" :"bg-slate-500"}>ثبت نام</Button>
+        <Button
+          type="submit"
+          className={isValid ? "bg-namava" : "bg-slate-500"}
+        >
+          ثبت نام
+        </Button>
       </div>
     </form>
   );

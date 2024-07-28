@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import VerifyOtp from "./VerifyOtp";
-import Link from "next/link";
 import Register from "./Register";
 
 function RegisterForm({ searchParams }: { searchParams: any }) {

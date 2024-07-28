@@ -2,7 +2,7 @@ import React from "react";
 import { FaXmark } from "react-icons/fa6";
 import ModalContainer from "./ModalContainer";
 import useCloseOutSideClick from "@/hooks/useOutSideClick";
-import { TModal } from "@/libs/types";
+import { TModal } from "@/src/libs/types";
 import Message from "@/icons/Message";
 import Button from "../auth/Button/Button";
 
