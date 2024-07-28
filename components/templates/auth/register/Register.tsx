@@ -21,17 +21,15 @@ function Register() {
   } = useForm<TUser>({ resolver: zodResolver(User) });
 
   const resgisterUserHandler = async (data: TUser) => {
+    console.log(data);
+    
     const res = await signUp(data);
     if (res?.status === 201) {
-      toast.success("کاربر با موفقیت ثبت نام شد");
-      router.replace("/");
-    } else if (res?.status === 419) {
-      toast.error("کاربری با این مشخصات وجود دارد");
-    } else if (res?.status === 422) {
-      toast.error("تمام فیلد ها را وارد کنید");
-    } else {
-      toast.error("از اتصال اینترنت خود مطمئن شوید");
+      toast.success(`${res.message}`);
+      return router.replace("/");
     }
+
+    toast.error(`${res.message}`);
   };
   return (
     <form onSubmit={handleSubmit(resgisterUserHandler)}>

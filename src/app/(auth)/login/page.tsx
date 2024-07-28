@@ -1,5 +1,5 @@
-import EmailLogin from "@/components/templates/auth/Login/EmailLogin";
-import MobileLogin from "@/components/templates/auth/Login/MobileLogin";
+
+import LoginForm from "@/components/templates/auth/Login/LoginForm";
 import SendOtpCode from "@/components/templates/auth/Login/OtpLogin";
 import VerifyOtp from "@/components/templates/auth/Login/VerifyOtp";
 import Logo from "@/icons/Logo";
@@ -23,9 +23,8 @@ function Login({ searchParams }: LoginProps) {
         </Link>
         {searchParams?.type === "verify" && <VerifyOtp />}
         {searchParams?.type === "otp" && <SendOtpCode />}
-        {searchParams?.type === "email" && <EmailLogin />}
-        {(!searchParams?.type || searchParams?.type === "phone") && (
-          <MobileLogin />
+        {(!searchParams?.type ) && (
+          <LoginForm />
         )}
 
         {searchParams?.type !== "verify" && (
@@ -35,22 +34,10 @@ function Login({ searchParams }: LoginProps) {
             )}
             <div className="flex items-center gap-x-6">
               <Link
-                href={"?type=email"}
-                className={searchParams?.type === "email" ? "text-white" : ""}
-              >
-                ورود از طریق ایمیل
-              </Link>
-              <Link
                 href={"?type=otp"}
                 className={searchParams?.type === "otp" ? "text-white" : ""}
               >
                 ورود با کد یکبار مصرف
-              </Link>
-              <Link
-                href={"?type=phone"}
-                className={searchParams?.type === "phone" ? "text-white" : ""}
-              >
-                ورود با شماره
               </Link>
             </div>
           </div>
@@ -64,9 +51,7 @@ export async function generateMetadata({ searchParams }: LoginProps) {
   const loginType =
     searchParams?.type === "otp"
       ? "کد یکبار مصرف"
-      : searchParams?.type === "email"
-      ? "ایمیل"
-      : "شماره همراه";
+      :"اطلاعات هویتی"
 
   return {
     title: `ورود از طریق ${loginType}`,

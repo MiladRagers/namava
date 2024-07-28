@@ -6,7 +6,7 @@ export const User = z.object({
     .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
   username: z
-    .string({required_error :"لطفا نام کاربری را وارد کنید"})
+    .string({ required_error: "لطفا نام کاربری را وارد کنید" })
     .min(3, { message: "نام کاربری باید حداقل 3 کاراکتر داشته باشد " })
     .max(30, {
       message: "نام کاربری باید حداکثر 30 کاراکتر داشته باشد",
@@ -312,3 +312,22 @@ export const UserAccount = z.object({
 });
 
 export type TUserAccount = z.infer<typeof UserAccount>;
+
+// login form schema
+
+export const Login = z.object({
+  identifier: z
+    .string()
+    .min(4, { message: "حداقل 4 کاراکتر الزامی است" })
+    .max(100, {
+      message: "حداکثر کاراکتر 100 می باشد",
+    }),
+  password: z
+    .string()
+    .min(8, { message: "رمز عبور باید حداقل 8 کاراکتر داشته باشد " })
+    .max(30, {
+      message: " رمز عبور باید حداکثر 30 کاراکتر داشته باشد",
+    }),
+});
+
+export type TLogin = z.infer<typeof Login>;
