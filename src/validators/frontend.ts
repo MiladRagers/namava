@@ -6,7 +6,7 @@ export const User = z.object({
     .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
   username: z
-    .string()
+    .string({required_error :"لطفا نام کاربری را وارد کنید"})
     .min(3, { message: "نام کاربری باید حداقل 3 کاراکتر داشته باشد " })
     .max(30, {
       message: "نام کاربری باید حداکثر 30 کاراکتر داشته باشد",

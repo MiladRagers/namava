@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaGlobe, FaPhone, FaUser } from "react-icons/fa6";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { signUpUser } from "@/src/libs/actions/auth";
+import { signUp } from "@/src/libs/actions/auth";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -21,12 +21,14 @@ function Register() {
   } = useForm<TUser>({ resolver: zodResolver(User) });
 
   const resgisterUserHandler = async (data: TUser) => {
-    const res = await signUpUser(data);
+    const res = await signUp(data);
     if (res?.status === 201) {
       toast.success("کاربر با موفقیت ثبت نام شد");
       router.replace("/");
     } else if (res?.status === 419) {
       toast.error("کاربری با این مشخصات وجود دارد");
+    } else if (res?.status === 422) {
+      toast.error("تمام فیلد ها را وارد کنید");
     } else {
       toast.error("از اتصال اینترنت خود مطمئن شوید");
     }
