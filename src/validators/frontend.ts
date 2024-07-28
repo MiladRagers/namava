@@ -33,7 +33,8 @@ export const User = z.object({
     .min(8, { message: "بیوگرافی حداقل باید 8 کارکتر داشته باشد" })
     .max(1000, {
       message: "بیوگرافی حداکثر باید 1000 کارکتر داشته باشد",
-    }),
+    })
+    .optional(),
 });
 
 export type TUser = z.infer<typeof User>;
@@ -305,7 +306,7 @@ export const UserAccount = z.object({
     .max(11, {
       message: "شماره تلفن باید حداکثر 11 کاراکتر داشته باشد",
     }),
-    genre: z.string(),
+  genre: z.string(),
   curPassword: z.string().optional(),
   newPassword: z.string().optional(),
 });

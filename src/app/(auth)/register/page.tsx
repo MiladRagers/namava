@@ -1,6 +1,5 @@
-import CompleteInfo from "@/components/templates/auth/register/CompleteInfo";
-import SendPhone from "@/components/templates/auth/register/SendPhone";
-import VerifyOtp from "@/components/templates/auth/register/VerifyOtp";
+
+import RegisterForm from "@/components/templates/auth/register/RegisterForm";
 import Logo from "@/icons/Logo";
 import Link from "next/link";
 import React from "react";
@@ -20,18 +19,7 @@ function RegisterPage({ searchParams }: ResgisterProps) {
         >
           ورود
         </Link>
-        {searchParams?.type === "verify" && (
-          <>
-            <VerifyOtp />
-            <div className="flex-center flex-col text-xs md:text-sm text-namava space-y-6 !mt-8">
-              <Link href={"?type=forgot"}>شماره را اشتباه وارد کردید ؟</Link>
-            </div>
-          </>
-        )}
-        {searchParams?.type === "detail" && <CompleteInfo />}
-        {(!searchParams?.type || searchParams?.type === "phone") && (
-          <SendPhone />
-        )}
+        <RegisterForm searchParams={searchParams} />
       </div>
     </div>
   );
@@ -41,12 +29,9 @@ export async function generateMetadata({ searchParams }: ResgisterProps) {
   const registerType =
     searchParams?.type === "verify"
       ? "کد یکبار مصرف"
-      : searchParams?.type === "detail"
-      ? "اطلاعات بیشتر"
-      : "شماره همراه";
-
+      : "ثبت نام کاربر"
   return {
-    title: `${registerType} را وارد کنید`,
+    title: `${registerType}`,
   };
 }
 

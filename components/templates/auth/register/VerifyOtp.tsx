@@ -1,4 +1,3 @@
-"use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/auth/Input/Input";
 import Label from "@/components/modules/auth/Label/Label";
@@ -8,7 +7,6 @@ import { FaEnvelope } from "react-icons/fa6";
 import { FiCode } from "react-icons/fi";
 
 function VerifyOtp() {
-  const [isActiveMobileNumber, setIsActiveMobileNumber] = useState(false);
   return (
     <>
       <div className="flex items-center gap-x-4 mt-5">
@@ -29,15 +27,6 @@ function VerifyOtp() {
               minLength={11}
               maxLength={11}
               placeholder="کد فعال سازی را وارد نمایید"
-              onChange={(e) => {
-                if (e.target.value.trim()) {
-                  setIsActiveMobileNumber(true);
-                } else {
-                  setIsActiveMobileNumber(false);
-                }
-              }}
-              dir={isActiveMobileNumber ? "ltr" : "rtl"}
-              className={isActiveMobileNumber ? "text-left" : "text-right"}
             />
             <FiCode className={`text-xl ml-4`} />
           </div>

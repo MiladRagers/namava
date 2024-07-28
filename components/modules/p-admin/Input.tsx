@@ -9,6 +9,7 @@ type TInput = {
   icon?: React.ReactNode;
   placeholder?: string;
   name: string;
+  labelClassName ?: string;
   multiple?: boolean;
   type: "text" | "number" | "email" | "password" | "file" | "textarea";
 };
@@ -21,11 +22,12 @@ function Input({
   name,
   type,
   multiple,
+  labelClassName
 }: TInput) {
   if (type !== "file" && type !== "textarea") {
     return (
       <div className="flex flex-col gap-y-3 text-white relative">
-        <Label title={title} className="!text-base md:!text-lg" />
+        <Label title={title} className={`${labelClassName ? labelClassName :"!text-base md:!text-lg"}`} />
         <div
           className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-3 md:pl-4 md:pr-2`}
         >
@@ -39,7 +41,7 @@ function Input({
           {icon}
         </div>
         {errors[name] && (
-          <span className="absolute top-24 text-xs md:text-sm text-red-600">
+          <span className={`absolute ${labelClassName ? "top-[85px]" :"top-24"} text-xs md:text-sm text-red-600`}>
             {errors[name].message}
           </span>
         )}
