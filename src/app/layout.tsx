@@ -4,6 +4,7 @@ import Navbar from "@/components/modules/Navbar/Navbar";
 import FooterMenu from "@/components/modules/FooterMenu/FooterMenu";
 import Footer from "@/components/modules/Footer/Footer";
 import { Toaster } from "react-hot-toast";
+import { authUser } from "@/src/utils/serverHelper";
 
 export const metadata: Metadata = {
   title: "تماشای آنلاین فیلم و سریال | نماوا",
@@ -14,19 +15,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await authUser();
   return (
     <html lang="fa" dir="rtl" className="font-Iran bg-[#121212]">
       <body>
-        <Navbar />
+        <Navbar user={user} />
         {children}
         <Footer />
         <FooterMenu />
-        <Toaster/>
+        <Toaster />
       </body>
     </html>
   );

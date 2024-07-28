@@ -6,8 +6,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { IoTicketOutline } from "react-icons/io5";
 import { LiaComments } from "react-icons/lia";
-
-function page() {
+async function page() {
   return (
     <div>
       <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-white gap-3 md:gap-5">

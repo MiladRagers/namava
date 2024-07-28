@@ -86,7 +86,6 @@ export const signIn = async (body) => {
       ],
     });
 
-    console.log(user);
 
     if (!user) {
       return {
