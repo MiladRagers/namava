@@ -10,9 +10,11 @@ import { usePathname } from "next/navigation";
 import KidLogo from "@/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
+function Navbar({ user }: any) {
+  console.log(user);
 
-function Navbar() {
   const pathname = usePathname();
+
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
 
@@ -114,9 +116,11 @@ function Navbar() {
                 <li className={pathname.includes("category") ? "active" : ""}>
                   <Link href={"/category"}>دسته بندی</Link>
                 </li>
-                <li>
-                  <Link href={"/p-admin"}>پنل مدیریت</Link>
-                </li>
+                {user.role === "ADMIN" && (
+                  <li>
+                    <Link href={"/p-admin"}>پنل مدیریت</Link>
+                  </li>
+                )}
                 <li>
                   <Link href={"/kids"}>کودکان</Link>
                 </li>
@@ -162,7 +166,7 @@ function Navbar() {
             </Link>
             <ProfileMenu isShow={isShowProfile} onShow={setIsShowProfile} />
           </div>
-          {!isKid && (
+          {!isKid && !user && (
             <Link
               href={"/login"}
               className={`bg-transparent  ${
