@@ -43,6 +43,11 @@ const schema = new mongoose.Schema({
     type: String,
     default: "/uploads/user.png",
   },
+  type: {
+    type: String,
+    default: "adult",
+    enum: ["adult", "kid"],
+  },
 });
 
 const model = mongoose.models?.Profile || mongoose.model("Profile", schema);

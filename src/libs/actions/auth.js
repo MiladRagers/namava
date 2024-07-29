@@ -59,6 +59,7 @@ export const signUp = async (body) => {
         ages: 7,
         user: user._id,
         image: `/uploads/kidProfile.png`,
+        type: "kid",
       },
     ];
 
