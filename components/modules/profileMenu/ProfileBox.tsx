@@ -10,9 +10,9 @@ function ProfileBox({ image, name, isLock }: any) {
         <Image
           src={image}
           alt={image}
-          width={30}
-          height={30}
-          className="rounded-full"
+          width={1920}
+          height={1080}
+          className="rounded-full h-[30px] w-[30px]"
         />
         <span>{name}</span>
       </div>
