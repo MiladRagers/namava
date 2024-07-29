@@ -1,0 +1,50 @@
+import mongoose from "mongoose";
+import UserModel from "./user";
+const schema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  ages: {
+    type: Number,
+    required: true,
+    enum: [3, 7, 12, 15, 18],
+    defalut: 3,
+  },
+  isLock: {
+    type: Boolean,
+    default: false,
+  },
+  password: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+  timeLimits: {
+    start: {
+      type: String,
+      required: false,
+    },
+    end: {
+      type: String,
+      required: false,
+    },
+  },
+  limitsMovies: [
+    { type: mongoose.Types.ObjectId, req: "Movie", required: false },
+  ],
+  image: {
+    type: String,
+    default: "http://localhost:3000/uploads/user.png",
+  },
+});
+
+const model = mongoose?.models.Profile || mongoose.model("Profile", schema);
+
+export default model;

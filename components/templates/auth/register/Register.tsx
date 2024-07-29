@@ -122,7 +122,7 @@ function Register() {
           type="submit"
           className={isValid ? "bg-namava" : "bg-slate-500"}
         >
-       {isLoading ?"در حال ثبت نام ..." :"در حالت ثبت نام ..."}
+          {isLoading ? "در حال ثبت نام ..." : "ثبت نام"}
         </Button>
       </div>
     </form>

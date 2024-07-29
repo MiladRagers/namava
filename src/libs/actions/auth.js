@@ -1,5 +1,6 @@
 "use server";
 import UserModel from "@/src/models/user";
+import ProfileModel from "@/src/models/profile";
 import {
   generateAccessToken,
   hashPassword,
@@ -9,6 +10,7 @@ import { cookies } from "next/headers";
 import connectToDB from "@/src/configs/db";
 import { Login, User } from "@/src/validators/frontend";
 import { redirect } from "next/navigation";
+import { baseURL } from "../types";
 
 export const signUp = async (body) => {
   try {
@@ -37,7 +39,7 @@ export const signUp = async (body) => {
     const accessToken = generateAccessToken({ email });
     const usersCount = await UserModel.countDocuments();
 
-    await UserModel.create({
+    let user = new UserModel({
       name,
       phone,
       username,
@@ -45,6 +47,28 @@ export const signUp = async (body) => {
       email,
       role: usersCount > 0 ? "USER" : "ADMIN",
     });
+
+    const profiles = [
+      {
+        name: "بزرگسال",
+        ages: 18,
+        user: user._id,
+      },
+      {
+        name: "کودک",
+        ages: 7,
+        user: user._id,
+        image: `${baseURL}/kidProfile.png`,
+      },
+    ];
+
+    const profileList = await ProfileModel.insertMany(profiles);
+
+    profileList.forEach((profile) => {
+      user.profiles.push(profile._id);
+    });
+
+    await user.save();
 
     cookies().set({
       name: "accessToken",
