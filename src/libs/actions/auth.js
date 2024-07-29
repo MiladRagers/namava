@@ -8,6 +8,7 @@ import {
 import { cookies } from "next/headers";
 import connectToDB from "@/src/configs/db";
 import { Login, User } from "@/src/validators/frontend";
+import { redirect } from "next/navigation";
 
 export const signUp = async (body) => {
   try {
@@ -86,7 +87,6 @@ export const signIn = async (body) => {
       ],
     });
 
-
     if (!user) {
       return {
         message: "کاربری با این اطلاعات یافت نشد ",
@@ -117,6 +117,18 @@ export const signIn = async (body) => {
       message: "کاربر با موفقیت وارد شد",
       status: 200,
     };
+  } catch (error) {
+    return {
+      message: "سرور با مشکل مواجه شده",
+      error: true,
+    };
+  }
+};
+
+export const logout = async () => {
+  try {
+    cookies().set({ name: "accessToken", value: "", maxAge: 0 });
+    redirect("/");
   } catch (error) {
     return {
       message: "سرور با مشکل مواجه شده",

@@ -2,6 +2,7 @@ import Button from "@/components/modules/auth/Button/Button";
 import Logo from "@/icons/Logo";
 import Plus from "@/icons/Plus";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
@@ -19,7 +20,7 @@ function ProfileList() {
       <div className="flex items-center justify-center flex-col mt-10 md:mt-24">
         <h1 className="text-xl md:text-3xl">چه کسی تماشا می‌کند؟</h1>
         <div className="flex-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
-          <div>
+          <Link href={"/profile-list-edit/1"}>
             <Image
               src="/images/user.png"
               width={150}
@@ -28,7 +29,7 @@ function ProfileList() {
               className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
             />
             <h2 className="text-center mt-3">بزرگسال</h2>
-          </div>
+          </Link>
           <div>
             <Image
               src="/images/kidProfile.png"
@@ -49,12 +50,12 @@ function ProfileList() {
             />
             <h2 className="text-center mt-3">میلاد</h2>
           </div>
-          <div>
+          <Link href={"/add-profile"}>
             <div className="flex items-center justify-center bg-gray-500/40 rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
               <Plus className="w-[35px] md:w-[60px] h-[35px] md:h-[60px]" />
             </div>
             <h2 className="text-center mt-3">افزودن پروفایل</h2>
-          </div>
+          </Link>
         </div>
         <Button className="!w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
           <IoMdSettings className="text-xl" />

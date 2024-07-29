@@ -11,8 +11,6 @@ import KidLogo from "@/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
 function Navbar({ user }: any) {
-  console.log(user);
-
   const pathname = usePathname();
 
   const [isShowProfile, setIsShowProfile] = useState(false);
@@ -154,18 +152,22 @@ function Navbar({ user }: any) {
           <Link href={isKid ? "/kids/search" : "/search"}>
             <Search className={isKid ? "fill-gray-600" : "fill-white"} />
           </Link>
-          <div className="relative">
-            <Link href={""} onMouseEnter={() => setIsShowProfile(true)}>
-              <Image
-                src={"/images/user.png"}
-                alt="user.png"
-                width={40}
-                height={40}
-                className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
-              />
-            </Link>
-            <ProfileMenu isShow={isShowProfile} onShow={setIsShowProfile} />
-          </div>
+          {user ? (
+            <div className="relative">
+              <Link href={""} onMouseEnter={() => setIsShowProfile(true)}>
+                <Image
+                  src={"/images/user.png"}
+                  alt="user.png"
+                  width={40}
+                  height={40}
+                  className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
+                />
+              </Link>
+              <ProfileMenu isShow={isShowProfile} onShow={setIsShowProfile} />
+            </div>
+          ) : (
+            <Link href={"/plans"} className="text-xs">خرید اشتراک</Link>
+          )}
           {!isKid && !user && (
             <Link
               href={"/login"}

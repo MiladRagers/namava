@@ -12,6 +12,8 @@ import User from "@/icons/User";
 import Phone from "@/icons/Phone";
 import Power from "@/icons/Power";
 import { usePathname } from "next/navigation";
+import { logout } from "@/src/libs/actions/auth";
+import toast from "react-hot-toast";
 
 type TProfileMenu = {
   isShow: boolean;
@@ -35,14 +37,16 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
           {/* profile header */}
           <div className="bg-[#D95C5C] p-4">
             <h1 className="text-center !text-white">اشتراک فعال ندارید</h1>
-            <Button className="h-[32px] !text-xs text-black shadow-xl !font-Iran bg-white  hover:bg-namava hover:text-white mt-2">
-              خرید اشتراک
-            </Button>
+            <Link href={"/plans"}>
+              <Button className="h-[32px] !text-xs text-black shadow-xl !font-Iran bg-white  hover:bg-namava hover:text-white mt-2">
+                خرید اشتراک
+              </Button>
+            </Link>
           </div>
           {/* profile body */}
           <div className="px-4 py-3 child:text-xs bg-white text-black">
             <div className="border-b border-b-gray-300 pb-2">
-              <div className="flex items-center justify-between">
+              <Link href={"/profile-list"} className="flex items-center justify-between hover:text-blue-600 group">
                 <div className="flex items-center gap-x-2">
                   <Image
                     src="/images/user.png"
@@ -54,10 +58,10 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
                   <span>بزرگسال</span>
                 </div>
                 <div className="flex items-center gap-x-1">
-                  <LuSettings className="text-lg text-gray-600" />
+                  <LuSettings className="text-lg text-gray-600 group-hover:text-blue-600" />
                   <span>تنظیمات</span>
                 </div>
-              </div>
+              </Link>
             </div>
             <div className="mt-2 space-y-3 border-b border-b-gray-300 pb-2">
               <div>
@@ -96,11 +100,11 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
                 <>
                   <div className="flex items-center gap-x-2 my-2">
                     <Folder2 />
-                    <Link href={"/"}>لیست من</Link>
+                    <Link href={"/bookmarks"}>لیست من</Link>
                   </div>
                   <div className="flex items-center gap-x-2 my-2">
                     <Star />
-                    <Link href={"/"}>خرید اشتراک</Link>
+                    <Link href={"/plans"}>خرید اشتراک</Link>
                   </div>
                   <div className="flex items-center gap-x-2 my-2">
                     <Gift />
@@ -108,17 +112,24 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
                   </div>
                   <div className="flex items-center gap-x-2 my-2">
                     <User />
-                    <Link href={"/"}>حساب کاربری</Link>
+                    <Link href={"/p-user"}>حساب کاربری</Link>
                   </div>
                   <div className="flex items-center gap-x-2 my-2">
                     <Phone />
-                    <Link href={"/"}>تماس با ما</Link>
+                    <Link href={"/contact-us"}>تماس با ما</Link>
                   </div>
                 </>
               )}
-              <div className="flex items-center gap-x-2 my-2">
+              <div
+                className="flex items-center gap-x-2 my-2 cursor-pointer"
+                onClick={async () => {
+                  await logout();
+                  toast.success("شما با موفقیت خارج شدید");
+                  onShow(false);
+                }}
+              >
                 <Power />
-                <Link href={"/"}>خروج</Link>
+                <span>خروج</span>
               </div>
             </div>
           </div>
