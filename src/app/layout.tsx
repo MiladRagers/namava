@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl" className="font-Iran bg-[#121212]">
       <body>
-        <Navbar user={user} />
+        <Navbar user={JSON.parse(JSON.stringify(user))} />
         {children}
         <Footer />
         <FooterMenu />

@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 
 function Register() {
   const [isPassword, setIsPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -21,9 +22,9 @@ function Register() {
   } = useForm<TUser>({ resolver: zodResolver(User) });
 
   const resgisterUserHandler = async (data: TUser) => {
-    console.log(data);
-    
+    setIsLoading(true);
     const res = await signUp(data);
+    setIsLoading(false);
     if (res?.status === 201) {
       toast.success(`${res.message}`);
       return router.replace("/");
@@ -121,7 +122,7 @@ function Register() {
           type="submit"
           className={isValid ? "bg-namava" : "bg-slate-500"}
         >
-          ثبت نام
+       {isLoading ?"در حال ثبت نام ..." :"در حالت ثبت نام ..."}
         </Button>
       </div>
     </form>

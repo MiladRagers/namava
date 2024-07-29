@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 
 function LoginForm() {
   const [isPassword, setIsPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -23,8 +24,9 @@ function LoginForm() {
   } = useForm<TLogin>({ resolver: zodResolver(Login) });
 
   const loginHandler = async (data: TLogin) => {
-    
+    setIsLoading(true);
     const res = await signIn(data);
+    setIsLoading(false);
     if (res?.status === 200) {
       toast.success(`${res.message}`);
       return router.replace("/");
@@ -76,7 +78,13 @@ function LoginForm() {
           placeholder="لطفا رمز عبور خود را وارد کنید"
           labelClassName="!text-[17px]"
         />
-        <Button type="submit">ورود</Button>
+        <Button
+          disabled={isLoading}
+          className={isValid && !isLoading ? "bg-namava" : "bg-slate-500"}
+          type="submit"
+        >
+          {isLoading ? "در حال ورود ..." : " ورود"}
+        </Button>
       </form>
     </>
   );
