@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import UserModel from "./user";
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -41,10 +41,10 @@ const schema = mongoose.Schema({
   ],
   image: {
     type: String,
-    default: "http://localhost:3000/uploads/user.png",
+    default: "/uploads/user.png",
   },
 });
 
-const model = mongoose?.models.Profile || mongoose.model("Profile", schema);
+const model = mongoose.models?.Profile || mongoose.model("Profile", schema);
 
 export default model;

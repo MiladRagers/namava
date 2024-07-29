@@ -16,7 +16,9 @@ const authUser = async () => {
     return false;
   }
 
-  const user = await UserModel.findOne({ email: tokenPayload?.email });
+  const user = await UserModel.findOne({ email: tokenPayload?.email } ,"-password").populate(
+    "profiles"
+  );
 
   return user;
 };

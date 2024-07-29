@@ -7,6 +7,11 @@ import { LiaComments } from "react-icons/lia";
 import { MdArticle } from "react-icons/md";
 
 import { FaRegCircleUser, FaRegHeart, FaStar } from "react-icons/fa6";
+import Folder2 from "@/icons/Folder2";
+import Star from "@/icons/Star";
+import Gift from "@/icons/gift";
+import User from "@/icons/User";
+import Phone from "@/icons/Phone";
 export const day: any = [];
 export const year: any = [];
 export let genres = [
@@ -170,6 +175,14 @@ export const sidebarLinks = [
     icon: <FaRegHeart className="text-[22px]" />,
     link: "/p-user/favlist",
   },
+];
+
+export const profileLinks = [
+  { id: 1, title: "لیست من", icon: <Folder2 />, link: "bookmarks" },
+  { id: 2, title: "خرید اشتراکی", icon: <Star />, link: "plans" },
+  { id: 3, title: "کارت هدیه", icon: <Gift />, link: "plans" },
+  { id: 4, title: "حساب کاربری", icon: <User />, link: "p-user" },
+  { id: 5, title: "تماس با ما", icon: <Phone />, link: "contact-us" },
 ];
 
 const generateDate = () => {

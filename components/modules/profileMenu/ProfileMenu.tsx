@@ -3,23 +3,19 @@ import Button from "../auth/Button/Button";
 import ProfileArrow from "@/icons/ProfileArrow";
 import Image from "next/image";
 import { LuSettings } from "react-icons/lu";
-import { BiLock } from "react-icons/bi";
 import Link from "next/link";
-import Folder2 from "@/icons/Folder2";
-import Star from "@/icons/Star";
-import Gift from "@/icons/gift";
-import User from "@/icons/User";
-import Phone from "@/icons/Phone";
-import Power from "@/icons/Power";
 import { usePathname } from "next/navigation";
-import { logout } from "@/src/libs/actions/auth";
-import toast from "react-hot-toast";
+import ProfileBox from "./ProfileBox";
+import { profileLinks } from "@/public/db";
+import ProfileLink from "./ProfileLink";
+import Logout from "./Logout";
 
 type TProfileMenu = {
   isShow: boolean;
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
+  user: any;
 };
-function ProfileMenu({ isShow, onShow }: TProfileMenu) {
+function ProfileMenu({ isShow, onShow, user }: TProfileMenu) {
   const url = usePathname();
 
   return (
@@ -46,7 +42,10 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
           {/* profile body */}
           <div className="px-4 py-3 child:text-xs bg-white text-black">
             <div className="border-b border-b-gray-300 pb-2">
-              <Link href={"/profile-list"} className="flex items-center justify-between hover:text-blue-600 group">
+              <Link
+                href={"/profile-list"}
+                className="flex items-center justify-between hover:text-blue-600 group"
+              >
                 <div className="flex items-center gap-x-2">
                   <Image
                     src="/images/user.png"
@@ -64,73 +63,16 @@ function ProfileMenu({ isShow, onShow }: TProfileMenu) {
               </Link>
             </div>
             <div className="mt-2 space-y-3 border-b border-b-gray-300 pb-2">
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-x-2">
-                    <Image
-                      src="/images/user.png"
-                      alt="user"
-                      width={30}
-                      height={30}
-                      className="rounded-full"
-                    />
-                    <span>بزرگسال</span>
-                  </div>
-                  <BiLock className="text-base text-gray-600" />
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-x-2">
-                    <Image
-                      src="/images/customProfile.jpg"
-                      alt="user"
-                      width={30}
-                      height={30}
-                      className="rounded-full"
-                    />
-                    <span>بزرگسال</span>
-                  </div>
-                  <BiLock className="text-base text-gray-600" />
-                </div>
-              </div>
+              {user.profiles.slice(1, 4).map((profile: any) => (
+                <ProfileBox {...profile} />
+              ))}
             </div>
             <div className="space-y-4 mt-4 mb-2">
-              {!url.includes("/kids") && (
-                <>
-                  <div className="flex items-center gap-x-2 my-2">
-                    <Folder2 />
-                    <Link href={"/bookmarks"}>لیست من</Link>
-                  </div>
-                  <div className="flex items-center gap-x-2 my-2">
-                    <Star />
-                    <Link href={"/plans"}>خرید اشتراک</Link>
-                  </div>
-                  <div className="flex items-center gap-x-2 my-2">
-                    <Gift />
-                    <Link href={"/"}>کارت هدیه</Link>
-                  </div>
-                  <div className="flex items-center gap-x-2 my-2">
-                    <User />
-                    <Link href={"/p-user"}>حساب کاربری</Link>
-                  </div>
-                  <div className="flex items-center gap-x-2 my-2">
-                    <Phone />
-                    <Link href={"/contact-us"}>تماس با ما</Link>
-                  </div>
-                </>
-              )}
-              <div
-                className="flex items-center gap-x-2 my-2 cursor-pointer"
-                onClick={async () => {
-                  await logout();
-                  toast.success("شما با موفقیت خارج شدید");
-                  onShow(false);
-                }}
-              >
-                <Power />
-                <span>خروج</span>
-              </div>
+              {!url.includes("/kids") &&
+                profileLinks.map((link) => (
+                  <ProfileLink {...link} key={link.id} />
+                ))}
+              <Logout onShow={onShow} />
             </div>
           </div>
         </div>
