@@ -7,7 +7,6 @@ import { FaPencil, FaTrash } from "react-icons/fa6";
 
 async function CategoriesList() {
   const categories: any = await getAllCategories();
-  console.log(categories);
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
