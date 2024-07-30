@@ -22,10 +22,10 @@ async function CategoriesList() {
           <th>تاریخ</th>
           <th>عملیات</th>
         </Table.Header>
-        {/* <Table.Body>
+        <Table.Body>
           {categories.map((category: any, index: number) => (
-            <Table.Row key={index}>
-              <td className="font-Dana">{index + 1}</td>
+            <Table.Row>
+              <td>{index + 1}</td>
               <td className="!p-0 md:!p-5">
                 <Image
                   src={category.image}
@@ -37,9 +37,11 @@ async function CategoriesList() {
               </td>
               <td>{category.title}</td>
               <td>{category.link}</td>
-              <td>{category.parent ? category.parent : "-----"}</td>
-              <td>{category.tags.join("  ")}</td>
-              <td>1403/04/15</td>
+              <td>{category.parrent ? category.parrent.title : "------"}</td>
+              <td>{category.tags.join(" ، ")}</td>
+              <td>
+                {new Date(category.createdAt).toLocaleDateString("fa-IR")}
+              </td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                   <FaTrash className="text-red-600 text-base md:text-lg" />
@@ -48,7 +50,7 @@ async function CategoriesList() {
               </td>
             </Table.Row>
           ))}
-        </Table.Body> */}
+        </Table.Body>
       </Table>
       <Pagination />
     </div>
