@@ -1,21 +1,21 @@
 import { hash, compare, genSalt } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
 
-const hashPassword = async (password) => {
+const hashPassword = async (password: string) => {
   const salt = await genSalt(10);
   const hashedPassword = await hash(password, salt);
   return hashedPassword;
 };
 
-const verifyPassword = async (password, hashedPassword) => {
+const verifyPassword = async (password: string, hashedPassword: string) => {
   const isValid = await compare(password, hashedPassword);
   return isValid;
 };
 
-const generateAccessToken = (data) => {
+const generateAccessToken = (data: { email: string }) => {
   const token = sign(
     { ...data },
-    process.env.NEXT_PUBLIC_AccessTokenSecretKey,
+    process.env.NEXT_PUBLIC_AccessTokenSecretKey as string,
     {
       expiresIn: "5d",
     }
@@ -23,11 +23,11 @@ const generateAccessToken = (data) => {
   return token;
 };
 
-const verifyAccessToken = (token) => {
+const verifyAccessToken = (token: string) => {
   try {
     const tokenPayload = verify(
       token,
-      process.env.NEXT_PUBLIC_AccessTokenSecretKey
+      process.env.NEXT_PUBLIC_AccessTokenSecretKey as string
     );
     return tokenPayload;
   } catch (err) {

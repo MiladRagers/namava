@@ -10,15 +10,16 @@ const authUser = async () => {
     return false;
   }
 
-  const tokenPayload = verifyAccessToken(token);
+  const tokenPayload: any = verifyAccessToken(token);
 
   if (!tokenPayload) {
     return false;
   }
 
-  const user = await UserModel.findOne({ email: tokenPayload?.email } ,"-password").populate(
-    "profiles"
-  );
+  const user = await UserModel.findOne(
+    { email: tokenPayload?.email },
+    "-password"
+  ).populate("profiles");
 
   return user;
 };

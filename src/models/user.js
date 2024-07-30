@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import CategoryModel from "./category";
+import ProfileModel from "./profile";
 const schema = mongoose.Schema(
   {
     name: {

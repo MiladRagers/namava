@@ -10,9 +10,21 @@ import { cookies } from "next/headers";
 import connectToDB from "@/src/configs/db";
 import { Login, User } from "@/src/validators/frontend";
 import { redirect } from "next/navigation";
-import { baseURL } from "../types";
 
-export const signUp = async (body) => {
+interface ISignup {
+  name: string;
+  phone: string;
+  email: string;
+  password: string;
+  username: string;
+}
+
+interface ISignin {
+  identifier: string;
+  password: string;
+}
+
+export const signUp = async (body: ISignup) => {
   try {
     connectToDB();
     const { name, phone, email, password, username } = body;
@@ -91,7 +103,7 @@ export const signUp = async (body) => {
   }
 };
 
-export const signIn = async (body) => {
+export const signIn = async (body: ISignin) => {
   const { identifier, password } = body;
   try {
     connectToDB();
