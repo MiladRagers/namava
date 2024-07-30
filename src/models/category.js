@@ -27,7 +27,7 @@ const schema = mongoose.Schema(
     parrent: {
       type: mongoose.Types.ObjectId,
       ref: "Category",
-      required: false,
+      default: null,
     },
     image: {
       type: String,
