@@ -57,6 +57,11 @@ const schema = mongoose.Schema(
     profiles: [
       { type: mongoose.Types.ObjectId, ref: "Profile", required: false },
     ],
+
+    profileLimitCount: {
+      type: Number,
+      default: 4,
+    },
   },
   { timestamps: true }
 );
