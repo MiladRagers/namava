@@ -11,9 +11,6 @@ import { IoMdSettings } from "react-icons/io";
 async function ProfileList() {
   const user = await authUser();
 
-   
-    
-  
   return (
     <div className="text-white">
       <div className="flex items-center justify-center relative">
@@ -38,7 +35,7 @@ async function ProfileList() {
         </div>
         <Button className="!w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
           <IoMdSettings className="text-xl" />
-          <span className="text-xs">تنظیمات پروفایل</span>
+          <Link href={"/profile-list-edit"} className="text-xs">تنظیمات پروفایل</Link>
         </Button>
       </div>
     </div>

@@ -68,8 +68,14 @@ function AddProfile() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-5 mt-10 px-4 md:px-0">
-          <Button>ذخیره</Button>
-          <Button className="!bg-gray-500/40">لغو</Button>
+          <Button type="submit">ذخیره</Button>
+          <Button
+            type="reset"
+            onClick={() => router.back()}
+            className="!bg-gray-500/40"
+          >
+            لغو
+          </Button>
         </div>
       </form>
     </div>
