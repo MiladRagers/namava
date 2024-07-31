@@ -5,8 +5,13 @@ import Image from "next/image";
 import React from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
-async function CategoriesList({ page }: { page: string }) {
-  const { categories, counts }: any = await getAllCategories(+page);
+type TList = {
+  page: string;
+  search: string;
+};
+
+async function CategoriesList({ page, search }: TList) {
+  const { categories, counts }: any = await getAllCategories(+page , search);
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
