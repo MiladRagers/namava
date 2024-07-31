@@ -2,9 +2,9 @@ import React, {
   cloneElement,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
-import useOutSideClose from "@/hooks/useOutSideClick";
 
 type TModalContext = {
   name: string;
@@ -39,23 +39,31 @@ function Open({ children, name }: { children: React.ReactNode; name: string }) {
 function Page({
   children,
   name: windowName,
-  title,
 }: {
   children: React.ReactNode;
   name: string;
-  title: string;
 }) {
   const { close, name } = useContext(ModalContext);
-  const ref: any = useOutSideClose(close, true);
-  if (name !== windowName) return null;
 
+  useEffect(() => {
+    const clickHandler = (e: any) => {
+      if (e.target.id === "modal") {
+        close();
+      }
+    };
+
+    window.addEventListener("click", clickHandler);
+    return () => window.removeEventListener("click", clickHandler);
+  }, []);
+
+  if (name !== windowName) return null;
   return (
     <>
       <div
-        id="delete-modal"
+        id="modal"
         className="bg-black/50 fixed inset-0  flex items-center justify-center  z-50"
       >
-        <div ref={ref}>{cloneElement(children as any, { onClose: close })}</div>
+        <div>{cloneElement(children as any, { onClose: close })}</div>
       </div>
     </>
   );

@@ -1,3 +1,6 @@
+"use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import Image from "next/image";
@@ -38,19 +41,28 @@ function FilmList() {
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center gap-x-0.5 justify-center">
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
               </div>
             </td>
             <td>فیلم</td>
             <td>اکشن</td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
+                <Modal>
+                  <Modal.Open name="delete">
+                    <FaTrash className="text-red-600 text-base md:text-lg" />
+                  </Modal.Open>
+                  <Modal.Open name="edit">
+                    <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  </Modal.Open>
+                  <Modal.Page name="delete">
+                    <ConfirmModal  />
+                  </Modal.Page>
+                </Modal>
               </div>
             </td>
           </Table.Row>
@@ -71,11 +83,11 @@ function FilmList() {
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center gap-x-0.5 justify-center">
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
               </div>
             </td>
             <td>فیلم</td>
@@ -104,11 +116,11 @@ function FilmList() {
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center gap-x-0.5 justify-center">
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
-              <FaRegStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
+                <FaRegStar className="text-amber-400" />
               </div>
             </td>
             <td>فیلم</td>
