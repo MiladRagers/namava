@@ -9,11 +9,13 @@ interface CategoryCard {
 }
 
 function CategoryCard({ title, image, link }: CategoryCard) {
+  console.log(link);
+  
   return (
     <div className="relative flex items-center">
-      <Link href={link}>
+      <Link href={`${link}`}>
         <Image
-          src={`/images/categories/${image}`}
+          src={image}
           alt={image}
           width={900}
           height={900}
