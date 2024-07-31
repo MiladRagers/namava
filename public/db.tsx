@@ -37,6 +37,8 @@ export let genres = [
   { name: "کلاسیک", id: 20 },
 ];
 
+export const ITEM_PER_PAGE = 10;
+
 export const RadioOptions = [
   { id: "series", name: "سریال", isActive: false },
   { id: "film", name: "فیلم", isActive: true },

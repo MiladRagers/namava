@@ -5,8 +5,8 @@ import Image from "next/image";
 import React from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
-async function CategoriesList() {
-  const categories: any = await getAllCategories();
+async function CategoriesList({ page }: { page: string }) {
+  const { categories, counts }: any = await getAllCategories(+page);
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -23,7 +23,7 @@ async function CategoriesList() {
         </Table.Header>
         <Table.Body>
           {categories.map((category: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={category._id}>
               <td>{index + 1}</td>
               <td className="!p-0 md:!p-5">
                 <Image
@@ -51,7 +51,7 @@ async function CategoriesList() {
           ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      <Pagination count={counts} />
     </div>
   );
 }
