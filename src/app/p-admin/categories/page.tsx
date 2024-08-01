@@ -22,7 +22,7 @@ async function CategoriesPage({
         <Title name="لیست دسته بندی ها" />
         <Search />
       </div>
-      <CategoriesList categories={categories} counts={counts}/>
+      <CategoriesList categories={JSON.parse(JSON.stringify(categories))} counts={counts}/>
     </>
   );
 }

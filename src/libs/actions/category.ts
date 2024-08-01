@@ -50,4 +50,6 @@ export const addNewCategory = async (body: FormData) => {
 
 export const deleteCategory = async (formData: FormData) => {
   const categoryId = formData.get("id");
+  console.log(categoryId);
+  
 };

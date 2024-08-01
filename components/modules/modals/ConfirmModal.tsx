@@ -41,7 +41,7 @@ function ConfirmModal({
 function AcceptBtn() {
   const { pending } = useFormStatus();
   return (
-    <Button className="text-white !mt-8 !w-full">
+    <Button className="text-white !mt-8 !w-full h-[44px]">
       {pending ? <Spinner /> : "بله"}
     </Button>
   );
