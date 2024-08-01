@@ -24,4 +24,23 @@ const authUser = async () => {
   return user;
 };
 
-export { authUser };
+const checkIsAdmin = async () => {
+  connectToDB();
+  const token = cookies().get("accessToken")?.value;
+
+  if (!token) {
+    return false;
+  }
+
+  const tokenPayload: any = verifyAccessToken(token);
+
+  if (!tokenPayload) {
+    return false;
+  }
+
+  const user = await UserModel.findOne({ email: tokenPayload?.email });
+
+  return user.role === "ADMIN" ? true : false;
+};
+
+export { authUser, checkIsAdmin };

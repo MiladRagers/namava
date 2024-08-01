@@ -2,14 +2,24 @@ import React from "react";
 import Title from "@/components/modules/p-admin/Title";
 import AddUser from "@/components/templates/p-admin/users/AddUser";
 import UsersList from "@/components/templates/p-admin/users/UsersList";
+import { count } from "console";
+import { getAllUsers } from "@/src/libs/service/services";
 
-function UsersPage() {
+async function UsersPage({
+  searchParams,
+}: {
+  searchParams: { page: string; q: string };
+}) {
+  const { users, counts }: any = await getAllUsers(
+    +searchParams.page,
+    searchParams.q
+  );
   return (
     <>
       <Title name="ایجاد کاربر" />
       <AddUser />
       <Title name="لیست کاربران" />
-      <UsersList />
+      <UsersList counts={counts} users={users} />
     </>
   );
 }

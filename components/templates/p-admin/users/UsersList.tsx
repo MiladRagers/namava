@@ -1,9 +1,15 @@
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import React from "react";
 import { FaEye, FaPencil, FaTrash } from "react-icons/fa6";
 
-function UsersList() {
+type TUser = {
+  users: any;
+  counts: number;
+};
+
+function UsersList({ users, counts }: TUser) {
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -19,99 +25,30 @@ function UsersList() {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>میلاد سلامیان</td>
-            <td>Milad1385</td>
-            <td>09336084013</td>
-            <td>milad@gmail.com</td>
-            <td>ادمین</td>
-            <td>116 روز</td>
-            <td>1403/04/15</td>
-            <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-              <FaTrash className="text-red-600 text-base md:text-lg" />
-              <FaPencil className="text-sky-600 text-base md:text-lg" />
-              <FaEye className="text-yellow-500 text-base md:text-lg" />
-            </td>
-          </Table.Row>
+          {users.map((user: any, index: number) => (
+            <Table.Row key={user._id}>
+              <td>{index + 1}</td>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.phone}</td>
+              <td>{user.email}</td>
+              <td>{user.role === "ADMIN" ? "ادمین" : "کاربر عادی"}</td>
+              <td>116 روز</td>
+              <td> {new Date(user.createdAt).toLocaleDateString("fa-IR")}</td>
+              <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                <FaTrash className="text-red-600 text-base md:text-lg" />
+                <FaPencil className="text-sky-600 text-base md:text-lg" />
+                <FaEye className="text-yellow-500 text-base md:text-lg" />
+              </td>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      {users.length > 0 ? (
+        <Pagination count={counts} />
+      ) : (
+        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+      )}
     </div>
   );
 }
