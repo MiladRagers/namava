@@ -5,7 +5,8 @@ import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { deleteUser } from "@/src/libs/actions/user";
-import React from "react";
+import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
 type TUser = {
@@ -14,6 +15,21 @@ type TUser = {
 };
 
 function UsersList({ users, counts }: TUser) {
+  const [optimisticUser, deleteOptimisticUser] = useOptimistic(
+    users,
+    (state, id) => {
+      return state.filter((user: any) => user._id !== id);
+    }
+  );
+
+  const deleteUserHandler = async (id: string) => {
+    deleteOptimisticUser(id);
+    const res = await deleteUser(id);
+    if (res?.status === 200) {
+      return toast.success(`${res.message}`);
+    }
+    toast.error(`${res?.message}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -29,7 +45,7 @@ function UsersList({ users, counts }: TUser) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {users.map((user: any, index: number) => (
+          {optimisticUser.map((user: any, index: number) => (
             <Table.Row key={user._id}>
               <td>{index + 1}</td>
               <td>{user.name}</td>
@@ -45,7 +61,7 @@ function UsersList({ users, counts }: TUser) {
                     <FaTrash className="text-red-600 text-base md:text-lg" />
                   </Modal.Open>
                   <Modal.Page name="delete">
-                    <ConfirmModal id={user._id} action={deleteUser} />
+                    <ConfirmModal id={user._id} onAction={deleteUserHandler} />
                   </Modal.Page>
                 </Modal>
                 <FaPencil className="text-sky-600 text-base md:text-lg" />
@@ -54,7 +70,7 @@ function UsersList({ users, counts }: TUser) {
           ))}
         </Table.Body>
       </Table>
-      {users.length > 0 ? (
+      {optimisticUser.length > 0 ? (
         <Pagination count={counts} />
       ) : (
         <EmptyBox title="موردی که جستجو کردید یافت نشد" />

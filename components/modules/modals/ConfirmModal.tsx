@@ -4,7 +4,6 @@ import { FaXmark } from "react-icons/fa6";
 import Button from "../auth/Button/Button";
 import Spinner from "../spinner/Spinner";
 
-
 function ConfirmModal({
   onClose,
   onAction,
@@ -21,7 +20,6 @@ function ConfirmModal({
         className="text-lg md:text-3xl absolute left-3 top-3 md:cursor-pointer"
       />
       <form className="flex-center flex-col space-y-5">
-        <input type="text" name="id" defaultValue={id} hidden />
         <Message className="!w-[136px] !h-[137px]" />
         <h2 className="text-lg font-IranMedium">آیا از حذف اطمینان دارید ؟</h2>
         <div className="flex items-center justify-center gap-x-3 w-full">

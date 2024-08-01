@@ -85,7 +85,7 @@ function CategoriesList({ categories, counts }: TList) {
           ))}
         </Table.Body>
       </Table>
-      {categories.length > 0 ? (
+      {optimisticCategory.length > 0 ? (
         <Pagination count={counts} />
       ) : (
         <EmptyBox title="موردی که جستجو کردید یافت نشد" />
