@@ -1,6 +1,7 @@
 "use client";
 import ConfirmModal from "@/components/modules/modals/ConfirmModal";
 import Modal from "@/components/modules/modals/Modal";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { deleteCategory } from "@/src/libs/actions/category";
@@ -65,7 +66,11 @@ function CategoriesList({ categories, counts }: TList) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination count={counts} />
+      {categories.length > 0 ? (
+        <Pagination count={counts} />
+      ) : (
+        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+      )}
     </div>
   );
 }
