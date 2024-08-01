@@ -4,6 +4,7 @@ import CategoryModel from "@/src/models/category";
 import { writeFileSync } from "fs";
 import path from "path";
 import { revalidatePath } from "next/cache";
+import { isValidObjectId } from "mongoose";
 
 export const addNewCategory = async (body: FormData) => {
   try {
@@ -40,8 +41,6 @@ export const addNewCategory = async (body: FormData) => {
       status: 201,
     };
   } catch (error) {
-    console.log(error);
-
     return {
       message: "اتصال خود را به اینترنت چک کنید",
     };
@@ -50,6 +49,31 @@ export const addNewCategory = async (body: FormData) => {
 
 export const deleteCategory = async (formData: FormData) => {
   const categoryId = formData.get("id");
-  console.log(categoryId);
-  
+  try {
+    if (isValidObjectId(categoryId)) {
+      const category = await CategoryModel.findOne({ _id: categoryId });
+      if (!category) {
+        return {
+          message: "این کتگوری وجود ندارد",
+          status: 404,
+        };
+      }
+
+      await CategoryModel.findByIdAndDelete(`${categoryId}`);
+      revalidatePath("/p-admin/categories");
+      return {
+        message: "دسته بندی با موفقیت حذف شد",
+        status: 200,
+      };
+    } else {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+    };
+  }
 };
