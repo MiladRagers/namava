@@ -19,7 +19,7 @@ async function UsersPage({
       <Title name="ایجاد کاربر" />
       <AddUser />
       <Title name="لیست کاربران" />
-      <UsersList counts={counts} users={users} />
+      <UsersList counts={counts} users={JSON.parse(JSON.stringify(users))} />
     </>
   );
 }

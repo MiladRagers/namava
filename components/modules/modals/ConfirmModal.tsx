@@ -1,18 +1,17 @@
 import Message from "@/icons/Message";
-import React from "react";
+import React, { useTransition } from "react";
 import { FaXmark } from "react-icons/fa6";
 import Button from "../auth/Button/Button";
 import Spinner from "../spinner/Spinner";
-import { useFormStatus } from "react-dom";
-import toast from "react-hot-toast";
+
 
 function ConfirmModal({
   onClose,
-  action,
+  onAction,
   id,
 }: {
   onClose?: any;
-  action: any;
+  onAction: any;
   id: string;
 }) {
   return (
@@ -21,22 +20,12 @@ function ConfirmModal({
         onClick={() => onClose()}
         className="text-lg md:text-3xl absolute left-3 top-3 md:cursor-pointer"
       />
-      <form
-        action={async (formData: FormData) => {
-          const res = await action(formData);
-          if (res?.status === 200) {
-            return toast.success(`${res?.message}`);
-          }
-
-          toast.error(`${res?.message}`);
-        }}
-        className="flex-center flex-col space-y-5"
-      >
+      <form className="flex-center flex-col space-y-5">
         <input type="text" name="id" defaultValue={id} hidden />
         <Message className="!w-[136px] !h-[137px]" />
         <h2 className="text-lg font-IranMedium">آیا از حذف اطمینان دارید ؟</h2>
         <div className="flex items-center justify-center gap-x-3 w-full">
-          <AcceptBtn />
+          <AcceptBtn onAction={onAction} id={id} />
           <Button
             className="!mt-8 text-white !bg-red-600 !w-full"
             onClick={onClose}
@@ -49,11 +38,17 @@ function ConfirmModal({
   );
 }
 
-function AcceptBtn() {
-  const { pending } = useFormStatus();
+function AcceptBtn({ onAction, id }: any) {
+  const [isPending, startTransition] = useTransition();
+
+  const handleClick = () => {
+    startTransition(() => {
+      onAction(id);
+    });
+  };
   return (
-    <Button className="text-white !mt-8 !w-full h-[44px]">
-      {pending ? <Spinner /> : "بله"}
+    <Button className="text-white !mt-8 !w-full h-[44px]" onClick={handleClick}>
+      {isPending ? <Spinner /> : "بله"}
     </Button>
   );
 }

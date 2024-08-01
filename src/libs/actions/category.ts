@@ -47,8 +47,7 @@ export const addNewCategory = async (body: FormData) => {
   }
 };
 
-export const deleteCategory = async (formData: FormData) => {
-  const categoryId = formData.get("id");
+export const deleteCategory = async (categoryId: string) => {
   try {
     if (isValidObjectId(categoryId)) {
       const category = await CategoryModel.findOne({ _id: categoryId });
@@ -59,14 +58,11 @@ export const deleteCategory = async (formData: FormData) => {
         };
       }
 
-      unlink(
-        path.join(process.cwd(), "public/" + category.image),
-        (err) => {
-          if (err) {
-            console.log(err);
-          }
+      unlink(path.join(process.cwd(), "public/" + category.image), (err) => {
+        if (err) {
+          console.log(err);
         }
-      );
+      });
 
       await CategoryModel.findByIdAndDelete(`${categoryId}`);
 

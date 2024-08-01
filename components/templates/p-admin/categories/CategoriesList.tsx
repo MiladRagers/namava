@@ -6,7 +6,8 @@ import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { deleteCategory } from "@/src/libs/actions/category";
 import Image from "next/image";
-import React from "react";
+import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
 type TList = {
@@ -15,6 +16,21 @@ type TList = {
 };
 
 function CategoriesList({ categories, counts }: TList) {
+  const [optimisticCategory, deleteOptimistc] = useOptimistic(
+    categories,
+    (allCategories, id) => {
+      return allCategories.filter((cat: any) => cat._id !== id);
+    }
+  );
+
+  const deleteCategoryHandler = async (id: string) => {
+    deleteOptimistc(id);
+    const res = await deleteCategory(id);
+    if (res?.status === 200) {
+      return toast.success(`${res.message}`);
+    }
+    toast.error(`${res?.message}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -29,7 +45,7 @@ function CategoriesList({ categories, counts }: TList) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {categories.map((category: any, index: number) => (
+          {optimisticCategory.map((category: any, index: number) => (
             <Table.Row key={category._id}>
               <td>{index + 1}</td>
               <td className="!p-0 md:!p-5">
@@ -55,7 +71,10 @@ function CategoriesList({ categories, counts }: TList) {
                       <FaTrash className="text-red-600 text-base md:text-lg" />
                     </Modal.Open>
                     <Modal.Page name="delete">
-                      <ConfirmModal action={deleteCategory} id={category._id} />
+                      <ConfirmModal
+                        onAction={deleteCategoryHandler}
+                        id={category._id}
+                      />
                     </Modal.Page>
                   </Modal>
 
