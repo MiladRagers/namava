@@ -1,18 +1,19 @@
+"use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import { getAllCategories } from "@/src/libs/service/services";
+import { deleteCategory } from "@/src/libs/actions/category";
 import Image from "next/image";
 import React from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
 type TList = {
-  page: string;
-  search: string;
+  categories: any;
+  counts: number;
 };
 
-async function CategoriesList({ page, search }: TList) {
-  const { categories, counts }: any = await getAllCategories(+page , search);
-
+function CategoriesList({ categories, counts }: TList) {
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -48,7 +49,15 @@ async function CategoriesList({ page, search }: TList) {
               </td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  <FaTrash className="text-red-600 text-base md:text-lg" />
+                  <Modal>
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="delete">
+                      <ConfirmModal action={deleteCategory} id={category._id} />
+                    </Modal.Page>
+                  </Modal>
+
                   <FaPencil className="text-sky-600 text-base md:text-lg" />
                 </div>
               </td>
