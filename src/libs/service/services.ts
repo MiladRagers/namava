@@ -39,8 +39,7 @@ export const getAllUsers = async (page: number, search: string) => {
 
     const regex = new RegExp(search, "i");
     const users = await UserModel.find({
-      name: { $regex: regex },
-      username: { $regex: regex },
+      $or: [{ name: { $regex: regex } }, { username: { $regex: regex } }],
     })
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
