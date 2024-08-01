@@ -14,6 +14,7 @@ type TSelectBox = {
   name: string;
   options: TOption[];
   dateName?: string;
+  disable?: boolean;
 };
 
 function SelectBox({
@@ -23,6 +24,7 @@ function SelectBox({
   name,
   options,
   dateName,
+  disable,
 }: TSelectBox) {
   return (
     <div className="flex w-full flex-col gap-y-3 text-white relative">
@@ -31,6 +33,7 @@ function SelectBox({
         className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
       >
         <select
+          disabled={disable}
           className="bg-[#121212] outline-none w-full text-sm md:text-base"
           {...register(`${name}`)}
           name={name}

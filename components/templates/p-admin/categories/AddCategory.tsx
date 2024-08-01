@@ -72,6 +72,7 @@ function AddCategories() {
         title="عنوان"
         type="text"
         placeholder="عنوان دسته بندی را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -82,6 +83,7 @@ function AddCategories() {
         title="لینک "
         type="text"
         placeholder="لینک دسته بندی را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -92,6 +94,7 @@ function AddCategories() {
         title="توضیحات "
         type="text"
         placeholder="درباره دسته بندی بنویسید"
+        disable={isLoading}
       />
 
       <Input
@@ -102,6 +105,7 @@ function AddCategories() {
         title="تگ ها"
         type="text"
         placeholder="تگ های دسته بندی را بنویسید"
+        disable={isLoading}
       />
 
       <SelectBox
@@ -110,6 +114,7 @@ function AddCategories() {
         name="parent"
         options={categoriesOption}
         title="پرنت دسته بندی"
+        disable={isLoading}
       />
 
       <Input
@@ -118,6 +123,7 @@ function AddCategories() {
         name="image"
         title="آپلودر عکس"
         type="file"
+        disable={isLoading}
       />
 
       <div className="flex items-center gap-x-8 mt-5 text-white">
