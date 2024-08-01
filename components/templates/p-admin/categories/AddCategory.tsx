@@ -10,9 +10,11 @@ import { RiArticleLine } from "react-icons/ri";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import { addNewCategory } from "@/src/libs/actions/category";
 import toast from "react-hot-toast";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 function AddCategories() {
   const [categoriesOption, setCategoriesOption] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -21,12 +23,6 @@ function AddCategories() {
   } = useForm<TCategory>({
     resolver: zodResolver(Category),
   });
-
-  const fakeOptions = [
-    { id: 1, label: "اکشن", value: "Action" },
-    { id: 2, label: "کمدی", value: "Comedy" },
-    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
-  ];
 
   useEffect(() => {
     const getAllCategories = async () => {
@@ -52,12 +48,16 @@ function AddCategories() {
     formData.append("parent", data.parent as string);
     formData.append("desc", data.desc);
     formData.append("image", data.image[0]);
-
+    setIsLoading(true);
     const res = await addNewCategory(formData);
     if (res?.status === 201) {
+      setIsLoading(false);
+      reset();
       return toast.success(`${res?.message}`);
     }
     toast.error(`${res?.message}`);
+    reset();
+    setIsLoading(false);
   };
   return (
     <form
@@ -121,8 +121,11 @@ function AddCategories() {
       />
 
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد دسته بندی
+        <Button
+          disabled={isLoading}
+          className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}
+        >
+          {isLoading ? <Spinner /> : "ایجاد دسته بندی"}
         </Button>
         <Button onClick={() => reset()} className="bg-red-700">
           لغو

@@ -9,9 +9,10 @@ type TInput = {
   icon?: React.ReactNode;
   placeholder?: string;
   name: string;
-  labelClassName ?: string;
+  labelClassName?: string;
   multiple?: boolean;
   type: "text" | "number" | "email" | "password" | "file" | "textarea";
+  disable?: boolean;
 };
 function Input({
   title,
@@ -22,18 +23,25 @@ function Input({
   name,
   type,
   multiple,
-  labelClassName
+  labelClassName,
+  disable,
 }: TInput) {
   if (type !== "file" && type !== "textarea") {
     return (
       <div className="flex flex-col gap-y-3 text-white relative">
-        <Label title={title} className={`${labelClassName ? labelClassName :"!text-base md:!text-lg"}`} />
+        <Label
+          title={title}
+          className={`${
+            labelClassName ? labelClassName : "!text-base md:!text-lg"
+          }`}
+        />
         <div
           className={`bg-[#121212] rounded-xl flex items-center justify-between gap-x-2 px-3 md:pl-4 md:pr-2`}
         >
           <input
             className="h-[52px] font-Dana  w-full text-[13px] md:text-sm lg:text-[15px] placeholder:text-gray-200 px-2.5 outline-none bg-transparent"
             name={name}
+            disabled={disable}
             {...register(`${name}`)}
             type={type}
             placeholder={placeholder}
@@ -41,7 +49,11 @@ function Input({
           {icon}
         </div>
         {errors[name] && (
-          <span className={`absolute ${labelClassName ? "top-[85px]" :"top-24"} text-xs md:text-sm text-red-600`}>
+          <span
+            className={`absolute ${
+              labelClassName ? "top-[85px]" : "top-24"
+            } text-xs md:text-sm text-red-600`}
+          >
             {errors[name].message}
           </span>
         )}
@@ -56,6 +68,7 @@ function Input({
         >
           <input
             name={name}
+            disabled={disable}
             {...register(`${name}`, {
               required: "لطفا تصویر را آپلود کنید",
             })}
@@ -87,6 +100,7 @@ function Input({
           className={`bg-[#121212] rounded-xl flex items-center pt-4 justify-between gap-x-2 px-2 md:pl-4 md:pr-2`}
         >
           <textarea
+            disabled={disable}
             className="font-Dana  w-full text-[13px] h-[200px] md:text-sm lg:text-[15px] placeholder:text-gray-200 px-2.5 outline-none bg-transparent"
             name={name}
             {...register(`${name}`)}
