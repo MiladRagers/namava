@@ -1,8 +1,12 @@
+"use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteUser } from "@/src/libs/actions/user";
 import React from "react";
-import { FaEye, FaPencil, FaTrash } from "react-icons/fa6";
+import { FaPencil, FaTrash } from "react-icons/fa6";
 
 type TUser = {
   users: any;
@@ -36,9 +40,15 @@ function UsersList({ users, counts }: TUser) {
               <td>116 روز</td>
               <td> {new Date(user.createdAt).toLocaleDateString("fa-IR")}</td>
               <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
+                <Modal>
+                  <Modal.Open name="delete">
+                    <FaTrash className="text-red-600 text-base md:text-lg" />
+                  </Modal.Open>
+                  <Modal.Page name="delete">
+                    <ConfirmModal id={user._id} action={deleteUser} />
+                  </Modal.Page>
+                </Modal>
                 <FaPencil className="text-sky-600 text-base md:text-lg" />
-                <FaEye className="text-yellow-500 text-base md:text-lg" />
               </td>
             </Table.Row>
           ))}
