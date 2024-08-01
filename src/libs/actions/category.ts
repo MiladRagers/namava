@@ -1,7 +1,7 @@
 "use server";
 import connectToDB from "@/src/configs/db";
 import CategoryModel from "@/src/models/category";
-import { writeFileSync } from "fs";
+import { writeFileSync, unlink } from "fs";
 import path from "path";
 import { revalidatePath } from "next/cache";
 import { isValidObjectId } from "mongoose";
@@ -59,7 +59,17 @@ export const deleteCategory = async (formData: FormData) => {
         };
       }
 
+      unlink(
+        path.join(process.cwd(), "public/" + category.image),
+        (err) => {
+          if (err) {
+            console.log(err);
+          }
+        }
+      );
+
       await CategoryModel.findByIdAndDelete(`${categoryId}`);
+
       revalidatePath("/p-admin/categories");
       return {
         message: "دسته بندی با موفقیت حذف شد",

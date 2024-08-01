@@ -4,6 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 import Button from "../auth/Button/Button";
 import Spinner from "../spinner/Spinner";
 import { useFormStatus } from "react-dom";
+import toast from "react-hot-toast";
 
 function ConfirmModal({
   onClose,
@@ -20,7 +21,17 @@ function ConfirmModal({
         onClick={() => onClose()}
         className="text-lg md:text-3xl absolute left-3 top-3 md:cursor-pointer"
       />
-      <form action={action} className="flex-center flex-col space-y-5">
+      <form
+        action={async (formData: FormData) => {
+          const res = await action(formData);
+          if (res?.status === 200) {
+            return toast.success(`${res?.message}`);
+          }
+
+          toast.error(`${res?.message}`);
+        }}
+        className="flex-center flex-col space-y-5"
+      >
         <input type="text" name="id" defaultValue={id} hidden />
         <Message className="!w-[136px] !h-[137px]" />
         <h2 className="text-lg font-IranMedium">آیا از حذف اطمینان دارید ؟</h2>
