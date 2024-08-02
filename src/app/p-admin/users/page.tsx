@@ -3,7 +3,7 @@ import Title from "@/components/modules/p-admin/Title";
 import AddUser from "@/components/templates/p-admin/users/AddUser";
 import UsersList from "@/components/templates/p-admin/users/UsersList";
 import { getAllUsers } from "@/src/libs/service/services";
-import Search from "@/icons/Search";
+import Search from "@/components/modules/p-admin/Search";
 
 async function UsersPage({
   searchParams,
