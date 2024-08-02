@@ -4,7 +4,7 @@ import ProfileModel from "@/src/models/profile";
 import connectToDB from "@/src/configs/db";
 import { revalidatePath } from "next/cache";
 import { isValidObjectId } from "mongoose";
-import { User } from "@/src/validators/frontend";
+import { TUser, User } from "@/src/validators/frontend";
 import { hashPassword } from "@/src/utils/auth";
 
 export const deleteUser = async (userId: string) => {
@@ -43,7 +43,7 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-export const createNewUser = async (body: any) => {
+export const createNewUser = async (body: TUser) => {
   try {
     connectToDB();
     const { name, username, phone, email, password, bio } = body;
