@@ -4,6 +4,8 @@ import ProfileModel from "@/src/models/profile";
 import connectToDB from "@/src/configs/db";
 import { revalidatePath } from "next/cache";
 import { isValidObjectId } from "mongoose";
+import { User } from "@/src/validators/frontend";
+import { hashPassword } from "@/src/utils/auth";
 
 export const deleteUser = async (userId: string) => {
   try {
@@ -17,7 +19,7 @@ export const deleteUser = async (userId: string) => {
     }
 
     const user = await UserModel.findOne({ _id: userId });
-    
+
     if (!user) {
       return {
         message: "کاربری با این ایدی یافت نشد",
@@ -41,9 +43,58 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-export const createNewUser = async () => {
+export const createNewUser = async (body: any) => {
   try {
     connectToDB();
+    const { name, username, phone, email, password, bio } = body;
+
+    const validateFields = User.safeParse(body);
+
+    if (!validateFields.success) {
+      return {
+        message: validateFields.error.flatten().fieldErrors,
+        status: 422,
+      };
+    }
+
+    const hashedPassword = await hashPassword(password);
+
+    let user = new UserModel({
+      name,
+      username,
+      email,
+      password: hashedPassword,
+      phone,
+      biography: bio,
+    });
+
+    const profiles = [
+      {
+        name: "بزرگسال",
+        ages: 18,
+        user: user._id,
+      },
+      {
+        name: "کودک",
+        ages: 7,
+        user: user._id,
+        image: `/uploads/kidProfile.png`,
+        type: "kid",
+      },
+    ];
+
+    const profileList = await ProfileModel.insertMany(profiles);
+
+    profileList.forEach((profile) => {
+      user.profiles.push(profile._id);
+    });
+
+    await user.save();
+
+    return {
+      message: "کاربر با موفقیت ثبت نام شد",
+      status: 201,
+    };
   } catch (error) {
     return {
       message: "اتصال اینترنت خود را بررسی کنید",

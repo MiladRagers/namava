@@ -32,6 +32,7 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
       enum: ["USER", "ADMIN"],
+      default :"USER",
       trim: true,
     },
     birthday: {
