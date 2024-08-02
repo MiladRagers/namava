@@ -2,14 +2,17 @@
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import { TUser, User } from "@/src/validators/frontend";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserAstronaut } from "react-icons/fa";
 import { FaEnvelope, FaInfo, FaLock, FaPhone, FaUser } from "react-icons/fa6";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createNewUser } from "@/src/libs/actions/user";
+import toast from "react-hot-toast";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 function AddUser() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -21,6 +24,14 @@ function AddUser() {
 
   const createNewUserHandler = async (data: TUser) => {
     const res = await createNewUser(data);
+    if (res?.status === 201) {
+      setIsLoading(false);
+      reset();
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
+    reset();
+    setIsLoading(false);
   };
   return (
     <form
@@ -35,6 +46,7 @@ function AddUser() {
         register={register}
         name="name"
         title="نام"
+        disable={isLoading}
       />
 
       <Input
@@ -45,6 +57,7 @@ function AddUser() {
         icon={<FaUserAstronaut className={`text-xl`} />}
         name="username"
         title="نام کاربری"
+        disable={isLoading}
       />
 
       <Input
@@ -55,6 +68,7 @@ function AddUser() {
         icon={<FaPhone className={`text-xl`} />}
         name="phone"
         title="شماره تلفن"
+        disable={isLoading}
       />
 
       <Input
@@ -65,6 +79,7 @@ function AddUser() {
         icon={<FaEnvelope className={`text-xl`} />}
         name="email"
         title="ایمیل"
+        disable={isLoading}
       />
 
       <Input
@@ -75,6 +90,7 @@ function AddUser() {
         icon={<FaLock className={`text-xl`} />}
         name="password"
         title="رمز عبور"
+        disable={isLoading}
       />
 
       <Input
@@ -85,11 +101,16 @@ function AddUser() {
         icon={<FaInfo className={`text-xl`} />}
         name="bio"
         title="بیوگرافی خلاصه"
+        disable={isLoading}
       />
 
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد کاربر
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}
+        >
+          {isLoading ? <Spinner /> : "ایجاد کاربر"}
         </Button>
         <Button className="bg-red-700" onClick={() => reset()}>
           لغو
