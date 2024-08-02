@@ -23,6 +23,7 @@ function AddUser() {
   });
 
   const createNewUserHandler = async (data: TUser) => {
+    setIsLoading(true);
     const res = await createNewUser(data);
     if (res?.status === 201) {
       setIsLoading(false);
@@ -30,7 +31,7 @@ function AddUser() {
       return toast.success(`${res?.message}`);
     }
     toast.error(`${res?.message}`);
-    // reset();
+    reset();
     setIsLoading(false);
   };
   return (
