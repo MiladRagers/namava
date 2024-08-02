@@ -57,6 +57,17 @@ export const createNewUser = async (body: TUser) => {
       };
     }
 
+    const isUserExist = await UserModel.findOne({
+      $or: [{ email }, { phone }, { username }],
+    });
+
+    if (isUserExist) {
+      return {
+        message: "کاربری با این مشخصات وجود دارد",
+        status: 419,
+      };
+    }
+
     const hashedPassword = await hashPassword(password);
 
     let user = new UserModel({
@@ -90,6 +101,8 @@ export const createNewUser = async (body: TUser) => {
     });
 
     await user.save();
+
+    revalidatePath("/p-admin/user");
 
     return {
       message: "کاربر با موفقیت ثبت نام شد",

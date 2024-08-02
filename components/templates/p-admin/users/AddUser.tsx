@@ -30,7 +30,7 @@ function AddUser() {
       return toast.success(`${res?.message}`);
     }
     toast.error(`${res?.message}`);
-    reset();
+    // reset();
     setIsLoading(false);
   };
   return (
