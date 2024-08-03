@@ -1,10 +1,26 @@
+"use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteActor } from "@/src/libs/actions/star";
 import Image from "next/image";
-import React from "react";
+import React, { useOptimistic } from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
-function ActorsList() {
+function ActorsList({ stars, count }: { stars: any; count: number }) {
+  const [optimisticStars, deleteOptimistcStars] = useOptimistic(
+    stars,
+    (allStars, id) => {
+      return allStars.filter((star: any) => star._id !== id);
+    }
+  );
+
+  const deleteStar = async (id: string) => {
+    deleteOptimistcStars(id);
+    await deleteActor(id);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -20,101 +36,45 @@ function ActorsList() {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <td>1</td>
-            <td className="!p-0 md:!p-5">
-              <Image
-                src="/images/actors/ac14.jpg"
-                className="md:w-14 w-12 h-12 md:h-14 object-cover  rounded-full mx-auto"
-                alt=""
-                width={1920}
-                height={1080}
-              />
-            </td>
-            <td>کریس ایوانز</td>
-            <td>CrisAvans</td>
-            <td>Cris-Avans</td>
-            <td>Cris-Avans</td>
-            <td>1403/04/15</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td className="!p-0 md:!p-5">
-              <Image
-                src="/images/actors/a6.jpg"
-                className="md:w-14 w-12 h-12 md:h-14 object-cover  rounded-full mx-auto"
-                alt=""
-                width={1920}
-                height={1080}
-              />
-            </td>
-            <td>کریس ایوانز</td>
-            <td>CrisAvans</td>
-            <td>Cris-Avans</td>
-            <td>Cris-Avans</td>
-            <td>1403/04/15</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td className="!p-0 md:!p-5">
-              <Image
-                src="/images/actors/ac13.jpg"
-                className="md:w-14 w-12 h-12 md:h-14 object-cover  rounded-full mx-auto"
-                alt=""
-                width={1920}
-                height={1080}
-              />
-            </td>
-            <td>کریس ایوانز</td>
-            <td>CrisAvans</td>
-            <td>Cris-Avans</td>
-            <td>Cris-Avans</td>
-            <td>1403/04/15</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td className="!p-0 md:!p-5">
-              <Image
-                src="/images/actors/ac12.jpg"
-                className="md:w-14 w-12 h-12 md:h-14 object-cover  rounded-full mx-auto"
-                alt=""
-                width={1920}
-                height={1080}
-              />
-            </td>
-            <td>کریس ایوانز</td>
-            <td>CrisAvans</td>
-            <td>Cris-Avans</td>
-            <td>Cris-Avans</td>
-            <td>1403/04/15</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
+          {optimisticStars.map((star: any, index: number) => (
+            <Table.Row key={star._id}>
+              <td>{index + 1}</td>
+              <td className="!p-0 md:!p-5">
+                <Image
+                  src={star.image}
+                  className="md:w-14 w-12 h-12 md:h-14 object-cover  rounded-full mx-auto"
+                  alt={star.name}
+                  width={1920}
+                  height={1080}
+                />
+              </td>
+              <td>{star.name}</td>
+              <td>{star.link}</td>
+              <td>{star.twitter}</td>
+              <td>{star.instagram}</td>
+              <td>{new Date(star.createdAt).toLocaleDateString("fa-IR")}</td>
+              <td>
+                <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                  <Modal>
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="delete">
+                      <ConfirmModal onAction={deleteStar} id={star._id} />
+                    </Modal.Page>
+                  </Modal>
+                  <FaPencil className="text-sky-600 text-base md:text-lg" />
+                </div>
+              </td>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      {optimisticStars.length > 0 ? (
+        <Pagination count={count} />
+      ) : (
+        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+      )}
     </div>
   );
 }

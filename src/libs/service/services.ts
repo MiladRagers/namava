@@ -2,6 +2,7 @@ import { ITEM_PER_PAGE } from "@/public/db";
 import connectToDB from "@/src/configs/db";
 import CategoryModel from "@/src/models/category";
 import UserModel from "@/src/models/user";
+import StarModel from "@/src/models/stars";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
@@ -65,6 +66,26 @@ export const getAllUsers = async (page: number, search: string) => {
     const counts = await UserModel.countDocuments();
     return {
       users,
+      counts,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllStars = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const stars = await StarModel.find({
+      name: { $regex: regex },
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+
+    const counts = await StarModel.countDocuments();
+    return {
+      stars,
       counts,
     };
   } catch (error) {

@@ -47,3 +47,8 @@ export const createNewActor = async (body: FormData) => {
     };
   }
 };
+
+
+export const deleteActor = async (id : string) =>{
+
+}
