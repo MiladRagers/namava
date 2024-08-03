@@ -1,7 +1,8 @@
-"use server"
+"use server";
 import connectToDB from "@/src/configs/db";
 import StarModel from "@/src/models/stars";
-import { writeFileSync } from "fs";
+import { unlink, writeFileSync } from "fs";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
@@ -48,7 +49,42 @@ export const createNewActor = async (body: FormData) => {
   }
 };
 
+export const deleteActor = async (id: string) => {
+  try {
+    connectToDB();
+    // if (!isValidObjectId(id)) {
+    //   return {
+    //     message: "ایدی مورد نظر معتبر نمیباشد",
+    //     status: 422,
+    //   };
+    // }
 
-export const deleteActor = async (id : string) =>{
+    const actor = await StarModel.findOne({ _id: id });
 
-}
+    if (!actor) {
+      return {
+        status: 404,
+        message: "بازیگر مورد نظر یافت نشد",
+      };
+    }
+
+    unlink(path.join(process.cwd(), "public/" + actor.image), (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    await StarModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath("/p-admin/actors");
+    return {
+      message: "بازیگر با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "لطفا اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};

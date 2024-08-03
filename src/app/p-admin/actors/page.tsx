@@ -22,7 +22,7 @@ async function ActorsPage({
         <Title name="لیست بازیگران و ستارگان" />
         <Search />
       </div>
-      <ActorsList stars={stars} count={counts} />
+      <ActorsList stars={stars} counts={counts} />
     </div>
   );
 }

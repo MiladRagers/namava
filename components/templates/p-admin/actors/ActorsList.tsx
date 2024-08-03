@@ -7,10 +7,11 @@ import Table from "@/components/modules/table/Table";
 import { deleteActor } from "@/src/libs/actions/star";
 import Image from "next/image";
 import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
-function ActorsList({ stars, count }: { stars: any; count: number }) {
-  const [optimisticStars, deleteOptimistcStars] = useOptimistic(
+function ActorsList({ stars, counts }: { stars: any; counts: number }) {
+  const [optimisticStars, deleteOptimistc] = useOptimistic(
     stars,
     (allStars, id) => {
       return allStars.filter((star: any) => star._id !== id);
@@ -18,8 +19,13 @@ function ActorsList({ stars, count }: { stars: any; count: number }) {
   );
 
   const deleteStar = async (id: string) => {
-    deleteOptimistcStars(id);
-    await deleteActor(id);
+    deleteOptimistc(id);
+    const res = await deleteActor(id);
+
+    if (res?.status === 200) {
+      return toast.success(`${res.message}`);
+    }
+    toast.error(`${res?.message}`);
   };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -71,9 +77,9 @@ function ActorsList({ stars, count }: { stars: any; count: number }) {
         </Table.Body>
       </Table>
       {optimisticStars.length > 0 ? (
-        <Pagination count={count} />
+        <Pagination count={counts} />
       ) : (
-        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+        <EmptyBox title="موردی برای نمایش یافت نشد" />
       )}
     </div>
   );
