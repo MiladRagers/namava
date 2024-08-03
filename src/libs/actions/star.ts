@@ -52,12 +52,12 @@ export const createNewActor = async (body: FormData) => {
 export const deleteActor = async (id: string) => {
   try {
     connectToDB();
-    // if (!isValidObjectId(id)) {
-    //   return {
-    //     message: "ایدی مورد نظر معتبر نمیباشد",
-    //     status: 422,
-    //   };
-    // }
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
 
     const actor = await StarModel.findOne({ _id: id });
 
