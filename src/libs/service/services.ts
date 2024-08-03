@@ -27,6 +27,24 @@ export const getAllCategories = async (page: number, search: string) => {
   }
 };
 
+// get all of the categories with out any pagination and search
+export const getCategories = async () => {
+  try {
+    connectToDB();
+    const isAdmin = await checkIsAdmin();
+    if (!isAdmin) {
+      return {
+        message: "این بخش فقط برای کاربرانی با نقش ادمین مجاز است",
+      };
+    }
+    const categories = await CategoryModel.find({});
+
+    return categories;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getAllUsers = async (page: number, search: string) => {
   try {
     connectToDB();

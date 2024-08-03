@@ -1,9 +1,9 @@
 import CategoryCard from "@/components/templates/category/CategoryCard";
-import { getAllCategories } from "@/src/libs/service/services";
+import { getAllCategories, getCategories } from "@/src/libs/service/services";
 import React from "react";
 
 async function Categories() {
-  const categories: any = await getAllCategories();
+  const categories : any = await getCategories();
 
   return (
     <div className="text-white container pt-20 pb-10">

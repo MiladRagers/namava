@@ -86,7 +86,7 @@ function AddNewActor() {
       />
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد دسته بندی
+          ایجاد بازیگر 
         </Button>
         <Button onClick={() => reset()} type="reset" className="bg-red-700">
           لغو
