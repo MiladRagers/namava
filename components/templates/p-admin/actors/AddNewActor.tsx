@@ -1,15 +1,17 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
-import Label from "@/components/modules/auth/Label/Label";
+import { createNewActor } from "@/src/libs/actions/star";
 import { Actor, TActor } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaInstagram, FaLink, FaTwitter, FaUser } from "react-icons/fa6";
 import { RiArticleLine } from "react-icons/ri";
 
 function AddNewActor() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,12 +21,29 @@ function AddNewActor() {
     resolver: zodResolver(Actor),
   });
 
-  const createNewActor = async (data: TActor) => {
-    console.log(data);
+  const createNewActorHandler = async (data: TActor) => {
+    const actorData = new FormData();
+    actorData.append("name", data.name);
+    actorData.append("bio", data.bio);
+    actorData.append("link", data.link);
+    actorData.append("twitter", data.twitter as string);
+    actorData.append("instagram", data.instagram as string);
+    actorData.append("image", data.image[0]);
+    setIsLoading(true);
+    const res = await createNewActor(actorData);
+    setIsLoading(false);
+    if (res?.status === 201) {
+      setIsLoading(false);
+      reset();
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
+    reset();
+    setIsLoading(false);
   };
   return (
     <form
-      onSubmit={handleSubmit(createNewActor)}
+      onSubmit={handleSubmit(createNewActorHandler)}
       className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
     >
       <Input
@@ -86,7 +105,7 @@ function AddNewActor() {
       />
       <div className="flex items-center gap-x-8 mt-5 text-white">
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد بازیگر 
+          ایجاد بازیگر
         </Button>
         <Button onClick={() => reset()} type="reset" className="bg-red-700">
           لغو

@@ -1,10 +1,11 @@
+"use server"
 import connectToDB from "@/src/configs/db";
 import StarModel from "@/src/models/stars";
 import { writeFileSync } from "fs";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
-export const createNewUser = async (body: FormData) => {
+export const createNewActor = async (body: FormData) => {
   try {
     connectToDB();
 
