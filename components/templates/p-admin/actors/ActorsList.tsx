@@ -15,7 +15,7 @@ function ActorsList() {
           <th>لینک</th>
           <th>اینستاگرام</th>
           <th>توییتر</th>
-          <th>تعداد اثر</th>
+
           <th>تاریخ</th>
           <th>عملیات</th>
         </Table.Header>
@@ -35,7 +35,6 @@ function ActorsList() {
             <td>CrisAvans</td>
             <td>Cris-Avans</td>
             <td>Cris-Avans</td>
-            <td>56</td>
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
@@ -59,7 +58,6 @@ function ActorsList() {
             <td>CrisAvans</td>
             <td>Cris-Avans</td>
             <td>Cris-Avans</td>
-            <td>56</td>
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
@@ -83,7 +81,6 @@ function ActorsList() {
             <td>CrisAvans</td>
             <td>Cris-Avans</td>
             <td>Cris-Avans</td>
-            <td>56</td>
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
@@ -107,7 +104,6 @@ function ActorsList() {
             <td>CrisAvans</td>
             <td>Cris-Avans</td>
             <td>Cris-Avans</td>
-            <td>56</td>
             <td>1403/04/15</td>
             <td>
               <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
