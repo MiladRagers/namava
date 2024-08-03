@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
+import Spinner from "@/components/modules/spinner/Spinner";
 import { createNewActor } from "@/src/libs/actions/star";
 import { Actor, TActor } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -104,8 +105,8 @@ function AddNewActor() {
         type="file"
       />
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد بازیگر
+        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}>
+          {isLoading ? <Spinner /> : " ایجاد بازیگر"}
         </Button>
         <Button onClick={() => reset()} type="reset" className="bg-red-700">
           لغو
