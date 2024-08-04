@@ -22,7 +22,7 @@ async function ActorsPage({
         <Title name="لیست بازیگران و ستارگان" />
         <Search />
       </div>
-      <ActorsList stars={stars} counts={counts} />
+      <ActorsList stars={JSON.parse(JSON.stringify(stars))} counts={counts} />
     </div>
   );
 }
