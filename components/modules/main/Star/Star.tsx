@@ -11,7 +11,7 @@ function Star({ src, title, link }: Star) {
   return (
     <>
       <Link
-        href={link}
+        href={`/biography/${link}`}
         className="block rounded-full w-[100px] h-[100px] sm:w-[140px] sm:h-[140px] md:w-[190px] md:h-[190px]"
         title={title}
       >
