@@ -60,7 +60,7 @@ function CategoriesList({ categories, counts }: TList) {
                     height={1080}
                   />
                 </td>
-                <td><Link href={`categories/${category.link}`}>{category.title}</Link></td>
+                <td><Link href={`categories/${category._id}`}>{category.title}</Link></td>
                 <td>{category.link}</td>
                 <td>{category.parrent ? category.parrent.title : "------"}</td>
                 <td>{category.tags.join(" ، ")}</td>

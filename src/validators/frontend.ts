@@ -46,7 +46,10 @@ export const Category = z.object({
     .string({ required_error: "عنوان دسته بندی را وارد کنید" })
     .min(3, { message: "عنوان دسته بندی حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "عنوان دسته بندی باید 30 کاراکتر داشته باشد" }),
-  link: z.string().optional(),
+  link: z
+    .string({ required_error: "لینک دسته بندی را وارد کنید" })
+    .min(3, { message: "لینک دسته بندی  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک دسته بندی  باید 30 کاراکتر داشته باشد" }),
   desc: z
     .string({ required_error: "توضیحات دسته بندی را وارد کنید" })
     .min(3, { message: "توضیحات دسته بندی  حداقل باید 3 کارکتر باشد" })

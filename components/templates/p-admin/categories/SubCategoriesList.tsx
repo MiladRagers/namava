@@ -42,15 +42,6 @@ function SubCategoriesList({
           {optimisticSubs.map((sub: any, index: number) => (
             <Table.Row key={sub._id}>
               <td>{index + 1}</td>
-              <td className="!p-0 md:!p-5">
-                <Image
-                  src={sub.image}
-                  className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
-                  alt=""
-                  width={1920}
-                  height={1080}
-                />
-              </td>
               <td>{sub.title}</td>
               <td>{sub.link}</td>
               <td>{sub.parrent ? sub.parrent.title : "------"}</td>
@@ -80,7 +71,7 @@ function SubCategoriesList({
       {optimisticSubs.length > 0 ? (
         <Pagination count={count} />
       ) : (
-        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+        <EmptyBox title="اطلاعات مورد نظر شما یافت نشد" />
       )}
     </div>
   );

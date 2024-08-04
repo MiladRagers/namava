@@ -11,20 +11,21 @@ async function page({
   params: any;
   searchParams: any;
 }) {
+  
   const { subCategories, counts }: any = await getSubCategory(
-    params.href as string,
-    +searchParams.page,
-    searchParams.q
+    params.id as string,
+    +searchParams.page || 1,
+    searchParams.q || ""
   );
-  console.log(subCategories);
+  console.log("milafdqwdqw => " , counts);
   
   return (
     <>
-      {/* <Title name="لیست زیر دسته بندی ها" />
+      <Title name={`لیست زیر دسته بندی`} />
       <SubCategoriesList
         subCategories={JSON.parse(JSON.stringify(subCategories))}
         count={counts}
-      /> */}
+      />
     </>
   );
 }

@@ -29,22 +29,26 @@ export const getAllCategories = async (page: number, search: string) => {
 };
 
 export const getSubCategory = async (
-  link: string,
+  id: string,
   page: number,
   search: string
 ) => {
+
+  
   try {
     connectToDB();
     const regex = new RegExp(search, "i");
 
     const subCategories = await CategoryModel.find({
-      parrent: true,
-      link,
+      parrent: id,
       title: { $regex: regex },
     })
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
-    const counts = await CategoryModel.countDocuments({ parrent: true });
+      .skip(ITEM_PER_PAGE * (page - 1)).populate("parrent" , "title");
+    
+
+
+    const counts = await CategoryModel.countDocuments({ parrent: id });
     return { subCategories, counts };
   } catch (error) {
     return error;

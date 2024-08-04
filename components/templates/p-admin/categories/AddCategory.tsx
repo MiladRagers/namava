@@ -44,7 +44,7 @@ function AddCategories() {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("tags", data.tags);
-    formData.append("link", data.link || "");
+    formData.append("link", data.link);
     formData.append("parrent", data.parrent as string);
     formData.append("desc", data.desc);
     formData.append("image", data.image ? data.image[0] : "");
