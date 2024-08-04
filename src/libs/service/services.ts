@@ -92,3 +92,14 @@ export const getAllStars = async (page: number, search: string) => {
     return error;
   }
 };
+
+// get all of the stars without pagination and search
+export const getStars = async () => {
+  try {
+    connectToDB();
+    const stars = await StarModel.find({});
+    return stars;
+  } catch (error) {
+    return error;
+  }
+};
