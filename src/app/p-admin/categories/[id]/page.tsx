@@ -1,3 +1,4 @@
+import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import SubCategoriesList from "@/components/templates/p-admin/categories/SubCategoriesList";
 import { getSubCategory } from "@/src/libs/service/services";
@@ -18,7 +19,10 @@ async function page({
 
   return (
     <>
-      <Title name={`دسته بندی (${parrent.title})`} />
+      <div>
+        <Title name={`دسته بندی (${parrent.title})`} />
+        <Search />
+      </div>
       <SubCategoriesList
         subCategories={JSON.parse(JSON.stringify(subCategories))}
         count={counts}
