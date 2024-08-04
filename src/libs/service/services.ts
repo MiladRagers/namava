@@ -103,3 +103,16 @@ export const getStars = async () => {
     return error;
   }
 };
+
+// use this function for get specific star
+// use the link for star
+
+export const getStar = async (link: string) => {
+  try {
+    connectToDB();
+    const star = await StarModel.findOne({ link });
+    return star;
+  } catch (error) {
+    return error;
+  }
+};
