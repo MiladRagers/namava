@@ -19,7 +19,7 @@ async function page({
 
   return (
     <>
-      <div>
+      <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-y-3">
         <Title name={`دسته بندی (${parrent.title})`} />
         <Search />
       </div>
