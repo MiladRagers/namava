@@ -46,21 +46,13 @@ export const Category = z.object({
     .string({ required_error: "عنوان دسته بندی را وارد کنید" })
     .min(3, { message: "عنوان دسته بندی حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "عنوان دسته بندی باید 30 کاراکتر داشته باشد" }),
-  link: z
-    .string({ required_error: "لینک دسته بندی را وارد کنید" })
-    .min(3, { message: "لینک دسته بندی  حداقل باید 3 کارکتر باشد" })
-    .max(30, { message: "لینک دسته بندی  باید 30 کاراکتر داشته باشد" }),
+  link: z.string().optional(),
   desc: z
     .string({ required_error: "توضیحات دسته بندی را وارد کنید" })
     .min(3, { message: "توضیحات دسته بندی  حداقل باید 3 کارکتر باشد" })
     .max(1000, { message: "توضیحات دسته بندی  باید 1000 کاراکتر داشته باشد" }),
-  parent: z.string().optional(),
-  image: z.any().refine(
-    (file) => {
-      return file && file[0] instanceof File;
-    },
-    { message: "عکس را آپلود کنید" }
-  ),
+  parrent: z.string().optional(),
+  image: z.any().optional(),
   tags: z
     .string({ required_error: "تگ های دسته بندی را بنویسید" })
     .min(3, { message: "تگ باید حداقل 3 کارکتر باشد" })

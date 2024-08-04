@@ -163,10 +163,16 @@ function Navbar({ user }: any) {
                   className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
                 />
               </Link>
-              <ProfileMenu isShow={isShowProfile} onShow={setIsShowProfile} user={user} />
+              <ProfileMenu
+                isShow={isShowProfile}
+                onShow={setIsShowProfile}
+                user={user}
+              />
             </div>
           ) : (
-            <Link href={"/plans"} className="text-xs">خرید اشتراک</Link>
+            <Link href={"/plans"} className="text-xs">
+              خرید اشتراک
+            </Link>
           )}
           {!isKid && !user && (
             <Link

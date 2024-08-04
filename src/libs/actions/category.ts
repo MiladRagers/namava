@@ -9,27 +9,30 @@ import { isValidObjectId } from "mongoose";
 export const addNewCategory = async (body: FormData) => {
   try {
     connectToDB();
-    const { title, tags, link, parent, image, desc }: any =
+    const { title, tags, link, parrent, image, desc }: any =
       Object.fromEntries(body);
-
-    if (!title || !tags || !link || !desc || !image) {
+  
+    
+    if (!title || !tags || !desc) {
       return {
         message: "لطفا همه فیلد ها را وارد کنید",
         status: 422,
       };
     }
-
-    const fileName = Date.now() + image.name;
-    let imageName = `/uploads/${fileName}`;
-    const imagePath = path.join(process.cwd(), "public/uploads/" + fileName);
-    const buffer = Buffer.from(await image.arrayBuffer());
-    writeFileSync(imagePath, buffer);
+    let imageName = undefined;
+    if (image !== "undefined") {
+      const fileName = Date.now() + image.name;
+      imageName = `/uploads/${fileName}`;
+      const imagePath = path.join(process.cwd(), "public/uploads/" + fileName);
+      const buffer = Buffer.from(await image.arrayBuffer());
+      writeFileSync(imagePath, buffer);
+    }
 
     await CategoryModel.create({
       title,
       tags: tags.split("،"),
       link,
-      parent,
+      parrent,
       description: desc,
       image: imageName,
     });
@@ -41,6 +44,8 @@ export const addNewCategory = async (body: FormData) => {
       status: 201,
     };
   } catch (error) {
+    console.log(error);
+
     return {
       message: "اتصال خود را به اینترنت چک کنید",
     };

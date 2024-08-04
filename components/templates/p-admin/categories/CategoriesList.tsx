@@ -6,6 +6,7 @@ import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { deleteCategory } from "@/src/libs/actions/category";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
@@ -45,44 +46,46 @@ function CategoriesList({ categories, counts }: TList) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {optimisticCategory.map((category: any, index: number) => (
-            <Table.Row key={category._id}>
-              <td>{index + 1}</td>
-              <td className="!p-0 md:!p-5">
-                <Image
-                  src={category.image}
-                  className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
-                  alt=""
-                  width={1920}
-                  height={1080}
-                />
-              </td>
-              <td>{category.title}</td>
-              <td>{category.link}</td>
-              <td>{category.parrent ? category.parrent.title : "------"}</td>
-              <td>{category.tags.join(" ، ")}</td>
-              <td>
-                {new Date(category.createdAt).toLocaleDateString("fa-IR")}
-              </td>
-              <td>
-                <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  <Modal>
-                    <Modal.Open name="delete">
-                      <FaTrash className="text-red-600 text-base md:text-lg" />
-                    </Modal.Open>
-                    <Modal.Page name="delete">
-                      <ConfirmModal
-                        onAction={deleteCategoryHandler}
-                        id={category._id}
-                      />
-                    </Modal.Page>
-                  </Modal>
+          {optimisticCategory
+            .filter((category : any) => !category.parrent)
+            .map((category: any, index: number) => (
+              <Table.Row key={category._id}>
+                <td>{index + 1}</td>
+                <td className="!p-0 md:!p-5">
+                  <Image
+                    src={category.image}
+                    className="w-32 object-cover h-10 md:h-14 rounded-md mx-auto"
+                    alt=""
+                    width={1920}
+                    height={1080}
+                  />
+                </td>
+                <td><Link href={`categories/${category.link}`}>{category.title}</Link></td>
+                <td>{category.link}</td>
+                <td>{category.parrent ? category.parrent.title : "------"}</td>
+                <td>{category.tags.join(" ، ")}</td>
+                <td>
+                  {new Date(category.createdAt).toLocaleDateString("fa-IR")}
+                </td>
+                <td>
+                  <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                    <Modal>
+                      <Modal.Open name="delete">
+                        <FaTrash className="text-red-600 text-base md:text-lg" />
+                      </Modal.Open>
+                      <Modal.Page name="delete">
+                        <ConfirmModal
+                          onAction={deleteCategoryHandler}
+                          id={category._id}
+                        />
+                      </Modal.Page>
+                    </Modal>
 
-                  <FaPencil className="text-sky-600 text-base md:text-lg" />
-                </div>
-              </td>
-            </Table.Row>
-          ))}
+                    <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  </div>
+                </td>
+              </Table.Row>
+            ))}
         </Table.Body>
       </Table>
       {optimisticCategory.length > 0 ? (

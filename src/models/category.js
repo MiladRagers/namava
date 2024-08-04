@@ -10,7 +10,7 @@ const schema = mongoose.Schema(
     link: {
       type: String,
       trim: true,
-      required: true,
+      required: false,
     },
     description: {
       type: String,
@@ -31,7 +31,7 @@ const schema = mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }

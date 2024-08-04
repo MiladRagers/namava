@@ -44,10 +44,10 @@ function AddCategories() {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("tags", data.tags);
-    formData.append("link", data.link);
-    formData.append("parent", data.parent as string);
+    formData.append("link", data.link || "");
+    formData.append("parrent", data.parrent as string);
     formData.append("desc", data.desc);
-    formData.append("image", data.image[0]);
+    formData.append("image", data.image ? data.image[0] : "");
     setIsLoading(true);
     const res = await addNewCategory(formData);
     if (res?.status === 201) {
@@ -111,7 +111,7 @@ function AddCategories() {
       <SelectBox
         register={register}
         errors={errors}
-        name="parent"
+        name="parrent"
         options={categoriesOption}
         title="پرنت دسته بندی"
         disable={isLoading}

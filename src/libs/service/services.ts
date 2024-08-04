@@ -21,8 +21,31 @@ export const getAllCategories = async (page: number, search: string) => {
     })
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
-    const counts = await CategoryModel.countDocuments();
+    const counts = await CategoryModel.countDocuments({ parrent: null });
     return { categories, counts };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getSubCategory = async (
+  link: string,
+  page: number,
+  search: string
+) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+
+    const subCategories = await CategoryModel.find({
+      parrent: true,
+      link,
+      title: { $regex: regex },
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+    const counts = await CategoryModel.countDocuments({ parrent: true });
+    return { subCategories, counts };
   } catch (error) {
     return error;
   }
