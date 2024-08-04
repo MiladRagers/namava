@@ -4,8 +4,9 @@ import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import Image from "next/image";
+import { deleteSubCategory } from "@/src/libs/actions/category";
 import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
 function SubCategoriesList({
@@ -24,6 +25,11 @@ function SubCategoriesList({
 
   const deleteSubCategoryHandler = async (id: string) => {
     deleteOptimistc(id);
+    const res = await deleteSubCategory(id);
+    if (res?.status === 200) {
+      return toast.success(`${res.message}`);
+    }
+    toast.error(`${res?.message}`);
   };
 
   return (

@@ -33,23 +33,22 @@ export const getSubCategory = async (
   page: number,
   search: string
 ) => {
-
-  
   try {
     connectToDB();
     const regex = new RegExp(search, "i");
+
+    const parrent = await CategoryModel.findOne({ _id: id } , "title");
 
     const subCategories = await CategoryModel.find({
       parrent: id,
       title: { $regex: regex },
     })
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1)).populate("parrent" , "title");
-    
-
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("parrent", "title");
 
     const counts = await CategoryModel.countDocuments({ parrent: id });
-    return { subCategories, counts };
+    return { subCategories, counts , parrent };
   } catch (error) {
     return error;
   }

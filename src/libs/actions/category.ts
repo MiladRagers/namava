@@ -11,8 +11,7 @@ export const addNewCategory = async (body: FormData) => {
     connectToDB();
     const { title, tags, link, parrent, image, desc }: any =
       Object.fromEntries(body);
-  
-    
+
     if (!title || !tags || !desc) {
       return {
         message: "لطفا همه فیلد ها را وارد کنید",
@@ -85,6 +84,41 @@ export const deleteCategory = async (categoryId: string) => {
   } catch (error) {
     return {
       message: "اتصال خود را به اینترنت چک کنید",
+    };
+  }
+};
+
+export const deleteSubCategory = async (subCategoryId: string) => {
+  try {
+    connectToDB();
+    if (isValidObjectId(subCategoryId)) {
+      const subCategory = await CategoryModel.findOne({
+        _id: subCategoryId,
+      }).populate("parrent", "title");
+      if (!subCategory) {
+        return {
+          message: "این کتگوری وجود ندارد",
+          status: 404,
+        };
+      }
+
+      await CategoryModel.findByIdAndDelete(`${subCategoryId}`);
+
+      revalidatePath(`/p-admin/categories/${subCategory.parrent._id}`);
+      return {
+        message: "دسته بندی با موفقیت حذف شد",
+        status: 200,
+      };
+    } else {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+  } catch (error) {
+    return {
+      message: "لطفا اتصال خود را به اینترنت چک کنید",
+      status: 500,
     };
   }
 };
