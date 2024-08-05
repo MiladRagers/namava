@@ -8,6 +8,8 @@ import { AiOutlineProduct } from "react-icons/ai";
 import Input from "@/components/modules/p-admin/Input";
 import { FaLink } from "react-icons/fa6";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import { createNewMenu } from "@/src/libs/actions/menu";
+import toast from "react-hot-toast";
 
 function AddNewMenu() {
   const {
@@ -25,12 +27,16 @@ function AddNewMenu() {
     { id: 3, label: "علمی تخیلی", value: "non-fiction" },
   ];
 
-  const createNewMenu = async (data: TMenu) => {
-    console.log(data);
+  const createNewMenuhandler = async (data: TMenu) => {
+    const res = await createNewMenu(data);
+    if (res?.status === 201) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
   };
   return (
     <form
-      onSubmit={handleSubmit(createNewMenu)}
+      onSubmit={handleSubmit(createNewMenuhandler)}
       className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
     >
       <Input
@@ -56,7 +62,7 @@ function AddNewMenu() {
       <SelectBox
         register={register}
         errors={errors}
-        name="parent"
+        name="parrent"
         options={fakeOptions}
         title="پرنت منو"
       />

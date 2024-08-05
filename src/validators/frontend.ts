@@ -75,7 +75,7 @@ export const Menu = z.object({
     .string({ required_error: "لینک منو را وارد کنید" })
     .min(3, { message: "لینک منو  حداقل باید 3 کارکتر باشد" })
     .max(30, { message: "لینک منو  باید 30 کاراکتر داشته باشد" }),
-  parent: z.string().optional(),
+  parrent: z.string().optional(),
 });
 
 export type TMenu = z.infer<typeof Menu>;
