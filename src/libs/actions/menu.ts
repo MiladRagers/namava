@@ -8,8 +8,7 @@ export const createNewMenu = async (data: TMenu) => {
   try {
     connectToDB();
     const { title, link, parrent } = data;
-    console.log(parrent);
-    
+
     const validateFields = Menu.safeParse(data);
     if (!validateFields.success) {
       return {
@@ -20,7 +19,7 @@ export const createNewMenu = async (data: TMenu) => {
     await MenuModel.create({
       title,
       link,
-      parrent : parrent || null,
+      parrent: parrent || null,
     });
 
     revalidatePath("/p-admin/menus");
@@ -30,8 +29,6 @@ export const createNewMenu = async (data: TMenu) => {
       status: 201,
     };
   } catch (error) {
-    console.log(error);
-    
     return { message: "اتصال اینترنت خود را چک کنید", status: 500 };
   }
 };
