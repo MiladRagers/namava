@@ -2,7 +2,7 @@
 import Button from "@/components/modules/auth/Button/Button";
 import { Menu, TMenu } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineProduct } from "react-icons/ai";
 import Input from "@/components/modules/p-admin/Input";
@@ -14,6 +14,7 @@ import Spinner from "@/components/modules/spinner/Spinner";
 
 function AddNewMenu() {
   const [isLoading, setIsLoading] = useState(false);
+  const [menusOption, setMenusOption] = useState([]);
   const {
     register,
     handleSubmit,
@@ -23,11 +24,23 @@ function AddNewMenu() {
     resolver: zodResolver(Menu),
   });
 
-  const fakeOptions = [
-    { id: 1, label: "اکشن", value: "Action" },
-    { id: 2, label: "کمدی", value: "Comedy" },
-    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
-  ];
+  useEffect(() => {
+    const getAllMenus = async () => {
+      const res = await fetch(`/api/menus`);
+      const menus = await res.json();
+      console.log(menus);
+      
+      const options = menus.map((menu: any) => ({
+        id: menu._id,
+        label: menu.title,
+        value: menu._id,
+      }));
+
+      setMenusOption(options);
+    };
+
+    getAllMenus();
+  }, []);
 
   const createNewMenuhandler = async (data: TMenu) => {
     setIsLoading(true);
@@ -70,7 +83,7 @@ function AddNewMenu() {
         register={register}
         errors={errors}
         name="parrent"
-        options={fakeOptions}
+        options={menusOption}
         title="پرنت منو"
       />
 
