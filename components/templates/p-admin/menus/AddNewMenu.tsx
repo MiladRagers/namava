@@ -61,6 +61,7 @@ function AddNewMenu() {
     >
       <Input
         register={register}
+        disable={isLoading}
         errors={errors}
         icon={<AiOutlineProduct className={`text-xl md:text-2xl`} />}
         name="title"
@@ -71,6 +72,7 @@ function AddNewMenu() {
 
       <Input
         register={register}
+        disable={isLoading}
         errors={errors}
         icon={<FaLink className={`text-xl md:text-2xl`} />}
         name="link"
@@ -81,6 +83,7 @@ function AddNewMenu() {
 
       <SelectBox
         register={register}
+        disable={isLoading}
         errors={errors}
         name="parrent"
         options={menusOption}
@@ -90,7 +93,7 @@ function AddNewMenu() {
       <div className="hidden md:block"></div>
 
       <div className="flex items-center gap-x-3 md:gap-x-8 mt-5 text-white">
-        <Button className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}>
+        <Button disabled={isLoading} className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}>
           {isLoading ? <Spinner /> : "ساخت منو"}
         </Button>
         <Button onClick={() => reset()} type="reset" className="bg-red-700">

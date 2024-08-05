@@ -32,6 +32,8 @@ export const sendNewContact = async (body: TContactUs) => {
       status: 201,
     };
   } catch (error) {
+    console.log(error);
+    
     return {
       message: "لطفا اتصال اینترنت خود را بررسی کنید",
       status: 500,

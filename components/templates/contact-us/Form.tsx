@@ -6,12 +6,13 @@ import { sendNewContact } from "@/src/libs/actions/contactUs";
 import { ContactUs, TContactUs } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FaEnvelope, FaUser } from "react-icons/fa6";
+import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa6";
 
 function Form() {
+  const [departmentsOption, setDepartmentsOption] = useState([]);
   const router = useRouter();
   const {
     register,
@@ -22,11 +23,21 @@ function Form() {
     resolver: zodResolver(ContactUs),
   });
 
-  const fakeOptions = [
-    { id: 1, label: "مدیریت مالی", value: "Action" },
-    { id: 2, label: "منابع انسانی", value: "Comedy" },
-    { id: 3, label: "واحد تولید", value: "non-fiction" },
-  ];
+  useEffect(() => {
+    const getAllDepartments = async () => {
+      const res = await fetch(`/api/department`);
+      const departments = await res.json();
+      const options = departments.map((department: any) => ({
+        id: department._id,
+        label: department.title,
+        value: department._id,
+      }));
+
+      setDepartmentsOption(options);
+    };
+
+    getAllDepartments();
+  }, []);
 
   const sendNewMessage = async (data: TContactUs) => {
     const res = await sendNewContact(data);
@@ -58,6 +69,16 @@ function Form() {
       />
 
       <Input
+        register={register}
+        errors={errors}
+        name="phone"
+        title="شماره تلفن"
+        type="text"
+        placeholder="شماره تلفن خود را وارد کنید"
+        icon={<FaPhone className="text-xl md:text-2xl" />}
+      />
+
+      <Input
         type="email"
         placeholder="ایمیل خودتان را وارد کنید"
         errors={errors}
@@ -71,7 +92,7 @@ function Form() {
         register={register}
         errors={errors}
         name="department"
-        options={fakeOptions}
+        options={departmentsOption}
         title="دپارتمان"
       />
 

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import DepartmentModel from "@/src/models/department";
 
 const schema = mongoose.Schema(
   {
@@ -9,6 +10,10 @@ const schema = mongoose.Schema(
     phone: {
       type: String,
       required: true,
+    },
+    department: {
+      type: mongoose.Types.ObjectId,
+      ref: "Department",
     },
     email: {
       type: String,

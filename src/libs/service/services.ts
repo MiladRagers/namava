@@ -4,6 +4,7 @@ import CategoryModel from "@/src/models/category";
 import MenuModel from "@/src/models/menu";
 import UserModel from "@/src/models/user";
 import StarModel from "@/src/models/stars";
+import DepartmentModel from "@/src/models/department";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
