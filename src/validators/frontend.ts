@@ -267,7 +267,7 @@ export const ContactUs = z.object({
     .max(11, {
       message: "شماره تلفن باید حداکثر 11 کاراکتر داشته باشد",
     }),
-  content: z
+  message: z
     .string()
     .min(3, { message: "متن پیغام حداقل باید 3 کاراکتر باشد" })
     .max(1000, { message: "متن پیغام حداکثر باید 1000 کارکتر باشد" }),

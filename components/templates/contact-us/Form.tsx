@@ -2,6 +2,7 @@
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import Spinner from "@/components/modules/spinner/Spinner";
 import { sendNewContact } from "@/src/libs/actions/contactUs";
 import { ContactUs, TContactUs } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +14,7 @@ import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa6";
 
 function Form() {
   const [departmentsOption, setDepartmentsOption] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -40,12 +42,15 @@ function Form() {
   }, []);
 
   const sendNewMessage = async (data: TContactUs) => {
+    setIsLoading(true);
     const res = await sendNewContact(data);
     if (res?.status === 201) {
+      setIsLoading(false);
       reset();
       toast.success(`${res?.message}`);
       return router.push("/");
     }
+    setIsLoading(false);
     toast.error(`${res?.message}`);
   };
   return (
@@ -99,14 +104,14 @@ function Form() {
       <Input
         register={register}
         errors={errors}
-        name="content"
+        name="message"
         title="متن پیغام"
         type="textarea"
         placeholder="متن پیغام خود را وارد کنید"
       />
 
       <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-        ارسال پیغام
+        {isLoading ? <Spinner /> : "ارسال پیغام"}
       </Button>
     </form>
   );

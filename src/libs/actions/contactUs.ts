@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export const sendNewContact = async (body: TContactUs) => {
   try {
     connectToDB();
-    const { name, phone, content, department, email } = body;
+    const { name, phone, message, department, email } = body;
 
     const validateFields = ContactUs.safeParse(body);
     if (!validateFields.success) {
@@ -20,7 +20,7 @@ export const sendNewContact = async (body: TContactUs) => {
     await ContactModel.create({
       name,
       phone,
-      content,
+      message,
       department,
       email,
     });
