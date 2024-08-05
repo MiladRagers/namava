@@ -62,7 +62,7 @@ function AddNewMenu() {
       <Input
         register={register}
         errors={errors}
-        icon={<AiOutlineProduct className={`text-xl`} />}
+        icon={<AiOutlineProduct className={`text-xl md:text-2xl`} />}
         name="title"
         title="عنوان"
         type="text"
@@ -72,7 +72,7 @@ function AddNewMenu() {
       <Input
         register={register}
         errors={errors}
-        icon={<FaLink className={`text-xl`} />}
+        icon={<FaLink className={`text-xl md:text-2xl`} />}
         name="link"
         title="لینک"
         type="text"
