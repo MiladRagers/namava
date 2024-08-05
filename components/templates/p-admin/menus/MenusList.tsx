@@ -1,4 +1,5 @@
 "use client";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import Image from "next/image";
@@ -41,7 +42,11 @@ function MenusList({ menus, count }: { menus: any; count: number }) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination count={count} />
+      {optimisticMenus.length > 0 ? (
+        <Pagination count={count} />
+      ) : (
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
+      )}
     </div>
   );
 }

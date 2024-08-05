@@ -1,3 +1,4 @@
+import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import AddNewMenu from "@/components/templates/p-admin/menus/AddNewMenu";
 import MenusList from "@/components/templates/p-admin/menus/MenusList";
@@ -14,7 +15,10 @@ async function MenusPage({ searchParams }: TAdminPage) {
     <div>
       <Title name="ایجاد منو" />
       <AddNewMenu />
-      <Title name="لیست منو" />
+      <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-y-3">
+        <Title name="لیست منو" />
+        <Search />
+      </div>
       <MenusList menus={JSON.parse(JSON.stringify(allMenus))} count={counts} />
     </div>
   );

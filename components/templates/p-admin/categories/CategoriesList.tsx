@@ -91,7 +91,7 @@ function CategoriesList({ categories, counts }: TList) {
       {optimisticCategory.length > 0 ? (
         <Pagination count={counts} />
       ) : (
-        <EmptyBox title="موردی که جستجو کردید یافت نشد" />
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
       )}
     </div>
   );
