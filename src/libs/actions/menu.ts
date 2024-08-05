@@ -52,6 +52,11 @@ export const deleteMenu = async (id: string) => {
     }
     await MenuModel.findByIdAndDelete(`${id}`);
     revalidatePath("/p-admin/menus");
+
+    return {
+      status: 200,
+      message: "منو با موفقیت حذف شد",
+    };
   } catch (error) {
     return { message: "اتصال اینترنت خود را چک کنید", status: 500 };
   }
