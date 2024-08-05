@@ -152,7 +152,8 @@ export const getAllMenus = async (page: number, search: string) => {
       title: { $regex: regex },
     })
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("parrent", "title");
 
     const counts = await MenuModel.countDocuments();
     return {
