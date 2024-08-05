@@ -2,7 +2,6 @@ import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import AddCategories from "@/components/templates/p-admin/categories/AddCategory";
 import CategoriesList from "@/components/templates/p-admin/categories/CategoriesList";
-import SubCategoriesList from "@/components/templates/p-admin/categories/SubCategoriesList";
 import { getAllCategories } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";
