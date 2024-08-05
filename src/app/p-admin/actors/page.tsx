@@ -3,13 +3,10 @@ import Title from "@/components/modules/p-admin/Title";
 import ActorsList from "@/components/templates/p-admin/actors/ActorsList";
 import AddNewActor from "@/components/templates/p-admin/actors/AddNewActor";
 import { getAllStars } from "@/src/libs/service/services";
+import { TAdminPage } from "@/src/libs/types";
 import React from "react";
 
-async function ActorsPage({
-  searchParams,
-}: {
-  searchParams: { page: string; q: string };
-}) {
+async function ActorsPage({ searchParams }: TAdminPage) {
   const { stars, counts }: any = await getAllStars(
     +searchParams.page,
     searchParams.q

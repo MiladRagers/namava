@@ -2,15 +2,10 @@ import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import SubCategoriesList from "@/components/templates/p-admin/categories/SubCategoriesList";
 import { getSubCategory } from "@/src/libs/service/services";
+import { TAdminPage } from "@/src/libs/types";
 import React from "react";
 
-async function page({
-  params,
-  searchParams,
-}: {
-  params: any;
-  searchParams: any;
-}) {
+async function page({ params, searchParams }: TAdminPage) {
   const { subCategories, counts, parrent }: any = await getSubCategory(
     params.id as string,
     +searchParams.page || 1,

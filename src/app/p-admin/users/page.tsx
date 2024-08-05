@@ -4,12 +4,9 @@ import AddUser from "@/components/templates/p-admin/users/AddUser";
 import UsersList from "@/components/templates/p-admin/users/UsersList";
 import { getAllUsers } from "@/src/libs/service/services";
 import Search from "@/components/modules/p-admin/Search";
+import { TAdminPage } from "@/src/libs/types";
 
-async function UsersPage({
-  searchParams,
-}: {
-  searchParams: { page: string; q: string };
-}) {
+async function UsersPage({ searchParams }: TAdminPage) {
   const { users, counts }: any = await getAllUsers(
     +searchParams.page,
     searchParams.q
