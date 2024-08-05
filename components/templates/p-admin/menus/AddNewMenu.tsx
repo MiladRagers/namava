@@ -2,7 +2,7 @@
 import Button from "@/components/modules/auth/Button/Button";
 import { Menu, TMenu } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineProduct } from "react-icons/ai";
 import Input from "@/components/modules/p-admin/Input";
@@ -10,8 +10,10 @@ import { FaLink } from "react-icons/fa6";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import { createNewMenu } from "@/src/libs/actions/menu";
 import toast from "react-hot-toast";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 function AddNewMenu() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -28,10 +30,15 @@ function AddNewMenu() {
   ];
 
   const createNewMenuhandler = async (data: TMenu) => {
+    setIsLoading(true);
     const res = await createNewMenu(data);
     if (res?.status === 201) {
+      reset();
+      setIsLoading(false);
       return toast.success(`${res?.message}`);
     }
+    reset();
+    setIsLoading(false);
     toast.error(`${res?.message}`);
   };
   return (
@@ -70,8 +77,8 @@ function AddNewMenu() {
       <div className="hidden md:block"></div>
 
       <div className="flex items-center gap-x-3 md:gap-x-8 mt-5 text-white">
-        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد منو
+        <Button className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}>
+          {isLoading ? <Spinner /> : "ساخت منو"}
         </Button>
         <Button onClick={() => reset()} type="reset" className="bg-red-700">
           لغو

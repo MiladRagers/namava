@@ -73,7 +73,7 @@ export const Menu = z.object({
     .max(30, { message: "عنوان منو باید 30 کاراکتر داشته باشد" }),
   link: z
     .string({ required_error: "لینک منو را وارد کنید" })
-    .min(3, { message: "لینک منو  حداقل باید 3 کارکتر باشد" })
+    .min(1, { message: "لینک منو  حداقل باید 1 کارکتر باشد" })
     .max(30, { message: "لینک منو  باید 30 کاراکتر داشته باشد" }),
   parrent: z.string().optional(),
 });

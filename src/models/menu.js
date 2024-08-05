@@ -15,7 +15,7 @@ const schema = mongoose.Schema(
     parrent: {
       type: mongoose.Types.ObjectId,
       ref: "Menu",
-      required: false,
+      default: null,
     },
   },
   { timestamps: true }
