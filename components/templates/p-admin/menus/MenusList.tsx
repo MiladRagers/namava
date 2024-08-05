@@ -1,10 +1,17 @@
+"use client";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import Image from "next/image";
-import React from "react";
+import React, { useOptimistic } from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
-function MenusList() {
+function MenusList({ menus, count }: { menus: any; count: number }) {
+  const [optimisticMenus, deleteOptimistc] = useOptimistic(
+    menus,
+    (allMenus, id) => {
+      return allMenus.filter((menu: any) => menu._id !== id);
+    }
+  );
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -17,61 +24,24 @@ function MenusList() {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <td>1</td>
-            <td>فیلم ها و سریال ها</td>
-            <td>films-seraies</td>
-            <td>----</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>فیلم ها و سریال ها</td>
-            <td>films-seraies</td>
-            <td>----</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>فیلم ها و سریال ها</td>
-            <td>films-seraies</td>
-            <td>----</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td>1</td>
-            <td>فیلم ها و سریال ها</td>
-            <td>films-seraies</td>
-            <td>----</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
+          {optimisticMenus.map((menu: any, index: number) => (
+            <Table.Row key={menu._id}>
+              <td>{index + 1}</td>
+              <td>{menu.title}</td>
+              <td>{menu.link}</td>
+              <td>{menu.parrent ? menu.parrent.title : "------"}</td>
+              <td>{new Date(menu.createdAt).toLocaleDateString("fa-IR")}</td>
+              <td>
+                <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                  <FaTrash className="text-red-600 text-base md:text-lg" />
+                  <FaPencil className="text-sky-600 text-base md:text-lg" />
+                </div>
+              </td>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 }
