@@ -2,13 +2,17 @@
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import { sendNewContact } from "@/src/libs/actions/contactUs";
 import { ContactUs, TContactUs } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaEnvelope, FaUser } from "react-icons/fa6";
 
 function Form() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -25,7 +29,13 @@ function Form() {
   ];
 
   const sendNewMessage = async (data: TContactUs) => {
-    console.log(data);
+    const res = await sendNewContact(data);
+    if (res?.status === 201) {
+      reset();
+      toast.success(`${res?.message}`);
+      return router.push("/");
+    }
+    toast.error(`${res?.message}`);
   };
   return (
     <form
@@ -74,7 +84,9 @@ function Form() {
         placeholder="متن پیغام خود را وارد کنید"
       />
 
-      <Button type="submit" className={`${isValid ? "" :"!bg-slate-600 "}`}>ارسال پیغام</Button>
+      <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
+        ارسال پیغام
+      </Button>
     </form>
   );
 }

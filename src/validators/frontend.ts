@@ -261,13 +261,19 @@ export const ContactUs = z.object({
     .email({ message: "فرمت ایمیل را صحیح وارد کنید" })
     .max(100, { message: "ایمیل حداکثر باید 100 کارکتر داشته باشد" }),
   department: z.string().min(1, { message: "دپارتمان مورد نظر را وارد کنید" }),
+  phone: z
+    .string()
+    .min(11, { message: "شماره تلفن باید حداقل 11 کاراکتر داشته باشد " })
+    .max(11, {
+      message: "شماره تلفن باید حداکثر 11 کاراکتر داشته باشد",
+    }),
   content: z
     .string()
     .min(3, { message: "متن پیغام حداقل باید 3 کاراکتر باشد" })
     .max(1000, { message: "متن پیغام حداکثر باید 1000 کارکتر باشد" }),
 });
 
-export type TContactUs = z.infer<typeof Article>;
+export type TContactUs = z.infer<typeof ContactUs>;
 
 // update user schema
 export const UpdateUser = z.object({
