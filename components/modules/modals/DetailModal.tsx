@@ -12,7 +12,7 @@ function DetailModal({ msg, onClose }: { msg: string; onClose?: any }) {
       />
       <form className="flex-center flex-col space-y-5">
         <Message className="!w-[136px] !h-[137px]" />
-        <p className="text-lg text-center whitespace-normal text-white">{msg}</p>
+        <p className="text-lg font-Iran text-center whitespace-normal text-white">{msg}</p>
         <Button
           className="!mt-8 text-white !w-full"
           onClick={onClose}
