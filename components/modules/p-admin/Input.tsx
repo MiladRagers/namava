@@ -3,7 +3,7 @@ import Label from "../auth/Label/Label";
 import { FaImage } from "react-icons/fa6";
 
 type TInput = {
-  title: string;
+  title ?: string;
   register: any;
   errors: any;
   icon?: React.ReactNode;
@@ -30,7 +30,7 @@ function Input({
     return (
       <div className="flex flex-col gap-y-3 text-white relative">
         <Label
-          title={title}
+          title={title || ""}
           className={`${
             labelClassName ? labelClassName : "!text-base md:!text-lg"
           }`}
@@ -62,7 +62,7 @@ function Input({
   } else if (type === "file") {
     return (
       <div className="flex flex-col  gap-y-3 text-white relative">
-        <Label title={title} className="!text-base md:!text-lg" />
+        <Label title={title || ""} className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212] h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
         >
@@ -94,8 +94,8 @@ function Input({
     );
   } else if (type === "textarea") {
     return (
-      <div className="flex flex-col gap-y-3 text-white relative">
-        <Label title={title} className="!text-base md:!text-lg" />
+      <div className="flex flex-col gap-y-3 text-white relative w-[100%]">
+        <Label title={title || ""} className="!text-base md:!text-lg" />
         <div
           className={`bg-[#121212] rounded-xl flex items-center pt-4 justify-between gap-x-2 px-2 md:pl-4 md:pr-2`}
         >
@@ -108,7 +108,7 @@ function Input({
           />
         </div>
         {errors[name] && (
-          <span className="absolute top-64 text-xs md:text-sm text-red-600">
+          <span className="absolute top-[232px] text-xs md:text-sm text-red-600">
             {errors[name].message}
           </span>
         )}

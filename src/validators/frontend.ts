@@ -332,3 +332,15 @@ export const Login = z.object({
 });
 
 export type TLogin = z.infer<typeof Login>;
+
+// send content modal
+export const Content = z.object({
+  content: z
+    .string()
+    .min(4, { message: "حداقل 4 کاراکتر الزامی است" })
+    .max(100, {
+      message: "حداکثر کاراکتر 100 می باشد",
+    }),
+});
+
+export type TContent = z.infer<typeof Content>;

@@ -2,16 +2,18 @@
 import ConfirmModal from "@/components/modules/modals/ConfirmModal";
 import DetailModal from "@/components/modules/modals/DetailModal";
 import Modal from "@/components/modules/modals/Modal";
+import SendModal from "@/components/modules/modals/SendModal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import { deleteContact } from "@/src/libs/actions/contactUs";
-import React, { useOptimistic } from "react";
+import { deleteContact, sendContactAnswer } from "@/src/libs/actions/contactUs";
+import React, { useOptimistic, useState } from "react";
 import toast from "react-hot-toast";
 import { FaEye, FaTrash } from "react-icons/fa6";
 import { MdQuestionAnswer } from "react-icons/md";
 
 function ContactsList({ contacts, count }: { contacts: any; count: number }) {
+  const [email, setEmail] = useState("");
   const [optimisticContact, deleteOptimistc] = useOptimistic(
     contacts,
     (allContacts, id) => {
@@ -28,6 +30,16 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
 
     toast.error(`${res?.message}`);
   };
+
+  const sendAnswerToContact = async (data: any) => {
+    const res = await sendContactAnswer({ ...data, email });
+    console.log(res);
+    
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -42,7 +54,7 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
         </Table.Header>
         <Table.Body>
           {optimisticContact.map((contact: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={contact._id}>
               <td
                 className={`text-white ${
                   contact.isAnswer ? "bg-green-700" : "bg-red-600"
@@ -68,7 +80,15 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
                       />
                     </Modal.Page>
 
-                    <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
+                    <Modal.Open name={contact.email} onSetId={setEmail}>
+                      <MdQuestionAnswer
+                        className="text-green-600 text-base md:text-xl"
+                      />
+                    </Modal.Open>
+                    <Modal.Page name={contact.email}>
+                      <SendModal action={sendAnswerToContact} />
+                    </Modal.Page>
+
                     <Modal.Open name="detail">
                       <FaEye className="text-namava text-base md:text-lg" />
                     </Modal.Open>

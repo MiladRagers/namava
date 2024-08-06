@@ -31,9 +31,22 @@ function Modal({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Open({ children, name }: { children: React.ReactNode; name: string }) {
+function Open({
+  children,
+  name,
+  onSetId,
+}: {
+  children: React.ReactNode;
+  name: string;
+  onSetId?: any;
+}) {
   const { open } = useContext(ModalContext);
-  return cloneElement(children as any, { onClick: () => open(name) });
+  return cloneElement(children as any, {
+    onClick: () => {
+      open(name);
+      onSetId(name);
+    },
+  });
 }
 
 function Page({
