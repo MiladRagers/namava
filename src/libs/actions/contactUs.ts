@@ -2,6 +2,7 @@
 import connectToDB from "@/src/configs/db";
 import ContactModel from "@/src/models/contactus";
 import { ContactUs, TContactUs } from "@/src/validators/frontend";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export const sendNewContact = async (body: TContactUs) => {
@@ -33,7 +34,7 @@ export const sendNewContact = async (body: TContactUs) => {
     };
   } catch (error) {
     console.log(error);
-    
+
     return {
       message: "لطفا اتصال اینترنت خود را بررسی کنید",
       status: 500,
@@ -41,4 +42,37 @@ export const sendNewContact = async (body: TContactUs) => {
   }
 };
 
+export const deleteContact = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ایدی مورد نظر نامعتبر است",
+        status: 422,
+      };
+    }
 
+    const contact = await ContactModel.findOne({ _id: id });
+
+    if (!contact) {
+      return {
+        message: "این پیغام برای حذف کردن یافت نشد",
+        status: 404,
+      };
+    }
+
+    await ContactModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath("/p-admin/contacts");
+
+    return {
+      message: "پیغام با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "لطفا اتصال اینترنت خود را بررسی کنید",
+      status: 500,
+    };
+  }
+};
