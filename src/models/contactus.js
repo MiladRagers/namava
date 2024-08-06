@@ -23,6 +23,10 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isAnswer: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

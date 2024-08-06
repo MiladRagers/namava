@@ -1,10 +1,24 @@
+"use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import React from "react";
-import { FaCheck, FaEye, FaPencil, FaRegStar, FaStar, FaTrash, FaXmark } from "react-icons/fa6";
+import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
+import { FaEye, FaTrash } from "react-icons/fa6";
 import { MdQuestionAnswer } from "react-icons/md";
 
-function ContactsList() {
+function ContactsList({ contacts, count }: { contacts: any; count: number }) {
+  const [optimisticContact, deleteOptimistc] = useOptimistic(
+    contacts,
+    (allContacts, id) => {
+      return allContacts.filter((contact: any) => contact._id !== id);
+    }
+  );
+
+  const deleteContactHnadler = async (id: string) => {
+    deleteOptimistc(id);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -13,47 +27,45 @@ function ContactsList() {
           <th>نام</th>
           <th>ایمیل</th>
           <th>وضعیت</th>
+          <th>دپارتمان</th>
           <th>تاریخ</th>
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <td className="bg-red-700 text-white">1</td>
-            <td>میلاد سلامیان</td>
-            <td>milad@gmail.com</td>
-            <td>
-                پاسخ داده شده
-            </td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                
-                <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
-                <FaEye className="text-namava text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td className="bg-green-700 text-white">1</td>
-            <td>میلاد سلامیان</td>
-            <td>milad@gmail.com</td>
-            <td>
-                پاسخ داده شده
-            </td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaTrash className="text-red-600 text-base md:text-lg" />
-                
-                <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
-                <FaEye className="text-namava text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
+          {optimisticContact.map((contact: any, index: number) => (
+            <Table.Row>
+              <td
+                className={`text-white ${
+                  contact.isAnswer ? "bg-green-700" : "bg-red-600"
+                }`}
+              >
+                {index + 1}
+              </td>
+              <td>{contact.name}</td>
+              <td>{contact.email}</td>
+              <td>{contact.isAnswer ? "پاسخ داده شده" : "بدون پاسخ"}</td>
+              <td>{contact.department.title}</td>
+              <td>{new Date(contact.createdAt).toLocaleDateString("fa-IR")}</td>
+              <td>
+                <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
+                  <Modal>
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="delete">
+                      <ConfirmModal id={contact._id} onAction={deleteContactHnadler} />
+                    </Modal.Page>
+                  </Modal>
+
+                  <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
+                  <FaEye className="text-namava text-base md:text-lg" />
+                </div>
+              </td>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 }

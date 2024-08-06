@@ -4,7 +4,7 @@ import CategoryModel from "@/src/models/category";
 import MenuModel from "@/src/models/menu";
 import UserModel from "@/src/models/user";
 import StarModel from "@/src/models/stars";
-import DepartmentModel from "@/src/models/department";
+import ContactModel from "@/src/models/contactus";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
@@ -144,7 +144,7 @@ export const getStar = async (link: string) => {
   }
 };
 
-// get all menus
+// get all menus with pagination and search
 export const getAllMenus = async (page: number, search: string) => {
   try {
     connectToDB();
@@ -159,6 +159,29 @@ export const getAllMenus = async (page: number, search: string) => {
     const counts = await MenuModel.countDocuments();
     return {
       allMenus,
+      counts,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all contacts with pagination and search
+export const getAllContacts = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const allContacts = await ContactModel.find({
+      $or: [{ name: { $regex: regex } }, { phone: { $regex: regex } }],
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("department", "title");
+
+    const counts = await ContactModel.countDocuments();
+
+    return {
+      allContacts,
       counts,
     };
   } catch (error) {

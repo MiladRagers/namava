@@ -110,7 +110,7 @@ function Form() {
         placeholder="متن پیغام خود را وارد کنید"
       />
 
-      <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
+      <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}>
         {isLoading ? <Spinner /> : "ارسال پیغام"}
       </Button>
     </form>
