@@ -1,5 +1,6 @@
 "use client";
 import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import DetailModal from "@/components/modules/modals/DetailModal";
 import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
@@ -66,10 +67,15 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
                         onAction={deleteContactHnadler}
                       />
                     </Modal.Page>
-                  </Modal>
 
-                  <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
-                  <FaEye className="text-namava text-base md:text-lg" />
+                    <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
+                    <Modal.Open name="detail">
+                      <FaEye className="text-namava text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="detail">
+                      <DetailModal msg={contact.message} />
+                    </Modal.Page>
+                  </Modal>
                 </div>
               </td>
             </Table.Row>
