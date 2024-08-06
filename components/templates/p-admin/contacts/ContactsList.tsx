@@ -1,8 +1,10 @@
 "use client";
 import ConfirmModal from "@/components/modules/modals/ConfirmModal";
 import Modal from "@/components/modules/modals/Modal";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteContact } from "@/src/libs/actions/contactUs";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaEye, FaTrash } from "react-icons/fa6";
@@ -18,6 +20,12 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
 
   const deleteContactHnadler = async (id: string) => {
     deleteOptimistc(id);
+    const res = await deleteContact(id);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+
+    toast.error(`${res?.message}`);
   };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -53,7 +61,10 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
                       <FaTrash className="text-red-600 text-base md:text-lg" />
                     </Modal.Open>
                     <Modal.Page name="delete">
-                      <ConfirmModal id={contact._id} onAction={deleteContactHnadler} />
+                      <ConfirmModal
+                        id={contact._id}
+                        onAction={deleteContactHnadler}
+                      />
                     </Modal.Page>
                   </Modal>
 
@@ -65,7 +76,11 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination count={count} />
+      {optimisticContact.length > 0 ? (
+        <Pagination count={count} />
+      ) : (
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
+      )}
     </div>
   );
 }
