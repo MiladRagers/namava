@@ -12,13 +12,15 @@ import { useForm } from "react-hook-form";
 import { BiCameraMovie, BiMovie } from "react-icons/bi";
 import { FaLink, FaRegFileImage } from "react-icons/fa6";
 import { FiVideo } from "react-icons/fi";
+import { IoEarthOutline } from "react-icons/io5";
 import { LuCalendarRange } from "react-icons/lu";
 import { MdAccessTime, MdOutlineWbIncandescent } from "react-icons/md";
 import { RiArticleLine, RiImageAddFill, RiMovie2Line } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
 
-function AddNewFilm() {
+function AddNewFilm({ stars }: any) {
   const [movieType, setMovieType] = useState("");
+  const [selectedOption, setSelectedOption] = useState([]);
   const router = useRouter();
 
   const {
@@ -42,8 +44,12 @@ function AddNewFilm() {
     id: voice.id,
   }));
 
-  const createNewMovie = async (data: TMovie) => {
+  const starsOption = stars.map((star: any) => ({
+    label: star.name,
+    value: star._id,
+  }));
 
+  const createNewMovie = async (data: TMovie) => {
     console.log(data);
   };
   return (
@@ -54,7 +60,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<RiMovie2Line className={`text-2xl`} />}
+        icon={<RiMovie2Line className={`text-xl md:text-2xl`} />}
         name="title"
         title="عنوان"
         type="text"
@@ -63,7 +69,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<LuCalendarRange className={`text-2xl`} />}
+        icon={<LuCalendarRange className={`text-xl md:text-2xl`} />}
         name="ageRange"
         title="رده سنی"
         type="text"
@@ -73,7 +79,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<MdAccessTime className={`text-2xl`} />}
+        icon={<MdAccessTime className={`text-xl md:text-2xl`} />}
         name="time"
         title="زمان"
         type="text"
@@ -83,7 +89,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<FaLink className={`text-2xl`} />}
+        icon={<FaLink className={`text-xl md:text-2xl`} />}
         name="link"
         title="لینک "
         type="text"
@@ -94,7 +100,7 @@ function AddNewFilm() {
         register={register}
         errors={errors}
         name="type"
-        icon={<BiCameraMovie className={`text-2xl`} />}
+        icon={<BiCameraMovie className={`text-xl md:text-2xl`} />}
         title="نوع اثر"
         options={RadioOptions}
         onType={setMovieType}
@@ -103,17 +109,26 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<MdOutlineWbIncandescent className={`text-2xl`} />}
+        icon={<MdOutlineWbIncandescent className={`text-xl md:text-2xl`} />}
         name="shortDesc"
         title="درباره اثر (خلاصه)"
         type="text"
         placeholder="در مورد اثر به شکل خلاصه توضیح دهید"
       />
+      <Input
+        register={register}
+        errors={errors}
+        icon={<IoEarthOutline className={`text-xl md:text-2xl`} />}
+        name="director"
+        title="کارگردان"
+        type="text"
+        placeholder="نام کارگردان این اثر وارد کنید"
+      />
 
       <Input
         register={register}
         errors={errors}
-        icon={<SlCalender className={`text-2xl`} />}
+        icon={<SlCalender className={`text-xl md:text-2xl`} />}
         name="showTime"
         title="زمان پخش"
         type="text"
@@ -128,11 +143,20 @@ function AddNewFilm() {
         title="دسته بندی"
       />
 
+      <SelectBox
+        register={register}
+        errors={errors}
+        name="stars"
+        options={starsOption}
+        title="بازیگران"
+        multiple
+      />
+
       {movieType === "series" && (
         <Input
           register={register}
           errors={errors}
-          icon={<BiMovie className={`text-2xl`} />}
+          icon={<BiMovie className={`text-xl md:text-2xl`} />}
           name="season"
           title="تعداد فصل"
           type="text"
@@ -143,7 +167,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<RiArticleLine className={`text-2xl`} />}
+        icon={<RiArticleLine className={`text-xl md:text-2xl`} />}
         name="longDesc"
         title="توضیحات کامل"
         type="text"
@@ -172,7 +196,7 @@ function AddNewFilm() {
         name="video"
         title="ویدیو"
         type="file"
-        icon={<FiVideo className={`text-2xl`} />}
+        icon={<FiVideo className={`text-xl md:text-2xl`} />}
       />
 
       <Input
@@ -181,7 +205,7 @@ function AddNewFilm() {
         name="deskBanner"
         title="بنر دسکتاپ"
         type="file"
-        icon={<RiImageAddFill className={`text-2xl`} />}
+        icon={<RiImageAddFill className={`text-xl md:text-2xl`} />}
       />
 
       <Input
@@ -190,7 +214,7 @@ function AddNewFilm() {
         name="mobileBanner"
         title="بنر موبایل"
         type="file"
-        icon={<FaRegFileImage className={`text-2xl`} />}
+        icon={<FaRegFileImage className={`text-xl md:text-2xl`} />}
       />
 
       <Input
@@ -200,7 +224,7 @@ function AddNewFilm() {
         title="تصاویر جزییات"
         type="file"
         multiple
-        icon={<FaRegFileImage className={`text-2xl`} />}
+        icon={<FaRegFileImage className={`text-xl md:text-2xl`} />}
       />
 
       {movieType === "series" && <div className="hidden md:block"></div>}

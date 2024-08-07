@@ -422,6 +422,9 @@ input:checked + .slider:before {
       rgba(34, 35, 39, 0) 100%
     );
   }
+
+  .css-13cymwt-control {
+  }
 }
 
 .recharts-legend-item-text {
@@ -445,7 +448,7 @@ input:checked + .slider:before {
   height: 0.1vw !important;
 }
 
-.recent-box::-webkit-scrollbar{
+.recent-box::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
@@ -528,5 +531,10 @@ table {
 
 .ck-editor__main {
   color: black;
+}
+
+.css-13cymwt-control {
+  background-color: #121212 !important;
+  border: none !important;
 }
 
