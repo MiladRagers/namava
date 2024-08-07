@@ -106,6 +106,17 @@ const schema = new mongoose.Schema(
       type: Number,
       default: 5,
     },
+
+    actors: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Stars",
+      },
+    ],
   },
   { timestamps: true }
 );
+
+const model = mongoose.models?.Movie || mongoose.model("Movie", schema);
+
+export default model;
