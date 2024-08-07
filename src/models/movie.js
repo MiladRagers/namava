@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import CategoryModel from "./category";
+import UserModel from "./user";
+import StarModel from "./stars";
 const schema = new mongoose.Schema(
   {
     title: {
