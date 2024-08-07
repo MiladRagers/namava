@@ -44,7 +44,9 @@ function Open({
   return cloneElement(children as any, {
     onClick: () => {
       open(name);
-      onSetId(name);
+      if (onSetId) {
+        onSetId(name);
+      }
     },
   });
 }
