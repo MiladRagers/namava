@@ -43,7 +43,6 @@ function AddNewFilm() {
   }));
 
   const createNewMovie = async (data: TMovie) => {
-    console.log("hello");
 
     console.log(data);
   };
@@ -55,7 +54,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<RiMovie2Line className={`text-xl`} />}
+        icon={<RiMovie2Line className={`text-2xl`} />}
         name="title"
         title="عنوان"
         type="text"
@@ -64,7 +63,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<LuCalendarRange className={`text-xl`} />}
+        icon={<LuCalendarRange className={`text-2xl`} />}
         name="ageRange"
         title="رده سنی"
         type="text"
@@ -74,7 +73,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<MdAccessTime className={`text-xl`} />}
+        icon={<MdAccessTime className={`text-2xl`} />}
         name="time"
         title="زمان"
         type="text"
@@ -84,7 +83,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<FaLink className={`text-xl`} />}
+        icon={<FaLink className={`text-2xl`} />}
         name="link"
         title="لینک "
         type="text"
@@ -104,7 +103,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<MdOutlineWbIncandescent className={`text-xl`} />}
+        icon={<MdOutlineWbIncandescent className={`text-2xl`} />}
         name="shortDesc"
         title="درباره اثر (خلاصه)"
         type="text"
@@ -114,7 +113,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<SlCalender className={`text-xl`} />}
+        icon={<SlCalender className={`text-2xl`} />}
         name="showTime"
         title="زمان پخش"
         type="text"
@@ -133,7 +132,7 @@ function AddNewFilm() {
         <Input
           register={register}
           errors={errors}
-          icon={<BiMovie className={`text-xl`} />}
+          icon={<BiMovie className={`text-2xl`} />}
           name="season"
           title="تعداد فصل"
           type="text"
@@ -144,7 +143,7 @@ function AddNewFilm() {
       <Input
         register={register}
         errors={errors}
-        icon={<RiArticleLine className={`text-xl`} />}
+        icon={<RiArticleLine className={`text-2xl`} />}
         name="longDesc"
         title="توضیحات کامل"
         type="text"
