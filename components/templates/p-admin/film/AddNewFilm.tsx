@@ -150,6 +150,8 @@ function AddNewFilm({ stars }: any) {
         options={starsOption}
         title="بازیگران"
         multiple
+        selected={selectedOption}
+        onSelected={setSelectedOption}
       />
 
       {movieType === "series" && (

@@ -17,6 +17,8 @@ type TSelectBox = {
   dateName?: string;
   disable?: boolean;
   multiple?: boolean;
+  selected?: any;
+  onSelected?: any;
 };
 
 function SelectBox({
@@ -28,6 +30,8 @@ function SelectBox({
   dateName,
   disable,
   multiple,
+  selected,
+  onSelected,
 }: TSelectBox) {
   if (!multiple) {
     return (
@@ -62,16 +66,24 @@ function SelectBox({
       </div>
     );
   } else {
+    const handleSelectChange = (e: any) => {
+      onSelected(e);
+    };
     return (
       <div className="flex w-full flex-col gap-y-3  relative">
-        <Label title={title} className="!text-base md:!text-lg min-h-[28px] text-white" />
+        <Label
+          title={title}
+          className="!text-base md:!text-lg min-h-[28px] text-white"
+        />
         <div
           className={`bg-[#121212]  h-[52px] px-2.5 rounded-xl flex items-center justify-between gap-x-2`}
         >
           <Select
+            defaultValue={selected}
             className="w-full"
             isMulti
             options={options}
+            onChange={handleSelectChange}
             placeholder="لطفا بازیگر مورد نظر را انتخاب کنید"
           />
         </div>
