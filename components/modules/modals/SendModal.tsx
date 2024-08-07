@@ -6,8 +6,17 @@ import Input from "../p-admin/Input";
 import { useForm } from "react-hook-form";
 import { Content, TContent } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Spinner from "../spinner/Spinner";
 
-function SendModal({ onClose, action }: { onClose?: any; action: any }) {
+function SendModal({
+  onClose,
+  action,
+  isLoading,
+}: {
+  onClose?: any;
+  action: any;
+  isLoading: boolean;
+}) {
   const {
     register,
     handleSubmit,
@@ -15,6 +24,7 @@ function SendModal({ onClose, action }: { onClose?: any; action: any }) {
   } = useForm<TContent>({
     resolver: zodResolver(Content),
   });
+
 
   return (
     <div className="w-[350px] md:w-[500px] bg-namavaBlack relative rounded-md text-black px-4 pt-5 pb-7">
@@ -28,6 +38,7 @@ function SendModal({ onClose, action }: { onClose?: any; action: any }) {
       >
         <Message className="!w-[136px] !h-[137px]" />
         <Input
+          disable={isLoading}
           type="textarea"
           register={register}
           name="content"
@@ -35,10 +46,13 @@ function SendModal({ onClose, action }: { onClose?: any; action: any }) {
           placeholder="متن پاسخ خود را وارد کنید ..."
         />
         <Button
-          className={`${isValid ? "" : "!bg-slate-600 "} text-white h-[44px]`}
+          disabled={isLoading}
+          className={`h-[44px] ${
+            isValid ? "" : "!bg-slate-600 "
+          } text-white h-[44px]`}
           type="submit"
         >
-          ارسال
+          {isLoading ? <Spinner /> : "ارسال"}
         </Button>
       </form>
     </div>

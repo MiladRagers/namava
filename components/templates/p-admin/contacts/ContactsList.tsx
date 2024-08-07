@@ -14,6 +14,7 @@ import { MdQuestionAnswer } from "react-icons/md";
 
 function ContactsList({ contacts, count }: { contacts: any; count: number }) {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [optimisticContact, deleteOptimistc] = useOptimistic(
     contacts,
     (allContacts, id) => {
@@ -32,12 +33,13 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
   };
 
   const sendAnswerToContact = async (data: any) => {
+    setIsLoading(true);
     const res = await sendContactAnswer({ ...data, email });
-    console.log(res);
-    
     if (res?.status === 200) {
+      setIsLoading(false);
       return toast.success(`${res?.message}`);
     }
+    setIsLoading(false);
     toast.error(`${res?.message}`);
   };
   return (
@@ -81,12 +83,10 @@ function ContactsList({ contacts, count }: { contacts: any; count: number }) {
                     </Modal.Page>
 
                     <Modal.Open name={contact.email} onSetId={setEmail}>
-                      <MdQuestionAnswer
-                        className="text-green-600 text-base md:text-xl"
-                      />
+                      <MdQuestionAnswer className="text-green-600 text-base md:text-xl" />
                     </Modal.Open>
                     <Modal.Page name={contact.email}>
-                      <SendModal action={sendAnswerToContact} />
+                      <SendModal isLoading={isLoading} action={sendAnswerToContact} />
                     </Modal.Page>
 
                     <Modal.Open name="detail">
