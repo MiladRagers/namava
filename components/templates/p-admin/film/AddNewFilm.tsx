@@ -151,7 +151,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         errors={errors}
         name="type"
         icon={<BiCameraMovie className={`text-xl md:text-2xl`} />}
-        title="اشتراک"
+        title="نوع"
         options={RadioOptions}
         onType={setMovieType}
       />
