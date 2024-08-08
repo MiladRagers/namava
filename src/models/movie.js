@@ -80,11 +80,13 @@ const schema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    detailImage: {
-      type: String,
-      trim: true,
-      required: true,
-    },
+    detailImage: [
+      {
+        type: String,
+        trim: true,
+        required: true,
+      },
+    ],
     creator: {
       type: mongoose.Types.ObjectId,
       ref: "User",

@@ -4,11 +4,13 @@ import Input from "@/components/modules/p-admin/Input";
 import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import { RadioOptions, voiceType } from "@/public/db";
+import { createNewMovie } from "@/src/libs/actions/movie";
 import { Movie, TMovie } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { BiCameraMovie, BiMovie } from "react-icons/bi";
 import { FaLink, FaRegFileImage } from "react-icons/fa6";
 import { FiVideo } from "react-icons/fi";
@@ -18,9 +20,9 @@ import { MdAccessTime, MdOutlineWbIncandescent } from "react-icons/md";
 import { RiArticleLine, RiImageAddFill, RiMovie2Line } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
 
-function AddNewFilm({ stars }: any) {
+function AddNewFilm({ stars, subCategories }: any) {
   const [movieType, setMovieType] = useState("");
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState<any>([]);
   const router = useRouter();
 
   const {
@@ -31,12 +33,12 @@ function AddNewFilm({ stars }: any) {
   } = useForm<TMovie>({
     resolver: zodResolver(Movie),
   });
-
-  const fakeOptions = [
-    { id: 1, label: "اکشن", value: "Action" },
-    { id: 2, label: "کمدی", value: "Comedy" },
-    { id: 3, label: "علمی تخیلی", value: "non-fiction" },
-  ];
+  
+  const subCategoriesOptions = subCategories.map((category : any) => ({
+    label: category.title,
+    value: category._id,
+    id: category._id,
+  }));
 
   const voices = voiceType.map((voice) => ({
     label: voice.name,
@@ -49,12 +51,38 @@ function AddNewFilm({ stars }: any) {
     value: star._id,
   }));
 
-  const createNewMovie = async (data: TMovie) => {
-    console.log(data);
+  const createNewMovieHandler = async (data: any) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("ageRange", data.ageRange);
+    formData.append("time", data.time);
+    formData.append("link", data.link);
+    formData.append("type", movieType);
+    formData.append("shortDesc", data.shortDesc);
+    formData.append("director", data.director);
+    formData.append("showTime", data.showTime);
+    formData.append("category", data.category);
+    formData.append("season", data.season);
+    formData.append("longDesc", data.longDesc);
+    formData.append("language", data.language);
+    formData.append("mainImage", data.mainImage[0]);
+    formData.append("logo", data.logo[0]);
+    formData.append("video", data.video[0]);
+    formData.append("deskBanner", data.deskBanner[0]);
+    formData.append("mobileBanner", data.mobileBanner[0]);
+    [...data.detailImage].forEach((image) => {
+      formData.append("detailImage", image);
+    });
+
+    const res = await createNewMovie(formData, selectedOption);
+    if (res?.status === 201) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
   };
   return (
     <form
-      onSubmit={handleSubmit(createNewMovie)}
+      onSubmit={handleSubmit(createNewMovieHandler)}
       className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
     >
       <Input
@@ -139,7 +167,7 @@ function AddNewFilm({ stars }: any) {
         register={register}
         errors={errors}
         name="category"
-        options={fakeOptions}
+        options={subCategoriesOptions}
         title="دسته بندی"
       />
 

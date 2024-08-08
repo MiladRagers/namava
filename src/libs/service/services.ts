@@ -121,6 +121,17 @@ export const getAllStars = async (page: number, search: string) => {
   }
 };
 
+export const getAllSubcategories = async () => {
+  try {
+    connectToDB();
+    const allCategoeies = await CategoryModel.find({});
+
+    return allCategoeies.filter((category) => category.parrent !== null);
+  } catch (error) {
+    return error;
+  }
+};
+
 // get all of the stars without pagination and search
 export const getStars = async () => {
   try {
