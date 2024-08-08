@@ -44,6 +44,11 @@ export const RadioOptions = [
   { id: "film", name: "فیلم", isActive: true },
 ];
 
+export const ContentType = [
+  { id: "kid", name: "کودک", isActive: false },
+  { id: "adult", name: "بزرگسال", isActive: true },
+];
+
 export let country = [
   { name: "ایران", id: 1 },
   { name: "هند", id: 2 },

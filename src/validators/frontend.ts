@@ -188,6 +188,9 @@ export const Movie = z.object({
     .string()
     .min(2, { message: "نام کارگردان را وارد کنید" })
     .max(20, { message: "حداکثر نام کارگردان 20 کاراکتر است" }),
+  contentType: z
+    .string()
+    .min(1, { message: "نوع محتوا این اثر را انتخاب کنید" }),
 });
 
 export type TMovie = z.infer<typeof Movie>;

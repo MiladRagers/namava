@@ -3,7 +3,7 @@ import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
-import { RadioOptions, voiceType } from "@/public/db";
+import { RadioOptions , ContentType, voiceType } from "@/public/db";
 import { createNewMovie } from "@/src/libs/actions/movie";
 import { Movie, TMovie } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiCameraMovie, BiMovie } from "react-icons/bi";
-import { FaLink, FaRegFileImage } from "react-icons/fa6";
+import { FaLink, FaRegFileImage, FaSquareCheck } from "react-icons/fa6";
 import { FiVideo } from "react-icons/fi";
 import { IoEarthOutline } from "react-icons/io5";
 import { LuCalendarRange } from "react-icons/lu";
@@ -33,8 +33,8 @@ function AddNewFilm({ stars, subCategories }: any) {
   } = useForm<TMovie>({
     resolver: zodResolver(Movie),
   });
-  
-  const subCategoriesOptions = subCategories.map((category : any) => ({
+
+  const subCategoriesOptions = subCategories.map((category: any) => ({
     label: category.title,
     value: category._id,
     id: category._id,
@@ -122,6 +122,15 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="لینک "
         type="text"
         placeholder="لینک اثر  را وارد کنید"
+      />
+
+      <Radio
+        register={register}
+        errors={errors}
+        name="contentType"
+        icon={<FaSquareCheck className={`text-xl md:text-2xl`} />}
+        title="محتوا"
+        options={ContentType}
       />
 
       <Radio

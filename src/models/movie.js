@@ -111,9 +111,10 @@ const schema = new mongoose.Schema(
       type: Number,
       default: 5,
     },
-    isKid: {
-      type: Boolean,
-      default: false,
+    contentType: {
+      type: String,
+      enum: ["kid", "adult"],
+      default: "adult",
     },
     actors: [
       {
