@@ -176,6 +176,18 @@ export const Movie = z.object({
     },
     { message: "تصویر جزییات را آپلود کنید" }
   ),
+
+  logo: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "تصویر لوگو را آپلود کنید" }
+  ),
+
+  director: z
+    .string()
+    .min(2, { message: "نام کارگردان را وارد کنید" })
+    .max(20, { message: "حداکثر نام کارگردان 20 کاراکتر است" }),
 });
 
 export type TMovie = z.infer<typeof Movie>;

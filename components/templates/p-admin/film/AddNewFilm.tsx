@@ -195,6 +195,14 @@ function AddNewFilm({ stars }: any) {
       <Input
         register={register}
         errors={errors}
+        name="logo"
+        title="لوگو"
+        type="file"
+      />
+
+      <Input
+        register={register}
+        errors={errors}
         name="video"
         title="ویدیو"
         type="file"
@@ -230,7 +238,6 @@ function AddNewFilm({ stars }: any) {
       />
 
       {movieType === "series" && <div className="hidden md:block"></div>}
-      <div className="hidden md:block"></div>
       <div className="flex items-center gap-x-3 md:gap-x-4 mt-5 text-white">
         <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
           ایجاد اثر
