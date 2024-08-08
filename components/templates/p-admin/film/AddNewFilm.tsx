@@ -65,6 +65,7 @@ function AddNewFilm({ stars, subCategories }: any) {
     formData.append("season", data.season);
     formData.append("longDesc", data.longDesc);
     formData.append("language", data.language);
+    formData.append("priceStatus", data.priceStatus);
     formData.append("mainImage", data.mainImage[0]);
     formData.append("contentType", data.contentType);
     formData.append("logo", data.logo[0]);
@@ -75,13 +76,12 @@ function AddNewFilm({ stars, subCategories }: any) {
       formData.append("detailImage", image);
     });
 
-    console.log(data);
 
-    // const res = await createNewMovie(formData, selectedOption);
-    // if (res?.status === 201) {
-    //   return toast.success(`${res?.message}`);
-    // }
-    // toast.error(`${res?.message}`);
+    const res = await createNewMovie(formData, selectedOption);
+    if (res?.status === 201) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
   };
   return (
     <form

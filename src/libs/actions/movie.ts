@@ -99,6 +99,7 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
       language: data.get("language"),
       contentType: data.get("contentType"),
       director: data.get("director"),
+      priceStatus: data.get("priceStatus"),
       mainImage: mainImageText,
       video: videoText,
       deskBanner: deskBannerText,
