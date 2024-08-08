@@ -3,7 +3,7 @@ import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
-import { RadioOptions , ContentType, voiceType } from "@/public/db";
+import { RadioOptions, ContentType, voiceType, MovieStatus } from "@/public/db";
 import { createNewMovie } from "@/src/libs/actions/movie";
 import { Movie, TMovie } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,6 +66,7 @@ function AddNewFilm({ stars, subCategories }: any) {
     formData.append("longDesc", data.longDesc);
     formData.append("language", data.language);
     formData.append("mainImage", data.mainImage[0]);
+    formData.append("contentType", data.contentType);
     formData.append("logo", data.logo[0]);
     formData.append("video", data.video[0]);
     formData.append("deskBanner", data.deskBanner[0]);
@@ -74,11 +75,13 @@ function AddNewFilm({ stars, subCategories }: any) {
       formData.append("detailImage", image);
     });
 
-    const res = await createNewMovie(formData, selectedOption);
-    if (res?.status === 201) {
-      return toast.success(`${res?.message}`);
-    }
-    toast.error(`${res?.message}`);
+    console.log(data);
+
+    // const res = await createNewMovie(formData, selectedOption);
+    // if (res?.status === 201) {
+    //   return toast.success(`${res?.message}`);
+    // }
+    // toast.error(`${res?.message}`);
   };
   return (
     <form
@@ -136,9 +139,19 @@ function AddNewFilm({ stars, subCategories }: any) {
       <Radio
         register={register}
         errors={errors}
+        name="priceStatus"
+        icon={<BiCameraMovie className={`text-xl md:text-2xl`} />}
+        title="اشتراک"
+        options={MovieStatus}
+        
+      />
+
+      <Radio
+        register={register}
+        errors={errors}
         name="type"
         icon={<BiCameraMovie className={`text-xl md:text-2xl`} />}
-        title="نوع اثر"
+        title="اشتراک"
         options={RadioOptions}
         onType={setMovieType}
       />

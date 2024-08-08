@@ -97,6 +97,8 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
       season: data.get("season") ? data.get("season") : null,
       longDesc: data.get("longDesc"),
       language: data.get("language"),
+      contentType: data.get("contentType"),
+      director: data.get("director"),
       mainImage: mainImageText,
       video: videoText,
       deskBanner: deskBannerText,
@@ -105,7 +107,6 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
       creator: auth._id,
       isFree: false,
       logo: logoImageText,
-      director: data.get("director"),
       actors,
     });
 

@@ -93,9 +93,10 @@ const schema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    isFree: {
-      type: Boolean,
-      default: false,
+    priceStatus: {
+      type: String,
+      default: "price",
+      enum: ["price", "free"],
     },
     logo: {
       type: String,

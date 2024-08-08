@@ -49,6 +49,11 @@ export const ContentType = [
   { id: "adult", name: "بزرگسال", isActive: true },
 ];
 
+export const MovieStatus = [
+  { id: "free", name: "رایگان", isActive: false },
+  { id: "price", name: "اشتراکی", isActive: true },
+];
+
 export let country = [
   { name: "ایران", id: 1 },
   { name: "هند", id: 2 },

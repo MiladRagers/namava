@@ -42,7 +42,7 @@ function Radio({
                 type="radio"
                 value={option.id}
                 id={option.id}
-                onInput={() => onType(option.id)}
+                onInput={() => onType?.(option.id)}
               />
             </div>
           ))}
