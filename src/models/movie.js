@@ -48,7 +48,7 @@ const schema = new mongoose.Schema(
     season: {
       type: String,
       trim: true,
-      default : null,
+      default: null,
       required: false,
     },
     longDesc: {
@@ -111,7 +111,10 @@ const schema = new mongoose.Schema(
       type: Number,
       default: 5,
     },
-
+    isKid: {
+      type: Boolean,
+      default: false,
+    },
     actors: [
       {
         type: mongoose.Types.ObjectId,
