@@ -94,7 +94,7 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
       shortDesc: data.get("shortDesc"),
       showTime: data.get("showTime"),
       category: data.get("category"),
-      season: data.get("season") ? data.get("season") : null,
+      season: data.get("season"),
       longDesc: data.get("longDesc"),
       language: data.get("language"),
       contentType: data.get("contentType"),
