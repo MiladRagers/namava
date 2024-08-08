@@ -191,6 +191,9 @@ export const Movie = z.object({
   contentType: z
     .string()
     .min(1, { message: "نوع محتوا این اثر را انتخاب کنید" }),
+  priceStatus: z.string().min(1, {
+    message: "وضعیت قیمت این اثر را انتخاب کنید",
+  }),
 });
 
 export type TMovie = z.infer<typeof Movie>;
