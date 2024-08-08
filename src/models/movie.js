@@ -48,6 +48,7 @@ const schema = new mongoose.Schema(
     season: {
       type: String,
       trim: true,
+      default : null,
       required: false,
     },
     longDesc: {
