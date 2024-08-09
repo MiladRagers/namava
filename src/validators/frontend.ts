@@ -116,7 +116,7 @@ export const Movie = z.object({
   title: z
     .string()
     .min(3, { message: "عنوان اثر حداقل باید 3 کارکتر باشد" })
-    .max(30, { message: "عنوان اثر باید 30 کاراکتر داشته باشد" }),
+    .max(60, { message: "عنوان اثر باید 60 کاراکتر داشته باشد" }),
   ageRange: z
     .string()
     .min(1, { message: "رده سنی حداقل باید 1 کارکتر باشد" })
