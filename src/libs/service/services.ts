@@ -5,6 +5,7 @@ import MenuModel from "@/src/models/menu";
 import UserModel from "@/src/models/user";
 import StarModel from "@/src/models/stars";
 import ContactModel from "@/src/models/contactus";
+import MovieModel from "@/src/models/movie";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
@@ -193,6 +194,27 @@ export const getAllContacts = async (page: number, search: string) => {
 
     return {
       allContacts,
+      counts,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all movie with pagination and search
+
+export const getAllMovies = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const allMovies = await MovieModel.find({ title: { $regex: regex } })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("category creator", "title parrent name");
+
+    const counts = await MovieModel.countDocuments();
+    return {
+      allMovies,
       counts,
     };
   } catch (error) {

@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from "react";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
 
-function FilmList() {
+function FilmList({ movies }: any) {
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -60,7 +60,7 @@ function FilmList() {
                     <FaPencil className="text-sky-600 text-base md:text-lg" />
                   </Modal.Open>
                   <Modal.Page name="delete">
-                    <ConfirmModal  />
+                    <ConfirmModal />
                   </Modal.Page>
                 </Modal>
               </div>

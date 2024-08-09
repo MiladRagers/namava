@@ -140,7 +140,7 @@ export const Movie = z.object({
     .max(1000, { message: "توضیحات اثر  باید 1000 کاراکتر داشته باشد" }),
   category: z.string().min(1, { message: "دسته بندی اثر را انتخاب کنید" }),
   type: z.string().min(1, { message: "لطفا نوع اثر را انتخاب کنید" }),
-  season: z.string().optional(),
+  season: z.any().optional().default(null),
   longDesc: z
     .string()
     .min(3, { message: "توضیحات اثر  حداقل باید 3 کارکتر باشد" })
