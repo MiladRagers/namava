@@ -3,6 +3,7 @@ import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import Spinner from "@/components/modules/spinner/Spinner";
 import { RadioOptions, ContentType, voiceType, MovieStatus } from "@/public/db";
 import { createNewMovie } from "@/src/libs/actions/movie";
 import { Movie, TMovie } from "@/src/validators/frontend";
@@ -22,6 +23,7 @@ import { SlCalender } from "react-icons/sl";
 
 function AddNewFilm({ stars, subCategories }: any) {
   const [movieType, setMovieType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState<any>([]);
   const router = useRouter();
 
@@ -76,11 +78,13 @@ function AddNewFilm({ stars, subCategories }: any) {
       formData.append("detailImage", image);
     });
 
-
+    setIsLoading(true);
     const res = await createNewMovie(formData, selectedOption);
     if (res?.status === 201) {
+      setIsLoading(false);
       return toast.success(`${res?.message}`);
     }
+    setIsLoading(false);
     toast.error(`${res?.message}`);
   };
   return (
@@ -96,6 +100,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="عنوان"
         type="text"
         placeholder="نام اثر را وارد کنید"
+        disable={isLoading}
       />
       <Input
         register={register}
@@ -105,6 +110,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="رده سنی"
         type="text"
         placeholder="رده سنی مورد نظر را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -115,6 +121,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="زمان"
         type="text"
         placeholder="مدت زمان اثر را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -125,6 +132,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="لینک "
         type="text"
         placeholder="لینک اثر  را وارد کنید"
+        disable={isLoading}
       />
 
       <Radio
@@ -143,7 +151,6 @@ function AddNewFilm({ stars, subCategories }: any) {
         icon={<BiCameraMovie className={`text-xl md:text-2xl`} />}
         title="اشتراک"
         options={MovieStatus}
-        
       />
 
       <Radio
@@ -164,6 +171,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="درباره اثر (خلاصه)"
         type="text"
         placeholder="در مورد اثر به شکل خلاصه توضیح دهید"
+        disable={isLoading}
       />
       <Input
         register={register}
@@ -173,6 +181,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="کارگردان"
         type="text"
         placeholder="نام کارگردان این اثر وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -183,6 +192,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="زمان پخش"
         type="text"
         placeholder="زمان پخش اثر را بنویسید"
+        disable={isLoading}
       />
 
       <SelectBox
@@ -213,6 +223,7 @@ function AddNewFilm({ stars, subCategories }: any) {
           title="تعداد فصل"
           type="text"
           placeholder="لطفا تعداد فصل این سریال را وارد کنید"
+          disable={isLoading}
         />
       )}
 
@@ -224,6 +235,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="توضیحات کامل"
         type="text"
         placeholder="توضیحات اثر را بنویسید"
+        disable={isLoading}
       />
 
       <SelectBox
@@ -240,6 +252,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         name="mainImage"
         title="تصویر اصلی"
         type="file"
+        disable={isLoading}
       />
 
       <Input
@@ -248,6 +261,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         name="logo"
         title="لوگو"
         type="file"
+        disable={isLoading}
       />
 
       <Input
@@ -257,6 +271,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="ویدیو"
         type="file"
         icon={<FiVideo className={`text-xl md:text-2xl`} />}
+        disable={isLoading}
       />
 
       <Input
@@ -266,6 +281,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="بنر دسکتاپ"
         type="file"
         icon={<RiImageAddFill className={`text-xl md:text-2xl`} />}
+        disable={isLoading}
       />
 
       <Input
@@ -275,6 +291,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         title="بنر موبایل"
         type="file"
         icon={<FaRegFileImage className={`text-xl md:text-2xl`} />}
+        disable={isLoading}
       />
 
       <Input
@@ -285,14 +302,20 @@ function AddNewFilm({ stars, subCategories }: any) {
         type="file"
         multiple
         icon={<FaRegFileImage className={`text-xl md:text-2xl`} />}
+        disable={isLoading}
       />
 
       {movieType === "series" && <div className="hidden md:block"></div>}
       <div className="flex items-center gap-x-3 md:gap-x-4 mt-5 text-white">
-        <Button type="submit" className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد اثر
+        <Button
+          disabled={isLoading}
+          type="submit"
+          className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}
+        >
+          {isLoading ? <Spinner /> : "ایجاد اثر"}
         </Button>
         <Button
+          disabled={isLoading}
           type="button"
           className="bg-amber-500"
           onClick={() => router.push("/p-admin/series")}
