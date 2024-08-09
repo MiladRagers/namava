@@ -201,6 +201,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         name="category"
         options={subCategoriesOptions}
         title="دسته بندی"
+        disable={isLoading}
       />
 
       <SelectBox
@@ -212,6 +213,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         multiple
         selected={selectedOption}
         onSelected={setSelectedOption}
+        disable={isLoading}
       />
 
       {movieType === "series" && (
@@ -244,6 +246,7 @@ function AddNewFilm({ stars, subCategories }: any) {
         name="language"
         options={voices}
         title="زبان"
+        disable={isLoading}
       />
 
       <Input
