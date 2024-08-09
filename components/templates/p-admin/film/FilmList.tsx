@@ -43,7 +43,7 @@ function FilmList({ movies, counts }: { movies: any; counts: number }) {
         </Table.Header>
         <Table.Body>
           {optimisticMovie.map((movie: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={movie._id}>
               <td>{index + 1}</td>
               <td className="py-2 !px-0 md:!p-5">
                 <Image
