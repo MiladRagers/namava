@@ -4,6 +4,7 @@ import MovieModel from "@/src/models/movie";
 import { authUser } from "@/src/utils/serverHelper";
 import { Movie } from "@/src/validators/frontend";
 import { writeFileSync } from "fs";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
@@ -122,6 +123,41 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
 
     return {
       message: "اتصال اینترنت خود را چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const deleteMovie = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "لطفا ایدی معتبر ارسال کنید",
+        status: 422,
+      };
+    }
+
+    const movie = await MovieModel.findOne({ _id: id });
+
+    if (!movie) {
+      return {
+        message: "این اثر یافت نشد",
+        status: 404,
+      };
+    }
+
+    await MovieModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath("/p-admin/movies");
+
+    return {
+      message: "اثر مورد نظر با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "لطفا اتصال اینترنت خود را بررسی کنید",
       status: 500,
     };
   }
