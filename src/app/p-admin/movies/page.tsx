@@ -16,10 +16,6 @@ async function MoviesPage({ searchParams }: TAdminPage) {
     getAllMovies(+searchParams.page, searchParams.q),
   ]);
 
-
-  console.log(movies.allMovies);
-  
-
   return (
     <div>
       <Title name="ایجاد فیلم و سریال" />
@@ -28,7 +24,10 @@ async function MoviesPage({ searchParams }: TAdminPage) {
         stars={JSON.parse(JSON.stringify(allStarts))}
       />
       <Title name="لیست فیلم و سریال ها" />
-      <FilmList movies={JSON.parse(JSON.stringify(movies.allMovies))} />
+      <FilmList
+        movies={JSON.parse(JSON.stringify(movies.allMovies))}
+        counts={movies.counts}
+      />
     </div>
   );
 }
