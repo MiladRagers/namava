@@ -4,8 +4,10 @@ import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteMovie } from "@/src/libs/actions/movie";
 import Image from "next/image";
 import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
 
 function FilmList({ movies, counts }: { movies: any; counts: number }) {
@@ -18,6 +20,11 @@ function FilmList({ movies, counts }: { movies: any; counts: number }) {
 
   const deleteMovieHandler = async (id: string) => {
     deleteOptimistc(id);
+    const res = await deleteMovie(id);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res.message}`);
   };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
