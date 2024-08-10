@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
+import Checkbox from "@/components/modules/p-admin/CheckBox";
 import Input from "@/components/modules/p-admin/Input";
 import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
@@ -308,7 +309,15 @@ function AddNewFilm({ stars, subCategories }: any) {
         disable={isLoading}
       />
 
+      <Checkbox
+        id="slider"
+        name="isSlider"
+        register={register}
+        title="اسلایدر"
+      />
+
       {movieType === "series" && <div className="hidden md:block"></div>}
+      <div className="hidden md:block"></div>
       <div className="flex items-center gap-x-3 md:gap-x-4 mt-5 text-white">
         <Button
           disabled={isLoading}

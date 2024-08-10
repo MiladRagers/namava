@@ -194,6 +194,7 @@ export const Movie = z.object({
   priceStatus: z.string().min(1, {
     message: "وضعیت قیمت این اثر را انتخاب کنید",
   }),
+  isSlider: z.boolean().default(false),
 });
 
 export type TMovie = z.infer<typeof Movie>;

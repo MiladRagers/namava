@@ -123,6 +123,10 @@ const schema = new mongoose.Schema(
         ref: "Stars",
       },
     ],
+    isSlider: {
+      type: String,
+      default: false,
+    },
   },
   { timestamps: true }
 );
