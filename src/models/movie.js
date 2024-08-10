@@ -124,7 +124,7 @@ const schema = new mongoose.Schema(
       },
     ],
     isSlider: {
-      type: String,
+      type: Boolean,
       default: false,
     },
   },

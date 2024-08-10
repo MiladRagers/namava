@@ -11,32 +11,44 @@ type Header = {
   isKid?: boolean;
   img?: string;
   mobileImage?: string;
-  className?: string
+  className?: string;
+  info?: any;
 };
-function Header({ isImage, isTitle, isKid, img, mobileImage, className }: Header) {
+function Header({
+  isImage,
+  isTitle,
+  isKid,
+  img,
+  mobileImage,
+  className,
+  info,
+}: Header) {
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
+
   return (
     <>
       <header
-        className={`${className} header-video  ${isKid || isAboutPage && !className
-          ? "min-h-screen md:min-h-screen"
-          : "min-h-[67vh] md:min-h-[95vh]"
-          }`}
+        className={`${className} header-video  ${
+          isKid || (isAboutPage && !className)
+            ? "min-h-screen md:min-h-screen"
+            : "min-h-[67vh] md:min-h-[95vh]"
+        }`}
       >
         {isImage ? (
           <>
             <Image
-              className={`w-full title-image hidden lg:block ${isKid ? "mt-20 min-h-screen" : ""
-                }`}
-              src={`/images/${img}`}
+              className={`w-full title-image hidden lg:block ${
+                isKid ? "mt-20 min-h-screen" : ""
+              }`}
+              src={`${img}`}
               alt="havieee.jpg"
               width={1920}
               height={1080}
             />
             <Image
               className="w-full title-image block lg:hidden"
-              src={`/images/${mobileImage}`}
+              src={`${info.mobileBanner}`}
               alt="havieee.jpg"
               width={1920}
               height={1080}
@@ -47,7 +59,7 @@ function Header({ isImage, isTitle, isKid, img, mobileImage, className }: Header
             <source src="/images/okazion.mp4" />
           </video>
         )}
-        {!isAboutPage && <HeaderDetail isKid={isKid} />}
+        {!isAboutPage && <HeaderDetail isKid={isKid} info={info} />}
         {!isTitle && (
           <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
             <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
