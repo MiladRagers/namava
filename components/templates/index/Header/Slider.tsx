@@ -2,7 +2,7 @@
 import React from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import { EffectFade, Navigation } from "swiper/modules";
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import Header from "./Header";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,8 +13,10 @@ function Slider({ slides }: any) {
         spaceBetween={30}
         effect={"fade"}
         navigation={true}
-        modules={[EffectFade, Navigation]}
+        modules={[EffectFade, Navigation , Autoplay]}
         className="mySwiper"
+        loop={true}
+        autoplay={true}
       >
         {slides.map((slide: any) => (
           <SwiperSlide>
