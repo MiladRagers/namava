@@ -67,7 +67,7 @@ export const getCategories = async () => {
         message: "این بخش فقط برای کاربرانی با نقش ادمین مجاز است",
       };
     }
-    const categories = await CategoryModel.find({});
+    const categories = await CategoryModel.find({parrent : null});
 
     return categories;
   } catch (error) {
