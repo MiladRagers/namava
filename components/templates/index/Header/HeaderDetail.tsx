@@ -3,6 +3,7 @@ import IMBD from "@/icons/IMBD";
 import Like from "@/icons/Like";
 import Plus from "@/icons/Plus";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
@@ -82,7 +83,7 @@ function HeaderDetail({
               <span>{info.time} دقیقه</span>
               <div className="flex items-center gap-x-1">
                 <IMBD />
-                <span className="mt-0.5">{info.score}</span>
+                <span className="mt-0.5">{info.IMDB}</span>
               </div>
             </div>
             <p className="hidden md:block max-w-[544px] text-white text-sm leading-6 mt-5">
@@ -108,13 +109,19 @@ function HeaderDetail({
             <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
               <Dislike />
             </button> */}
-              <button className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava">
+              <Link
+                href={`/movie/${info.link}`}
+                className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
+              >
                 <GrCircleInformation className="text-3xl" />
                 اطلاعات بیشتر
-              </button>
+              </Link>
             </div>
-            <p className="text-xs hidden md:block text-gray-50 mt-5">
-              ستارگان:هادی کاظمی ، ایمان صفا ، غلامرضا نیکخواه
+            <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
+              ستارگان:
+              {info.actors.map((actor : any) => (
+                <Link href={`/biography/${actor.link}`} className="ml-1">{actor.name}</Link>
+              ))}
             </p>
           </div>
         </div>

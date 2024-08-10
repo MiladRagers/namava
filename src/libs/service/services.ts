@@ -227,7 +227,7 @@ export const getAllMovies = async (page: number, search: string) => {
 export const getAllSlidersMovies = async () => {
   try {
     connectToDB();
-    return await MovieModel.find({ isSlider: true }).populate("actors", "name");
+    return await MovieModel.find({ isSlider: true }).populate("actors", "name link");
   } catch (error) {
     return error;
   }
