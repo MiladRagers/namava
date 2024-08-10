@@ -119,7 +119,7 @@ function HeaderDetail({
             </div>
             <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
               ستارگان:
-              {info.actors.map((actor : any) => (
+              {info.actors.slice(0 , 4).map((actor : any) => (
                 <Link href={`/biography/${actor.link}`} className="ml-1">{actor.name}</Link>
               ))}
             </p>
