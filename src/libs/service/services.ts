@@ -221,3 +221,16 @@ export const getAllMovies = async (page: number, search: string) => {
     return error;
   }
 };
+
+// get sliders for home page
+
+export const getAllSlidersMovies = async () => {
+  try {
+    connectToDB();
+    const slides = await MovieModel.find({}).populate("actors", "name");
+
+    return slides;
+  } catch (error) {
+    return error;
+  }
+};
