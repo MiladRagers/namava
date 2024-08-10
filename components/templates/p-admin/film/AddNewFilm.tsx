@@ -67,6 +67,7 @@ function AddNewFilm({ stars, subCategories }: any) {
     formData.append("category", data.category);
     formData.append("season", data.season || null);
     formData.append("longDesc", data.longDesc);
+    formData.append("isSlider", data.isSlider);
     formData.append("language", data.language);
     formData.append("priceStatus", data.priceStatus);
     formData.append("mainImage", data.mainImage[0]);
