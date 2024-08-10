@@ -7,8 +7,6 @@ import { getAllSlidersMovies } from "../libs/service/services";
 
 export default async function Home() {
   const slides = await getAllSlidersMovies();
-  console.log(slides);
-  
 
   return (
     <>

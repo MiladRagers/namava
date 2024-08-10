@@ -19,7 +19,7 @@ function Slider({ slides }: any) {
         autoplay={true}
       >
         {slides.map((slide: any) => (
-          <SwiperSlide>
+          <SwiperSlide key={slide._id}>
             <Header img={slide.deskBanner} isImage info={slide} />
           </SwiperSlide>
         ))}
