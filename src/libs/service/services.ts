@@ -67,7 +67,7 @@ export const getCategories = async () => {
         message: "این بخش فقط برای کاربرانی با نقش ادمین مجاز است",
       };
     }
-    const categories = await CategoryModel.find({parrent : null});
+    const categories = await CategoryModel.find({ parrent: null });
 
     return categories;
   } catch (error) {
@@ -227,7 +227,22 @@ export const getAllMovies = async (page: number, search: string) => {
 export const getAllSlidersMovies = async () => {
   try {
     connectToDB();
-    return await MovieModel.find({ isSlider: true }).populate("actors", "name link");
+    return await MovieModel.find({ isSlider: true }).populate(
+      "actors",
+      "name link"
+    );
+  } catch (error) {
+    return error;
+  }
+};
+
+// get specific movie
+
+export const getMovie = async (link: string) => {
+  try {
+    connectToDB();
+    const movie = await MovieModel.findOne({ link }).populate("category actors");
+    return movie;
   } catch (error) {
     return error;
   }
