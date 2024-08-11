@@ -15,7 +15,7 @@ function HeaderDetail({
   isKid: boolean | undefined;
   info: any;
 }) {
-  const age = Number(info.ageRange);
+  const age = Number(info?.ageRange);
   return (
     <>
       {isKid ? (

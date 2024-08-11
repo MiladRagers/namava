@@ -1,16 +1,25 @@
+"use client";
 import Heart from "@/icons/Heart";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Movie {
   image: string;
   title: string;
   link: string;
+  isLink?: boolean;
 }
-function Movie({ image, title, link }: Movie) {
+function Movie({ image, title, link, isLink }: Movie) {
+  const router = useRouter();
+
+  const clickHandler = () => {
+    if (!isLink) return;
+
+    router.push(`/movie/${link}`);
+  };
   return (
-    <div  className={`transition-all group `}>
+    <div className={`transition-all group cursor-pointer `} onClick={clickHandler}>
       <div className="relative">
         <Image
           src={image}
