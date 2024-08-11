@@ -13,6 +13,7 @@ type Header = {
   mobileImage?: string;
   className?: string;
   info?: any;
+  onSwipe?: any;
 };
 function Header({
   isImage,
@@ -22,6 +23,7 @@ function Header({
   mobileImage,
   className,
   info,
+  onSwipe,
 }: Header) {
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
@@ -62,11 +64,17 @@ function Header({
         {!isAboutPage && <HeaderDetail isKid={isKid} info={info} />}
         {!isTitle && (
           <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
-            <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+            <button
+              onClick={() => onSwipe?.slidePrev()}
+              className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
+            >
               <FaChevronRight className="text-[16px] text-gray-400" />
             </button>
             <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-              <FaChevronLeft className="text-[16px] text-gray-400" />
+              <FaChevronLeft
+                onClick={() => onSwipe?.slideNext()}
+                className="text-[16px] text-gray-400"
+              />
             </button>
           </div>
         )}

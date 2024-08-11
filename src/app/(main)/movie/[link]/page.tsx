@@ -29,7 +29,7 @@ async function page({ params }: TParams) {
 
       <section className="text-white">
         <StarsSlider title={`بازیگران فیلم ${movie.title}`} />
-        <StarsSlider title="عوامل فیلم هاوایی" />
+        {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
         <MovieSlider title={`بر اساس ${movie.title}`} link="/" />
       </section>
 
