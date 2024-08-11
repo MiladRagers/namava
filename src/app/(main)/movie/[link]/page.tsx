@@ -9,8 +9,6 @@ import React from "react";
 
 async function page({ params }: TParams) {
   const movie = await getMovie(params.link);
-  console.log(movie);
-
   return (
     <>
       <section className="relative">

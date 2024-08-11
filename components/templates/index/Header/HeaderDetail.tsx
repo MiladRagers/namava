@@ -123,6 +123,9 @@ function HeaderDetail({
                 <Link key={actor._id} href={`/biography/${actor.link}`} className="ml-1">{actor.name}</Link>
               ))}
             </p>
+            <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
+              کارگردان:  {info.director}
+            </p>
           </div>
         </div>
       )}
