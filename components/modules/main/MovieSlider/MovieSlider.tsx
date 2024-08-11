@@ -19,6 +19,7 @@ import Movie from "../Movie/Movie";
 type TMovieSlider = { title: string; link?: string; movies: any };
 function MovieSlider({ title, link, movies }: TMovieSlider) {
   const [movieId, setMovieId] = useState<string | null>(null);
+  const [movieDetail, setMovieDetail] = useState<any>(null);
   return (
     <div>
       <div className="container">
@@ -48,7 +49,16 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
             }}
           >
             {movies.map((movie: any) => (
-              <SwiperSlide onClick={() => setMovieId(movie._id)}>
+              <SwiperSlide
+                onClick={() => {
+                  setMovieId(movie._id);
+                  setMovieDetail(movie);
+                  window.scrollTo({
+                    behavior: "smooth",
+                    top: 1800,
+                  });
+                }}
+              >
                 <div
                   className={`transition-all group ${
                     movieId === movie._id ? "md:pt-[20px]" : ""
@@ -70,32 +80,29 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
           <div className="flex items-end justify-between flex-row-reverse relative movie-perview">
             <Image
               className="md:h-[539px] aspect-video  w-[75%]  static"
-              src="/images/films/havaie.jpg"
+              src={movieDetail.deskBanner}
               width={1519}
               height={534}
-              alt="havaie"
+              alt={movieDetail.title}
             />
             <div className="w-[25%]  z-20 right-10 md:h-[539px] rigth-side">
               <div className="relative top-[23%] right-10">
                 <span className="block text-white text-center md:text-right text-base md:text-[22px]">
-                  اکازیون
+                  {movieDetail.title}
                 </span>
                 <div className="hidden md:flex items-center gap-x-5 font-Dana text-white text-sm mt-5">
                   <span className="bg-orange-400 text-sm rounded-full px-1.5">
-                    15+
+                    {movieDetail.ageRange}+
                   </span>
-                  <span>2024</span>
-                  <span>111 دقیقه</span>
+                  <span>{movieDetail.showTime}</span>
+                  <span>{movieDetail.time} دقیقه</span>
                   <div className="flex items-center gap-x-1">
                     <IMBD />
-                    <span className="mt-0.5"> 7.3</span>
+                    <span className="mt-0.5">{movieDetail.IMDB}</span>
                   </div>
                 </div>
                 <p className="hidden md:block static w-[614px]  text-white text-xs leading-6 mt-5">
-                  قصه اکازیون که در دهه ۷۰ می گذرد، داستان رحیم است که قصد دارد
-                  برای ادامه تحصیل به کانادا برود اما متوجه می شود ممنوع الخروج
-                  شده و این اتفاق زیر سر دایی محسن است، پس باید دنبال راه چاره
-                  ای باشد…
+                  {movieDetail.shortDesc}
                 </p>
                 <p className="my-3 text-white text-xs/6  text-center md:text-right">
                   اکازیون، چهارشنبه ها ساعت ۸ صبح به صورت اختصاصی در نماوا

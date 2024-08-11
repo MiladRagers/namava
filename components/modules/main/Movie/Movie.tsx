@@ -10,7 +10,7 @@ interface Movie {
 }
 function Movie({ image, title, link }: Movie) {
   return (
-    <Link href={link} className={`transition-all group `}>
+    <div  className={`transition-all group `}>
       <div className="relative">
         <Image
           src={image}
@@ -32,7 +32,7 @@ function Movie({ image, title, link }: Movie) {
         </div>
       </div>
       <h3 className="text-xs mt-3 mr-3">{title}</h3>
-    </Link>
+    </div>
   );
 }
 
