@@ -259,7 +259,7 @@ export const getRealedMovies = async (category: string, id: string) => {
     const relatedMovies = await MovieModel.find({
       category,
       _id: { $ne: id },
-    });
+    }).populate("actors", "link name");
 
     return relatedMovies;
   } catch (error) {

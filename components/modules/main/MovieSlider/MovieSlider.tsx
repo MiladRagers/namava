@@ -15,6 +15,7 @@ import Plus from "@/icons/Plus";
 import Like from "@/icons/Like";
 import Dislike from "@/icons/Dislike";
 import Movie from "../Movie/Movie";
+import Link from "next/link";
 
 type TMovieSlider = { title: string; link?: string; movies: any };
 function MovieSlider({ title, link, movies }: TMovieSlider) {
@@ -121,13 +122,30 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                   <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
                     <Dislike fill="white" />
                   </button>
-                  <button className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava">
+                  <Link
+                    href={movieDetail.link}
+                    className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
+                  >
                     <GrCircleInformation className="text-3xl" />
                     اطلاعات بیشتر
-                  </button>
+                  </Link>
                 </div>
+                <p className="text-xs hidden md:flex text-[#ccc] mt-5 items-center gap-x-1">
+                  ستارگان :{" "}
+                  <div className="flex items-center">
+                    {movieDetail.actors.slice(0, 4).map((actor: any) => (
+                      <Link
+                        key={actor._id}
+                        href={`/biography/${actor.link}`}
+                        className="ml-2 block"
+                      >
+                        {actor.name}
+                      </Link>
+                    ))}
+                  </div>
+                </p>
                 <p className="text-xs hidden md:block text-[#ccc] mt-5">
-                  ستارگان:هادی کاظمی ، ایمان صفا ، غلامرضا نیکخواه
+                  کارگردان : {movieDetail.director}
                 </p>
               </div>
             </div>
