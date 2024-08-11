@@ -1,12 +1,11 @@
 import React from "react";
 import Slider from "./Slider";
-import { getStars } from "@/src/libs/service/services";
 
 interface StarsSlider {
   title: string;
+  allStars: any;
 }
-async function StarsSlider({ title }: StarsSlider) {
-  const allStars = await getStars();
+async function StarsSlider({ title , allStars}: StarsSlider) {
   return (
     <div className="container">
       <h3 className="font-IranMedium text-base md:text-lg">{title}</h3>

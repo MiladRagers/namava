@@ -241,7 +241,10 @@ export const getAllSlidersMovies = async () => {
 export const getMovie = async (link: any) => {
   try {
     connectToDB();
-    const movie = await MovieModel.findOne({ link }).populate("category actors" , "link image title");
+    const movie = await MovieModel.findOne({ link }).populate(
+      "category actors",
+      "link image title name"
+    );
     return movie;
   } catch (error) {
     return error;
