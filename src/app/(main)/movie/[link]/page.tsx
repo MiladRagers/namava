@@ -5,10 +5,14 @@ import Details from "@/components/templates/Movie/Details";
 import Header from "@/components/templates/index/Header/Header";
 import { getMovie } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { authUser } from "@/src/utils/serverHelper";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const movie = await getMovie(params.link);
+  const [movie, userInfo] = await Promise.all([
+    getMovie(params.link),
+    authUser(),
+  ]);
   return (
     <>
       <section className="relative">
@@ -35,7 +39,7 @@ async function page({ params }: TParams) {
       </section>
 
       <section className="pb-20">
-        <Comments />
+        <Comments user={userInfo._id} />
       </section>
     </>
   );
