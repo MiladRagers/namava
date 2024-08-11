@@ -15,6 +15,7 @@ function HeaderDetail({
   isKid: boolean | undefined;
   info: any;
 }) {
+  const age = Number(info.ageRange);
   return (
     <>
       {isKid ? (
@@ -76,7 +77,19 @@ function HeaderDetail({
               {info.title}
             </span>
             <div className="hidden md:flex items-center gap-x-5 font-Dana text-white text-sm mt-5">
-              <span className="bg-orange-400 text-sm rounded-full px-1.5">
+              <span
+                className={`${
+                  age === 3
+                    ? "three"
+                    : age === 7
+                    ? "seven"
+                    : age === 12
+                    ? "twelve"
+                    : age === 15
+                    ? "fifteen"
+                    : "eighteen"
+                } flex-center text-sm rounded-full px-1.5`}
+              >
                 {info.ageRange}+
               </span>
               <span>{info.showTime}</span>
@@ -119,12 +132,18 @@ function HeaderDetail({
             </div>
             <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
               ستارگان:
-              {info.actors.slice(0 , 4).map((actor : any) => (
-                <Link key={actor._id} href={`/biography/${actor.link}`} className="ml-1">{actor.name}</Link>
+              {info.actors.slice(0, 4).map((actor: any) => (
+                <Link
+                  key={actor._id}
+                  href={`/biography/${actor.link}`}
+                  className="ml-1"
+                >
+                  {actor.name}
+                </Link>
               ))}
             </p>
             <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
-              کارگردان:  {info.director}
+              کارگردان: {info.director}
             </p>
           </div>
         </div>
