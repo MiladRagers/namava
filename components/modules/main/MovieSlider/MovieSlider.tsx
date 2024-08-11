@@ -51,6 +51,7 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
           >
             {movies.map((movie: any) => (
               <SwiperSlide
+                key={movie._id}
                 onClick={() => {
                   setMovieId(movie._id);
                   setMovieDetail(movie);
@@ -123,7 +124,7 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                     <Dislike fill="white" />
                   </button>
                   <Link
-                    href={movieDetail.link}
+                    href={`/movie/${movieDetail.link}`}
                     className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
                   >
                     <GrCircleInformation className="text-3xl" />

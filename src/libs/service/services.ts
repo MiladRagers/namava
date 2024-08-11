@@ -259,7 +259,7 @@ export const getRealedMovies = async (category: string, id: string) => {
     const relatedMovies = await MovieModel.find({
       category,
       _id: { $ne: id },
-    });
+    }).populate("actors", "link name");
 
     return relatedMovies;
   } catch (error) {
@@ -278,6 +278,46 @@ export const getStarMovies = async (starId: string) => {
     );
 
     return movies;
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all movies
+
+export const getMovies = async () => {
+  try {
+    connectToDB();
+
+    const categories = await CategoryModel.find({});
+
+    const allMovies = await MovieModel.find({}).populate(
+      "category actors",
+      "title link parrent link name"
+    );
+
+    const categorizeFilms = (films: any) => {
+      const categorized: any = {};
+
+      films.forEach((film: any) => {
+        const categoryTitle = film.category.title;
+
+        // اگر دسته‌بندی وجود ندارد، یک آرایه جدید ایجاد کن
+        if (!categorized[categoryTitle]) {
+          categorized[categoryTitle] = [];
+        }
+
+        // فیلم را به دسته‌بندی مربوطه اضافه کن
+        categorized[categoryTitle].push(film);
+      });
+
+      return categorized;
+    };
+
+    // استفاده از تابع
+    const result = categorizeFilms(allMovies);
+
+    return result;
   } catch (error) {
     return error;
   }
