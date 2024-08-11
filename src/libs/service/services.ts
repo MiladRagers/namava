@@ -250,3 +250,19 @@ export const getMovie = async (link: any) => {
     return error;
   }
 };
+
+// get related movies
+
+export const getRealedMovies = async (category: string, id: string) => {
+  try {
+    connectToDB();
+    const relatedMovies = await MovieModel.find({
+      category,
+      _id: { $ne: id },
+    });
+
+    return relatedMovies;
+  } catch (error) {
+    return error;
+  }
+};

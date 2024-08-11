@@ -3,7 +3,7 @@ import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
 import Comments from "@/components/templates/Comments/Comments";
 import Details from "@/components/templates/Movie/Details";
 import Header from "@/components/templates/index/Header/Header";
-import { getMovie } from "@/src/libs/service/services";
+import { getMovie, getRealedMovies } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
 import React from "react";
@@ -13,6 +13,9 @@ async function page({ params }: TParams) {
     getMovie(params.link),
     authUser(),
   ]);
+
+  const realatedMovies = await getRealedMovies(movie.category, movie._id);
+
   return (
     <>
       <section className="relative">
@@ -35,11 +38,15 @@ async function page({ params }: TParams) {
           title={`بازیگران فیلم ${movie.title}`}
         />
         {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
-        <MovieSlider title={`بر اساس ${movie.title}`} link="/" />
+        <MovieSlider
+          movies={JSON.parse(JSON.stringify(realatedMovies))}
+          title={`بر اساس ${movie.title}`}
+          link="/"
+        />
       </section>
 
       <section className="pb-20">
-        <Comments user={userInfo._id} />
+        <Comments user={JSON.parse(JSON.stringify(userInfo._id))} />
       </section>
     </>
   );

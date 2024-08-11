@@ -13,11 +13,11 @@ function Movie({ image, title, link }: Movie) {
     <Link href={link} className={`transition-all group `}>
       <div className="relative">
         <Image
-          src={`/images/${image}`}
+          src={image}
           alt="slide1.jpg"
           width={490}
           height={500}
-          className="rounded-md w-full lg:w-full lg:h-[250px] md:w-auto h-[150px] md:h-auto"
+          className="rounded-md w-full lg:w-full object-cover lg:h-[270px] md:w-auto h-[150px] md:h-auto"
         />
         <div className="flex text-xs md:text-sm transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute inset-0  movie-overlay rounded-md">
           <div className="pb-6 px-2 space-y-2 md:space-y-3">

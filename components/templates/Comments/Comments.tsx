@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 import LoginModal from "@/components/modules/modals/LoginModal";
 import { useRouter } from "next/navigation";
-import { TUser } from "@/src/validators/frontend";
 
 type TComments = {
   isKid?: boolean;

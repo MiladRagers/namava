@@ -14,10 +14,11 @@ import MicroPhone from "@/icons/MicroPhone";
 import Plus from "@/icons/Plus";
 import Like from "@/icons/Like";
 import Dislike from "@/icons/Dislike";
+import Movie from "../Movie/Movie";
 
-type TMovieSlider = { title: string; link?: string };
-function MovieSlider({ title, link }: TMovieSlider) {
-  const [movieId, setMovieId] = useState<number | null>(null);
+type TMovieSlider = { title: string; link?: string; movies: any };
+function MovieSlider({ title, link, movies }: TMovieSlider) {
+  const [movieId, setMovieId] = useState<string | null>(null);
   return (
     <div>
       <div className="container">
@@ -26,9 +27,7 @@ function MovieSlider({ title, link }: TMovieSlider) {
           <Swiper
             slidesPerView={3}
             spaceBetween={20}
-            // centeredSlides={true}
             autoplay={true}
-            // loop={true}
             className="mySwiper"
             modules={[Navigation, Autoplay]}
             navigation={true}
@@ -48,158 +47,21 @@ function MovieSlider({ title, link }: TMovieSlider) {
               },
             }}
           >
-
-            <SwiperSlide onClick={() => setMovieId(2)}>
-              <div
-                className={`transition-all group ${
-                  movieId === 2 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <div className="relative">
-                  <Image
-                    src={"/images/sharikJorm.jpg"}
-                    alt="slide1.jpg"
-                    width={490}
-                    height={500}
-                    className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
+            {movies.map((movie: any) => (
+              <SwiperSlide onClick={() => setMovieId(movie._id)}>
+                <div
+                  className={`transition-all group ${
+                    movieId === movie._id ? "md:pt-[20px]" : ""
+                  }`}
+                >
+                  <Movie
+                    image={movie.mainImage}
+                    link={movie.link}
+                    title={movie.title}
                   />
-                  <div className="flex transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute text-sm inset-0 movie-overlay rounded-md">
-                    <div className="pb-6 px-2 space-y-3 text-xs">
-                      <p className="text-[13px]">
-                        فیلم - <span className="font-Dana">1403</span>
-                      </p>
-                      <div className="flex  gap-x-1">
-                        <Heart />
-                        <span className="font-Dana mt-[1px]">%80</span>
-                      </div>
-                      <div className="flex  gap-x-1">
-                        <IMBD />
-                        <span className="font-Dana mt-[1px]">9.5</span>
-                      </div>
-                      <div className="flex  gap-x-1">
-                        <MicroPhone />
-                        <span className="font-Dana mt-[1px]">
-                          زیرنویس انگلیسی
-                        </span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <h3 className="text-xs mt-3 mr-3">شریک جرم</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(3)}>
-              <div
-                className={`transition-all ${
-                  movieId === 3 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/havaie.jpg"}
-                  alt="havaie.jpg"
-                  width={500}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">هاوایی</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(4)}>
-              <div
-                className={`transition-all ${
-                  movieId === 4 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/okazion.jpg"}
-                  alt="okazion.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">اکازیون</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(5)}>
-              <div
-                className={`transition-all ${
-                  movieId === 5 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/davinchesse.jpg"}
-                  alt="slide1.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">داوینچیز</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(6)}>
-              <div
-                className={`transition-all ${
-                  movieId === 6 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/d699470b-cf86-47e8-80bb-ca7e87eb022a.jpg"}
-                  alt="slide1.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">همزاد من</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(7)}>
-              <div
-                className={`transition-all ${
-                  movieId === 7 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/4f01db3a-f1de-4b11-9851-221f4d848d7b.jpg"}
-                  alt="slide1.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">شوگان</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(8)}>
-              <div
-                className={`transition-all ${
-                  movieId === 8 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/e5293b19-e395-4fd6-b668-8684007c8f31.jpg"}
-                  alt="slide1.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">اربابان آسمان</h3>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide onClick={() => setMovieId(9)}>
-              <div
-                className={`transition-all ${
-                  movieId === 9 ? "md:pt-[20px]" : ""
-                }`}
-              >
-                <Image
-                  src={"/images/471b0682-7f7e-4fcc-b70a-718933f6b36d.jpg"}
-                  alt="slide1.jpg"
-                  width={490}
-                  height={500}
-                  className="rounded-md min-w-[102px] lg:w-[190px] lg:[279px] md:w-auto h-[170px] md:h-auto"
-                />
-                <h3 className="text-xs mt-3 mr-3">کافه کنار جاده</h3>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
