@@ -28,7 +28,7 @@ async function page({ params }: TParams) {
         />
         <div className="absolute inset-0 title-overlay"></div>
       </section>
-      <section className="text-white mt-14 container relative bottom-16 md:bottom-24 z-20 space-y-6">
+      <section className="text-white mt-28 container relative bottom-16 md:bottom-24 z-20 space-y-6">
         <Details info={movie} />
       </section>
 

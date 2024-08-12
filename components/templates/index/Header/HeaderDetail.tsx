@@ -102,9 +102,7 @@ function HeaderDetail({
             <p className="hidden md:block max-w-[544px] text-white text-sm leading-6 mt-5">
               {info.shortDesc}
             </p>
-            <p className="my-3 text-white text-xs/6 md:text-sm text-center md:text-right">
-              سریال اکازیون، چهارشنبه ها ساعت ۸ صبح به صورت اختصاصی در نماوا
-            </p>
+            
             <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
               <button className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
                 <FaPlay />
