@@ -142,7 +142,7 @@ function HeaderDetail({
                 </Link>
               ))}
             </p>
-            <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
+            <p className="text-xs hidden md:flex text-gray-50 mt-2 items-center gap-x-3">
               کارگردان: {info.director}
             </p>
           </div>
