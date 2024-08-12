@@ -289,8 +289,6 @@ export const getMovies = async () => {
   try {
     connectToDB();
 
-    const categories = await CategoryModel.find({});
-
     const allMovies = await MovieModel.find({}).populate(
       "category actors",
       "title link parrent link name"
@@ -318,6 +316,24 @@ export const getMovies = async () => {
     const result = categorizeFilms(allMovies);
 
     return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+// get mainCategory
+
+export const getCategory = async (id: string) => {
+  try {
+    connectToDB();
+
+    const mainCategory = await CategoryModel.findOne({
+      parrent: id,
+    });
+
+    console.log(mainCategory);
+
+    return mainCategory;
   } catch (error) {
     return error;
   }

@@ -9,8 +9,6 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { GrCircleInformation } from "react-icons/gr";
 import { FaPlay } from "react-icons/fa6";
 import IMBD from "@/icons/IMBD";
-import Heart from "@/icons/Heart";
-import MicroPhone from "@/icons/MicroPhone";
 import Plus from "@/icons/Plus";
 import Like from "@/icons/Like";
 import Dislike from "@/icons/Dislike";
