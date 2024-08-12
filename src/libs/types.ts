@@ -13,7 +13,7 @@ export type TParams = {
 
 export type TAdminPage = {
   searchParams: { page: string; q: string };
-  params: { [key: string]: string | string[] | undefined };
+  params: { [key: string]: string | string[] | undefined | any };
 };
 
 export const baseURL = "http://localhost:3000";

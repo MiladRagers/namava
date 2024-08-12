@@ -7,6 +7,7 @@ import StarModel from "@/src/models/stars";
 import ContactModel from "@/src/models/contactus";
 import MovieModel from "@/src/models/movie";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
+import CommentModel from "@/src/models/comments";
 
 export const getAllCategories = async (page: number, search: string) => {
   try {
@@ -321,19 +322,22 @@ export const getMovies = async () => {
   }
 };
 
-// get mainCategory
+// get all comments with pagination
 
-export const getCategory = async (id: string) => {
+export const getAllComments = async (page: string) => {
   try {
     connectToDB();
 
-    const mainCategory = await CategoryModel.findOne({
-      parrent: id,
-    });
+    const comments = await CommentModel.find({})
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (+page - 1)).populate("movie user" , "title link name");
 
-    console.log(mainCategory);
+    const counts = await CommentModel.countDocuments();
 
-    return mainCategory;
+    return {
+      comments,
+      counts,
+    };
   } catch (error) {
     return error;
   }
