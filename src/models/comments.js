@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+import MovieModel from "@/src/models/movie";
+import UserModel from "@/src/models/user";
 const schema = new mongoose.Schema(
   {
     user: {
@@ -10,7 +11,7 @@ const schema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Movie",
     },
-    star: {
+    score: {
       type: Number,
       default: 5,
     },
@@ -21,6 +22,11 @@ const schema = new mongoose.Schema(
     liked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
     dislinked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
     isSpoiled: {
+      type: Boolean,
+      default: false,
+    },
+
+    isAccept: {
       type: Boolean,
       default: false,
     },

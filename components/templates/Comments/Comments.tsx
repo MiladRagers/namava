@@ -7,14 +7,18 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 import LoginModal from "@/components/modules/modals/LoginModal";
 import { useRouter } from "next/navigation";
+import { sendNewComment } from "@/src/libs/actions/comment";
+import toast from "react-hot-toast";
 
 type TComments = {
   isKid?: boolean;
-  user: any;
+  user: string;
+  movieId: string;
 };
-function Comments({ isKid, user }: TComments) {
+function Comments({ isKid, user, movieId }: TComments) {
   const router = useRouter();
   const [isShowLoginModal, setIsShowLoginModal] = useState(false);
+
   return (
     <>
       <div
@@ -63,7 +67,16 @@ function Comments({ isKid, user }: TComments) {
             </div>
           </div>
         ) : (
-          <>
+          <form
+            action={async (formData: FormData) => {
+              const res = await sendNewComment(formData, movieId);
+              if (res?.status === 201) {
+                router.refresh();
+                return toast.success(`${res?.message}`);
+              }
+              return toast.error(`${res?.message}`);
+            }}
+          >
             <div className="w-full flex items-center gap-x-3 mt-10">
               <Image
                 src="/images/user.png"
@@ -74,14 +87,18 @@ function Comments({ isKid, user }: TComments) {
               />
               <input
                 placeholder="نظرتان درباره این فیلم چیست ؟"
-                className="w-full h-[52px]  outline-none placeholder:text-namavaBlack text-xs md:text-sm px-6 py-3 rounded-xl"
+                name="content"
+                className="w-full h-[52px] text-black  outline-none placeholder:text-namavaBlack text-xs md:text-sm px-6 py-3 rounded-xl"
               />
-              <Send />
+              <button type="submit">
+                <Send />
+              </button>
             </div>
             <div className="pt-5 pr-14">
               <div className="flex items-center gap-x-2">
                 <input
                   id="spoil"
+                  name="isSpoiled"
                   type="checkbox"
                   className={`film-checkbox ${isKid ? "!border-black" : ""}`}
                 />
@@ -90,7 +107,7 @@ function Comments({ isKid, user }: TComments) {
                 </label>
               </div>
             </div>
-          </>
+          </form>
         )}
 
         <div className="divide-y divide-gray-700">

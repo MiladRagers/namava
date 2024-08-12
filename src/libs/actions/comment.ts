@@ -4,11 +4,12 @@ import connectToDB from "@/src/configs/db";
 import CommentModel from "@/src/models/comments";
 import { authUser } from "@/src/utils/serverHelper";
 
-export const sendNewComment = async (data: any) => {
+export const sendNewComment = async (formData: FormData, movie: string) => {
+  console.log(movie);
+
   try {
     connectToDB();
     const user = await authUser();
-
     if (!user) {
       return {
         message: "لطفا برای ارسال کامنت لاگین کنید",
@@ -16,7 +17,7 @@ export const sendNewComment = async (data: any) => {
       };
     }
 
-    const { movie, content, isSpoiled } = data;
+    const { content, isSpoiled } = Object.fromEntries(formData);
 
     if (!movie || !content) {
       return {
@@ -29,7 +30,7 @@ export const sendNewComment = async (data: any) => {
       user: user._id,
       movie,
       content,
-      isSpoiled,
+      isSpoiled: isSpoiled === "on" ? true : false,
     });
 
     return {
