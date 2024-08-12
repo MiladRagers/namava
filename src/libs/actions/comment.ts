@@ -3,6 +3,7 @@
 import connectToDB from "@/src/configs/db";
 import CommentModel from "@/src/models/comments";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export const sendNewComment = async (formData: FormData, movie: string) => {
@@ -46,12 +47,11 @@ export const sendNewComment = async (formData: FormData, movie: string) => {
   }
 };
 
-export const acceptAndRejectComment = async (status: boolean , id: string) => {
+export const acceptAndRejectComment = async (status: boolean, id: string) => {
   try {
     connectToDB();
 
     console.log(status);
-    
 
     if (!checkIsAdmin()) {
       return {
@@ -72,12 +72,38 @@ export const acceptAndRejectComment = async (status: boolean , id: string) => {
     revalidatePath("/p-admin/comments");
 
     return {
-      message: `کامنت با موفقیت ${status  ? "رد" : "تایید"}`,
+      message: `کامنت با موفقیت ${status ? "رد" : "تایید"}`,
       status: 200,
     };
   } catch (error) {
     console.log(error);
-    
+
+    return {
+      message: "لطفا اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const deleteComment = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    await CommentModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath("/p-admin/comments");
+
+    return {
+      message: "کامنت با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
     return {
       message: "لطفا اتصال خود را به اینترنت چک کنید",
       status: 500,

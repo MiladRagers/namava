@@ -4,7 +4,10 @@ import DetailModal from "@/components/modules/modals/DetailModal";
 import Modal from "@/components/modules/modals/Modal";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import { acceptAndRejectComment } from "@/src/libs/actions/comment";
+import {
+  acceptAndRejectComment,
+  deleteComment,
+} from "@/src/libs/actions/comment";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import {
@@ -24,6 +27,15 @@ function CommentsList({ comments, counts }: any) {
       return allComments.filter((comment: any) => comment._id !== id);
     }
   );
+
+  const deleteCommentHandler = async (id: string) => {
+    deleteOptimistc(id);
+    const res = await deleteComment(id);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${res?.message}`);
+  };
 
   const acceptOrDeclineComment = async (isAccept: any, commentId: any) => {
     const res = await acceptAndRejectComment(commentId, isAccept);
@@ -78,7 +90,16 @@ function CommentsList({ comments, counts }: any) {
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                   <Modal>
-                    <FaTrash className="text-red-600 text-base md:text-lg" />
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+
+                    <Modal.Page name="delete">
+                      <ConfirmModal
+                        id={comment._id}
+                        onAction={deleteCommentHandler}
+                      />
+                    </Modal.Page>
                     <FaPencil className="text-sky-600 text-base md:text-lg" />
 
                     <Modal.Open name="action">
