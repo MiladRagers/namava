@@ -328,9 +328,17 @@ export const getAllComments = async (page: string) => {
   try {
     connectToDB();
 
+    if (!checkIsAdmin()) {
+      return {
+        message: "شما به این روت دسترسی ندارید",
+        status: 401,
+      };
+    }
+
     const comments = await CommentModel.find({})
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (+page - 1)).populate("movie user" , "title link name");
+      .skip(ITEM_PER_PAGE * (+page - 1))
+      .populate("movie user", "title link name");
 
     const counts = await CommentModel.countDocuments();
 

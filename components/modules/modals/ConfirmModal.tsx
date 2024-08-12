@@ -8,10 +8,12 @@ function ConfirmModal({
   onClose,
   onAction,
   id,
+  title = "آیا از حدف اطمینان دارید ؟",
 }: {
   onClose?: any;
   onAction: any;
-  id: string;
+  id?: string;
+  title?: string;
 }) {
   return (
     <div className="w-[350px] md:w-[500px] bg-gray-100 relative rounded-md text-black px-4 pt-5 pb-7">
@@ -21,7 +23,7 @@ function ConfirmModal({
       />
       <form className="flex-center flex-col space-y-5">
         <Message className="!w-[136px] !h-[137px]" />
-        <h2 className="text-lg font-IranMedium">آیا از حذف اطمینان دارید ؟</h2>
+        <h2 className="text-lg font-IranMedium">{title}</h2>
         <div className="flex items-center justify-center gap-x-3 w-full">
           <AcceptBtn onAction={onAction} id={id} />
           <Button
@@ -36,12 +38,16 @@ function ConfirmModal({
   );
 }
 
-function AcceptBtn({ onAction, id }: any) {
+function AcceptBtn({ onAction, id }: { onAction: any; id?: string }) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
     startTransition(() => {
-      onAction(id);
+      if (id) {
+        onAction(id);
+      }else{
+        onAction();
+      }
     });
   };
   return (

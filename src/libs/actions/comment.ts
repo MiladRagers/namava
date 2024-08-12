@@ -2,7 +2,8 @@
 
 import connectToDB from "@/src/configs/db";
 import CommentModel from "@/src/models/comments";
-import { authUser } from "@/src/utils/serverHelper";
+import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
+import { revalidatePath } from "next/cache";
 
 export const sendNewComment = async (formData: FormData, movie: string) => {
   console.log(movie);
@@ -40,6 +41,45 @@ export const sendNewComment = async (formData: FormData, movie: string) => {
   } catch (error) {
     return {
       message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const acceptAndRejectComment = async (status: boolean , id: string) => {
+  try {
+    connectToDB();
+
+    console.log(status);
+    
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "شما به این روت دسترسی ندارید",
+        status: 401,
+      };
+    }
+
+    await CommentModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          isAccept: status ? false : true,
+        },
+      }
+    );
+
+    revalidatePath("/p-admin/comments");
+
+    return {
+      message: `کامنت با موفقیت ${status  ? "رد" : "تایید"}`,
+      status: 200,
+    };
+  } catch (error) {
+    console.log(error);
+    
+    return {
+      message: "لطفا اتصال خود را به اینترنت چک کنید",
       status: 500,
     };
   }

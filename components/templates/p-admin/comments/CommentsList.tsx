@@ -1,9 +1,12 @@
 "use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
 import DetailModal from "@/components/modules/modals/DetailModal";
 import Modal from "@/components/modules/modals/Modal";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { acceptAndRejectComment } from "@/src/libs/actions/comment";
 import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import {
   FaCheck,
   FaEye,
@@ -11,6 +14,7 @@ import {
   FaRegStar,
   FaStar,
   FaTrash,
+  FaXmark,
 } from "react-icons/fa6";
 
 function CommentsList({ comments, counts }: any) {
@@ -20,6 +24,15 @@ function CommentsList({ comments, counts }: any) {
       return allComments.filter((comment: any) => comment._id !== id);
     }
   );
+
+  const acceptOrDeclineComment = async (isAccept: any, commentId: any) => {
+    const res = await acceptAndRejectComment(commentId, isAccept);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+
+    toast.error(`${res?.message}`);
+  };
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -35,7 +48,7 @@ function CommentsList({ comments, counts }: any) {
         </Table.Header>
         <Table.Body>
           {optimisticComments.map((comment: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={comment._id}>
               <td
                 className={`text-white ${
                   comment.isAccept ? "bg-green-700" : "bg-red-700"
@@ -67,7 +80,24 @@ function CommentsList({ comments, counts }: any) {
                   <Modal>
                     <FaTrash className="text-red-600 text-base md:text-lg" />
                     <FaPencil className="text-sky-600 text-base md:text-lg" />
-                    <FaCheck className="text-green-500 text-base md:text-lg" />
+
+                    <Modal.Open name="action">
+                      {comment.isAccept ? (
+                        <FaXmark className="text-red-600 text-base md:text-lg" />
+                      ) : (
+                        <FaCheck className="text-green-500 text-base md:text-lg" />
+                      )}
+                    </Modal.Open>
+                    <Modal.Page name="action">
+                      <ConfirmModal
+                        title={`آیا از ${
+                          comment.isAccept ? "رد" : "تایید"
+                        } کامنت اطمینان دارید ؟`}
+                        onAction={() =>
+                          acceptOrDeclineComment(comment._id, comment.isAccept)
+                        }
+                      />
+                    </Modal.Page>
                     <Modal.Open name="detail">
                       <FaEye className="text-amber-400 text-base md:text-lg" />
                     </Modal.Open>
