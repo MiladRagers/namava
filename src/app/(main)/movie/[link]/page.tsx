@@ -9,7 +9,7 @@ import { authUser } from "@/src/utils/serverHelper";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const [movie, userInfo] = await Promise.all([
+  const [movie, userInfo]: [movie: any, userInfo: any] = await Promise.all([
     getMovie(params.link),
     authUser(),
   ]);
@@ -49,6 +49,7 @@ async function page({ params }: TParams) {
         <Comments
           user={userInfo ? JSON.parse(JSON.stringify(userInfo._id)) : null}
           movieId={JSON.parse(JSON.stringify(movie._id))}
+          comments={JSON.parse(JSON.stringify(movie.comments))}
         />
       </section>
     </>

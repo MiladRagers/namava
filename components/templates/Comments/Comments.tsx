@@ -14,8 +14,9 @@ type TComments = {
   isKid?: boolean;
   user: string;
   movieId: string;
+  comments: any;
 };
-function Comments({ isKid, user, movieId }: TComments) {
+function Comments({ isKid, user, movieId, comments }: TComments) {
   const router = useRouter();
   const [isShowLoginModal, setIsShowLoginModal] = useState(false);
 
@@ -111,9 +112,9 @@ function Comments({ isKid, user, movieId }: TComments) {
         )}
 
         <div className="divide-y divide-gray-700">
-          <Comment onShow={setIsShowLoginModal} />
-          <Comment onShow={setIsShowLoginModal} />
-          <Comment onShow={setIsShowLoginModal} />
+          {comments.map((comment: any) => (
+            <Comment key={comment._id} onShow={setIsShowLoginModal} comment={comment} />
+          ))}
         </div>
       </div>
       {isShowLoginModal && (

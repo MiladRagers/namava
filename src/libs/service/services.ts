@@ -243,11 +243,17 @@ export const getMovie = async (link: any) => {
   try {
     connectToDB();
     const movie = await MovieModel.findOne({ link })
-      .populate("category actors", "link image title name").populate("comments")
+      .populate("category actors", "link image title name")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          select: "name email",
+        },
+      })
       .lean();
 
-    console.log(movie);
-    
+
     return movie;
   } catch (error) {
     return error;

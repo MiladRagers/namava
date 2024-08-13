@@ -20,7 +20,7 @@ const schema = new mongoose.Schema(
       required: true,
     },
     liked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
-    dislinked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
+    disliked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
     isSpoiled: {
       type: Boolean,
       default: false,
