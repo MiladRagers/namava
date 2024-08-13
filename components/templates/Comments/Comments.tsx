@@ -112,9 +112,27 @@ function Comments({ isKid, user, movieId, comments }: TComments) {
         )}
 
         <div className="divide-y divide-gray-700">
-          {comments.map((comment: any) => (
-            <Comment key={comment._id} onShow={setIsShowLoginModal} comment={comment} />
-          ))}
+          {comments.length ? (
+            comments.map((comment: any) => (
+              <Comment
+                key={comment._id}
+                onShow={setIsShowLoginModal}
+                comment={comment}
+              />
+            ))
+          ) : (
+            <div
+              className={`flex flex-col md:flex-row items-center justify-center gap-y-4 gap-x-9 rounded-lg mx-auto mt-10 w-full  md:w-[484px] ${
+                isKid ? "bg-white text-black" : "bg-[#37383e] text-white"
+              } p-4`}
+            >
+              <div className="flex items-center gap-x-2">
+                <Message />
+                <p className="text-sm md:text-base">هیچ کامنتی تاکنون ثبت نشده است.</p>
+              </div>
+              
+            </div>
+          )}
         </div>
       </div>
       {isShowLoginModal && (
