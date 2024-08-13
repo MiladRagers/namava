@@ -3,7 +3,6 @@ import React, { useTransition } from "react";
 import { FaXmark } from "react-icons/fa6";
 import Button from "../auth/Button/Button";
 import Spinner from "../spinner/Spinner";
-import { useRouter } from "next/navigation";
 
 function ConfirmModal({
   onClose,
