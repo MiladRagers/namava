@@ -99,7 +99,7 @@ function HeaderDetail({
                 <span className="mt-0.5">{info.IMDB}</span>
               </div>
             </div>
-            <p className="line-clamp-2 text-xs md:text-sm  md:line-clamp-6  max-w-[544px] text-white leading-6 mt-5">
+            <p className="line-clamp-2 text-xs/[24px] md:text-sm/[28px] text-center md:text-right  md:line-clamp-6  max-w-[544px] text-white mt-5">
               {info.shortDesc}
             </p>
             

@@ -70,7 +70,7 @@ export const acceptAndRejectComment = async (status: boolean, id: string) => {
     revalidatePath("/p-admin/comments");
 
     return {
-      message: `کامنت با موفقیت ${status ? "رد" : "تایید"}`,
+      message: `کامنت با موفقیت ${status ? "رد" : "تایید"} شد`,
       status: 200,
     };
   } catch (error) {

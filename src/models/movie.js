@@ -131,6 +131,13 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
+schema.virtual("comments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "movie",
+});
+
+
 const model = mongoose.models?.Movie || mongoose.model("Movie", schema);
 
 export default model;
