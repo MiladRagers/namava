@@ -2,6 +2,7 @@
 import ConfirmModal from "@/components/modules/modals/ConfirmModal";
 import DetailModal from "@/components/modules/modals/DetailModal";
 import Modal from "@/components/modules/modals/Modal";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import {
@@ -100,7 +101,6 @@ function CommentsList({ comments, counts }: any) {
                         onAction={deleteCommentHandler}
                       />
                     </Modal.Page>
-                    <FaPencil className="text-sky-600 text-base md:text-lg" />
 
                     <Modal.Open name="action">
                       {comment.isAccept ? (
@@ -120,7 +120,7 @@ function CommentsList({ comments, counts }: any) {
                       />
                     </Modal.Page>
                     <Modal.Open name="detail">
-                      <FaEye className="text-amber-400 text-base md:text-lg" />
+                      <FaEye className="text-blue-600 text-base md:text-lg" />
                     </Modal.Open>
                     <Modal.Page name="detail">
                       <DetailModal msg={comment.content} />
@@ -132,7 +132,11 @@ function CommentsList({ comments, counts }: any) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      {optimisticComments.length > 0 ? (
+        <Pagination count={counts} />
+      ) : (
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
+      )}
     </div>
   );
 }

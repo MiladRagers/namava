@@ -47,7 +47,7 @@ async function page({ params }: TParams) {
 
       <section className="pb-20">
         <Comments
-          user={JSON.parse(JSON.stringify(userInfo._id))}
+          user={userInfo ? JSON.parse(JSON.stringify(userInfo._id)) : null}
           movieId={JSON.parse(JSON.stringify(movie._id))}
         />
       </section>

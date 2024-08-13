@@ -51,8 +51,6 @@ export const acceptAndRejectComment = async (status: boolean, id: string) => {
   try {
     connectToDB();
 
-    console.log(status);
-
     if (!checkIsAdmin()) {
       return {
         message: "شما به این روت دسترسی ندارید",

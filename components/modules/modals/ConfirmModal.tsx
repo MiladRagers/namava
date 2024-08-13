@@ -43,11 +43,7 @@ function AcceptBtn({ onAction, id }: { onAction: any; id?: string }) {
 
   const handleClick = () => {
     startTransition(() => {
-      if (id) {
-        onAction(id);
-      }else{
-        onAction();
-      }
+      onAction(id);
     });
   };
   return (
