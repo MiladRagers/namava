@@ -246,6 +246,7 @@ export const getMovie = async (link: any) => {
       .populate("category actors", "link image title name")
       .populate({
         path: "comments",
+        match: { isAccept: true },
         populate: {
           path: "user",
           select: "name email",
