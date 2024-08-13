@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { isValidObjectId } from "mongoose";
 import { TUser, User } from "@/src/validators/frontend";
 import { hashPassword } from "@/src/utils/auth";
+import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const deleteUser = async (userId: string) => {
   try {
@@ -107,6 +108,38 @@ export const createNewUser = async (body: TUser) => {
     return {
       message: "کاربر با موفقیت ثبت نام شد",
       status: 201,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال اینترنت خود را بررسی کنید",
+      status: 500,
+    };
+  }
+};
+
+export const changeUserRole = async (id: string, role: string) => {
+  try {
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای کاربران ادمین مجاز است",
+        status: 403,
+      };
+    }
+
+    await UserModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          role: role === "ADMIN" ? "USER" : "ADMIN",
+        },
+      }
+    );
+
+    revalidatePath("/p-admin/users");
+
+    return {
+      message: "نقش کاربر با موفقیت تغییر کرد",
+      status: 200,
     };
   } catch (error) {
     return {

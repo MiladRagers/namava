@@ -4,10 +4,10 @@ import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
-import { deleteUser } from "@/src/libs/actions/user";
+import { changeUserRole, deleteUser } from "@/src/libs/actions/user";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
-import { FaPencil, FaTrash } from "react-icons/fa6";
+import { FaCheck, FaPencil, FaTrash, FaXmark } from "react-icons/fa6";
 
 type TUser = {
   users: any;
@@ -28,6 +28,15 @@ function UsersList({ users, counts }: TUser) {
     if (res?.status === 200) {
       return toast.success(`${res.message}`);
     }
+    toast.error(`${res?.message}`);
+  };
+
+  const changeUserRoleHandler = async (id: string, role: string) => {
+    const res = await changeUserRole(id, role);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+
     toast.error(`${res?.message}`);
   };
   return (
@@ -62,6 +71,24 @@ function UsersList({ users, counts }: TUser) {
                   </Modal.Open>
                   <Modal.Page name="delete">
                     <ConfirmModal id={user._id} onAction={deleteUserHandler} />
+                  </Modal.Page>
+
+                  <Modal.Open name="delete">
+                    {user.role === "USER" ? (
+                      <FaCheck className="text-green-600 text-base md:text-lg" />
+                    ) : (
+                      <FaXmark className="text-red-600 text-base md:text-lg" />
+                    )}
+                  </Modal.Open>
+                  <Modal.Page name="delete">
+                    <ConfirmModal
+                      title={`آیا از ${
+                        user.role === "ADMIN" ? "کاربر" : "ادمین"
+                      } کردن اطمینان دارید ؟`}
+                      onAction={() =>
+                        changeUserRoleHandler(user._id, user.role)
+                      }
+                    />
                   </Modal.Page>
                 </Modal>
                 <FaPencil className="text-sky-600 text-base md:text-lg" />

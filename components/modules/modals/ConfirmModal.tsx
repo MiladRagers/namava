@@ -3,6 +3,7 @@ import React, { useTransition } from "react";
 import { FaXmark } from "react-icons/fa6";
 import Button from "../auth/Button/Button";
 import Spinner from "../spinner/Spinner";
+import { useRouter } from "next/navigation";
 
 function ConfirmModal({
   onClose,
@@ -25,7 +26,7 @@ function ConfirmModal({
         <Message className="!w-[136px] !h-[137px]" />
         <h2 className="text-lg font-IranMedium">{title}</h2>
         <div className="flex items-center justify-center gap-x-3 w-full">
-          <AcceptBtn onAction={onAction} id={id} />
+          <AcceptBtn onClose={onClose} onAction={onAction} id={id} />
           <Button
             className="!mt-8 text-white !bg-red-600 !w-full"
             onClick={onClose}
@@ -38,12 +39,22 @@ function ConfirmModal({
   );
 }
 
-function AcceptBtn({ onAction, id }: { onAction: any; id?: string }) {
+function AcceptBtn({
+  onAction,
+  id,
+  onClose,
+}: {
+  onAction: any;
+  id?: string;
+  onClose: any;
+}) {
   const [isPending, startTransition] = useTransition();
 
-  const handleClick = () => {
+  const handleClick = (e: any) => {
+    e.preventDefault();
     startTransition(() => {
       onAction(id);
+      onClose();
     });
   };
   return (

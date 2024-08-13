@@ -38,8 +38,11 @@ function CommentsList({ comments, counts }: any) {
     toast.error(`${res?.message}`);
   };
 
-  const acceptOrDeclineComment = async (isAccept: any, commentId: any) => {
-    const res = await acceptAndRejectComment(commentId, isAccept);
+  const acceptOrDeclineComment = async (
+    commentId: string,
+    isAccept: boolean
+  ) => {
+    const res = await acceptAndRejectComment(isAccept, commentId);
     if (res?.status === 200) {
       return toast.success(`${res?.message}`);
     }
