@@ -64,7 +64,7 @@ function ProfileMenu({ isShow, onShow, user }: TProfileMenu) {
             </div>
             <div className="mt-2 space-y-3 border-b border-b-gray-300 pb-2">
               {user.profiles.slice(1, 4).map((profile: any) => (
-                <ProfileBox {...profile} />
+                <ProfileBox {...profile} key={profile._id} />
               ))}
             </div>
             <div className="space-y-4 mt-4 mb-2">
