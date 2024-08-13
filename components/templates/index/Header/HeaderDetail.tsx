@@ -64,13 +64,13 @@ function HeaderDetail({
           </div>
         </div>
       ) : (
-        <div className="px-[43px] top-52 md:top-28  absolute z-20">
+        <div className="px-[43px] top-40 md:top-28  absolute z-20">
           <Image
             src={info?.logo}
             width={450}
             height={450}
             alt="oka"
-            className="w-[125px] md:w-[300px]  mx-auto md:mx-0 "
+            className="w-[125px] md:w-[46%]  mx-auto md:mx-0 "
           />
           <div className="py-6">
             <span className="block text-white text-center md:text-right text-base md:text-[22px]">
@@ -99,7 +99,7 @@ function HeaderDetail({
                 <span className="mt-0.5">{info.IMDB}</span>
               </div>
             </div>
-            <p className="hidden md:block max-w-[544px] text-white text-sm leading-6 mt-5">
+            <p className="line-clamp-2 text-xs md:text-sm  md:line-clamp-6  max-w-[544px] text-white leading-6 mt-5">
               {info.shortDesc}
             </p>
             
