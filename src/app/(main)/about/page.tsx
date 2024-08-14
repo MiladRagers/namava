@@ -14,7 +14,7 @@ function AboutUs() {
       <Header
         className="!h-[380px]"
         isImage
-        img="intro.jpg"
+        img="/images/intro.jpg"
         isTitle
         mobileImage="mobileAboutImg.jpg"
       />

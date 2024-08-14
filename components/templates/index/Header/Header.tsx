@@ -50,7 +50,7 @@ function Header({
             />
             <Image
               className="w-full title-image block lg:hidden"
-              src={`${info.mobileBanner}`}
+              src={`${info?.mobileBanner ?? `/images/${mobileImage}`}`}
               alt="havieee.jpg"
               width={1920}
               height={1080}
