@@ -83,19 +83,19 @@ function Comments({ isKid, user, movieId, comments }: TComments) {
                 src="/images/user.png"
                 width={400}
                 height={400}
-                className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] rounded-full"
+                className="w-[30px] flex-shrink-0 md:w-[40px] h-[30px] md:h-[40px] rounded-full"
                 alt="user.png"
               />
               <input
                 placeholder="نظرتان درباره این فیلم چیست ؟"
                 name="content"
-                className="w-full h-[52px] text-black  outline-none placeholder:text-namavaBlack text-xs md:text-sm px-6 py-3 rounded-xl"
+                className="w-full h-[40px] md:h-[52px] text-black  outline-none placeholder:text-namavaBlack text-xs md:text-sm px-3 md:px-6 py-3 rounded-xl"
               />
               <button type="submit">
                 <Send />
               </button>
             </div>
-            <div className="pt-5 pr-14">
+            <div className="pt-5 md:pr-14">
               <div className="flex items-center gap-x-2">
                 <input
                   id="spoil"

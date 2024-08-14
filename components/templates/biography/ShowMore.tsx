@@ -24,7 +24,7 @@ function ShowMore({ bio }: { bio: string }) {
           className="absolute top-6 right-4"
           onClick={() => setIsOpen(false)}
         />
-        <p className="text-xs/[25px] line-clamp-6 md:text-sm/[25px] text-justify max-h-[100px] md:h-auto relative overflow-hidden">
+        <p className="text-xs/[25px] line-clamp-[10] md:text-sm/[25px] text-justify md:h-auto relative">
           {bio}
         </p>
       </div>
