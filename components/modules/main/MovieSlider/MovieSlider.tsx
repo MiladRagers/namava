@@ -68,6 +68,8 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                     image={movie.mainImage}
                     link={movie.link}
                     title={movie.title}
+                    type={movie.type}
+                    showTime={movie.showTime}
                   />
                 </div>
               </SwiperSlide>
