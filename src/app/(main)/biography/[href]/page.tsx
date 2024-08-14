@@ -1,8 +1,10 @@
 import Movie from "@/components/modules/main/Movie/Movie";
+import ShowMore from "@/components/templates/biography/ShowMore";
 import { getStar, getStarMovies } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import Image from "next/image";
 import React from "react";
+import { FaChevronDown } from "react-icons/fa6";
 
 async function page({ params }: TParams) {
   const { href } = params;
@@ -12,7 +14,7 @@ async function page({ params }: TParams) {
 
   return (
     <div className="container text-white py-20 relative">
-      <div className="absolute top-0 left-0 right-0 -z-20">
+      <div className="block sm:hidden absolute top-0 left-0 right-0 -z-20">
         <Image className="" alt="" width={1920} height={1080} src={image} />
         <div className="absolute inset-0 bg-black/80 -z-0"></div>
       </div>
@@ -31,10 +33,13 @@ async function page({ params }: TParams) {
           <h1 className="text-lg  font-IranMedium md:text-2xl mt-5 md:m-0 text-center md:text-right ">
             بیوگرافی {name}
           </h1>
-          <p className="text-xs/[25px] md:text-sm/[25px] mt-10 text-justify">
+          <div className="text-xs/[25px] md:text-sm/[25px] mt-[45px] text-justify max-h-[100px] md:h-auto relative overflow-hidden">
             {bio}
-          </p>
+            <div className="block md:hidden absolute bottom-0  right-0 left-0 h-[160px] bg-gradient-to-t from-[#121212] from-0%   to-100%"></div>
+          </div>
         </div>
+
+        <ShowMore bio={bio} />
       </div>
       <div>
         <h2 className="text-base md:text-lg font-IranMedium">
