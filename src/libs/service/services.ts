@@ -254,7 +254,6 @@ export const getMovie = async (link: any) => {
       })
       .lean();
 
-
     return movie;
   } catch (error) {
     return error;
@@ -355,6 +354,19 @@ export const getAllComments = async (page: string) => {
       comments,
       counts,
     };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all series
+
+export const getAllSeries = async () => {
+  try {
+    connectToDB();
+    const series = await MovieModel.find({ type: "series" });
+
+    return series;
   } catch (error) {
     return error;
   }

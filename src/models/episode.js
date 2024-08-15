@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import MovieModel from "./movie";
 
 const schema = new mongoose.Schema(
   {
@@ -34,6 +35,7 @@ const schema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Season",
     },
+    series: { type: mongoose.Types.ObjectId, ref: "Movie" },
   },
   {
     timestamps: true,

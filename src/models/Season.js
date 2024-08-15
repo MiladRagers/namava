@@ -5,7 +5,7 @@ import EpisodeModel from "../models/episode";
 
 const schema = new mongoose.Schema({
   seasonNumber: Number,
-  episodes: [{ type: mongoose.Types.ObjectId, ref: "Episode" }],
+  episodes: [{ type: mongoose.Types.ObjectId, ref: "Episode", default: [] }],
   series: { type: mongoose.Types.ObjectId, ref: "Movie" },
 });
 

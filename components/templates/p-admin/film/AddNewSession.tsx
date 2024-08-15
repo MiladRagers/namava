@@ -2,17 +2,19 @@
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import { createNewEpisode } from "@/src/libs/actions/episode";
 import { Session, TSession } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaLink } from "react-icons/fa";
 import { FaImage } from "react-icons/fa6";
 import { FiVideo } from "react-icons/fi";
 import { MdAccessTime } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
 
-function AddNewSession() {
+function AddNewSession({ series }: any) {
   const {
     register,
     handleSubmit,
@@ -22,19 +24,39 @@ function AddNewSession() {
     resolver: zodResolver(Session),
   });
 
-  const fakeSeries = [
-    { id: 1, value: "کاپیتان", label: "کاپیتان آمریکا" },
-    { id: 2, value: "جومونگ", label: "جومونگ" },
-  ];
+
+  const seriesOptions = series.map((movie: any) => ({
+    id: movie._id,
+    value: movie._id,
+    label: movie.title,
+  }));
 
   const fakeSeason = [
     { id: 1, value: "1", label: "فصل 1" },
-    { id: 1, value: "2", label: "فصل 2" },
-    { id: 1, value: "3", label: "فصل 3" },
+    { id: 2, value: "2", label: "فصل 2" },
+    { id: 3, value: "3", label: "فصل 3" },
+    { id: 4, value: "4", label: "فصل 4" },
+    { id: 5, value: "5", label: "فصل 5" },
+    { id: 6, value: "6", label: "فصل 6" },
   ];
 
   const createNewSession = async (data: TSession) => {
-    console.log(data);
+    const episodeData = new FormData();
+    episodeData.append("title", data.title);
+    episodeData.append("image", data.banner[0]);
+    episodeData.append("video", data.video[0]);
+    episodeData.append("description", data.desc);
+    episodeData.append("time", data.time);
+    episodeData.append("link", data.link);
+    episodeData.append("series", data.serial);
+    episodeData.append("season", data.season);
+
+    const res = await createNewEpisode(episodeData);
+    if (res?.status === 201) {
+      return toast.success(`${res?.message}`);
+    }
+
+    toast.error(`${res?.message}`);
   };
   return (
     <form
@@ -103,7 +125,7 @@ function AddNewSession() {
         register={register}
         errors={errors}
         name="serial"
-        options={fakeSeries}
+        options={seriesOptions}
         title="نام سریال"
       />
       <SelectBox

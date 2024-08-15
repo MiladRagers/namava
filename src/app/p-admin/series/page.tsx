@@ -1,12 +1,14 @@
 import Title from "@/components/modules/p-admin/Title";
 import AddNewSession from "@/components/templates/p-admin/film/AddNewSession";
+import { getAllSeries } from "@/src/libs/service/services";
 import React from "react";
 
-function SeriesPage() {
+async function SeriesPage() {
+  const allSeries = await getAllSeries();
   return (
     <>
       <Title name="ایجاد قسمت سریال" />
-      <AddNewSession />
+      <AddNewSession series={JSON.parse(JSON.stringify(allSeries))} />
     </>
   );
 }
