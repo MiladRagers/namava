@@ -4,20 +4,30 @@ import Comments from "@/components/templates/Comments/Comments";
 import Details from "@/components/templates/Movie/Details";
 import Header from "@/components/templates/index/Header/Header";
 import Session from "@/components/templates/session/Session";
+import { getMovie, getRealedMovies } from "@/src/libs/service/services";
+import { TParams } from "@/src/libs/types";
+import { authUser } from "@/src/utils/serverHelper";
 import Image from "next/image";
 import React from "react";
 import { FaChevronDown, FaYoutube } from "react-icons/fa6";
 
-function page() {
+async function page({ params }: TParams) {
+  const [movie, userInfo]: [movie: any, userInfo: any] = await Promise.all([
+    getMovie(params.link),
+    authUser(),
+  ]);
+
+  const realatedMovies = await getRealedMovies(movie.category, movie._id);
   return (
     <>
       <section className="relative">
-        {/* <Header
+        <Header
           isImage={true}
           isTitle
-          img="/images/ben10.jpg"
-          mobileImage="/images/ben10Mobile.jpg"
-        /> */}
+          img={movie.deskBanner}
+          mobileImage={movie.mobileBanner}
+          info={JSON.parse(JSON.stringify(movie))}
+        />
         <div className="absolute inset-0 title-overlay"></div>
       </section>
       {/* season of Season */}
@@ -48,14 +58,14 @@ function page() {
       </section>
 
       <section className="container mb-20 grid grid-cols-1 gap-3 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <Session/>
-        <Session/>
-        <Session/>
-        <Session/>
-        <Session/>
-        <Session/>
-        <Session/>
-        <Session/>
+        <Session />
+        <Session />
+        <Session />
+        <Session />
+        <Session />
+        <Session />
+        <Session />
+        <Session />
       </section>
       <section className="text-white mt-10 container relative bottom-16 md:bottom-12 z-10 space-y-6">
         {/* <Details /> */}
@@ -67,9 +77,7 @@ function page() {
         {/* <MovieSlider title="بر اساس هاوایی" link="/" /> */}
       </section>
 
-      <section className="pb-20">
-        {/* <Comments /> */}
-      </section>
+      <section className="pb-20">{/* <Comments /> */}</section>
     </>
   );
 }

@@ -65,12 +65,9 @@ function HeaderDetail({
         </div>
       ) : (
         <div className="px-[43px] top-40 md:top-28  absolute z-20">
-          <Image
+          <img
             src={info?.logo}
-            width={450}
-            height={450}
-            alt="oka"
-            className="w-[105px] md:w-[35%]  mx-auto md:mx-0 "
+            className="max-w-[200px]  max-h-[160px] mx-auto md:mx-0 "
           />
           <div className="py-6">
             <span className="block text-white text-center md:text-right text-base md:text-[22px]">
@@ -102,7 +99,7 @@ function HeaderDetail({
             <p className="line-clamp-2 text-xs/[24px] md:text-sm/[28px] text-center md:text-right  md:line-clamp-6  max-w-[544px] text-white mt-5">
               {info.shortDesc}
             </p>
-            
+
             <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
               <button className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
                 <FaPlay />
