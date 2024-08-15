@@ -53,10 +53,6 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                 onClick={() => {
                   setMovieId(movie._id);
                   setMovieDetail(movie);
-                  window.scrollTo({
-                    behavior: "smooth",
-                    top: 1800,
-                  });
                 }}
               >
                 <div
@@ -124,7 +120,11 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                     <Dislike fill="white" />
                   </button>
                   <Link
-                    href={`/movie/${movieDetail.link}`}
+                    href={
+                      movieDetail.type === "film"
+                        ? `/movie/${movieDetail.link}`
+                        : `/series/${movieDetail.link}`
+                    }
                     className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
                   >
                     <GrCircleInformation className="text-3xl" />

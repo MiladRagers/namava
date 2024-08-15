@@ -14,19 +14,9 @@ interface Movie {
   showTime: string;
 }
 function Movie({ image, title, link, isLink, type, showTime }: Movie) {
-  const router = useRouter();
-
-  const clickHandler = () => {
-    if (!isLink) return;
-
-    router.push(`/movie/${link}`);
-  };
   return (
     <>
-      <div
-        className={`transition-all hidden lg:block group cursor-pointer `}
-        onClick={clickHandler}
-      >
+      <div className={`transition-all hidden lg:block group cursor-pointer `}>
         <div className="relative">
           <Image
             src={image}
@@ -51,7 +41,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
         <h3 className="text-xs mt-3 mr-3">{title}</h3>
       </div>
       <Link
-        href={`/movie/${link}`}
+        href={type === "film" ? `/movie/${link}` : `/series/${link}`}
         className={`transition-all block lg:hidden group cursor-pointer `}
       >
         <div className="relative">
