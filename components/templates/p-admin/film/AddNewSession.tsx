@@ -2,10 +2,11 @@
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
+import Spinner from "@/components/modules/spinner/Spinner";
 import { createNewEpisode } from "@/src/libs/actions/episode";
 import { Session, TSession } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaLink } from "react-icons/fa";
@@ -15,6 +16,7 @@ import { MdAccessTime } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
 
 function AddNewSession({ series }: any) {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,7 +25,6 @@ function AddNewSession({ series }: any) {
   } = useForm<TSession>({
     resolver: zodResolver(Session),
   });
-
 
   const seriesOptions = series.map((movie: any) => ({
     id: movie._id,
@@ -50,12 +51,13 @@ function AddNewSession({ series }: any) {
     episodeData.append("link", data.link);
     episodeData.append("series", data.serial);
     episodeData.append("season", data.season);
-
+    setIsLoading(true);
     const res = await createNewEpisode(episodeData);
     if (res?.status === 201) {
+      setIsLoading(false);
       return toast.success(`${res?.message}`);
     }
-
+    setIsLoading(false);
     toast.error(`${res?.message}`);
   };
   return (
@@ -71,6 +73,7 @@ function AddNewSession({ series }: any) {
         title="نام قسمت"
         type="text"
         placeholder="نام قسمت را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -81,6 +84,7 @@ function AddNewSession({ series }: any) {
         title="زمان"
         type="text"
         placeholder="مدت زمان قسمت را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -91,6 +95,7 @@ function AddNewSession({ series }: any) {
         title="لینک "
         type="text"
         placeholder="لینک قسمت را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -101,6 +106,7 @@ function AddNewSession({ series }: any) {
         title="درباره قسمت (خلاصه)"
         type="text"
         placeholder="در مورد قسمت به شکل خلاصه توضیح دهید"
+        disable={isLoading}
       />
 
       <Input
@@ -110,6 +116,7 @@ function AddNewSession({ series }: any) {
         title="بنر"
         type="file"
         icon={<FaImage className={`text-2xl`} />}
+        disable={isLoading}
       />
 
       <Input
@@ -119,6 +126,7 @@ function AddNewSession({ series }: any) {
         title="ویدیو"
         type="file"
         icon={<FiVideo className={`text-2xl`} />}
+        disable={isLoading}
       />
 
       <SelectBox
@@ -127,6 +135,7 @@ function AddNewSession({ series }: any) {
         name="serial"
         options={seriesOptions}
         title="نام سریال"
+        disable={isLoading}
       />
       <SelectBox
         register={register}
@@ -134,11 +143,15 @@ function AddNewSession({ series }: any) {
         name="season"
         options={fakeSeason}
         title="فصل"
+        disable={isLoading}
       />
 
       <div className="flex items-center gap-x-8 mt-5 text-white">
-        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد اثر
+        <Button
+          disabled={isLoading}
+          className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}
+        >
+          {isLoading ? <Spinner /> : "ایجاد اثر"}
         </Button>
         <Button onClick={() => reset()} className="bg-red-700">
           لغو
