@@ -70,7 +70,7 @@ function HeaderDetail({
             width={450}
             height={450}
             alt="oka"
-            className="w-[125px] md:w-[46%]  mx-auto md:mx-0 "
+            className="w-[105px] md:w-[35%]  mx-auto md:mx-0 "
           />
           <div className="py-6">
             <span className="block text-white text-center md:text-right text-base md:text-[22px]">

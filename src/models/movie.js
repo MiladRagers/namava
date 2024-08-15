@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import CategoryModel from "./category";
 import UserModel from "./user";
 import StarModel from "./stars";
+import Season from "./Season";
 const schema = new mongoose.Schema(
   {
     title: {
@@ -127,6 +128,12 @@ const schema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    seasons: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Season",
+      },
+    ],
   },
   { timestamps: true }
 );
@@ -136,7 +143,6 @@ schema.virtual("comments", {
   localField: "_id",
   foreignField: "movie",
 });
-
 
 const model = mongoose.models?.Movie || mongoose.model("Movie", schema);
 
