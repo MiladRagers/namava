@@ -12,12 +12,12 @@ function page() {
   return (
     <>
       <section className="relative">
-        <Header
+        {/* <Header
           isImage={true}
           isTitle
-          img="ben10.jpg"
-          mobileImage="ben10Mobile.jpg"
-        />
+          img="/images/ben10.jpg"
+          mobileImage="/images/ben10Mobile.jpg"
+        /> */}
         <div className="absolute inset-0 title-overlay"></div>
       </section>
       {/* season of Season */}
@@ -58,17 +58,17 @@ function page() {
         <Session/>
       </section>
       <section className="text-white mt-10 container relative bottom-16 md:bottom-12 z-10 space-y-6">
-        <Details />
+        {/* <Details /> */}
       </section>
 
       <section className="text-white">
-        <StarsSlider title="بازیگران فیلم هاوایی" />
-        <StarsSlider title="عوامل فیلم هاوایی" />
-        <MovieSlider title="بر اساس هاوایی" link="/" />
+        {/* <StarsSlider title="بازیگران فیلم هاوایی" /> */}
+        {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
+        {/* <MovieSlider title="بر اساس هاوایی" link="/" /> */}
       </section>
 
       <section className="pb-20">
-        <Comments />
+        {/* <Comments /> */}
       </section>
     </>
   );
