@@ -205,7 +205,7 @@ export const Session = z.object({
   title: z
     .string()
     .min(3, { message: "عنوان قسمت حداقل باید 3 کارکتر باشد" })
-    .max(30, { message: "عنوان قسمت باید 30 کاراکتر داشته باشد" }),
+    .max(60, { message: "عنوان قسمت باید 60 کاراکتر داشته باشد" }),
   time: z
     .string()
     .min(1, { message: "مدت زمان حداقل باید 1 کارکتر باشد" })

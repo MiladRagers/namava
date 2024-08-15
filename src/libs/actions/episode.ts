@@ -15,11 +15,7 @@ export const createNewEpisode = async (data: FormData) => {
     const image: any = data.get("image");
     const video: any = data.get("video");
     const series = data.get("series");
-
-    const season = new SeasonModel({
-      seasonNumber: Number(data.get("season")),
-      series,
-    });
+    const seasonNumber = Number(data.get("season"));
 
     let imageName = undefined;
     if (image !== "undefined") {
@@ -36,9 +32,16 @@ export const createNewEpisode = async (data: FormData) => {
       const fileName = Date.now() + video.name;
       videoName = `/uploads/${fileName}`;
       const imagePath = path.join(process.cwd(), "public/uploads/" + fileName);
-      const buffer = Buffer.from(await image.arrayBuffer());
+      const buffer = Buffer.from(await video.arrayBuffer());
       writeFileSync(imagePath, buffer);
     }
+
+    const season = new SeasonModel({
+      seasonNumber,
+      series,
+    });
+
+    const isSeriesExist = await SeasonModel.findOne({ series, seasonNumber });
 
     const episode = new EpisodeModel({
       title: data.get("title"),
@@ -51,7 +54,21 @@ export const createNewEpisode = async (data: FormData) => {
       series: data.get("series"),
     });
 
-    season.episodes.push(episode._id);
+    if (!isSeriesExist) {
+      season.episodes.push(episode._id);
+      await season.save();
+    } else {
+      await SeasonModel.findOneAndUpdate(
+        { series, seasonNumber },
+        {
+          $push: {
+            episodes: episode._id,
+          },
+        }
+      );
+    }
+
+    await episode.save();
 
     await MovieModel.findOneAndUpdate(
       { _id: series },
@@ -61,8 +78,6 @@ export const createNewEpisode = async (data: FormData) => {
         },
       }
     );
-
-    await Promise.all([episode.save(), season.save()]);
 
     revalidatePath("/p-admin/series");
 
