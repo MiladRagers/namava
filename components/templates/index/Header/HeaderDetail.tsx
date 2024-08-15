@@ -67,7 +67,7 @@ function HeaderDetail({
         <div className="px-[43px] top-40 md:top-28  absolute z-20">
           <img
             src={info?.logo}
-            className="max-w-[115px] md:max-w-[200px]  max-h-[160px] mx-auto md:mx-0 "
+            className="max-w-[105px] md:max-w-[200px]  max-h-[160px] mx-auto md:mx-0 "
           />
           <div className="py-6">
             <span className="block text-white text-center md:text-right text-base md:text-[22px]">

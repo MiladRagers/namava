@@ -48,11 +48,11 @@ async function page({ params }: TParams) {
         <div className="bg-namavaBlack rounded-md flex items-center gap-x-2 py-2 px-3 text-white text-xs md:text-sm !mt-0">
           <div className="flex items-center gap-x-2">
             <FaYoutube className="text-2xl" />
-            <p>تعداد فصل ها : 4</p>
+            <p>تعداد فصل ها : {movie.season}</p>
           </div>
           <span className="block w-px h-4 bg-slate-500"></span>
           <div>
-            <p>وضعیت : پایان فصل 4</p>
+            <p>وضعیت : پایان فصل {movie.season}</p>
           </div>
         </div>
       </section>
