@@ -34,8 +34,6 @@ async function page({ params, searchParams }: TParams) {
     (season: any) => season.seasonNumber == activeSeason
   );
 
-  console.log(seasonEpisodes);
-
   return (
     <>
       <section className="relative">
