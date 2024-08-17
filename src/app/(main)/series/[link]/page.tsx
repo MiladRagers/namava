@@ -75,11 +75,14 @@ async function page({ params, searchParams }: TParams) {
         ))}
       </section>
       <section className="text-white mt-10 container relative bottom-16 md:bottom-12 z-10 space-y-6">
-        {/* <Details /> */}
+        <Details info={movie} />
       </section>
 
       <section className="text-white">
-        {/* <StarsSlider title="بازیگران فیلم هاوایی" /> */}
+        <StarsSlider
+          allStars={JSON.parse(JSON.stringify(movie.actors))}
+          title={`بازیگران سریال ${movie.title}`}
+        />
         {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
         {realatedMovies.length > 0 && (
           <MovieSlider
@@ -90,7 +93,13 @@ async function page({ params, searchParams }: TParams) {
         )}
       </section>
 
-      <section className="pb-20">{/* <Comments /> */}</section>
+      <section className="pb-20">
+        <Comments
+          user={userInfo ? JSON.parse(JSON.stringify(userInfo._id)) : null}
+          movieId={JSON.parse(JSON.stringify(movie._id))}
+          comments={JSON.parse(JSON.stringify(movie.comments))}
+        />
+      </section>
     </>
   );
 }
