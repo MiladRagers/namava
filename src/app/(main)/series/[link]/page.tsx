@@ -56,7 +56,7 @@ async function page({ params, searchParams }: TParams) {
           </div>
           <span className="block w-px h-4 bg-slate-500"></span>
           <div>
-            <p>وضعیت : پایان فصل {movie.season}</p>
+            <p>وضعیت : پایان فصل {seasons.length}</p>
           </div>
         </div>
       </section>
