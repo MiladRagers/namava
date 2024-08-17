@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 function SeasonOption({ seasons }: any) {
-  const [activeSeason, setActiveSeason] = useState(1);
   const searchParams = useSearchParams();
+  const [activeSeason, setActiveSeason] = useState(
+    Number(searchParams.get("season") || 1)
+  );
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
   const { push } = useRouter();
