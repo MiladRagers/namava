@@ -14,6 +14,7 @@ import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 import { FaChevronDown, FaYoutube } from "react-icons/fa6";
 
@@ -24,6 +25,10 @@ async function page({ params, searchParams }: TParams) {
     getMovie(params.link),
     authUser(),
   ]);
+
+  if (!movie) {
+    notFound();
+  }
 
   const [seasons, realatedMovies]: any = await Promise.all([
     getSpecificSeasons(movie._id),
@@ -76,7 +81,13 @@ async function page({ params, searchParams }: TParams) {
       <section className="text-white">
         {/* <StarsSlider title="بازیگران فیلم هاوایی" /> */}
         {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
-        {/* <MovieSlider title="بر اساس هاوایی" link="/" /> */}
+        {realatedMovies.length > 0 && (
+          <MovieSlider
+            movies={JSON.parse(JSON.stringify(realatedMovies))}
+            title={`بر اساس ${movie.title}`}
+            link="/"
+          />
+        )}
       </section>
 
       <section className="pb-20">{/* <Comments /> */}</section>

@@ -55,10 +55,12 @@ function AddNewSession({ series }: any) {
     const res = await createNewEpisode(episodeData);
     if (res?.status === 201) {
       setIsLoading(false);
+      reset();
       return toast.success(`${res?.message}`);
     }
     setIsLoading(false);
     toast.error(`${res?.message}`);
+    reset();
   };
   return (
     <form
