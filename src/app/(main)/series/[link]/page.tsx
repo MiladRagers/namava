@@ -12,11 +12,8 @@ import {
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
-import { FaChevronDown, FaYoutube } from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa6";
 
 async function page({ params, searchParams }: TParams) {
   const activeSeason = searchParams?.season ?? 1;
