@@ -10,6 +10,7 @@ export type TComment = {
 
 export type TParams = {
   params: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key: string]: string};
 };
 
 export type TAdminPage = {

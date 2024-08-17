@@ -17,7 +17,9 @@ import Link from "next/link";
 import React from "react";
 import { FaChevronDown, FaYoutube } from "react-icons/fa6";
 
-async function page({ params }: TParams) {
+async function page({ params, searchParams }: TParams) {
+  const activeSeason = searchParams?.season ?? 1;
+
   const [movie, userInfo]: [movie: any, userInfo: any] = await Promise.all([
     getMovie(params.link),
     authUser(),
@@ -28,7 +30,11 @@ async function page({ params }: TParams) {
     getRealedMovies(movie.category, movie._id),
   ]);
 
-  console.log(seasons);
+  const seasonEpisodes = seasons.find(
+    (season: any) => season.seasonNumber == activeSeason
+  );
+
+  console.log(seasonEpisodes);
 
   return (
     <>
@@ -58,14 +64,12 @@ async function page({ params }: TParams) {
       </section>
 
       <section className="container mb-20 grid grid-cols-1 gap-3 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <Session />
-        <Session />
-        <Session />
-        <Session />
-        <Session />
-        <Session />
-        <Session />
-        <Session />
+        {seasonEpisodes.episodes.map((episode: any) => (
+          <Session
+            key={episode._id}
+            episode={JSON.parse(JSON.stringify(episode))}
+          />
+        ))}
       </section>
       <section className="text-white mt-10 container relative bottom-16 md:bottom-12 z-10 space-y-6">
         {/* <Details /> */}
