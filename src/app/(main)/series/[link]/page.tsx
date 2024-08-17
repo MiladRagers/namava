@@ -2,12 +2,18 @@ import MovieSlider from "@/components/modules/main/MovieSlider/MovieSlider";
 import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
 import Comments from "@/components/templates/Comments/Comments";
 import Details from "@/components/templates/Movie/Details";
+import SeasonOption from "@/components/templates/Movie/SeasonOption";
 import Header from "@/components/templates/index/Header/Header";
 import Session from "@/components/templates/session/Session";
-import { getMovie, getRealedMovies } from "@/src/libs/service/services";
+import {
+  getMovie,
+  getRealedMovies,
+  getSpecificSeasons,
+} from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaChevronDown, FaYoutube } from "react-icons/fa6";
 
@@ -17,7 +23,13 @@ async function page({ params }: TParams) {
     authUser(),
   ]);
 
-  const realatedMovies = await getRealedMovies(movie.category, movie._id);
+  const [seasons, realatedMovies]: any = await Promise.all([
+    getSpecificSeasons(movie._id),
+    getRealedMovies(movie.category, movie._id),
+  ]);
+
+  console.log(seasons);
+
   return (
     <>
       <section className="relative">
@@ -32,19 +44,7 @@ async function page({ params }: TParams) {
       </section>
       {/* season of Season */}
       <section className="mt-10 container flex flex-col gap-y-4 md:flex-row md:items-center gap-x-4 relative bottom-6 md:bottom-28 z-20 space-y-6">
-        <div className="bg-white relative group text-black flex items-center justify-center  rounded-md py-2 px-2 gap-x-4 w-[100px]">
-          <p className="font-Dana text-sm md:text-base">فصل 1</p>
-          <FaChevronDown className="text-base md:text-lg" />
-
-          <div className="absolute flex py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75 justify-center bg-white top-12 right-0 z-20 w-[150px] rounded-md">
-            <ul className="flex flex-col gap-y-4 justify-between cursor-pointer hover:child:text-namava">
-              <li>فصل 1</li>
-              <li>فصل 2</li>
-              <li>فصل 3</li>
-              <li>فصل 4</li>
-            </ul>
-          </div>
-        </div>
+        <SeasonOption seasons={JSON.parse(JSON.stringify(seasons))} />
         <div className="bg-namavaBlack rounded-md flex items-center gap-x-2 py-2 px-3 text-white text-xs md:text-sm !mt-0">
           <div className="flex items-center gap-x-2">
             <FaYoutube className="text-2xl" />

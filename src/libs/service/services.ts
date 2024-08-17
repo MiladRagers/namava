@@ -4,10 +4,11 @@ import CategoryModel from "@/src/models/category";
 import MenuModel from "@/src/models/menu";
 import UserModel from "@/src/models/user";
 import StarModel from "@/src/models/stars";
+import SeasonModel from "@/src/models/Season";
 import ContactModel from "@/src/models/contactus";
 import MovieModel from "@/src/models/movie";
-import { checkIsAdmin } from "@/src/utils/serverHelper";
 import CommentModel from "@/src/models/comments";
+import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
   try {
@@ -367,6 +368,21 @@ export const getAllSeries = async () => {
     const series = await MovieModel.find({ type: "series" });
 
     return series;
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all seasons of series
+
+export const getSpecificSeasons = async (id: string) => {
+  try {
+    connectToDB();
+    const seasons = await SeasonModel.find({ series: id })
+      .populate("episodes")
+      .sort({ seasonNumber: 1 });
+
+    return seasons;
   } catch (error) {
     return error;
   }
