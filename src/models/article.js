@@ -43,6 +43,16 @@ const schema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
+
+    isAccept: {
+      type: Boolean,
+      default: false,
+    },
+
+    isDraft: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
