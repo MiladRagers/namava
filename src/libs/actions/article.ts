@@ -3,7 +3,8 @@
 import connectToDB from "@/src/configs/db";
 import ArticleModel from "@/src/models/article";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
-import { writeFileSync } from "fs";
+import { unlink, writeFileSync } from "fs";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
@@ -65,6 +66,53 @@ export const createNewArticle = async (data: FormData) => {
   } catch (error) {
     return {
       message: "لطفا اتصال اینترنت خود را بررسی کنید",
+      status: 500,
+    };
+  }
+};
+
+export const deleteArticle = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "لطفا یک ایدی معتبر ارسال کنید",
+        status: 422,
+      };
+    }
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای ادمین ها در دسترس است",
+        status: 404,
+      };
+    }
+
+    const article = await ArticleModel.findOne({ _id: id });
+    if (!article) {
+      return {
+        message: "این مقاله در سایت یافت نشد",
+        status: 404,
+      };
+    }
+
+    await ArticleModel.findByIdAndDelete(`${id}`);
+
+    unlink(path.join(process.cwd(), "public/" + article.image), (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    revalidatePath("/p-admin/articles");
+
+    return {
+      message: "مقاله با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "لطفا اتصال اینترنت خود را چک کنید",
       status: 500,
     };
   }
