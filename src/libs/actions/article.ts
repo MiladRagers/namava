@@ -53,6 +53,7 @@ export const createNewArticle = async (data: FormData) => {
       movie,
       image: imageName,
       content,
+      creator: user._id,
     });
 
     revalidatePath("/p-admin/articles");
@@ -61,7 +62,6 @@ export const createNewArticle = async (data: FormData) => {
       message: "مقاله با موفقیت ساخته شد",
       status: 201,
     };
-    
   } catch (error) {
     return {
       message: "لطفا اتصال اینترنت خود را بررسی کنید",
