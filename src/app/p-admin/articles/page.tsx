@@ -1,3 +1,4 @@
+import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import AddNewArticle from "@/components/templates/p-admin/article/AddNewArticle";
 import ArticleList from "@/components/templates/p-admin/article/ArticleList";
@@ -17,7 +18,10 @@ async function ArticlesPage({ searchParams }: TAdminPage) {
     <>
       <Title name="ایجاد مقاله جدید" />
       <AddNewArticle movies={JSON.parse(JSON.stringify(movies))} />
-      <Title name="لیست مقاله ها" />
+      <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-y-3">
+        <Title name="لیست مقاله ها" />
+        <Search />
+      </div>
       <ArticleList
         articles={JSON.parse(JSON.stringify(data.articles))}
         counts={data.counts}
