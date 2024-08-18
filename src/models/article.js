@@ -38,6 +38,11 @@ const schema = mongoose.Schema(
       required: true,
       trim: true,
     },
+
+    creator: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
