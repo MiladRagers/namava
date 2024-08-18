@@ -84,9 +84,11 @@ function AddNewFilm({ stars, subCategories }: any) {
     const res = await createNewMovie(formData, selectedOption);
     if (res?.status === 201) {
       setIsLoading(false);
+      reset();
       return toast.success(`${res?.message}`);
     }
     setIsLoading(false);
+    reset();
     toast.error(`${res?.message}`);
   };
   return (
