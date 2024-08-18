@@ -33,7 +33,7 @@ function SelectBox({
   selected,
   onSelected,
 }: TSelectBox) {
-  if (!multiple) {
+  if (!multiple && !selected) {
     return (
       <div className="flex w-full flex-col gap-y-3 text-white relative">
         <Label title={title} className="!text-base md:!text-lg min-h-[28px]" />
@@ -81,7 +81,7 @@ function SelectBox({
           <Select
             defaultValue={selected}
             className="w-full"
-            isMulti
+            isMulti={multiple}
             options={options}
             onChange={handleSelectChange}
             placeholder="لطفا بازیگر مورد نظر را انتخاب کنید"

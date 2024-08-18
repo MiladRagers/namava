@@ -331,6 +331,17 @@ export const getMovies = async () => {
   }
 };
 
+// get all movies with out any pagination
+
+export const getAllMoviesWithOutPagination = async () => {
+  try {
+    connectToDB();
+    return await MovieModel.find({});
+  } catch (error) {
+    return error;
+  }
+};
+
 // get all comments with pagination
 
 export const getAllComments = async (page: string) => {

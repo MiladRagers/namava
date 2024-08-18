@@ -16,9 +16,10 @@ import toast from "react-hot-toast";
 
 const Editor = dynamic(() => import("./Editor"), { ssr: false });
 
-function AddNewArticle() {
+function AddNewArticle({ movies }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const [articleBody, setArticleBody] = useState("");
+  const [selectedOption, setSelectedOption] = useState([]);
   const {
     register,
     handleSubmit,
@@ -28,10 +29,11 @@ function AddNewArticle() {
     resolver: zodResolver(Article),
   });
 
-  const fakeShows = [
-    { id: 1, value: "کاپیتان", label: "کاپیتان آمریکا" },
-    { id: 2, value: "جومونگ", label: "جومونگ" },
-  ];
+  const moviesOption = movies.map((movie: any) => ({
+    id: movie._id,
+    value: movie._id,
+    label: movie.title,
+  }));
 
   const createNewArticleHandeler = async (data: TArticle) => {
     console.log(data);
@@ -102,12 +104,17 @@ function AddNewArticle() {
         placeholder="بطور مثال اکشن ، علمی و..."
       />
 
+  
+
       <SelectBox
         register={register}
         errors={errors}
-        name="movie"
-        options={fakeShows}
+        name="stars"
+        options={moviesOption}
         title="نام فیلم / سریال"
+        selected={selectedOption}
+        onSelected={setSelectedOption}
+        disable={isLoading}
       />
 
       <Input
