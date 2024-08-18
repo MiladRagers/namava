@@ -1,9 +1,13 @@
 "use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteArticle } from "@/src/libs/actions/article";
 import Image from "next/image";
 import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaCheck, FaPencil, FaTrash, FaXmark } from "react-icons/fa6";
 
 function ArticleList({ articles, counts }: any) {
@@ -13,6 +17,15 @@ function ArticleList({ articles, counts }: any) {
       return allArticles.filter((article: any) => article._id !== id);
     }
   );
+
+  const deleteArticleHandler = async (id: string) => {
+    deleteOptimistc(id);
+    const res = await deleteArticle(id);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+    toast.error(`${toast.error}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -27,7 +40,7 @@ function ArticleList({ articles, counts }: any) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {articles.map((article: any, index: number) => (
+          {optimisticArticles.map((article: any, index: number) => (
             <Table.Row>
               <td>{index + 1}</td>
               <td className="!p-0 md:!p-5">
@@ -46,10 +59,20 @@ function ArticleList({ articles, counts }: any) {
               <td>{new Date(article.createdAt).toLocaleDateString("fa-IR")}</td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  <FaTrash className="text-red-600 text-base md:text-lg" />
+                  <Modal>
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="delete">
+                      <ConfirmModal
+                        id={article._id}
+                        onAction={deleteArticleHandler}
+                      />
+                    </Modal.Page>
+                  </Modal>
                   <FaPencil className="text-sky-600 text-base md:text-lg" />
                   <FaCheck className="text-green-500 text-base md:text-lg" />
-                  <FaXmark className="text-amber-500 text-base md:text-lg" />
+                  {/* <FaXmark className="text-amber-500 text-base md:text-lg" /> */}
                 </div>
               </td>
             </Table.Row>
