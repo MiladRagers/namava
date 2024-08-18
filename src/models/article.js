@@ -41,3 +41,7 @@ const schema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const model = mongoose.models.Article || mongoose.model("Article", schema);
+
+export default model;

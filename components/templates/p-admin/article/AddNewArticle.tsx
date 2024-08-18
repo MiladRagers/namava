@@ -11,10 +11,13 @@ import SelectBox from "@/components/modules/p-admin/SelectBox";
 import Button from "@/components/modules/auth/Button/Button";
 import Label from "@/components/modules/auth/Label/Label";
 import dynamic from "next/dynamic";
+import { createNewArticle } from "@/src/libs/actions/article";
+import toast from "react-hot-toast";
 
 const Editor = dynamic(() => import("./Editor"), { ssr: false });
 
 function AddNewArticle() {
+  const [isLoading, setIsLoading] = useState(false);
   const [articleBody, setArticleBody] = useState("");
   const {
     register,
@@ -30,14 +33,34 @@ function AddNewArticle() {
     { id: 2, value: "جومونگ", label: "جومونگ" },
   ];
 
-  const createNewArticle = async (data: TArticle) => {
+  const createNewArticleHandeler = async (data: TArticle) => {
     console.log(data);
+    const articleData = new FormData();
+    articleData.append("title", data.title);
+    articleData.append("link", data.link);
+    articleData.append("readingTime", data.readingTime);
+    articleData.append("tags", data.tags);
+    articleData.append("movie", data.movie);
+    articleData.append("image", data.image[0]);
+    articleData.append("content", articleBody);
+
+    const res = await createNewArticle(articleData);
+    setIsLoading(true);
+
+    if (res?.status === 201) {
+      setIsLoading(false);
+      reset();
+      return toast.success(`${res?.message}`);
+    }
+    reset();
+    setIsLoading(false);
+    toast.error(`${res?.message}`);
   };
 
   return (
     <form
       className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
-      onSubmit={handleSubmit(createNewArticle)}
+      onSubmit={handleSubmit(createNewArticleHandeler)}
     >
       <Input
         register={register}
