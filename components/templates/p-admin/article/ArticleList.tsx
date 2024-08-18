@@ -63,6 +63,13 @@ function ArticleList({ articles, counts }: any) {
                     <Modal.Open name="delete">
                       <FaTrash className="text-red-600 text-base md:text-lg" />
                     </Modal.Open>
+                    <Modal.Open name="status">
+                      {article.isAccept ? (
+                        <FaXmark className="text-amber-500 text-base md:text-lg" />
+                      ) : (
+                        <FaCheck className="text-green-500 text-base md:text-lg" />
+                      )}
+                    </Modal.Open>
                     <Modal.Page name="delete">
                       <ConfirmModal
                         id={article._id}
@@ -71,8 +78,6 @@ function ArticleList({ articles, counts }: any) {
                     </Modal.Page>
                   </Modal>
                   <FaPencil className="text-sky-600 text-base md:text-lg" />
-                  <FaCheck className="text-green-500 text-base md:text-lg" />
-                  {/* <FaXmark className="text-amber-500 text-base md:text-lg" /> */}
                 </div>
               </td>
             </Table.Row>
