@@ -13,13 +13,15 @@ import Label from "@/components/modules/auth/Label/Label";
 import dynamic from "next/dynamic";
 import { createNewArticle } from "@/src/libs/actions/article";
 import toast from "react-hot-toast";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 const Editor = dynamic(() => import("./Editor"), { ssr: false });
 
 function AddNewArticle({ movies }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const [articleBody, setArticleBody] = useState("");
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState<any>({});
+
   const {
     register,
     handleSubmit,
@@ -28,6 +30,8 @@ function AddNewArticle({ movies }: any) {
   } = useForm<TArticle>({
     resolver: zodResolver(Article),
   });
+
+  console.log(errors);
 
   const moviesOption = movies.map((movie: any) => ({
     id: movie._id,
@@ -42,7 +46,7 @@ function AddNewArticle({ movies }: any) {
     articleData.append("link", data.link);
     articleData.append("readingTime", data.readingTime);
     articleData.append("tags", data.tags);
-    articleData.append("movie", data.movie);
+    articleData.append("movie", selectedOption?.value);
     articleData.append("image", data.image[0]);
     articleData.append("content", articleBody);
 
@@ -72,6 +76,7 @@ function AddNewArticle({ movies }: any) {
         title="عنوان"
         type="text"
         placeholder="عنوان مقاله را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -82,6 +87,7 @@ function AddNewArticle({ movies }: any) {
         title="لینک "
         type="text"
         placeholder="لینک مقاله را وارد کنید"
+        disable={isLoading}
       />
 
       <Input
@@ -91,6 +97,7 @@ function AddNewArticle({ movies }: any) {
         name="readingTime"
         title="مدت زمان"
         type="text"
+        disable={isLoading}
         placeholder="مدت زمان مورد نیاز برای مطالعه مقاله را وارد کنید"
       />
 
@@ -102,14 +109,13 @@ function AddNewArticle({ movies }: any) {
         title="تگ ها"
         type="text"
         placeholder="بطور مثال اکشن ، علمی و..."
+        disable={isLoading}
       />
-
-  
 
       <SelectBox
         register={register}
         errors={errors}
-        name="stars"
+        name="movie"
         options={moviesOption}
         title="نام فیلم / سریال"
         selected={selectedOption}
@@ -123,6 +129,7 @@ function AddNewArticle({ movies }: any) {
         name="image"
         title="آپلودر عکس"
         type="file"
+        disable={isLoading}
       />
 
       <div className="md:col-span-2 space-y-3 text-white">
@@ -131,13 +138,21 @@ function AddNewArticle({ movies }: any) {
       </div>
 
       <div className="flex items-center gap-x-4 mt-5 text-white">
-        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
-          ایجاد مقاله
+        <Button
+          disabled={isLoading}
+          type="submit"
+          className={`${isValid ? "" : "!bg-slate-600 "}`}
+        >
+          {isLoading ? <Spinner /> : "ایجاد مقاله"}
         </Button>
-        <Button className={`${isValid ? "" : "!bg-slate-600 "}`}>
+        <Button
+          disabled={isLoading}
+          type="button"
+          className={`${isValid ? "" : "!bg-slate-600 "}`}
+        >
           پیش نویس
         </Button>
-        <Button onClick={() => reset()} className="bg-red-700">
+        <Button type="reset" onClick={() => reset()} className="bg-red-700">
           لغو
         </Button>
       </div>

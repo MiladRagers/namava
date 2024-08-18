@@ -242,7 +242,7 @@ export const Article = z.object({
   title: z
     .string()
     .min(3, { message: "عنوان مقاله حداقل باید 3 کارکتر باشد" })
-    .max(30, { message: "عنوان مقاله باید 30 کاراکتر داشته باشد" }),
+    .max(100, { message: "عنوان مقاله باید 100 کاراکتر داشته باشد" }),
   readingTime: z
     .string()
     .min(1, { message: "مدت زمان خواندن حداقل باید 1 کارکتر باشد" })
@@ -261,9 +261,6 @@ export const Article = z.object({
     },
     { message: "عکس را آپلود کنید" }
   ),
-  movie: z
-    .string()
-    .min(1, { message: "لطفا فیلم مربوط به این مقاله را انتخاب کنید" }),
 });
 
 export type TArticle = z.infer<typeof Article>;

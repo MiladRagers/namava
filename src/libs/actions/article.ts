@@ -49,7 +49,7 @@ export const createNewArticle = async (data: FormData) => {
       title,
       link,
       readingTime,
-      tags: tags.split(","),
+      tags: tags.split("،"),
       movie,
       image: imageName,
       content,
