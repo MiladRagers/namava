@@ -8,6 +8,7 @@ import SeasonModel from "@/src/models/Season";
 import ContactModel from "@/src/models/contactus";
 import MovieModel from "@/src/models/movie";
 import CommentModel from "@/src/models/comments";
+import ArticleModel from "@/src/models/article";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 export const getAllCategories = async (page: number, search: string) => {
@@ -394,6 +395,26 @@ export const getSpecificSeasons = async (id: string) => {
       .sort({ seasonNumber: 1 });
 
     return seasons;
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all articles
+export const getAllArticles = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const articles = await ArticleModel.find({ title: { $regex: regex } })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("creator movie", "name title link");
+
+    const counts = await ArticleModel.countDocuments();
+    return {
+      articles,
+      counts,
+    };
   } catch (error) {
     return error;
   }
