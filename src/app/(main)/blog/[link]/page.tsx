@@ -50,7 +50,9 @@ async function ArticlePage({ params }: TParams) {
           </div>
 
           <Link
-            href="/movie/1"
+            href={`/${article.movie.type === "film" ? "movie" : "series"}/${
+              article.movie.link
+            }`}
             className="border flex-center w-[300px] text-sm text-namava hover:bg-namava transition-all hover:text-white border-namava px-2 py-2 rounded-md mt-5"
           >
             تماشا {article.movie.title} در نماوا
@@ -64,10 +66,7 @@ async function ArticlePage({ params }: TParams) {
           {/* tags */}
           <div className="text-sm flex items-center flex-wrap gap-x-4 mb-6">
             <span className="font-IranMedium">واژگان کلیدی : </span>
-            <p className="text-xs/[26px]">
-              میلاد سلامیان ، هیرو احمدی ، کیومرث رضوی ، جلال رضوی ، مهدی
-              سلامیان
-            </p>
+            <p className="text-xs/[26px]">{article.tags.join(" , ")}</p>
           </div>
           {/* share */}
           <div className="text-sm flex md:items-center gap-4 flex-col md:flex-row">
@@ -102,7 +101,12 @@ async function ArticlePage({ params }: TParams) {
           height={1080}
           className="w-[120px] h-[176px] rounded-md"
         />
-        <Link href={`/${article.movie.type === "film" ? 'movie' :"series"}/${article.movie.link}`} className="space-y-10 block">
+        <Link
+          href={`/${article.movie.type === "film" ? "movie" : "series"}/${
+            article.movie.link
+          }`}
+          className="space-y-10 block"
+        >
           <h3>{article.movie.title}</h3>
           <Button className="!w-[150px] md:!w-[200px]">تماشا در نماوا</Button>
         </Link>
