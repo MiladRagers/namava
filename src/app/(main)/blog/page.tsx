@@ -1,17 +1,22 @@
 import ArticleSlider from "@/components/templates/article/ArticleSlider";
 import MainSlider from "@/components/templates/article/MainSlider";
+import { getArticles } from "@/src/libs/service/services";
 import Link from "next/link";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
-function page() {
+async function page() {
+  const [articlesSlider] = await Promise.all([getArticles()]);
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">
-      <MainSlider />
+      <MainSlider articles={JSON.parse(JSON.stringify(articlesSlider))} />
       <div className="mt-10">
         <div className="text-white flex items-center justify-between mb-6">
           <p className="text-base md:text-lg font-IranMedium">آخرین مطالب</p>
-          <Link href={""} className="flex items-center gap-x-2 hover:bg-namava hover:text-white px-3 py-1.5 rounded-md transition-all">
+          <Link
+            href={""}
+            className="flex items-center gap-x-2 hover:bg-namava hover:text-white px-3 py-1.5 rounded-md transition-all"
+          >
             مشاهده بیشتر
             <FaChevronLeft />
           </Link>
@@ -21,7 +26,10 @@ function page() {
       <div className="mt-10">
         <div className="text-white flex items-center justify-between mb-6">
           <p className="text-base md:text-lg font-IranMedium">مطالب پر مخاطب</p>
-          <Link href={""} className="flex items-center gap-x-2 hover:bg-namava hover:text-white px-3 py-1.5 rounded-md transition-all">
+          <Link
+            href={""}
+            className="flex items-center gap-x-2 hover:bg-namava hover:text-white px-3 py-1.5 rounded-md transition-all"
+          >
             مشاهده بیشتر
             <FaChevronLeft />
           </Link>
