@@ -434,3 +434,19 @@ export const getArticles = async () => {
     return error;
   }
 };
+
+// get specific article
+
+export const getArticle = async (link: string) => {
+  try {
+    connectToDB();
+    const article = await ArticleModel.findOne({ link }).populate(
+      "creator movie",
+      "name title link mainImage type link"
+    );
+
+    return article;
+  } catch (error) {
+    return error;
+  }
+};
