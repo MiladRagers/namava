@@ -419,3 +419,18 @@ export const getAllArticles = async (page: number, search: string) => {
     return error;
   }
 };
+
+// get all articles without pagination
+export const getArticles = async () => {
+  try {
+    connectToDB();
+    const articles = await ArticleModel.find({ isAccept: true }).populate(
+      "creator movie",
+      "name title link"
+    );
+
+    return articles;
+  } catch (error) {
+    return error;
+  }
+};
