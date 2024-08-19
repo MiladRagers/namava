@@ -21,8 +21,8 @@ function ArticleList({ articles, counts }: any) {
   const deleteArticleHandler = async (id: string) => {
     deleteOptimistc(id);
     const res = await deleteArticle(id);
-    if (res?.status === 200) {
-      return toast.success(`${res?.message}`);
+    if (res.status === 200) {
+      return toast.success(`${res.message}`);
     }
     toast.error(`${toast.error}`);
   };
