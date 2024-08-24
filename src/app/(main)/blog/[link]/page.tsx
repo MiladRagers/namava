@@ -13,6 +13,8 @@ const ArticleBody = dynamic(
 );
 async function ArticlePage({ params }: TParams) {
   const article = await getArticle(params.link as string);
+
+  const articleCreatedTime = new Date(article.createdAt);
   return (
     <>
       <div className="max-w-[800px] mx-auto shadow-2xl bg-namavaBlack text-white mt-28 rounded-md">
@@ -41,10 +43,16 @@ async function ArticlePage({ params }: TParams) {
               <Link href="/" className="text-namava">
                 {article.creator.name}
               </Link>
+              <span>{articleCreatedTime.toLocaleDateString("fa-IR")}</span>
               <span>
-                {new Date(article.createdAt).toLocaleDateString("fa-IR")}
+                {articleCreatedTime.getHours() < 10
+                  ? `0${articleCreatedTime.getHours()}`
+                  : articleCreatedTime.getHours()}{" "}
+                :{" "}
+                {articleCreatedTime.getMinutes() < 10
+                  ? `0${articleCreatedTime.getMinutes()}`
+                  : articleCreatedTime.getMinutes()}
               </span>
-              <span> - 12:52 ب.ظ</span>
               <span className="block w-px h-4 bg-slate-400"></span>
               <span>زمان مطالعه : </span>
               <span>{article.readingTime} دقیقه</span>
