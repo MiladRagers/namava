@@ -540,3 +540,8 @@ table {
   border: none !important;
 }
 
+
+.swiper-pagination-bullets{
+  margin-top: -54px;
+}
+
