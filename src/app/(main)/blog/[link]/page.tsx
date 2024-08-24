@@ -41,7 +41,9 @@ async function ArticlePage({ params }: TParams) {
               <Link href="/" className="text-namava">
                 {article.creator.name}
               </Link>
-              <span> - 28 تیر 1403</span>
+              <span>
+                {new Date(article.createdAt).toLocaleDateString("fa-IR")}
+              </span>
               <span> - 12:52 ب.ظ</span>
               <span className="block w-px h-4 bg-slate-400"></span>
               <span>زمان مطالعه : </span>
