@@ -10,12 +10,16 @@ export type TComment = {
 
 export type TParams = {
   params: { [key: string]: string | string[] | undefined };
-  searchParams?: { [key: string]: string};
+  searchParams?: { [key: string]: string };
 };
 
 export type TAdminPage = {
   searchParams: { page: string; q: string };
   params: { [key: string]: string | string[] | undefined | any };
+};
+
+export type TSearchParams = {
+  searchParams?: { [key: string]: string | undefined | any };
 };
 
 export const baseURL = "http://localhost:3000";

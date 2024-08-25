@@ -5,7 +5,6 @@ import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
 import Collections from "@/components/templates/index/Collections/Collections";
 import {
   getAllSlidersMovies,
-  getCategory,
   getMovies,
   getStars,
 } from "../libs/service/services";

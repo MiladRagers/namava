@@ -458,9 +458,11 @@ export const searchMovies = async (search: string) => {
     connectToDB();
     const regex = new RegExp(search, "i");
     const movies = await MovieModel.find({
-      title: { $regex: regex },
-      longDesc: { $regex: regex },
-      shortDesc: { $regex: regex },
+      $or: [
+        { title: { $regex: regex } },
+        { longDesc: { $regex: regex } },
+        { shortDesc: { $regex: regex } },
+      ],
     });
 
     return movies;
