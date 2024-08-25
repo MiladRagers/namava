@@ -450,3 +450,21 @@ export const getArticle = async (link: string) => {
     return error;
   }
 };
+
+// search between movies and some filters based on movie detail
+
+export const searchMovies = async (search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const movies = await MovieModel.find({
+      title: { $regex: regex },
+      longDesc: { $regex: regex },
+      shortDesc: { $regex: regex },
+    });
+
+    return movies;
+  } catch (error) {
+    return error;
+  }
+};
