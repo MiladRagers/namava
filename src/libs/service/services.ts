@@ -453,7 +453,12 @@ export const getArticle = async (link: string) => {
 
 // search between movies and some filters based on movie detail
 
-export const searchMovies = async (search: string) => {
+export const searchMovies = async (
+  search: string,
+  types: string[] = ["film", "series"]
+) => {
+  console.log(types);
+
   try {
     connectToDB();
     const regex = new RegExp(search, "i");
@@ -463,7 +468,11 @@ export const searchMovies = async (search: string) => {
         { longDesc: { $regex: regex } },
         { shortDesc: { $regex: regex } },
       ],
+
+      type: { $in: types },
     });
+
+    console.log(movies);
 
     return movies;
   } catch (error) {

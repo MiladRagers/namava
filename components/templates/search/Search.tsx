@@ -7,7 +7,7 @@ import { useDebouncedCallback } from "use-debounce";
 import Filter from "./Filter";
 import Button from "@/components/modules/auth/Button/Button";
 
-function SearchBox() {
+function SearchBox({ search }: { search: string }) {
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();

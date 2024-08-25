@@ -14,9 +14,18 @@ interface Movie {
   showTime: string;
 }
 function Movie({ image, title, link, isLink, type, showTime }: Movie) {
+  const router = useRouter();
+  const handleMovieNavigation = async () => {
+    if (isLink) {
+      return router.push(`/movie/${link}`);
+    }
+  };
   return (
     <>
-      <div className={`transition-all hidden lg:block group cursor-pointer `}>
+      <div
+        onClick={() => handleMovieNavigation()}
+        className={`transition-all hidden lg:block group cursor-pointer `}
+      >
         <div className="relative">
           <Image
             src={image}
