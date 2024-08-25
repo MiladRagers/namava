@@ -14,7 +14,7 @@ async function page({ params }: TParams) {
     authUser(),
   ]);
 
-  const realatedMovies = await getRealedMovies(movie.category, movie._id);
+  const realatedMovies: any = await getRealedMovies(movie.category, movie._id);
 
   return (
     <>
@@ -38,11 +38,13 @@ async function page({ params }: TParams) {
           title={`بازیگران فیلم ${movie.title}`}
         />
         {/* <StarsSlider title="عوامل فیلم هاوایی" /> */}
-        <MovieSlider
-          movies={JSON.parse(JSON.stringify(realatedMovies))}
-          title={`بر اساس ${movie.title}`}
-          link="/"
-        />
+        {realatedMovies.length > 0 && (
+          <MovieSlider
+            movies={JSON.parse(JSON.stringify(realatedMovies))}
+            title={`بر اساس ${movie.title}`}
+            link="/"
+          />
+        )}
       </section>
 
       <section className="pb-20">
