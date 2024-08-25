@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArticleBox from "./ArticleBox";
 
-function ArticleSlider() {
+function ArticleSlider({ articles }: any) {
   return (
     <Swiper
       slidesPerView={4}
@@ -29,46 +29,16 @@ function ArticleSlider() {
         },
       }}
     >
-      <SwiperSlide>
-        <ArticleBox
-          title="«شوگان»؛ نگاه تازه‌ به یک داستان ماندگار"
-          createdAt="25 تیر 1403"
-          image="ar1.jpg"
-          readingTime={5}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ArticleBox
-          title="«شوگان»؛ نگاه تازه‌ به یک داستان ماندگار"
-          createdAt="25 تیر 1403"
-          image="ar2.jpg"
-          readingTime={5}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ArticleBox
-          title="«شوگان»؛ نگاه تازه‌ به یک داستان ماندگار"
-          createdAt="25 تیر 1403"
-          image="ar3.jpg"
-          readingTime={5}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ArticleBox
-          title="«شوگان»؛ نگاه تازه‌ به یک داستان ماندگار"
-          createdAt="25 تیر 1403"
-          image="ar4.jpg"
-          readingTime={5}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ArticleBox
-          title="«شوگان»؛ نگاه تازه‌ به یک داستان ماندگار"
-          createdAt="25 تیر 1403"
-          image="ar5.jpg"
-          readingTime={5}
-        />
-      </SwiperSlide>
+      {articles.map((article: any) => (
+        <SwiperSlide key={article._id}>
+          <ArticleBox
+            title={article.title}
+            createdAt={new Date(article.createdAt).toLocaleDateString("fa-IR")}
+            image={article.image}
+            readingTime={5}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

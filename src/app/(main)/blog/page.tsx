@@ -6,10 +6,10 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
 async function page() {
-  const [articlesSlider] = await Promise.all([getArticles()]);
+  const [articles] : any = await Promise.all([getArticles()]);
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">
-      <MainSlider articles={JSON.parse(JSON.stringify(articlesSlider))} />
+      <MainSlider articles={JSON.parse(JSON.stringify(articles))} />
       <div className="mt-10">
         <div className="text-white flex items-center justify-between mb-6">
           <p className="text-base md:text-lg font-IranMedium">آخرین مطالب</p>
@@ -21,7 +21,7 @@ async function page() {
             <FaChevronLeft />
           </Link>
         </div>
-        <ArticleSlider />
+        <ArticleSlider articles={JSON.parse(JSON.stringify(articles))} />
       </div>
       <div className="mt-10">
         <div className="text-white flex items-center justify-between mb-6">
@@ -34,7 +34,9 @@ async function page() {
             <FaChevronLeft />
           </Link>
         </div>
-        <ArticleSlider />
+        <ArticleSlider
+          articles={JSON.parse(JSON.stringify(articles.reverse()))}
+        />
       </div>
     </div>
   );

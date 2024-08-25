@@ -13,7 +13,7 @@ function ArticleBox({ title, image, createdAt, readingTime }: TArticle) {
   return (
     <Link href="/blog/1" className="shadow-2xl">
       <Image
-        src={`/images/article/${image}`}
+        src={image}
         alt={image}
         width={1920}
         height={1080}
