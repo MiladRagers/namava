@@ -8,9 +8,6 @@ import React from "react";
 
 async function SearchPage({ searchParams }: TSearchParams) {
   const movies: any = await searchMovies(searchParams?.q ?? "");
-
-  console.log("movies = > ", movies);
-
   return (
     <div className="flex container pt-24 pb-20 gap-x-8 min-h-screen text-white">
       <Filter className="hidden md:block" />
