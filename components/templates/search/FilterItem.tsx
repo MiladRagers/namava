@@ -64,6 +64,7 @@ function FilterItem({
 
   const deleteUserFilter = () => {
     params.delete(slug);
+    onOpen("");
     router.replace(`${pathname}?${params}`);
   };
 
