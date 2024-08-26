@@ -44,7 +44,8 @@ function Filter({ className, onShow, categories }: Filter) {
           className="text-namava text-sm"
           onClick={() => {
             router.replace(pathname);
-            onShow(false);
+            onShow?.(false);
+            setCurOpen?.("");
           }}
         >
           حذف همه
