@@ -11,10 +11,12 @@ async function SearchPage({ searchParams }: TSearchParams) {
       searchParams?.q ?? "",
       searchParams?.type,
       searchParams?.genre,
-      searchParams?.voice
+      searchParams?.voice,
+      searchParams?.country
     ),
     getAllSubcategories(),
   ]);
+
 
   const formatedCategories = categories.map((category: any) => ({
     id: String(category._id),

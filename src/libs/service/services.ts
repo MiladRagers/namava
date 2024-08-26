@@ -457,12 +457,14 @@ export const searchMovies = async (
   search: string,
   types: string[],
   categoryNames: string[],
-  voices: string[]
+  voices: string[],
+  countries: string[]
 ) => {
   try {
     await connectToDB();
 
-    let categoryIds = null;
+    console.log(countries);
+
     let filter = {};
 
     if (categoryNames?.length) {
@@ -470,7 +472,7 @@ export const searchMovies = async (
         title: { $in: categoryNames },
       });
 
-      categoryIds = categories.map((category) => category._id);
+      let categoryIds = categories.map((category) => category._id);
       filter = {
         ...filter,
         category: { $in: categoryIds },
@@ -491,6 +493,15 @@ export const searchMovies = async (
       };
     }
 
+    if (countries?.length) {
+      filter = {
+        ...filter,
+        country: {
+          $in: typeof countries === "string" ? Array(countries) : countries,
+        },
+      };
+    }
+
     const regex = new RegExp(search, "i");
     const movies = await MovieModel.find({
       $or: [
@@ -500,10 +511,6 @@ export const searchMovies = async (
       ],
       ...filter,
     });
-
-    console.log("Filter:", filter);
-    console.log("Regex:", regex);
-    console.log("Movies found:", movies.length);
 
     return movies;
   } catch (error) {
