@@ -17,7 +17,11 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
   const router = useRouter();
   const handleMovieNavigation = async () => {
     if (isLink) {
-      return router.push(`/movie/${link}`);
+      if (type === "film") {
+        router.push(`/movie/${link}`);
+      }else{
+        router.push(`/series/${link}`);
+      }
     }
   };
   return (
