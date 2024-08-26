@@ -17,7 +17,6 @@ async function SearchPage({ searchParams }: TSearchParams) {
     getAllSubcategories(),
   ]);
 
-
   const formatedCategories = categories.map((category: any) => ({
     id: String(category._id),
     name: category.title,
@@ -33,7 +32,10 @@ async function SearchPage({ searchParams }: TSearchParams) {
         <SearchBox
           categories={JSON.parse(JSON.stringify(formatedCategories))}
           search={searchParams?.q}
+          movies={JSON.parse(JSON.stringify(movies))}
+          q={searchParams?.q}
         />
+
         {movies.length > 0 ? (
           <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-4 gap-y-16 pt-10">
             {movies.map((movie: any) => (
