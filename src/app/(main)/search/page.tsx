@@ -2,18 +2,35 @@ import Movie from "@/components/modules/main/Movie/Movie";
 import Filter from "@/components/templates/search/Filter";
 import SearchBox from "@/components/templates/search/Search";
 import SearchMovie from "@/icons/SearchMovie";
-import { searchMovies } from "@/src/libs/service/services";
+import {
+  getAllSubcategories,
+  getCategories,
+  searchMovies,
+} from "@/src/libs/service/services";
 import { TSearchParams } from "@/src/libs/types";
 import React from "react";
 
 async function SearchPage({ searchParams }: TSearchParams) {
-  const movies: any = await searchMovies(
-    searchParams?.q ?? "",
-    searchParams?.type
-  );
+  const [movies, categories]: any = await Promise.all([
+    searchMovies(
+      searchParams?.q ?? "",
+      searchParams?.type,
+      searchParams?.genre
+    ),
+    getAllSubcategories(),
+  ]);
+
+  const formatedCategories = categories.map((category: any) => ({
+    id: String(category._id),
+    name: category.title,
+  }));
+
   return (
     <div className="flex container pt-24 pb-20 gap-x-8 min-h-screen text-white">
-      <Filter className="hidden md:block" />
+      <Filter
+        categories={JSON.parse(JSON.stringify(formatedCategories))}
+        className="hidden md:block"
+      />
       <div className="w-full  md:mr-[350px]">
         <SearchBox search={searchParams?.q} />
         {movies.length > 0 ? (

@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterItem from "./FilterItem";
 import { genres, voiceType, orderType, date } from "../../../public/db";
 import { country } from "../../../public/db";
@@ -9,10 +9,15 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 type Filter = {
   className?: string;
   onShow?: any;
+  categories?: any;
 };
 
-function Filter({ className, onShow }: Filter) {
+function Filter({ className, onShow, categories }: Filter) {
+
+  console.log(categories);
+  
   const [curOpen, setCurOpen] = useState<string | null>(null);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -26,8 +31,6 @@ function Filter({ className, onShow }: Filter) {
 
     router.replace(`${pathname}?${params}`);
   };
-
-  
 
   return (
     <div
@@ -75,7 +78,7 @@ function Filter({ className, onShow }: Filter) {
         <FilterItem
           curOpen={curOpen}
           onOpen={setCurOpen}
-          items={genres}
+          items={categories}
           title="ژانر ها"
           slug="genre"
         />

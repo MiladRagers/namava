@@ -455,12 +455,34 @@ export const getArticle = async (link: string) => {
 
 export const searchMovies = async (
   search: string,
-  types: string[] = ["film", "series"]
+  types: string[],
+  categoryNames: string[]
 ) => {
-  console.log(types);
-
   try {
-    connectToDB();
+    await connectToDB();
+
+    let categoryIds = null;
+    let filter = {};
+
+    if (categoryNames?.length) {
+      const categories = await CategoryModel.find({
+        title: { $in: categoryNames },
+      });
+
+      categoryIds = categories.map((category) => category._id);
+      filter = {
+        ...filter,
+        category: { $in: categoryIds },
+      };
+    }
+
+    if (types?.length) {
+      filter = {
+        ...filter,
+        type: { $in: types },
+      };
+    }
+
     const regex = new RegExp(search, "i");
     const movies = await MovieModel.find({
       $or: [
@@ -468,14 +490,16 @@ export const searchMovies = async (
         { longDesc: { $regex: regex } },
         { shortDesc: { $regex: regex } },
       ],
-
-      type: { $in: types },
+      ...filter,
     });
 
-    console.log(movies);
+    console.log('Filter:', filter);
+    console.log('Regex:', regex);
+    console.log('Movies found:', movies.length);
 
     return movies;
   } catch (error) {
+    console.error('Error in searchMovies:', error);
     return error;
   }
 };

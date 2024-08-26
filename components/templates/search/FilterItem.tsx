@@ -276,7 +276,7 @@ function FilterItem({
               )}
               <span className="text-sm text-[#ccc]">همه {title} </span>
               <ul className="space-y-4 my-4">
-                {searchedItems.map((item, index) => (
+                {searchedItems?.map((item, index) => (
                   <li key={index}>
                     <div className="flex items-center gap-x-2">
                       <input
