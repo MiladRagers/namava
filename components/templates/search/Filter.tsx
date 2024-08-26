@@ -12,9 +12,6 @@ type Filter = {
 };
 
 function Filter({ className, onShow, categories }: Filter) {
-
-  console.log(categories);
-  
   const [curOpen, setCurOpen] = useState<string | null>(null);
 
   const router = useRouter();

@@ -7,7 +7,13 @@ import { useDebouncedCallback } from "use-debounce";
 import Filter from "./Filter";
 import Button from "@/components/modules/auth/Button/Button";
 
-function SearchBox({ search }: { search: string }) {
+function SearchBox({
+  search,
+  categories,
+}: {
+  search: string;
+  categories: any;
+}) {
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -47,7 +53,11 @@ function SearchBox({ search }: { search: string }) {
           isShow ? "opacity-100 visible" : "opacity-0 invisible"
         }  z-50 text-white`}
       >
-        <Filter className="w-full h-full !rounded-none" onShow={setIsShow} />
+        <Filter
+          categories={categories}
+          className="w-full h-full !rounded-none"
+          onShow={setIsShow}
+        />
         <div
           className="absolute bottom-10 flex-center w-full"
           onClick={() => setIsShow(false)}
