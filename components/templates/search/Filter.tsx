@@ -1,10 +1,9 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { BiChevronRight } from "react-icons/bi";
+import { country, date, orderType, voiceType } from "../../../public/db";
 import FilterItem from "./FilterItem";
-import { genres, voiceType, orderType, date } from "../../../public/db";
-import { country } from "../../../public/db";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 type Filter = {
   className?: string;
