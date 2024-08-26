@@ -456,7 +456,8 @@ export const getArticle = async (link: string) => {
 export const searchMovies = async (
   search: string,
   types: string[],
-  categoryNames: string[]
+  categoryNames: string[],
+  voices: string[]
 ) => {
   try {
     await connectToDB();
@@ -473,6 +474,13 @@ export const searchMovies = async (
       filter = {
         ...filter,
         category: { $in: categoryIds },
+      };
+    }
+
+    if (voices?.length) {
+      filter = {
+        ...filter,
+        language: { $in: voices },
       };
     }
 
@@ -493,13 +501,13 @@ export const searchMovies = async (
       ...filter,
     });
 
-    console.log('Filter:', filter);
-    console.log('Regex:', regex);
-    console.log('Movies found:', movies.length);
+    console.log("Filter:", filter);
+    console.log("Regex:", regex);
+    console.log("Movies found:", movies.length);
 
     return movies;
   } catch (error) {
-    console.error('Error in searchMovies:', error);
+    console.error("Error in searchMovies:", error);
     return error;
   }
 };

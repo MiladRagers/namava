@@ -10,7 +10,8 @@ async function SearchPage({ searchParams }: TSearchParams) {
     searchMovies(
       searchParams?.q ?? "",
       searchParams?.type,
-      searchParams?.genre
+      searchParams?.genre,
+      searchParams?.voice
     ),
     getAllSubcategories(),
   ]);
