@@ -42,7 +42,10 @@ function Filter({ className, onShow, categories }: Filter) {
         </div>
         <span
           className="text-namava text-sm"
-          onClick={() => router.replace(pathname)}
+          onClick={() => {
+            router.replace(pathname);
+            onShow(false);
+          }}
         >
           حذف همه
         </span>
