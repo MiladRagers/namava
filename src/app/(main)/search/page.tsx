@@ -13,7 +13,8 @@ async function SearchPage({ searchParams }: TSearchParams) {
       searchParams?.genre,
       searchParams?.voice,
       searchParams?.country,
-      searchParams?.order
+      searchParams?.order,
+      { from: searchParams?.from, to: searchParams?.to }
     ),
     getAllSubcategories(),
   ]);

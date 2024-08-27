@@ -459,7 +459,8 @@ export const searchMovies = async (
   categoryNames: string[],
   voices: string[],
   countries: string[],
-  order: string
+  order: string,
+  range: { from: String; to: String }
 ) => {
   try {
     await connectToDB();
@@ -498,6 +499,13 @@ export const searchMovies = async (
         country: {
           $in: typeof countries === "string" ? Array(countries) : countries,
         },
+      };
+    }
+
+    if (range.from && range.to) {
+      filter = {
+        ...filter,
+        showTime: { $gte: range.from, $lte: range.to },
       };
     }
 
