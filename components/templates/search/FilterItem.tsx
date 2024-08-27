@@ -96,6 +96,8 @@ function FilterItem({
     router.replace(`${pathname}?${params}`);
   };
 
+  const fromDate = searchParams?.get("from") || 0;
+
   useEffect(() => {
     if (isOpen) {
       const height = subMenuRef.current.scrollHeight;
@@ -205,12 +207,20 @@ function FilterItem({
                 >
                   {dateType === "miladi"
                     ? date?.miladi.map((option) => (
-                        <option key={option} value={option}>
+                        <option
+                          disabled={option <= +fromDate ? true : false}
+                          key={option}
+                          value={option}
+                        >
                           {option}
                         </option>
                       ))
                     : date?.shamsi.map((option) => (
-                        <option key={option} value={option}>
+                        <option
+                          disabled={option <= +fromDate ? true : false}
+                          key={option}
+                          value={option}
+                        >
                           {option}
                         </option>
                       ))}
