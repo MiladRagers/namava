@@ -9,12 +9,10 @@ import Button from "@/components/modules/auth/Button/Button";
 import { FaXmark } from "react-icons/fa6";
 
 function SearchBox({
-  search,
   categories,
   q,
   movies,
 }: {
-  search: string;
   categories: any;
   q: string;
   movies: any;
