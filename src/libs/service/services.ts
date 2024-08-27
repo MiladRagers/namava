@@ -458,12 +458,11 @@ export const searchMovies = async (
   types: string[],
   categoryNames: string[],
   voices: string[],
-  countries: string[]
+  countries: string[],
+  order: string
 ) => {
   try {
     await connectToDB();
-
-    console.log(countries);
 
     let filter = {};
 
@@ -502,6 +501,9 @@ export const searchMovies = async (
       };
     }
 
+    const [feild, direction] = order.split("-");
+    const sort = direction === "asc" ? 1 : -1;
+
     const regex = new RegExp(search, "i");
     const movies = await MovieModel.find({
       $or: [
@@ -510,7 +512,7 @@ export const searchMovies = async (
         { shortDesc: { $regex: regex } },
       ],
       ...filter,
-    });
+    }).sort(order !== "default" ? { [feild]: sort } : {});
 
     return movies;
   } catch (error) {

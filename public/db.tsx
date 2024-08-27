@@ -115,10 +115,10 @@ export let voiceType = [
 
 export let orderType = [
   { name: "پیش فرض (مرتبط ترین)", id: 1, slug: "default" },
-  { name: "تازه های نماوا", id: 2, slug: "movie-desc" },
-  { name: "امتیاز IMDB", id: 3, slug: "score-desc" },
-  { name: "سال ساخت (جدید ترین)", id: 4, slug: "created-desc" },
-  { name: "سال ساخت (قدیمی ترین)", id: 5, slug: "created-asc" },
+  { name: "تازه های نماوا", id: 2, slug: "showTime-desc" },
+  { name: "امتیاز IMDB", id: 3, slug: "IMDB-desc" },
+  { name: "سال ساخت (جدید ترین)", id: 4, slug: "createdAt-desc" },
+  { name: "سال ساخت (قدیمی ترین)", id: 5, slug: "createdAt-asc" },
 ];
 
 export let date: { shamsi: number[]; miladi: number[] } = {
