@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Filter from "./Filter";
 import Button from "@/components/modules/auth/Button/Button";
+import { FaXmark } from "react-icons/fa6";
 
 function SearchBox({
   search,
@@ -45,18 +46,30 @@ function SearchBox({
             {searchParams.size}
           </span>
         </div>
-        <div className="bg-[#37383e] text-[13px] md:text-base w-full py-2 px-3 md:py-4 md:px-6 rounded-xl flex items-center gap-x-2">
-          <Search className="!w-[30px] !h-[30px] !fill-white " />
-          <input
-            value={searchValue}
-            type="text"
-            placeholder="فیلم ، سریال ، بازیگر و ژانر"
-            className="bg-transparent outline-none text-[#cccc] w-full"
-            onChange={(e) => {
-              handleSearch(e.target.value);
-              setSearchValue(e.target.value);
-            }}
-          />
+        <div className="bg-[#37383e] text-[13px] md:text-base w-full py-2 px-3 md:py-4 md:px-6 rounded-xl flex items-center justify-between gap-x-2">
+          <div className="flex items-center gap-x-2">
+            <Search className="!w-[30px] !h-[30px] !fill-white " />
+            <input
+              value={searchValue}
+              type="text"
+              placeholder="فیلم ، سریال ، بازیگر و ژانر"
+              className="bg-transparent outline-none text-[#cccc] w-full"
+              onChange={(e) => {
+                handleSearch(e.target.value);
+                setSearchValue(e.target.value);
+              }}
+            />
+          </div>
+          {searchValue.length > 2 && (
+            <FaXmark
+              onClick={() => {
+                setSearchValue("");
+                params.delete("q");
+                router.replace(`${pathname}?${params}`);
+              }}
+              className="text-lg text-white md:text-xl cursor-default md:cursor-pointer"
+            />
+          )}
         </div>
         <div
           className={`fixed md:opacity-0 md:invisible inset-0 ${
