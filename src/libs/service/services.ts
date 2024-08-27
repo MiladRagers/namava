@@ -501,7 +501,7 @@ export const searchMovies = async (
       };
     }
 
-    const [feild, direction] = order.split("-");
+    const [feild, direction] = order ? order.split("-") : [];
     const sort = direction === "asc" ? 1 : -1;
 
     const regex = new RegExp(search, "i");
