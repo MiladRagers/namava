@@ -563,17 +563,21 @@ export const getAllEpisodes = async (
   try {
     connectToDB();
     const regex = new RegExp(search, "i");
+    const mainMovie = await MovieModel.findOne({ _id: id });
     const episodes = await EpisodeModel.find({
       title: { $regex: regex },
-      _id: id,
+      series: id,
     })
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .sort({ createdAt: -1 })
+      .populate("season");
 
     const counts = await EpisodeModel.countDocuments();
     return {
       episodes,
       counts,
+      name: mainMovie.title,
     };
   } catch (error) {
     return error;

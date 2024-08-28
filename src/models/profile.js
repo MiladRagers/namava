@@ -50,6 +50,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-const model = mongoose.models?.Profile || mongoose.model("Profile", schema);
+const model = mongoose.models.Profile || mongoose.model("Profile", schema);
 
 export default model;

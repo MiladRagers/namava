@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/templates/p-admin/article/AddNewArticle.tsx", "src/models/menu.ts", "src/models/category.ts", "src/models/article.ts", "src/models/actor.ts", "components/modules/modals/Modal.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/templates/p-admin/article/AddNewArticle.tsx", "src/models/menu.js", "src/models/category.js", "src/models/article.js", "src/models/actor.js", "components/modules/modals/Modal.jsx", "src/models/profile.js", "src/models/user.js", "src/models/subdepartment.js", "src/models/stars.js", "src/models/Season.js", "src/models/movie.js", "src/models/episode.js", "src/models/department.js", "src/models/contactus.js", "src/models/comments.js"],
   "exclude": ["node_modules"]
 }
