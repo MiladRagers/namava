@@ -6,6 +6,7 @@ import Header from "@/components/templates/index/Header/Header";
 import { getMovie, getRealedMovies } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
+import { notFound } from "next/navigation";
 import React from "react";
 
 async function page({ params }: TParams) {
@@ -13,6 +14,10 @@ async function page({ params }: TParams) {
     getMovie(params.link),
     authUser(),
   ]);
+
+  if (!movie) {
+    notFound();
+  }
 
   const realatedMovies: any = await getRealedMovies(movie.category, movie._id);
 
