@@ -85,7 +85,7 @@ function HeaderDetail({
                     : age === 15
                     ? "fifteen"
                     : "eighteen"
-                } flex-center text-sm rounded-full px-1.5`}
+                } flex-center text-sm rounded-full text-black font-bold px-1.5`}
               >
                 {info.ageRange}+
               </span>

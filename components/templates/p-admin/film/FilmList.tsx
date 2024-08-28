@@ -56,11 +56,15 @@ function FilmList({ movies, counts }: { movies: any; counts: number }) {
                 />
               </td>
               <td>
-                {movie.type === "film" ? (
-                  movie.title
-                ) : (
-                  <Link href={`/p-admin/series/${movie._id}`}>{movie.title}</Link>
-                )}
+                <Link
+                  href={
+                    movie.type === "series"
+                      ? `/p-admin/series/${movie._id}`
+                      : `/movie/${movie.link}`
+                  }
+                >
+                  {movie.title}
+                </Link>
               </td>
               <td>{movie.ageRange} سال</td>
               <td>{movie.time} دقیقه</td>
