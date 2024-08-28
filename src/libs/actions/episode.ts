@@ -41,7 +41,7 @@ export const createNewEpisode = async (data: FormData) => {
       series,
     });
 
-    const isSeriesExist = await SeasonModel.findOne({ series, seasonNumber });
+    const existSeason = await SeasonModel.findOne({ series, seasonNumber });
 
     const episode = new EpisodeModel({
       title: data.get("title"),
@@ -50,11 +50,11 @@ export const createNewEpisode = async (data: FormData) => {
       time: data.get("time"),
       image: imageName,
       video: videoName,
-      season: season._id,
+      season: existSeason ? existSeason._id : season._id,
       series: data.get("series"),
     });
 
-    if (!isSeriesExist) {
+    if (!existSeason) {
       season.episodes.push(episode._id);
       await season.save();
     } else {
@@ -70,14 +70,16 @@ export const createNewEpisode = async (data: FormData) => {
 
     await episode.save();
 
-    await MovieModel.findOneAndUpdate(
-      { _id: series },
-      {
-        $push: {
-          seasons: season._id,
-        },
-      }
-    );
+    if (!existSeason) {
+      await MovieModel.findOneAndUpdate(
+        { _id: series },
+        {
+          $push: {
+            seasons: season._id,
+          },
+        }
+      );
+    }
 
     revalidatePath("/p-admin/series");
 
