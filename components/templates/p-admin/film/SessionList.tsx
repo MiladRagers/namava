@@ -11,7 +11,7 @@ function SessionList({ episodes, counts }: any) {
   console.log(counts);
 
   return (
-    <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
+    <div className="users-list mt-3 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
         <Table.Header>
           <th>شماره</th>
