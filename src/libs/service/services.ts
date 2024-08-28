@@ -9,6 +9,7 @@ import ContactModel from "@/src/models/contactus";
 import MovieModel from "@/src/models/movie";
 import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
+import EpisodeModel from "@/src/models/episode";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 // get all site stat
@@ -548,6 +549,33 @@ export const searchMovies = async (
     return movies;
   } catch (error) {
     console.error("Error in searchMovies:", error);
+    return error;
+  }
+};
+
+// get all episodes
+
+export const getAllEpisodes = async (
+  page: number,
+  search: string,
+  id: string
+) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const episodes = await EpisodeModel.find({
+      title: { $regex: regex },
+      _id: id,
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+
+    const counts = await EpisodeModel.countDocuments();
+    return {
+      episodes,
+      counts,
+    };
+  } catch (error) {
     return error;
   }
 };
