@@ -6,6 +6,7 @@ import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { deleteMovie } from "@/src/libs/actions/movie";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
@@ -54,7 +55,13 @@ function FilmList({ movies, counts }: { movies: any; counts: number }) {
                   height={1080}
                 />
               </td>
-              <td>{movie.title}</td>
+              <td>
+                {movie.type === "film" ? (
+                  movie.title
+                ) : (
+                  <Link href={`/p-admin/series/${movie._id}`}>{movie.title}</Link>
+                )}
+              </td>
               <td>{movie.ageRange} سال</td>
               <td>{movie.time} دقیقه</td>
               <td>{movie.showTime}</td>

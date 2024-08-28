@@ -6,7 +6,7 @@ function page() {
   return (
     <>
       <Title name="قسمت های سریال فلان" />;
-      <SessionList/>
+      <SessionList />
     </>
   );
 }

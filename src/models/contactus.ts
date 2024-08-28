@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import DepartmentModel from "@/src/models/department";
 
-const schema = mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     name: {
       type: String,

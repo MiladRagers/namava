@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const schema = mongoose.Schema(
+const schema =new mongoose.Schema(
   {
     title: {
       type: String,

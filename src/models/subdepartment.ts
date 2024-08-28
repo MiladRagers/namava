@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import Department from "../models/department";
-const schema = mongoose.Schema(
+import Department from "./department";
+const schema =new mongoose.Schema(
   {
     title: {
       type: String,

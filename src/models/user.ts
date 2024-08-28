@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import CategoryModel from "./category";
 import ProfileModel from "./profile";
-const schema = mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -32,7 +32,7 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
       enum: ["USER", "ADMIN"],
-      default :"USER",
+      default: "USER",
       trim: true,
     },
     birthday: {
