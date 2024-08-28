@@ -19,10 +19,10 @@ export const getAllStats = async () => {
     const usersCount = await UserModel.countDocuments();
     const moviesCount = await MovieModel.countDocuments();
 
-    const latestUsers = await UserModel.find(
-      {},
-      "name profiles createdAt"
-    ).sort({ createdAt: -1 }).limit(10);
+    const latestUsers = await UserModel.find({}, "name profiles createdAt")
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .populate("profiles", "image name");
 
     return {
       usersCount,

@@ -20,7 +20,7 @@ function RecentUser({ users }: { users: TUser[] }) {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr>
+              <tr key={user._id}>
                 <td className="font-Dana">{index + 1}</td>
                 <td>
                   <img
