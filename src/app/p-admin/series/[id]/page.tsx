@@ -1,3 +1,4 @@
+import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import SessionList from "@/components/templates/p-admin/film/SessionList";
 import { getAllEpisodes } from "@/src/libs/service/services";
@@ -12,7 +13,11 @@ async function page({ params, searchParams }: TAdminPage) {
   );
   return (
     <>
-      <Title name={`سریال ${name}`} />;
+      <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-y-3">
+        <Title name={`سریال ${name}`} />;
+        <Search />
+      </div>
+
       <SessionList
         episodes={JSON.parse(JSON.stringify(episodes))}
         counts={counts}
