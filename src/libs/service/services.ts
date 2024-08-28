@@ -573,7 +573,7 @@ export const getAllEpisodes = async (
       .sort({ createdAt: -1 })
       .populate("season");
 
-    const counts = await EpisodeModel.countDocuments();
+    const counts = await EpisodeModel.countDocuments({ series: id });
     return {
       episodes,
       counts,

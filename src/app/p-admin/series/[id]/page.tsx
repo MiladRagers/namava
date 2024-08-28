@@ -13,7 +13,10 @@ async function page({ params, searchParams }: TAdminPage) {
   return (
     <>
       <Title name={`سریال ${name}`} />;
-      <SessionList episodes={JSON.parse(JSON.stringify(episodes))} />
+      <SessionList
+        episodes={JSON.parse(JSON.stringify(episodes))}
+        counts={counts}
+      />
     </>
   );
 }

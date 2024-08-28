@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { formatDate } from "@/src/utils/funcs";
@@ -6,8 +7,8 @@ import Image from "next/image";
 import React from "react";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
 
-function SessionList({ episodes }: any) {
-  console.log(episodes);
+function SessionList({ episodes, counts }: any) {
+  console.log(counts);
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -24,13 +25,13 @@ function SessionList({ episodes }: any) {
         </Table.Header>
         <Table.Body>
           {episodes.map((episode: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={episode._id}>
               <td>{index + 1}</td>
               <td className="py-2 !px-0 md:!p-5">
                 <Image
                   src={episode.image}
                   className="!w-[144px] object-cover h-[100px] md:h-[100px]  rounded-md mx-auto"
-                  alt=""
+                  alt={episode.title}
                   width={1920}
                   height={1080}
                 />
@@ -58,7 +59,11 @@ function SessionList({ episodes }: any) {
           ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      {episodes.length > 0 ? (
+        <Pagination count={counts} />
+      ) : (
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
+      )}
     </div>
   );
 }
