@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const [movie, userInfo]: [movie: any, userInfo: any] = await Promise.all([
+  const [movie, userInfo]: any = await Promise.all([
     getMovie(params.link),
     authUser(),
   ]);

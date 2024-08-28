@@ -1,4 +1,6 @@
+import Article from "@/icons/Article";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Details({ info }: any) {
@@ -18,6 +20,26 @@ function Details({ info }: any) {
         ))}
       </div>
       <div>
+        <h3 className="text-base md:text-lg font-IranMedium">اطلاعات بیشتر</h3>
+        <div className="bg-namavaBlack max-w-[577px] my-5 rounded-md shadow py-6">
+          <Article />
+          <div className="px-5 mt-4">
+            <h3 className="">
+              «مرد عنکبوتی: راهی به خانه نیست»؛ یک پیتر پارکر کلاسیک اما کاملاً
+              تازه
+            </h3>
+            <p className="min-h-[127px] mt-5 text-sm/[26px] text-[#aaa]">
+              تام هالند، توبی مگوایر و اندرو گارفیلد درباره حضور مجدد در نقش مرد
+              عنکبوتی صحبت می‌کنند و این که چرا «راهی به خانه نیست» یک تجربه
+              احساسی برای آن‌ها بود.
+            </p>
+
+            <Link href={`/`} className="text-namava">
+              ادامه مطلب
+            </Link>
+          </div>
+        </div>
+
         <h3 className="text-base md:text-lg font-IranMedium">
           درباره فیلم {info.title}
         </h3>
