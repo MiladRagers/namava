@@ -4,12 +4,16 @@ import Title from "@/components/modules/p-admin/Title";
 import DurationChart from "@/components/templates/p-admin/DurationChart";
 import RecentUser from "@/components/templates/p-admin/RecentUser";
 import SalesChart from "@/components/templates/p-admin/SalesChart";
+import { getAllStats } from "@/src/libs/service/services";
+import { TStats } from "@/src/libs/types";
 import React from "react";
 import { HiOutlineBanknotes, HiOutlineBriefcase } from "react-icons/hi2";
 import { LuUsers } from "react-icons/lu";
 import { RiMovie2Line } from "react-icons/ri";
 
-function MainPage() {
+async function MainPage() {
+  const { usersCount, moviesCount, latestUsers } =
+    (await getAllStats()) as TStats;
   return (
     <div className="text-white">
       <div className="flex flex-col md:flex-row gap-y-6 items-center justify-between">
@@ -56,18 +60,18 @@ function MainPage() {
           icon={<LuUsers className="text-2xl md:text-3xl lg:text-4xl" />}
           title="کاربران"
           color="bg-[#3730a3]"
-          value={29232}
+          value={usersCount}
         />
         <StatBox
           icon={<RiMovie2Line className="text-2xl md:text-3xl lg:text-4xl" />}
           title="فیلم و سریال ها"
           color="bg-[#854d0e]"
-          value={29232}
+          value={moviesCount}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
         <DurationChart />
-        <RecentUser />
+        <RecentUser users={JSON.parse(JSON.stringify(latestUsers))} />
       </div>
       <div>
         <SalesChart />

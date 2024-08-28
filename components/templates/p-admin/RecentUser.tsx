@@ -1,7 +1,9 @@
+import { TUser } from "@/src/libs/types";
+import { formatDate } from "@/src/utils/funcs";
 import React from "react";
 import { FaEye, FaTrash } from "react-icons/fa6";
 
-function RecentUser() {
+function RecentUser({ users }: { users: TUser[] }) {
   return (
     <div className="bg-namavaBlack rounded-md border border-gray-800 shadow py-4 md:py-6 px-3 md:px-6">
       <h2 className="text-lg md:text-xl pb-2 font-IranMedium">کاربران اخیر</h2>
@@ -17,166 +19,24 @@ function RecentUser() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="font-Dana">1</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">2</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">3</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">4</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">5</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">6</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">7</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">8</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">9</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
-            <tr>
-              <td className="font-Dana">10</td>
-              <td>
-                <img
-                  src="/images/user.png"
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
-                  alt=""
-                />
-              </td>
-              <td>میلاد سلامیان</td>
-              <td className="font-Dana">1403/04/08</td>
-              <td className="flex items-center justify-center gap-x-4">
-                <FaTrash className="mt-2.5 text-red-700" />
-                <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
-              </td>
-            </tr>
+            {users.map((user, index) => (
+              <tr>
+                <td className="font-Dana">{index + 1}</td>
+                <td>
+                  <img
+                    src="/images/user.png"
+                    className="w-8 md:w-10 h-8 md:h-10 rounded-full mx-auto"
+                    alt=""
+                  />
+                </td>
+                <td>{user.name}</td>
+                <td className="font-Dana">{formatDate(user.createdAt)}</td>
+                <td className="flex items-center justify-center gap-x-4">
+                  <FaTrash className="mt-2.5 text-red-700" />
+                  <FaEye className="mt-2.5 text-namava md:cursor-pointer" />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

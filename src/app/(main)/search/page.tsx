@@ -33,7 +33,6 @@ async function SearchPage({ searchParams }: TSearchParams) {
       <div className="w-full  md:mr-[350px]">
         <SearchBox
           categories={JSON.parse(JSON.stringify(formatedCategories))}
-          search={searchParams?.q}
           movies={JSON.parse(JSON.stringify(movies))}
           q={searchParams?.q}
         />

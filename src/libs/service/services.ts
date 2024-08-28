@@ -11,6 +11,29 @@ import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
+// get all site stat
+
+export const getAllStats = async () => {
+  try {
+    connectToDB();
+    const usersCount = await UserModel.countDocuments();
+    const moviesCount = await MovieModel.countDocuments();
+
+    const latestUsers = await UserModel.find(
+      {},
+      "name profiles createdAt"
+    ).sort({ createdAt: -1 }).limit(10);
+
+    return {
+      usersCount,
+      moviesCount,
+      latestUsers,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getAllCategories = async (page: number, search: string) => {
   try {
     connectToDB();

@@ -22,4 +22,19 @@ export type TSearchParams = {
   searchParams?: { [key: string]: string | undefined | any };
 };
 
+// p-admin types
+
+export type TStats = {
+  usersCount: number;
+  moviesCount: number;
+  latestUsers: TUser[];
+};
+
+export interface TUser {
+  _id: string;
+  name: string;
+  profiles: string[];
+  createdAt: string;
+}
+
 export const baseURL = "http://localhost:3000";
