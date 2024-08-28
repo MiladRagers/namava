@@ -8,8 +8,6 @@ import React from "react";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
 
 function SessionList({ episodes, counts }: any) {
-  console.log(counts);
-
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
