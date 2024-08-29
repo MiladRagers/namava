@@ -10,6 +10,7 @@ import MovieModel from "@/src/models/movie";
 import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
+import SubscriptionModel from "@/src/models/subdepartment";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 // get all site stat
@@ -591,6 +592,30 @@ export const getAllEpisodes = async (
       episodes,
       counts,
       name: mainMovie.title,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all subscription for admin page
+
+export const getAllSubscription = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+    const subscriptions = await SubscriptionModel.find({
+      title: { $regex: regex },
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("creator", "name username");
+
+    const counts = await SubscriptionModel.countDocuments({});
+
+    return {
+      subscriptions,
+      counts,
     };
   } catch (error) {
     return error;
