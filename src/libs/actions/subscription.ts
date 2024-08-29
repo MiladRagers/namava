@@ -3,6 +3,7 @@ import connectToDB from "@/src/configs/db";
 import SubscriptionModel from "@/src/models/subscription";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { Subscription, TSubscription } from "@/src/validators/frontend";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export const createNewSubscription = async (data: TSubscription) => {
@@ -46,12 +47,50 @@ export const createNewSubscription = async (data: TSubscription) => {
 
     return {
       message: "اشتراک با موفقیت ساخته شد",
-      status : 201
+      status: 201,
     };
   } catch (error) {
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
     };
+  }
+};
+
+export const deleteSubscription = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای ادمین است",
+        status: 403,
+      };
+    }
+
+    const subscription = await SubscriptionModel.findOne({ _id: id });
+    if (!subscription) {
+      return {
+        message: "اشتراک مورد نظر یافت نشد",
+        status: 404,
+      };
+    }
+
+    await SubscriptionModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath(`/p-admin/subscription`);
+
+    return {
+      message: "اشتراک با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return error;
   }
 };
