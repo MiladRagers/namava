@@ -7,6 +7,8 @@ import EpisodeModel from "@/src/models/episode";
 import { writeFileSync } from "fs";
 import path from "path";
 import { revalidatePath } from "next/cache";
+import { isValidObjectId } from "mongoose";
+import { checkIsAdmin, deleteImage } from "@/src/utils/serverHelper";
 
 export const createNewEpisode = async (data: FormData) => {
   try {
@@ -92,5 +94,46 @@ export const createNewEpisode = async (data: FormData) => {
       message: "اتصال خود را به اینترنت بررسی کنید",
       status: 500,
     };
+  }
+};
+
+export const deleteEpisode = async (id: string) => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ای دی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای کاربران ادمین است",
+        status: 403,
+      };
+    }
+
+    const episode = await EpisodeModel.findOne({ _id: id });
+    if (!episode) {
+      return {
+        message: "این قسمت برای حذف یافت نشد",
+        status: 404,
+      };
+    }
+
+    await deleteImage(episode.image);
+    await deleteImage(episode.video);
+
+    await EpisodeModel.findByIdAndDelete(`${id}`);
+
+    revalidatePath(`/p-admin/series/${episode.series}`);
+
+    return {
+      message: "قسمت با موفقیت حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return error;
   }
 };
