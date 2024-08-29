@@ -3,7 +3,11 @@ import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
 import Comments from "@/components/templates/Comments/Comments";
 import Details from "@/components/templates/Movie/Details";
 import Header from "@/components/templates/index/Header/Header";
-import { getMovie, getRealedMovies } from "@/src/libs/service/services";
+import {
+  getMovie,
+  getRealedMovies,
+  getRelatedArticleToMovie,
+} from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
 import { notFound } from "next/navigation";
@@ -15,11 +19,14 @@ async function page({ params }: TParams) {
     authUser(),
   ]);
 
+  const [realatedMovies, relatedArticle]: any = await Promise.all([
+    getRealedMovies(movie.category, movie._id),
+    getRelatedArticleToMovie(movie._id),
+  ]);
+
   if (!movie) {
     notFound();
   }
-
-  const realatedMovies: any = await getRealedMovies(movie.category, movie._id);
 
   return (
     <>
@@ -34,7 +41,7 @@ async function page({ params }: TParams) {
         <div className="absolute inset-0 title-overlay"></div>
       </section>
       <section className="text-white mt-16 md:mt-6 container relative bottom-16 md:bottom-24 z-20 space-y-6">
-        <Details info={movie} />
+        <Details info={movie} article={relatedArticle} />
       </section>
 
       <section className="text-white">

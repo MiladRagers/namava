@@ -53,6 +53,11 @@ const schema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    shortDesc: {
+      type: String,
+      default: false,
+    },
   },
   { timestamps: true }
 );

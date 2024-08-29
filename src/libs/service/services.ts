@@ -444,6 +444,19 @@ export const getAllArticles = async (page: number, search: string) => {
   }
 };
 
+// get movie / series article
+
+export const getRelatedArticleToMovie = async (id: string) => {
+  try {
+    connectToDB();
+    const article = await ArticleModel.findOne({ movie: id });
+
+    return article;
+  } catch (error) {
+    return error;
+  }
+};
+
 // get all articles without pagination
 export const getArticles = async () => {
   try {

@@ -45,7 +45,7 @@ function SearchBox({
           </span>
         </div>
         <div className="bg-[#37383e] text-[13px] md:text-base w-full py-2 px-3 md:py-4 md:px-6 rounded-xl flex items-center justify-between gap-x-2">
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-2 w-full">
             <Search className="!w-[30px] !h-[30px] !fill-white " />
             <input
               value={searchValue}
