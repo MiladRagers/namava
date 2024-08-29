@@ -2,9 +2,15 @@ import Search from "@/components/modules/p-admin/Search";
 import Title from "@/components/modules/p-admin/Title";
 import AddNewSubscription from "@/components/templates/p-admin/Subscription/AddNewSubscription";
 import SubscriptionList from "@/components/templates/p-admin/Subscription/SubscriptionList";
+import { getAllSubscription } from "@/src/libs/service/services";
+import { TAdminPage } from "@/src/libs/types";
 import React from "react";
 
-function Subscription() {
+async function Subscription({ searchParams }: TAdminPage) {
+  const { subscriptions, counts }: any = await getAllSubscription(
+    +searchParams.page,
+    searchParams.q
+  );
   return (
     <div>
       <Title name="ساخت اشتراک" />
@@ -13,7 +19,10 @@ function Subscription() {
         <Title name="لیست اشتراک ها" />
         <Search />
       </div>
-      <SubscriptionList />
+      <SubscriptionList
+        subscriptions={JSON.parse(JSON.stringify(subscriptions))}
+        counts={counts}
+      />
     </div>
   );
 }

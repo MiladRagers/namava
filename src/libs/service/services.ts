@@ -10,7 +10,7 @@ import MovieModel from "@/src/models/movie";
 import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
-import SubscriptionModel from "@/src/models/subdepartment";
+import SubscriptionModel from "@/src/models/subscription";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
 
 // get all site stat
@@ -610,6 +610,9 @@ export const getAllSubscription = async (page: number, search: string) => {
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1))
       .populate("creator", "name username");
+
+    console.log(subscriptions);
+    
 
     const counts = await SubscriptionModel.countDocuments({});
 
