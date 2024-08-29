@@ -45,9 +45,9 @@ const checkIsAdmin = async () => {
   return user.role === "ADMIN" ? true : false;
 };
 
-const deleteImage = async (path: any) => {
+const deleteImage = async (imagePath: any) => {
   try {
-    unlink(path.join(process.cwd(), "public/" + path), (err) => {
+    unlink(path.join(process.cwd(), "public/" + imagePath), (err) => {
       if (err) {
         console.log(err);
       } else {
@@ -59,4 +59,4 @@ const deleteImage = async (path: any) => {
   }
 };
 
-export { authUser, checkIsAdmin , deleteImage };
+export { authUser, checkIsAdmin, deleteImage };
