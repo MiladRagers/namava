@@ -360,3 +360,14 @@ export const Content = z.object({
 });
 
 export type TContent = z.infer<typeof Content>;
+
+export const Subscription = z.object({
+  title: z
+    .string()
+    .min(3, { message: "حداقل 3 کاراکتر برای عنوان الزامی است" }),
+  price: z.string().min(1, { message: "وارد کردن مبلغ الزامی است" }),
+  discount: z.string().optional(),
+  time: z.string().min(1, { message: "وارد کردن مدت زمان الزامی است" }),
+});
+
+export type TSubscription = z.infer<typeof Subscription>;

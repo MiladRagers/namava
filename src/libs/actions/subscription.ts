@@ -1,0 +1,56 @@
+"use server";
+import connectToDB from "@/src/configs/db";
+import SubscriptionModel from "@/src/models/subscription";
+import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
+import { Subscription, TSubscription } from "@/src/validators/frontend";
+import { revalidatePath } from "next/cache";
+
+export const createNewSubscription = async (data: TSubscription) => {
+  try {
+    connectToDB();
+    const { price, time, title, discount } = data;
+    const user = await authUser();
+
+    const validateFields = Subscription.safeParse(data);
+
+    if (!validateFields.success) {
+      return {
+        message: validateFields.error.flatten().fieldErrors,
+        status: 422,
+      };
+    }
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای کاربران ادمین است",
+        status: 403,
+      };
+    }
+
+    if (!user) {
+      return {
+        message: "کاربر گرامی لطفا در ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    await SubscriptionModel.create({
+      price,
+      time,
+      title,
+      discount,
+      creator: user._id,
+    });
+
+    revalidatePath("/p-admin/subscription");
+
+    return {
+      message: "اشتراک با موفقیت ساخته شد",
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
