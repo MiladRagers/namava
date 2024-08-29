@@ -1,13 +1,32 @@
 "use client";
+import ConfirmModal from "@/components/modules/modals/ConfirmModal";
+import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteEpisode } from "@/src/libs/actions/episode";
 import { formatDate } from "@/src/utils/funcs";
 import Image from "next/image";
-import React from "react";
+import React, { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
 
 function SessionList({ episodes, counts }: any) {
+  const [optimisticEpisodes, deleteOptimistic] = useOptimistic(
+    episodes,
+    (state, id) => {
+      return state.filter((episode: any) => episode._id !== id);
+    }
+  );
+  const deleteEpisodeHandler = async (id: string) => {
+    deleteOptimistic(id);
+    const res: any = await deleteEpisode(id);
+    if (res.status === 200) {
+      return toast?.success(`${res.message}`);
+    }
+
+    return toast.error(`${res?.message}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -22,7 +41,7 @@ function SessionList({ episodes, counts }: any) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {episodes.map((episode: any, index: number) => (
+          {optimisticEpisodes.map((episode: any, index: number) => (
             <Table.Row key={episode._id}>
               <td>{index + 1}</td>
               <td className="py-2 !px-0 md:!p-5">
@@ -49,15 +68,25 @@ function SessionList({ episodes, counts }: any) {
               <td>{episode?.season?.seasonNumber}</td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  <FaTrash className="text-red-600 text-base md:text-lg" />
-                  <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  <Modal>
+                    <Modal.Open name="delete">
+                      <FaTrash className="text-red-600 text-base md:text-lg" />
+                    </Modal.Open>
+                    <Modal.Page name="delete">
+                      <ConfirmModal
+                        id={episode._id}
+                        onAction={deleteEpisodeHandler}
+                      />
+                    </Modal.Page>
+                    <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  </Modal>
                 </div>
               </td>
             </Table.Row>
           ))}
         </Table.Body>
       </Table>
-      {episodes.length > 0 ? (
+      {optimisticEpisodes.length > 0 ? (
         <Pagination count={counts} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
