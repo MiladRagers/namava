@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
-import SelectBox from "@/components/modules/p-admin/SelectBox";
 import Spinner from "@/components/modules/spinner/Spinner";
 import { createNewSubscription } from "@/src/libs/actions/subscription";
 import { Subscription, TSubscription } from "@/src/validators/frontend";
@@ -11,7 +10,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import { FaCalendar, FaGift, FaLink } from "react-icons/fa6";
+import { FaCalendar, FaGift } from "react-icons/fa6";
 
 function AddNewSubscription() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,9 +28,11 @@ function AddNewSubscription() {
     const res = await createNewSubscription(data);
     if (res?.status === 201) {
       setIsLoading(false);
+      reset();
       return toast.success(`${res?.message}`);
     }
     setIsLoading(false);
+    reset();
     return toast.error(`${res?.message}`);
   };
   return (
