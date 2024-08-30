@@ -12,6 +12,7 @@ import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
 import SubscriptionModel from "@/src/models/subscription";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
+import { isValidObjectId } from "mongoose";
 
 // get all site stat
 
@@ -633,6 +634,21 @@ export const getSubscriptions = async () => {
     );
 
     return subscriptions;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getSubscription = async (id: string) => {
+  try {
+    connectToDB();
+
+    if (!isValidObjectId(id)) {
+      return false;
+    }
+    const subscription = await SubscriptionModel.findOne({ _id: id });
+
+    return subscription;
   } catch (error) {
     return error;
   }

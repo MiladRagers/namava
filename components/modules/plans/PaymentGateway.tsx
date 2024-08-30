@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Bank from "./Bank";
 import Button from "../auth/Button/Button";
 
-function PaymentGateway() {
+function PaymentGateway({ totalPrice }: { totalPrice: number }) {
   const [activeBank, setActiveBank] = useState("");
   return (
     <div className="bg-namavaBlack  w-full px-[28] rounded-md py-6 md:w-1/3 mx-auto text-white">
@@ -23,7 +23,9 @@ function PaymentGateway() {
 
         <div className="flex items-center justify-between mt-6">
           <span> مبلغ قابل پرداخت : </span>
-          <span className="text-sm text-namava">120,000 تومان</span>
+          <span className="text-sm text-namava">
+            {totalPrice.toLocaleString("fa-IR")} تومان
+          </span>
         </div>
 
         <Button className="!mt-8">ادامه و پرداخت</Button>
