@@ -63,6 +63,10 @@ const schema = new mongoose.Schema(
       type: Number,
       default: 4,
     },
+    subscriptionEnd: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );

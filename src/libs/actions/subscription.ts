@@ -1,6 +1,7 @@
 "use server";
 import connectToDB from "@/src/configs/db";
 import SubscriptionModel from "@/src/models/subscription";
+import UserModel from "@/src/models/user";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { Subscription, TSubscription } from "@/src/validators/frontend";
 import { isValidObjectId } from "mongoose";
@@ -90,6 +91,24 @@ export const deleteSubscription = async (id: string) => {
       message: "اشتراک با موفقیت حذف شد",
       status: 200,
     };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const addSubscription = async (
+  userId: string,
+  durationInDay: number
+) => {
+  try {
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + durationInDay);
+
+    await UserModel.findByIdAndUpdate(`${userId}`, {
+      $set: {
+        subscriptionEnd: endDate,
+      },
+    });
   } catch (error) {
     return error;
   }

@@ -11,7 +11,7 @@ import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
 import SubscriptionModel from "@/src/models/subscription";
-import { checkIsAdmin } from "@/src/utils/serverHelper";
+import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 
 // get all site stat
@@ -649,6 +649,26 @@ export const getSubscription = async (id: string) => {
     const subscription = await SubscriptionModel.findOne({ _id: id });
 
     return subscription;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const checkUserSubscription = async () => {
+  try {
+    const user = await authUser();
+    if (!user) {
+      return {
+        message: "کاربر مورد نظر یافت نشد",
+      };
+    }
+
+    const now = new Date();
+    if (user.subscriptionEnd && user.subscriptionEnd < now) {
+      return false;
+    } else {
+      return true;
+    }
   } catch (error) {
     return error;
   }
