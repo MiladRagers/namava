@@ -96,15 +96,14 @@ export const deleteSubscription = async (id: string) => {
   }
 };
 
-export const addSubscription = async (
-  userId: string,
-  durationInDay: number
-) => {
+export const addSubscription = async (durationInDay: number) => {
   try {
+    connectToDB();
+    const user = await authUser();
     const endDate = new Date();
     endDate.setDate(endDate.getDate() + durationInDay);
 
-    await UserModel.findByIdAndUpdate(`${userId}`, {
+    await UserModel.findByIdAndUpdate(`${user.userId}`, {
       $set: {
         subscriptionEnd: endDate,
       },
