@@ -3,7 +3,8 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken");
-  if (request.nextUrl.pathname.startsWith("/plans")) {
+  const pathname = request.nextUrl.pathname;
+  if (pathname.startsWith("/plans") || pathname.startsWith("/p-user")) {
     if (!accessToken) {
       return NextResponse.redirect(new URL("/login", request.url));
     } else {
