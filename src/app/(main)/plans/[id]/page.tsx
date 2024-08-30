@@ -2,19 +2,10 @@ import Button from "@/components/modules/auth/Button/Button";
 import PaymentGateway from "@/components/modules/plans/PaymentGateway";
 import { getSubscription } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
-import React from "react";
-import { notFound, redirect } from "next/navigation";
-import { authUser } from "@/src/utils/serverHelper";
+import { notFound } from "next/navigation";
 
 async function page({ params }: TParams) {
-  const [user, subscription]: any = await Promise.all([
-    authUser(),
-    getSubscription(params?.id as string),
-  ]);
-
-  if (!user) {
-    redirect("/login");
-  }
+  const subscription = await getSubscription(params?.id as string);
 
   if (!subscription) {
     notFound();
