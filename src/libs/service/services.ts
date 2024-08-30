@@ -611,15 +611,28 @@ export const getAllSubscription = async (page: number, search: string) => {
       .skip(ITEM_PER_PAGE * (page - 1))
       .populate("creator", "name username");
 
-    console.log(subscriptions);
-    
-
     const counts = await SubscriptionModel.countDocuments({});
 
     return {
       subscriptions,
       counts,
     };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get all subscriptions with out any pagination and search
+
+export const getSubscriptions = async () => {
+  try {
+    connectToDB();
+    const subscriptions = await SubscriptionModel.find({}).populate(
+      "creator",
+      "name username"
+    );
+
+    return subscriptions;
   } catch (error) {
     return error;
   }
