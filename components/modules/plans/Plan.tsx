@@ -2,7 +2,7 @@ import React from "react";
 
 function Plan({ subscription }: any) {
   return (
-    <div className="bg-namavaBlack flex items-center justify-between py-4 px-5 rounded-lg">
+    <div className="bg-namavaBlack cursor-pointer flex items-center justify-between py-4 px-5 rounded-lg">
       <div className="space-y-3">
         <h3 className="text-base md:text-lg">{subscription.title}</h3>
 
