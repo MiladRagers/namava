@@ -657,17 +657,27 @@ export const getSubscription = async (id: string) => {
 export const checkUserSubscription = async () => {
   try {
     const user = await authUser();
+    console.log(user);
+    
     if (!user) {
       return {
         message: "کاربر مورد نظر یافت نشد",
       };
     }
 
-    const now = new Date();
-    if (user.subscriptionEnd && user.subscriptionEnd < now) {
-      return false;
+    const now: any = new Date();
+    if (!user.subscriptionEnd && user.subscriptionEnd < now) {
+      
+      return {
+        hasSubscription: false,
+      };
     } else {
-      return true;
+      const remainingTime = user.subscriptionEnd - now;
+      const remainingDays = Math.ceil(remainingTime / (1000 * 60 * 60 * 24));
+      return {
+        hasSubscription: true,
+        remainingDays,
+      };
     }
   } catch (error) {
     return error;

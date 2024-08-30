@@ -14,10 +14,11 @@ type TProfileMenu = {
   isShow: boolean;
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
   user: any;
+  userSubscription?: { hasSubscription: boolean; remainingDays: number };
 };
-function ProfileMenu({ isShow, onShow, user }: TProfileMenu) {
-  const url = usePathname();
 
+function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
+  const url = usePathname();
   return (
     <div
       className={`absolute profile-container rounded-[12px] ${
@@ -32,12 +33,20 @@ function ProfileMenu({ isShow, onShow, user }: TProfileMenu) {
         <div className="rounded-[12px] overflow-hidden">
           {/* profile header */}
           <div className="bg-[#D95C5C] p-4">
-            <h1 className="text-center !text-white">اشتراک فعال ندارید</h1>
-            <Link href={"/plans"}>
-              <Button className="h-[32px] !text-xs text-black shadow-xl !font-Iran bg-white  hover:bg-namava hover:text-white mt-2">
-                خرید اشتراک
-              </Button>
-            </Link>
+            <h1 className="text-center !text-white text-sm">
+              {!userSubscription?.hasSubscription
+                ? "اشتراک فعال ندارید"
+                : `اشتراک باقی مانده :  ${userSubscription?.remainingDays.toLocaleString(
+                    "fa-IR"
+                  )} روز`}
+            </h1>
+            {!userSubscription?.hasSubscription && (
+              <Link href={"/plans"}>
+                <Button className="h-[32px] !text-xs text-black shadow-xl !font-Iran bg-white  hover:bg-namava hover:text-white mt-2">
+                  خرید اشتراک
+                </Button>
+              </Link>
+            )}
           </div>
           {/* profile body */}
           <div className="px-4 py-3 child:text-xs bg-white text-black">

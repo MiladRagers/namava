@@ -5,6 +5,7 @@ import FooterMenu from "@/components/modules/FooterMenu/FooterMenu";
 import Footer from "@/components/modules/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { authUser } from "@/src/utils/serverHelper";
+import { checkUserSubscription } from "../libs/service/services";
 
 export const metadata: Metadata = {
   title: "تماشای آنلاین فیلم و سریال | نماوا",
@@ -21,10 +22,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await authUser();
+  const userSubscription = await checkUserSubscription();
+
   return (
     <html lang="fa" dir="rtl" className="font-Iran bg-[#121212]">
       <body>
-        <Navbar user={JSON.parse(JSON.stringify(user))} />
+        <Navbar
+          user={JSON.parse(JSON.stringify(user))}
+          userSubscription={userSubscription}
+        />
         {children}
         <Footer />
         <FooterMenu />

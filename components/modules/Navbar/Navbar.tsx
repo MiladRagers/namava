@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import KidLogo from "@/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
-function Navbar({ user }: any) {
+function Navbar({ user , userSubscription}: any) {
   const pathname = usePathname();
 
   const [isShowProfile, setIsShowProfile] = useState(false);
@@ -167,6 +167,7 @@ function Navbar({ user }: any) {
                 isShow={isShowProfile}
                 onShow={setIsShowProfile}
                 user={user}
+                userSubscription={userSubscription}
               />
             </div>
           ) : (
