@@ -39,7 +39,7 @@ function SubscriptionList({ subscriptions, counts }: any) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {subscriptions.map((subscription: any, index: number) => (
+          {optimisticSubscriptions.map((subscription: any, index: number) => (
             <Table.Row>
               <td>{index + 1}</td>
               <td>{subscription.title}</td>
@@ -66,7 +66,7 @@ function SubscriptionList({ subscriptions, counts }: any) {
           ))}
         </Table.Body>
       </Table>
-      {subscriptions.length ? (
+      {optimisticSubscriptions.length ? (
         <Pagination count={counts} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
