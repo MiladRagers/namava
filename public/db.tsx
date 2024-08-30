@@ -225,6 +225,14 @@ export const generateYear = () => {
   }
 };
 
+export const banks = [
+  { id: 1, name: "بانک ملت", icon: "BehPardakht.png" },
+  { id: 2, name: "بانک رفاه", icon: "RefahEPay.png" },
+  { id: 3, name: "بانک ملی", icon: "SadadEPay.png" },
+  { id: 4, name: "بانک کارآفرین", icon: "KarafarinEPay.png" },
+  { id: 5, name: "بانک پارسیان", icon: "ParsianEPay.png" },
+];
+
 generateMiladi();
 generateShamsi();
 generateDate();

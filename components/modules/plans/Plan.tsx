@@ -1,8 +1,12 @@
+import Link from "next/link";
 import React from "react";
 
 function Plan({ subscription }: any) {
   return (
-    <div className="bg-namavaBlack cursor-pointer flex items-center justify-between py-4 px-5 rounded-lg">
+    <Link
+      href={`/plans/${subscription._id}`}
+      className="bg-namavaBlack cursor-pointer flex items-center justify-between py-4 px-5 rounded-lg"
+    >
       <div className="space-y-3">
         <h3 className="text-base md:text-lg">{subscription.title}</h3>
 
@@ -32,7 +36,7 @@ function Plan({ subscription }: any) {
           هزار تومان
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
 
