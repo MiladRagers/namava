@@ -11,7 +11,7 @@ async function page({ params }: TParams) {
     notFound();
   }
 
-  const { title, price, discount } = subscription;
+  const { title, price, discount, time } = subscription;
 
   return (
     <div className="flex  my-28">
@@ -50,7 +50,10 @@ async function page({ params }: TParams) {
           </div>
         </div>
       </div>
-      <PaymentGateway totalPrice={price - (price * discount) / 100} />
+      <PaymentGateway
+        totalPrice={price - (price * discount) / 100}
+        time={time}
+      />
     </div>
   );
 }

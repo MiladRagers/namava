@@ -100,14 +100,25 @@ export const addSubscription = async (durationInDay: number) => {
   try {
     connectToDB();
     const user = await authUser();
+    if (!user) {
+      return {
+        message: "برای خرید اشتراک ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
     const endDate = new Date();
     endDate.setDate(endDate.getDate() + durationInDay);
 
-    await UserModel.findByIdAndUpdate(`${user.userId}`, {
+    await UserModel.findByIdAndUpdate(`${user._id}`, {
       $set: {
         subscriptionEnd: endDate,
       },
     });
+
+    return {
+      message: "اشتراک شما با موفقیت افزوده شد",
+      status: 200,
+    };
   } catch (error) {
     return error;
   }

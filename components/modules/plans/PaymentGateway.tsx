@@ -3,9 +3,33 @@ import { banks } from "@/public/db";
 import React, { useState } from "react";
 import Bank from "./Bank";
 import Button from "../auth/Button/Button";
+import toast from "react-hot-toast";
+import { addSubscription } from "@/src/libs/actions/subscription";
+import { useRouter } from "next/navigation";
 
-function PaymentGateway({ totalPrice }: { totalPrice: number }) {
+function PaymentGateway({
+  totalPrice,
+  time,
+}: {
+  totalPrice: number;
+  time: number;
+}) {
+  const router = useRouter();
   const [activeBank, setActiveBank] = useState("");
+
+  const paymentHandler = async () => {
+    if (!activeBank) {
+      return toast.error("لطفا یک درگاه را انتخاب کنید");
+    }
+
+    const res: any = await addSubscription(time);
+    if (res?.status === 200) {
+      router.push("/");
+      return toast.success(`${res.message}`);
+    }
+
+    return toast.error(`${res?.message}`);
+  };
   return (
     <div className="bg-namavaBlack  w-full px-[28] rounded-md py-6 md:w-1/3 mx-auto text-white">
       <h2 className="text-base md:text-lg font-IranMedium text-center">
@@ -28,7 +52,9 @@ function PaymentGateway({ totalPrice }: { totalPrice: number }) {
           </span>
         </div>
 
-        <Button className="!mt-8">ادامه و پرداخت</Button>
+        <Button className="!mt-8" onClick={paymentHandler}>
+          ادامه و پرداخت
+        </Button>
       </div>
     </div>
   );
