@@ -49,9 +49,9 @@ function Sidebar() {
     },
     {
       id: 5,
-      title: "اسلایدر ها",
+      title: "مجموعه ها",
       icon: <IoImageOutline className="icon-item" />,
-      href: "/p-admin/sliders",
+      href: "/p-admin/collection",
     },
     {
       id: 6,

@@ -4,7 +4,7 @@ import React from "react";
 function SlidersPage() {
   return (
     <div>
-      <Title name="اسلایدر ها" />
+      <Title name="ساخت مجموعه" />
     </div>
   );
 }
