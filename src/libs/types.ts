@@ -38,4 +38,10 @@ export interface TUser {
   createdAt: string;
 }
 
+
+export interface TResponse {
+  message: string;
+  status: number;
+}
+
 export const baseURL = "http://localhost:3000";

@@ -2,7 +2,6 @@
 import connectToDB from "@/src/configs/db";
 import MovieModel from "@/src/models/movie";
 import { authUser } from "@/src/utils/serverHelper";
-import { Movie } from "@/src/validators/frontend";
 import { writeFileSync } from "fs";
 import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
@@ -18,12 +17,12 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
     connectToDB();
     const auth = await authUser();
 
-    const mainImage = data.get("mainImage") as any;
-    const logo = data.get("logo") as any;
-    const video = data.get("video") as any;
-    const deskBanner = data.get("deskBanner") as any;
-    const mobileBanner = data.get("mobileBanner") as any;
-    const detailImages = data.getAll("detailImage") as any;
+    const mainImage = data.get("mainImage") as File;
+    const logo = data.get("logo") as File;
+    const video = data.get("video") as File;
+    const deskBanner = data.get("deskBanner") as File;
+    const mobileBanner = data.get("mobileBanner") as File;
+    const detailImages = data.getAll("detailImage") as File[];
 
     const actors = stars.map((star) => star.value);
 
@@ -120,8 +119,6 @@ export const createNewMovie = async (data: FormData, stars: TStar[]) => {
       status: 201,
     };
   } catch (error) {
-    console.log(error);
-
     return {
       message: "اتصال اینترنت خود را چک کنید",
       status: 500,
