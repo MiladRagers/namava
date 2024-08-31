@@ -688,6 +688,8 @@ export const checkUserSubscription = async () => {
   }
 };
 
+// get all collection in p-admin with pagination and search
+
 export const getAllCollcetions = async (page: number, search: string) => {
   try {
     connectToDB();
@@ -697,8 +699,7 @@ export const getAllCollcetions = async (page: number, search: string) => {
       title: { $regex: regex },
     })
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1))
-      .populate("movies", "link name mainImage type showTime");
+      .skip(ITEM_PER_PAGE * (page - 1));
 
     const counts = await CollcetionModel.countDocuments();
 
@@ -706,6 +707,22 @@ export const getAllCollcetions = async (page: number, search: string) => {
       collections,
       counts,
     };
+  } catch (error) {
+    return error;
+  }
+};
+
+// get specific collcetion
+
+export const getCollection = async (link: string) => {
+  try {
+    connectToDB();
+    const collection = await CollcetionModel.findOne({ link }).populate(
+      "movies",
+      "link title mainImage type showTime"
+    );
+
+    return collection;
   } catch (error) {
     return error;
   }
