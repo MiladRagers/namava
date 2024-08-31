@@ -1,8 +1,10 @@
 "use client";
 import Button from "@/components/modules/auth/Button/Button";
 import Input from "@/components/modules/p-admin/Input";
+import Radio from "@/components/modules/p-admin/Radio";
 import SelectBox from "@/components/modules/p-admin/SelectBox";
 import Spinner from "@/components/modules/spinner/Spinner";
+import { ContentType } from "@/public/db";
 import { createCollection } from "@/src/libs/actions/collection";
 import { Collcetion, TCollection } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +12,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiOutlineProduct } from "react-icons/ai";
-import { FaArtstation, FaLink, FaRegFileImage } from "react-icons/fa6";
+import {
+  FaArtstation,
+  FaLink,
+  FaRegFileImage,
+  FaSquareCheck,
+} from "react-icons/fa6";
 import { RiImageAddFill } from "react-icons/ri";
 
 function AddNewCollection({ movies }: any) {
@@ -30,6 +37,7 @@ function AddNewCollection({ movies }: any) {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("link", data.link);
+    formData.append("type", data.contentType);
     formData.append("mainImage", data.mainImage[0]);
     formData.append("deskBanner", data.deskBanner[0]);
     formData.append("mobileBanner", data.mobileBanner[0]);
@@ -100,6 +108,15 @@ function AddNewCollection({ movies }: any) {
         disable={isLoading}
       />
 
+      <Radio
+        register={register}
+        errors={errors}
+        name="contentType"
+        icon={<FaSquareCheck className={`text-xl md:text-2xl`} />}
+        title="گروه سنی"
+        options={ContentType}
+      />
+
       <Input
         register={register}
         errors={errors}
@@ -128,8 +145,6 @@ function AddNewCollection({ movies }: any) {
         icon={<FaRegFileImage className={`text-xl md:text-2xl`} />}
         disable={isLoading}
       />
-
-      <div className="hidden md:block"></div>
 
       <div className="flex items-center gap-x-3 md:gap-x-8 mt-5 text-white">
         <Button
