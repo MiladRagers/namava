@@ -28,7 +28,7 @@ function AddNewMenu() {
     const getAllMenus = async () => {
       const res = await fetch(`/api/menus`);
       const menus = await res.json();
-      console.log(menus);
+  
       
       const options = menus.map((menu: any) => ({
         id: menu._id,

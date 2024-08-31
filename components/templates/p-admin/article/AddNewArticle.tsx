@@ -40,7 +40,7 @@ function AddNewArticle({ movies }: any) {
   }));
 
   const createNewArticleHandeler = async (data: TArticle) => {
-    console.log(data);
+
     const articleData = new FormData();
     articleData.append("title", data.title);
     articleData.append("link", data.link);

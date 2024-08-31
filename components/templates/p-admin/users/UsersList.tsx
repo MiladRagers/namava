@@ -5,6 +5,7 @@ import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
 import { changeUserRole, deleteUser } from "@/src/libs/actions/user";
+import { getRemainingDays } from "@/src/utils/funcs";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaCheck, FaPencil, FaTrash, FaXmark } from "react-icons/fa6";
@@ -62,7 +63,11 @@ function UsersList({ users, counts }: TUser) {
               <td>{user.phone}</td>
               <td>{user.email}</td>
               <td>{user.role === "ADMIN" ? "ادمین" : "کاربر عادی"}</td>
-              <td>116 روز</td>
+              <td>
+                {getRemainingDays(user)
+                  ? `${getRemainingDays(user)} روز`
+                  : "ندارد"}
+              </td>
               <td> {new Date(user.createdAt).toLocaleDateString("fa-IR")}</td>
               <td className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                 <Modal>
