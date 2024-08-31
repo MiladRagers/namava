@@ -32,8 +32,6 @@ function AddNewCollection({ movies }: any) {
     resolver: zodResolver(Collcetion),
   });
 
-  console.log(errors);
-
   const createNewCollection = async (data: TCollection) => {
     const formData = new FormData();
     formData.append("title", data.title);
@@ -46,6 +44,7 @@ function AddNewCollection({ movies }: any) {
     setIsLoading(true);
     const res = await createCollection(formData, selectedOption);
     if (res.status === 201) {
+      setSelectedOption([]);
       setIsLoading(false);
       reset();
       return toast.success(`${res.message}`);
@@ -108,6 +107,7 @@ function AddNewCollection({ movies }: any) {
         selected={selectedOption}
         onSelected={setSelectedOption}
         disable={isLoading}
+        placeholder="فیلم و سریال های مورد نظر را انتخاب کنید"
       />
 
       <Radio

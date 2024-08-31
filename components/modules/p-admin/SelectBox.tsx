@@ -19,6 +19,7 @@ type TSelectBox = {
   multiple?: boolean;
   selected?: any;
   onSelected?: any;
+  placeholder?: string;
 };
 
 function SelectBox({
@@ -32,6 +33,7 @@ function SelectBox({
   multiple,
   selected,
   onSelected,
+  placeholder = "placeholder",
 }: TSelectBox) {
   if (!multiple && !selected) {
     return (
@@ -84,7 +86,7 @@ function SelectBox({
             isMulti={multiple}
             options={options}
             onChange={handleSelectChange}
-            placeholder="لطفا بازیگر مورد نظر را انتخاب کنید"
+            placeholder={placeholder}
           />
         </div>
       </div>
