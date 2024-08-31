@@ -12,8 +12,15 @@ export const createCollection = async (
 ): Promise<TResponse> => {
   try {
     connectToDB();
-    const { title, description, link, mainImage, deskBanner, mobileBanner } =
-      Object.fromEntries(data);
+    const {
+      title,
+      description,
+      type,
+      link,
+      mainImage,
+      deskBanner,
+      mobileBanner,
+    } = Object.fromEntries(data);
 
     const moviesId = movies.map((movies: any) => movies.value);
 
@@ -66,6 +73,7 @@ export const createCollection = async (
       mainImage: mainImageText,
       desktopBanner: deskBannerText,
       mobileBanner: mobileBannerText,
+      type,
     });
 
     return {

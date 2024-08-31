@@ -32,12 +32,14 @@ function AddNewCollection({ movies }: any) {
     resolver: zodResolver(Collcetion),
   });
 
+  console.log(errors);
+
   const createNewCollection = async (data: TCollection) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("link", data.link);
-    formData.append("type", data.contentType);
+    formData.append("type", data.type);
     formData.append("mainImage", data.mainImage[0]);
     formData.append("deskBanner", data.deskBanner[0]);
     formData.append("mobileBanner", data.mobileBanner[0]);
@@ -90,7 +92,7 @@ function AddNewCollection({ movies }: any) {
         disable={isLoading}
         errors={errors}
         icon={<FaArtstation className={`text-xl md:text-2xl`} />}
-        name="title"
+        name="description"
         title="توضیحات"
         type="text"
         placeholder="توضیحات این مجموعه را بنویسید"
@@ -111,7 +113,7 @@ function AddNewCollection({ movies }: any) {
       <Radio
         register={register}
         errors={errors}
-        name="contentType"
+        name="type"
         icon={<FaSquareCheck className={`text-xl md:text-2xl`} />}
         title="گروه سنی"
         options={ContentType}

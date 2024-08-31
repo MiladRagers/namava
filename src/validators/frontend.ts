@@ -405,7 +405,7 @@ export const Collcetion = z.object({
     { message: "بنر موبایل باید آپلود شود" }
   ),
 
-  contentType: z
+  type: z
   .string()
   .min(1, { message: "نوع محتوا این اثر را انتخاب کنید" }),
 });
