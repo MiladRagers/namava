@@ -371,3 +371,39 @@ export const Subscription = z.object({
 });
 
 export type TSubscription = z.infer<typeof Subscription>;
+
+export const Collcetion = z.object({
+  title: z
+    .string()
+    .min(3, { message: "حداقل 3 کاراکتر برای عنوان الزامی است" }),
+  link: z
+    .string({ required_error: "لینک مجموعه را وارد کنید" })
+    .min(3, { message: "لینک مجموعه حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک مجموعه باید 30 کاراکتر داشته باشد" }),
+  description: z
+    .string({ required_error: "توضیحات مجموعه را وارد کنید" })
+    .min(3, { message: "توضیحات مجموعه حداقل باید 3 کارکتر باشد" })
+    .max(1000, { message: "توضیحات مجموعه باید 1000 کاراکتر داشته باشد" }),
+
+  mainImage: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "تصویر اصلی باید آپلود شود" }
+  ),
+
+  deskBanner: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "بنر دسکتاپ باید آپلود شود" }
+  ),
+  mobileBanner: z.any().refine(
+    (file) => {
+      return file && file[0] instanceof File;
+    },
+    { message: "بنر موبایل باید آپلود شود" }
+  ),
+});
+
+export type TCollection = z.infer<typeof Collcetion>;

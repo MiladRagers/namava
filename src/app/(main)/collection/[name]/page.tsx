@@ -16,7 +16,7 @@ function page() {
         <div className="title-overlay absolute inset-0"></div>
         <div className="bottom-24 absolute z-30 container px-10">
           <h1 className="text-3xl">مجموعه فیلم های گودزیلا</h1>
-          <p className="text-justify max-w-[673px] pt-5">
+          <p className="text-justify max-w-[673px] pt-5 text-base/[28px]">
             گودزیلا یک هیولای خیالی است که بازمانده ای از دوران ژوراسیک به حساب
             می آید و در اعماق دریا زندگی می کند. گودزیلا بر اثر تشعشعات اتمی جهش
             ژنتیکی پیدا کرده و از آن به عنوان پادشاه هیولاها یاد می کنند. این
@@ -26,7 +26,7 @@ function page() {
         </div>
       </div>
       <div className="container grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 gap-y-16 pt-10 text-white pb-20">
-        <Movie title="جنگل آسفالت" image="godzi1.jpg" link="" />
+        {/* <Movie title="جنگل آسفالت" image="godzi1.jpg" link="" />
         <Movie title="هاوایی" image="godzi2.jpg" link="" />
         <Movie title="شریک جرم" image="godzi9.jpg" link="" />
         <Movie title="اکازیون" image="godzi4.jpg" link="" />
@@ -44,7 +44,7 @@ function page() {
           title="کافه کنار جاده"
           image="godzi7.jpg"
           link=""
-        />
+        /> */}
       </div>
     </>
   );
