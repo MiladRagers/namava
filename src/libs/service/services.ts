@@ -11,6 +11,7 @@ import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
 import SubscriptionModel from "@/src/models/subscription";
+import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 
@@ -682,6 +683,29 @@ export const checkUserSubscription = async () => {
         remainingDays,
       };
     }
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllCollcetions = async (page: number, search: string) => {
+  try {
+    connectToDB();
+    const regex = new RegExp(search, "i");
+
+    const collections = await CollcetionModel.find({
+      title: { $regex: regex },
+    })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate("movies", "link name mainImage type showTime");
+
+    const counts = await CollcetionModel.countDocuments();
+
+    return {
+      collections,
+      counts,
+    };
   } catch (error) {
     return error;
   }
