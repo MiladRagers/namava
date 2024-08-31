@@ -12,7 +12,7 @@ import { LuUsers } from "react-icons/lu";
 import { RiMovie2Line } from "react-icons/ri";
 
 async function MainPage() {
-  const { usersCount, moviesCount, latestUsers } =
+  const { usersCount, moviesCount, latestUsers , subscriptionCount} =
     (await getAllStats()) as TStats;
   return (
     <div className="text-white">
@@ -46,7 +46,7 @@ async function MainPage() {
           }
           title="اشتراک ها"
           color="bg-[#075985]"
-          value={29232}
+          value={subscriptionCount}
         />
         <StatBox
           icon={

@@ -28,6 +28,7 @@ export type TStats = {
   usersCount: number;
   moviesCount: number;
   latestUsers: TUser[];
+  subscriptionCount: number;
 };
 
 export interface TUser {

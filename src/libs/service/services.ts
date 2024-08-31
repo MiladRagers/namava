@@ -21,6 +21,9 @@ export const getAllStats = async () => {
     connectToDB();
     const usersCount = await UserModel.countDocuments();
     const moviesCount = await MovieModel.countDocuments();
+    const subscriptionCount = await UserModel.countDocuments({
+      subscriptionEnd: { $ne: null },
+    });
 
     const latestUsers = await UserModel.find({}, "name profiles createdAt")
       .sort({ createdAt: -1 })
@@ -31,6 +34,7 @@ export const getAllStats = async () => {
       usersCount,
       moviesCount,
       latestUsers,
+      subscriptionCount,
     };
   } catch (error) {
     return error;
@@ -658,7 +662,7 @@ export const checkUserSubscription = async () => {
   try {
     const user = await authUser();
     console.log(user);
-    
+
     if (!user) {
       return {
         message: "کاربر مورد نظر یافت نشد",
@@ -667,7 +671,6 @@ export const checkUserSubscription = async () => {
 
     const now: any = new Date();
     if (!user.subscriptionEnd && user.subscriptionEnd < now) {
-      
       return {
         hasSubscription: false,
       };
