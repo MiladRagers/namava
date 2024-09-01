@@ -10,7 +10,7 @@ async function page({ params }: TParams) {
     collcetion;
   return (
     <>
-      <div className="relative header-video min-h-[70vh] md:min-h-[95vh] text-white">
+      <div className="relative z-20 header-video min-h-[70vh] md:min-h-[95vh] text-white">
         <Image
           className={`w-full title-image hidden lg:block`}
           src={desktopBanner}
@@ -36,7 +36,7 @@ async function page({ params }: TParams) {
         </div>
       </div>
 
-      <div className="container grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 gap-y-16 pt-10 text-white pb-20 -mt-16 relative z-30 ">
+      <div className="container grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 gap-y-16 pt-10 text-white pb-20 -mt-16 relative z-20 ">
         {movies.map((movie: any) => (
           <Movie
             key={movie._id}
