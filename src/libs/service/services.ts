@@ -11,6 +11,7 @@ import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
 import EpisodeModel from "@/src/models/episode";
 import SubscriptionModel from "@/src/models/subscription";
+import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
@@ -733,6 +734,18 @@ export const getAllCollectionSlider = async () => {
     connectToDB();
     const collections = await CollcetionModel.find({});
     return collections;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserBookmarks = async () => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    const bookmarks = await BookmarkModel.find({ user: user._id });
+
+    return bookmarks;
   } catch (error) {
     return error;
   }

@@ -14,11 +14,36 @@ import Like from "@/icons/Like";
 import Dislike from "@/icons/Dislike";
 import Movie from "../Movie/Movie";
 import Link from "next/link";
+import { IoCheckmarkSharp } from "react-icons/io5";
+import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
+import toast from "react-hot-toast";
 
-type TMovieSlider = { title: string; link?: string; movies: any };
-function MovieSlider({ title, link, movies }: TMovieSlider) {
-  const [movieId, setMovieId] = useState<string | null>(null);
+type TMovieSlider = {
+  title: string;
+  link?: string;
+  movies: any;
+  userBookmarks: any;
+};
+
+function MovieSlider({ title, link, movies, userBookmarks }: TMovieSlider) {
+  const [movieId, setMovieId] = useState<string>("");
   const [movieDetail, setMovieDetail] = useState<any>(null);
+  const [bookmarks, setBookmarks] = useState(userBookmarks);
+
+  console.log(bookmarks);
+
+  const handleAddToBookmark = async () => {
+    setBookmarks([...bookmarks, movieId]);
+    toast.success(`با موفقیت اضافه شد`);
+    await addOrDeleteBookmark(movieId);
+  };
+
+  const handleRemoveFromBookmark = async () => {
+    setBookmarks(bookmarks.filter((id: string) => id !== movieId));
+    toast.success(`با موفقیت حذف شد`);
+    await addOrDeleteBookmark(movieId);
+  };
+
   return (
     <div>
       <div className="container">
@@ -110,9 +135,21 @@ function MovieSlider({ title, link, movies }: TMovieSlider) {
                     <FaPlay />
                     خرید اشتراک
                   </button>
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Plus />
-                  </button>
+                  {!bookmarks.includes(movieDetail._id) ? (
+                    <button
+                      onClick={handleAddToBookmark}
+                      className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Plus />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleRemoveFromBookmark}
+                      className="flex-center py-3 px-3 w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <IoCheckmarkSharp className="text-xl" />
+                    </button>
+                  )}
                   <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
                     <Like fill="white" />
                   </button>

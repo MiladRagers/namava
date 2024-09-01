@@ -8,15 +8,22 @@ import {
   getAllSlidersMovies,
   getMovies,
   getStars,
+  getUserBookmarks,
 } from "../libs/service/services";
 
 export default async function Home() {
-  const [slides, allStars, movies, collections] = await Promise.all([
-    getAllSlidersMovies(),
-    getStars(),
-    getMovies(),
-    getAllCollectionSlider(),
-  ]);
+  const [slides, allStars, movies, collections, userBookmarks]: any =
+    await Promise.all([
+      getAllSlidersMovies(),
+      getStars(),
+      getMovies(),
+      getAllCollectionSlider(),
+      getUserBookmarks(),
+    ]);
+
+  const userMoviesBookmark = userBookmarks.map(
+    (bookmark: any) => bookmark.movie
+  );
 
   return (
     <>
@@ -28,6 +35,7 @@ export default async function Home() {
             <div key={category}>
               <MovieSlider
                 movies={JSON.parse(JSON.stringify(movies[category]))}
+                userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
                 title={`${category}`}
               />
             </div>
