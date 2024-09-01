@@ -75,8 +75,6 @@ function CollectionList({ collections, counts }: any) {
                     </Modal.Page>
                   </Modal>
 
-                  <FaTrash className="text-red-600 text-base md:text-lg" />
-
                   <FaPencil className="text-sky-600 text-base md:text-lg" />
                 </div>
               </td>
