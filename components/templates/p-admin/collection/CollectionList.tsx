@@ -4,9 +4,11 @@ import Modal from "@/components/modules/modals/Modal";
 import EmptyBox from "@/components/modules/p-admin/EmptyBox";
 import Pagination from "@/components/modules/pagination/Pagination";
 import Table from "@/components/modules/table/Table";
+import { deleteCollcetion } from "@/src/libs/actions/collection";
 import Image from "next/image";
 import Link from "next/link";
 import { useOptimistic } from "react";
+import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 
 function CollectionList({ collections, counts }: any) {
@@ -16,6 +18,16 @@ function CollectionList({ collections, counts }: any) {
       return state.filter((collection: any) => collection._id !== id);
     }
   );
+
+  const deleteCollectionHandler = async (id: string) => {
+    deleteOptimistc(id);
+    const res = await deleteCollcetion(id);
+    if (res.status === 200) {
+      return toast.success(`${res.message}`);
+    }
+
+    return toast.error(`${res.message}`);
+  };
 
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
@@ -51,17 +63,17 @@ function CollectionList({ collections, counts }: any) {
               <td>{collcetion.type === "adult" ? "بزرگسال" : "کودک"}</td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  {/* <Modal>
+                  <Modal>
                     <Modal.Open name="delete">
                       <FaTrash className="text-red-600 text-base md:text-lg" />
                     </Modal.Open>
                     <Modal.Page name="delete">
                       <ConfirmModal
-                        onAction={deleteCategoryHandler}
-                        id={category._id}
+                        onAction={deleteCollectionHandler}
+                        id={collcetion._id}
                       />
                     </Modal.Page>
-                  </Modal> */}
+                  </Modal>
 
                   <FaTrash className="text-red-600 text-base md:text-lg" />
 
