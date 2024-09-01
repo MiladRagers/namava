@@ -125,6 +125,21 @@ export const deleteEpisode = async (id: string) => {
     await deleteImage(episode.image);
     await deleteImage(episode.video);
 
+    const mainSeason = await SeasonModel.findOne({ _id: episode.season });
+
+    if (mainSeason.episodes.length <= 1) {
+      await SeasonModel.findByIdAndDelete(`${episode.season}`);
+    } else {
+      await SeasonModel.findOneAndUpdate(
+        { _id: episode.season },
+        {
+          $pull: {
+            episodes: episode._id,
+          },
+        }
+      );
+    }
+
     await EpisodeModel.findByIdAndDelete(`${id}`);
 
     revalidatePath(`/p-admin/series/${episode.series}`);
