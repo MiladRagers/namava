@@ -1,9 +1,11 @@
 import React from "react";
 import Bookmark from "@/components/templates/bookmarks/Bookmarks";
-function Bookmarks() {
+import { getUserBookmarks } from "@/src/libs/service/services";
+async function Bookmarks() {
+  const bookmarks = await getUserBookmarks();
   return (
     <div className="py-24 container text-white">
-      <Bookmark />
+      <Bookmark bookmarks={JSON.parse(JSON.stringify(bookmarks))} />
     </div>
   );
 }
