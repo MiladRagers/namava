@@ -4,7 +4,8 @@ import CollcetionModel from "@/src/models/collection";
 import { TResponse } from "../types";
 import path from "path";
 import { writeFileSync } from "fs";
-import { checkIsAdmin } from "@/src/utils/serverHelper";
+import { checkIsAdmin, deleteImage } from "@/src/utils/serverHelper";
+import { isValidObjectId } from "mongoose";
 
 export const createCollection = async (
   data: FormData,
@@ -79,6 +80,51 @@ export const createCollection = async (
     return {
       message: "موفقیت آمیز بود",
       status: 201,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const deleteCollcetion = async (id: string): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!isValidObjectId(id)) {
+      return {
+        message: "ای دی مورد نظر معتبر نیست",
+        status: 422,
+      };
+    }
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "این روت فقط برای کاربران ادمین است",
+        status: 403,
+      };
+    }
+
+    const collcetion = await CollcetionModel.findOne({ _id: id });
+
+    if (!collcetion) {
+      return {
+        message: "مجموعه مورد نظر برای حذف پیدا نشد",
+        status: 404,
+      };
+    }
+
+    await deleteImage(collcetion.mainImage);
+    await deleteImage(collcetion.desktopBanner);
+    await deleteImage(collcetion.mobileBanner);
+
+    await CollcetionModel.findOneAndDelete({ _id: id });
+
+    return {
+      message: "مجموعه با موفقیت حذف شد",
+      status: 200,
     };
   } catch (error) {
     return {

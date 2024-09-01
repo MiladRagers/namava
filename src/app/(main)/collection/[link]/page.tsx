@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const collcetion = await getCollection(params?.link as string);
+  const collcetion = await getCollection(params.link as string);
   const { title, description, desktopBanner, movies, mobileBanner } =
     collcetion;
   return (
