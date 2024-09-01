@@ -22,8 +22,10 @@ export default async function Home() {
     ]);
 
   const userMoviesBookmark = userBookmarks.map(
-    (bookmark: any) => bookmark.movie
+    (bookmark: any) => bookmark.movie._id
   );
+
+  console.log("movies => ", userBookmarks);
 
   return (
     <>
