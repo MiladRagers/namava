@@ -727,3 +727,13 @@ export const getCollection = async (link: string) => {
     return error;
   }
 };
+
+export const getAllCollectionSlider = async () => {
+  try {
+    connectToDB();
+    const collections = await CollcetionModel.find({});
+    return collections;
+  } catch (error) {
+    return error;
+  }
+};

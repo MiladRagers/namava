@@ -6,10 +6,11 @@ import Collection from "./Collection";
 
 interface Collections {
   title: string;
+  collections: any;
 }
-function Collections({ title }: Collections) {
+function Collections({ title, collections }: Collections) {
   return (
-    <div className="container">
+    <div className="container py-10">
       <h3 className="font-IranMedium text-base md:text-lg">{title}</h3>
       <Swiper
         slidesPerView={4}
@@ -34,47 +35,15 @@ function Collections({ title }: Collections) {
           },
         }}
       >
-        <SwiperSlide>
-          <Collection image="/images/godzila.jpg" title="گودزیلا" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/impossible.jpg" title="گودزیلا" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/marvel.jpg" title="مارول" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/batman.jpg" title="بتمن" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection
-            image="/images/spiderman.jpg"
-            title="مرد عنکبوتی"
-            link=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/rambo.jpg" title="رامبو" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/terminator.jpg" title="نابودگر" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/matrix.jpg" title="ماتریکس" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/starWar.jpg" title="جنگ ستارگان" link="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection
-            image="/images/mortalCombat.jpg"
-            title="مورتال کمبت"
-            link=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Collection image="/images/fast.jpg" title="سریع و خشن" link="" />
-        </SwiperSlide>
+        {collections.map((collection: any) => (
+          <SwiperSlide key={collection._id}>
+            <Collection
+              image={collection.mainImage}
+              title={collection.title}
+              link={collection.link}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

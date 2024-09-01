@@ -4,16 +4,18 @@ import Slider from "@/components/templates/index/Slider/Slider";
 import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
 import Collections from "@/components/templates/index/Collections/Collections";
 import {
+  getAllCollectionSlider,
   getAllSlidersMovies,
   getMovies,
   getStars,
 } from "../libs/service/services";
 
 export default async function Home() {
-  const [slides, allStars, movies] = await Promise.all([
+  const [slides, allStars, movies, collections] = await Promise.all([
     getAllSlidersMovies(),
     getStars(),
     getMovies(),
+    getAllCollectionSlider(),
   ]);
 
   return (
@@ -32,7 +34,10 @@ export default async function Home() {
           );
         })}
         <StarsSlider allStars={allStars} title="ستارگان" />
-        <Collections title="مجموعه فیلم ها" />
+        <Collections
+          collections={JSON.parse(JSON.stringify(collections))}
+          title="مجموعه فیلم ها"
+        />
       </div>
     </>
   );

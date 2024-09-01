@@ -8,7 +8,11 @@ interface Collection {
 }
 function Collection({ image, title, link }: Collection) {
   return (
-    <Link href={link} className="block" title={`مجموعه فیلم های ${title}`}>
+    <Link
+      href={`/collection/${link}`}
+      className="block"
+      title={`مجموعه فیلم های ${title}`}
+    >
       <Image
         src={image}
         alt={title}
