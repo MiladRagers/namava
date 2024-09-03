@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 function Comment({ onShow, comment, user  , movieLink}: TComment) {
-  console.log(comment);
+
 
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
   const [liked, setLiked] = useState(comment.liked.includes(user));

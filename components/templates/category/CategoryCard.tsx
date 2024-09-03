@@ -9,7 +9,7 @@ interface CategoryCard {
 }
 
 function CategoryCard({ title, image, link }: CategoryCard) {
-  console.log(link);
+  
   
   return (
     <div className="relative flex items-center">

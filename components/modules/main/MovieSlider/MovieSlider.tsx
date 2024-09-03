@@ -30,7 +30,7 @@ function MovieSlider({ title, link, movies, userBookmarks }: TMovieSlider) {
   const [movieDetail, setMovieDetail] = useState<any>(null);
   const [bookmarks, setBookmarks] = useState(userBookmarks);
 
-  console.log(bookmarks);
+
 
   const handleAddToBookmark = async () => {
     setBookmarks([...bookmarks, movieId]);

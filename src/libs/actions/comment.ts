@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { TResponse } from "../types";
 
 export const sendNewComment = async (formData: FormData, movie: string) => {
-  console.log(movie);
+
 
   try {
     connectToDB();

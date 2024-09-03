@@ -1,3 +1,21 @@
+export type THeader = {
+  isImage?: boolean;
+  isTitle?: boolean;
+  isKid?: boolean;
+  img?: string;
+  mobileImage?: string;
+  className?: string;
+  info?: any;
+  onSwipe?: any;
+  subscription: any;
+};
+
+export type THeaderDetails = {
+  isKid: boolean | undefined;
+  info: any;
+  subscription: any;
+};
+
 export type TModal = {
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   isShow: Boolean;

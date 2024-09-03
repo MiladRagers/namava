@@ -6,7 +6,7 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import Header from "./Header";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-function Slider({ slides }: any) {
+function Slider({ slides, subscription }: any) {
   const [swipe, setSwipe] = useState();
   return (
     <div>
@@ -21,7 +21,13 @@ function Slider({ slides }: any) {
       >
         {slides.map((slide: any) => (
           <SwiperSlide key={slide._id}>
-            <Header onSwipe={swipe} img={slide.deskBanner} isImage info={slide} />
+            <Header
+              onSwipe={swipe}
+              img={slide.deskBanner}
+              isImage
+              info={slide}
+              subscription={subscription}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -20,7 +20,7 @@ function EditUser() {
   });
 
   const updateUserInfo = async (data: TUpdateUser) => {
-    console.log(data);
+
   };
 
   const fakeOptions = [

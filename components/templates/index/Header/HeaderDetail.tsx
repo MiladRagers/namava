@@ -2,20 +2,16 @@ import Dislike from "@/icons/Dislike";
 import IMBD from "@/icons/IMBD";
 import Like from "@/icons/Like";
 import Plus from "@/icons/Plus";
+import { THeaderDetails } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 
-function HeaderDetail({
-  isKid,
-  info,
-}: {
-  isKid: boolean | undefined;
-  info: any;
-}) {
+function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
   const age = Number(info?.ageRange);
+
   return (
     <>
       {isKid ? (
@@ -101,10 +97,17 @@ function HeaderDetail({
             </p>
 
             <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
-              <button className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
+              <Link
+                href={
+                  subscription?.hasSubscription
+                    ? `/${info.type === "film" ? "movie" : "series"}/${info.link}`
+                    : "/plans"
+                }
+                className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
+              >
                 <FaPlay />
-                خرید اشتراک
-              </button>
+                {subscription?.hasSubscription ? "تماشای فیلم" : "خرید اشتراک"}
+              </Link>
               <button className=" py-3 px-5 bg-gray-500/35 hover:bg-white/40 text-white rounded-xl text-[13px]">
                 پیش نمایش
               </button>

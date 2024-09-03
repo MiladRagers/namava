@@ -663,7 +663,7 @@ export const getSubscription = async (id: string) => {
 export const checkUserSubscription = async () => {
   try {
     const user = await authUser();
-    console.log(user);
+
 
     if (!user) {
       return {

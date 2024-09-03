@@ -4,17 +4,8 @@ import React from "react";
 import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
 import HeaderDetail from "./HeaderDetail";
 import { usePathname } from "next/navigation";
+import { THeader } from "@/src/libs/types";
 
-type Header = {
-  isImage?: boolean;
-  isTitle?: boolean;
-  isKid?: boolean;
-  img?: string;
-  mobileImage?: string;
-  className?: string;
-  info?: any;
-  onSwipe?: any;
-};
 function Header({
   isImage,
   isTitle,
@@ -24,7 +15,8 @@ function Header({
   className,
   info,
   onSwipe,
-}: Header) {
+  subscription,
+}: THeader) {
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
 
@@ -61,7 +53,7 @@ function Header({
             <source src="/images/okazion.mp4" />
           </video>
         )}
-        {!isAboutPage && <HeaderDetail isKid={isKid} info={info} />}
+        {!isAboutPage && <HeaderDetail subscription={subscription} isKid={isKid} info={info} />}
         {!isTitle && (
           <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
             <button
