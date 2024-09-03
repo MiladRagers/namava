@@ -25,6 +25,7 @@ export default async function Home() {
     (bookmark: any) => bookmark.movie._id
   );
 
+
   return (
     <>
       <HeaderSlider slides={JSON.parse(JSON.stringify(slides))} />
