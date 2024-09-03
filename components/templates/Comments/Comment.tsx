@@ -1,27 +1,37 @@
 "use client";
 
+import ActiveLike from "@/icons/ActiveLike";
 import Chevron from "@/icons/Chevron";
 import Dislike from "@/icons/Dislike";
 import Information from "@/icons/Information";
 import Like from "@/icons/Like";
+import { likeComment } from "@/src/libs/actions/comment";
 import { TComment } from "@/src/libs/types";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 function Comment({ onShow, comment, user }: TComment) {
-  const path = usePathname();
+  console.log(comment);
+
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
+  const [liked, setLiked] = useState(comment.liked.includes(user));
+  const [disliked, setDisliked] = useState(comment.disliked.includes(user));
+  const path = usePathname();
   const isKid = path.includes("/kids");
 
-  const handleLikeComment = async (commentId: string) => {
+  const handleLike = async (commentId: string) => {
     if (!user) {
-      onShow?.(true);
+      return onShow(true);
     }
+    await likeComment(commentId, user);
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
   };
-  const handleDislikeComment = async (commentId: string) => {
+
+  const handleDislike = async (commentId: string) => {
     if (!user) {
-      onShow?.(true);
+      return onShow(true);
     }
   };
 
@@ -71,18 +81,22 @@ function Comment({ onShow, comment, user }: TComment) {
             </p>
             <div className="flex items-center gap-x-8 mt-6">
               <div className="flex items-center gap-x-2">
-                <Like
-                  onClick={() => handleLikeComment(comment._id)}
-                  fill={isKid ? "gray" : "white"}
-                  className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
-                />
+                {liked ? (
+                  <ActiveLike onClick={() => handleLike(comment._id)} />
+                ) : (
+                  <Like
+                    onClick={() => handleLike(comment._id)}
+                    fill={isKid ? "gray" : "white"}
+                    className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
+                  />
+                )}
                 <span className="font-Dana text-sm">
                   {comment.liked.length}
                 </span>
               </div>
               <div className="flex items-center gap-x-2">
                 <Dislike
-                  onClick={() => handleDislikeComment(comment._id)}
+                  onClick={() => handleDislike(comment._id)}
                   fill={isKid ? "gray" : "white"}
                   className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
                 />

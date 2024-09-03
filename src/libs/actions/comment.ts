@@ -110,7 +110,7 @@ export const deleteComment = async (id: string) => {
   }
 };
 
-export const likeOrDislikeComment = async (
+export const likeComment = async (
   commentId: string,
   userId: string
 ): Promise<TResponse> => {
@@ -131,19 +131,22 @@ export const likeOrDislikeComment = async (
       };
     }
 
-    const isUserLiked = await CommentModel.findOne({
+    const isLiked = await CommentModel.findOne({
       _id: commentId,
       liked: { $in: userId },
     });
 
-    if (isUserLiked) {
+    const isDisLiked = await CommentModel.findOne({
+      _id: commentId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked || isLiked) {
       await CommentModel.findOneAndUpdate(
         { _id: commentId },
         {
           $pull: {
             liked: userId,
-          },
-          $push: {
             disliked: userId,
           },
         }
@@ -155,15 +158,14 @@ export const likeOrDislikeComment = async (
           $push: {
             liked: userId,
           },
-          $pull: {
-            disliked: userId,
-          },
         }
       );
     }
 
+    revalidatePath(`/movie/dispicable`);
+
     return {
-      message: "با موفقیت عملیات انجام شد",
+      message: "با موفقیت کامنت لایک شد",
       status: 200,
     };
   } catch (error) {
