@@ -118,6 +118,7 @@ function Comments({ isKid, user, movieId, comments }: TComments) {
                 key={comment._id}
                 onShow={setIsShowLoginModal}
                 comment={comment}
+                user={user}
               />
             ))
           ) : (

@@ -9,10 +9,21 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
-function Comment({ onShow, comment }: TComment) {
+function Comment({ onShow, comment, user }: TComment) {
   const path = usePathname();
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
   const isKid = path.includes("/kids");
+
+  const handleLikeComment = async (commentId: string) => {
+    if (!user) {
+      onShow?.(true);
+    }
+  };
+  const handleDislikeComment = async (commentId: string) => {
+    if (!user) {
+      onShow?.(true);
+    }
+  };
 
   return (
     <div
@@ -61,19 +72,23 @@ function Comment({ onShow, comment }: TComment) {
             <div className="flex items-center gap-x-8 mt-6">
               <div className="flex items-center gap-x-2">
                 <Like
-                  onClick={() => onShow(true)}
+                  onClick={() => handleLikeComment(comment._id)}
                   fill={isKid ? "gray" : "white"}
                   className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
                 />
-                <span className="font-Dana text-sm">{comment.liked.length}</span>
+                <span className="font-Dana text-sm">
+                  {comment.liked.length}
+                </span>
               </div>
               <div className="flex items-center gap-x-2">
                 <Dislike
-                  onClick={() => onShow(true)}
+                  onClick={() => handleDislikeComment(comment._id)}
                   fill={isKid ? "gray" : "white"}
                   className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
                 />
-                <span className="font-Dana text-sm">{comment.disliked.length}</span>
+                <span className="font-Dana text-sm">
+                  {comment.disliked.length}
+                </span>
               </div>
             </div>
           </>

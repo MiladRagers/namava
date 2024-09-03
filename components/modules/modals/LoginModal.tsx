@@ -5,9 +5,11 @@ import useCloseOutSideClick from "@/hooks/useOutSideClick";
 import { TModal } from "@/src/libs/types";
 import Message from "@/icons/Message";
 import Button from "../auth/Button/Button";
+import { useRouter } from "next/navigation";
 
 function LoginModal({ isShow, onClose }: TModal) {
   const { ref } = useCloseOutSideClick(onClose, false);
+  const router = useRouter();
   return (
     <ModalContainer isShow={isShow ? true : false}>
       <div
@@ -21,7 +23,12 @@ function LoginModal({ isShow, onClose }: TModal) {
         <div className="flex-center flex-col space-y-5">
           <Message className="!w-[136px] !h-[137px]" />
           <p>برای ثبت نظر، ابتدا باید وارد شوید.</p>
-          <Button className="text-white !mt-8">ورود / ثبت نام</Button>
+          <Button
+            className="text-white !mt-8"
+            onClick={() => router.push("/login")}
+          >
+            ورود / ثبت نام
+          </Button>
           <Button
             className="!mt-8 bg-white text-black"
             onClick={() => onClose(false)}

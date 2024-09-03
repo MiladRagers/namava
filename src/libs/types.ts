@@ -6,6 +6,7 @@ export type TModal = {
 export type TComment = {
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
   comment: any;
+  user: any;
 };
 
 export type TParams = {
@@ -37,7 +38,6 @@ export interface TUser {
   profiles: string[];
   createdAt: string;
 }
-
 
 export interface TResponse {
   message: string;
