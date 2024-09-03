@@ -5,6 +5,7 @@ import CommentModel from "@/src/models/comments";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
+import { TResponse } from "../types";
 
 export const sendNewComment = async (formData: FormData, movie: string) => {
   console.log(movie);
@@ -104,6 +105,70 @@ export const deleteComment = async (id: string) => {
   } catch (error) {
     return {
       message: "لطفا اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const likeOrDislikeComment = async (
+  commentId: string,
+  userId: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(commentId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isUserLiked = await CommentModel.findOne({
+      _id: commentId,
+      liked: { $in: userId },
+    });
+
+    if (isUserLiked) {
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $pull: {
+            liked: userId,
+          },
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $push: {
+            liked: userId,
+          },
+          $pull: {
+            disliked: userId,
+          },
+        }
+      );
+    }
+
+    return {
+      message: "با موفقیت عملیات انجام شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
     };
   }
