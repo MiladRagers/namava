@@ -175,3 +175,86 @@ export const likeComment = async (
     };
   }
 };
+
+export const dislikeComment = async (
+  commentId: string,
+  userId: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(commentId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isLiked = await CommentModel.findOne({
+      _id: commentId,
+      liked: { $in: userId },
+    });
+
+    const isDisLiked = await CommentModel.findOne({
+      _id: commentId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked) {
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $pull: {
+            disliked: userId,
+          },
+        }
+      );
+    } else if (isLiked) {
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $pull: {
+            liked: userId,
+          },
+        }
+      );
+
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await CommentModel.findOneAndUpdate(
+        { _id: commentId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    }
+
+    revalidatePath(`/movie/dispicable`);
+
+    return {
+      message: "با موفقیت کامنت دیس لایک شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};

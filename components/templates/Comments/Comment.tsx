@@ -5,11 +5,12 @@ import Chevron from "@/icons/Chevron";
 import Dislike from "@/icons/Dislike";
 import Information from "@/icons/Information";
 import Like from "@/icons/Like";
-import { likeComment } from "@/src/libs/actions/comment";
+import { dislikeComment, likeComment } from "@/src/libs/actions/comment";
 import { TComment } from "@/src/libs/types";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 function Comment({ onShow, comment, user }: TComment) {
   console.log(comment);
@@ -24,7 +25,10 @@ function Comment({ onShow, comment, user }: TComment) {
     if (!user) {
       return onShow(true);
     }
-    await likeComment(commentId, user);
+    const res = await likeComment(commentId, user);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
     setLiked(!liked);
     if (disliked) setDisliked(false);
   };
@@ -33,6 +37,14 @@ function Comment({ onShow, comment, user }: TComment) {
     if (!user) {
       return onShow(true);
     }
+
+    const res = await dislikeComment(commentId, user);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setDisliked(!disliked);
+
+    if (liked) setLiked(false);
   };
 
   return (
@@ -95,11 +107,18 @@ function Comment({ onShow, comment, user }: TComment) {
                 </span>
               </div>
               <div className="flex items-center gap-x-2">
-                <Dislike
-                  onClick={() => handleDislike(comment._id)}
-                  fill={isKid ? "gray" : "white"}
-                  className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
-                />
+                {disliked ? (
+                  <ActiveLike
+                    isDislike
+                    onClick={() => handleDislike(comment._id)}
+                  />
+                ) : (
+                  <Dislike
+                    onClick={() => handleDislike(comment._id)}
+                    fill={isKid ? "gray" : "white"}
+                    className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] cursor-pointer"
+                  />
+                )}
                 <span className="font-Dana text-sm">
                   {comment.disliked.length}
                 </span>

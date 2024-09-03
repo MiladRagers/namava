@@ -2,9 +2,10 @@ import React, { ComponentProps } from "react";
 
 type TActiveLike = ComponentProps<"svg"> & {
   fill?: string;
+  isDislike?: boolean;
 };
 
-function ActiveLike({ fill, ...rest }: TActiveLike) {
+function ActiveLike({ fill, isDislike, ...rest }: TActiveLike) {
   return (
     <svg
       {...rest}
@@ -13,6 +14,7 @@ function ActiveLike({ fill, ...rest }: TActiveLike) {
       width="40"
       height="40"
       preserveAspectRatio="xMidYMid meet"
+      className={isDislike ? "rotate-180" : ""}
     >
       <defs>
         <clipPath id="__lottie_element_162">
