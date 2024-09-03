@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-function Comment({ onShow, comment, user }: TComment) {
+function Comment({ onShow, comment, user  , movieLink}: TComment) {
   console.log(comment);
 
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
@@ -25,7 +25,7 @@ function Comment({ onShow, comment, user }: TComment) {
     if (!user) {
       return onShow(true);
     }
-    const res = await likeComment(commentId, user);
+    const res = await likeComment(commentId, user , movieLink);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
@@ -38,7 +38,7 @@ function Comment({ onShow, comment, user }: TComment) {
       return onShow(true);
     }
 
-    const res = await dislikeComment(commentId, user);
+    const res = await dislikeComment(commentId, user , movieLink);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }

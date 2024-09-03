@@ -15,8 +15,9 @@ type TComments = {
   user: string;
   movieId: string;
   comments: any;
+  movieLink: string;
 };
-function Comments({ isKid, user, movieId, comments }: TComments) {
+function Comments({ isKid, user, movieId, comments, movieLink }: TComments) {
   const router = useRouter();
   const [isShowLoginModal, setIsShowLoginModal] = useState(false);
 
@@ -119,6 +120,7 @@ function Comments({ isKid, user, movieId, comments }: TComments) {
                 onShow={setIsShowLoginModal}
                 comment={comment}
                 user={user}
+                movieLink={movieLink}
               />
             ))
           ) : (
@@ -129,9 +131,10 @@ function Comments({ isKid, user, movieId, comments }: TComments) {
             >
               <div className="flex items-center gap-x-2">
                 <Message />
-                <p className="text-sm md:text-base">هیچ کامنتی تاکنون ثبت نشده است.</p>
+                <p className="text-sm md:text-base">
+                  هیچ کامنتی تاکنون ثبت نشده است.
+                </p>
               </div>
-              
             </div>
           )}
         </div>

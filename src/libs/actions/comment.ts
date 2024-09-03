@@ -112,7 +112,8 @@ export const deleteComment = async (id: string) => {
 
 export const likeComment = async (
   commentId: string,
-  userId: string
+  userId: string,
+  movieLink: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -162,7 +163,7 @@ export const likeComment = async (
       );
     }
 
-    revalidatePath(`/movie/dispicable`);
+    revalidatePath(`/movie/${movieLink}`);
 
     return {
       message: "با موفقیت کامنت لایک شد",
@@ -178,7 +179,8 @@ export const likeComment = async (
 
 export const dislikeComment = async (
   commentId: string,
-  userId: string
+  userId: string,
+  movieLink: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -245,7 +247,7 @@ export const dislikeComment = async (
       );
     }
 
-    revalidatePath(`/movie/dispicable`);
+    revalidatePath(`/movie/${movieLink}`);
 
     return {
       message: "با موفقیت کامنت دیس لایک شد",

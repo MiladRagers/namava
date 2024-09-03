@@ -6,7 +6,8 @@ export type TModal = {
 export type TComment = {
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
   comment: any;
-  user: any;
+  user: string;
+  movieLink: string;
 };
 
 export type TParams = {

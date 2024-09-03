@@ -7,6 +7,7 @@ import {
   getMovie,
   getRealedMovies,
   getRelatedArticleToMovie,
+  getUserBookmarks,
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
@@ -14,9 +15,10 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const [movie, userInfo]: any = await Promise.all([
+  const [movie, userInfo, userBookmarks]: any = await Promise.all([
     getMovie(params.link),
     authUser(),
+    getUserBookmarks(),
   ]);
 
   const [realatedMovies, relatedArticle]: any = await Promise.all([
@@ -55,6 +57,7 @@ async function page({ params }: TParams) {
             movies={JSON.parse(JSON.stringify(realatedMovies))}
             title={`بر اساس ${movie.title}`}
             link="/"
+            userBookmarks={JSON.parse(JSON.stringify(userBookmarks))}
           />
         )}
       </section>
@@ -64,6 +67,7 @@ async function page({ params }: TParams) {
           user={userInfo ? JSON.parse(JSON.stringify(userInfo._id)) : null}
           movieId={JSON.parse(JSON.stringify(movie._id))}
           comments={JSON.parse(JSON.stringify(movie.comments))}
+          movieLink={movie.link}
         />
       </section>
     </>
