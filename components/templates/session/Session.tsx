@@ -158,6 +158,48 @@ function Session({ episode, user }: any) {
           <p className="text-xs/[25px] text-[#aaaaaa] px-4 py-4">
             {episode.description}
           </p>
+
+          <div className="flex items-center justify-between px-4 pb-3">
+            <div className="flex items-center gap-x-1 flex-row-reverse">
+              <span className="block mt-1 text-white text-sm">85%</span>
+              <Heart />
+            </div>
+            <div className="flex items-center gap-x-2">
+              {liked ? (
+                <button
+                  onClick={() => handleLike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
+                  <ActiveLike className="!flex-shrink-0 w-[24px] h-[24px] fill-white stroke-white" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleLike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
+                  <Like className="!flex-shrink-0 w-[22px] h-[22px] fill-white stroke-white" />
+                </button>
+              )}
+              {disliked ? (
+                <button
+                  onClick={() => handleDislike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
+                  <ActiveLike
+                    isDislike
+                    className="!flex-shrink-0 !w-[22px] !h-[22px] fill-white stroke-white"
+                  />
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleDislike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
+                  <Dislike className="!flex-shrink-0 w-[22px] h-[22px] fill-white stroke-white" />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
