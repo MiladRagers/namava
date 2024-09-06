@@ -12,6 +12,7 @@ import { Login, TLogin } from "@/src/validators/frontend";
 import { AiOutlineProduct } from "react-icons/ai";
 import { signIn } from "@/src/libs/actions/auth";
 import toast from "react-hot-toast";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 function LoginForm() {
   const [isPassword, setIsPassword] = useState(true);
@@ -80,10 +81,12 @@ function LoginForm() {
         />
         <Button
           disabled={isLoading}
-          className={isValid && !isLoading ? "bg-namava" : "bg-slate-500"}
+          className={`h-[44px] ${
+            isValid && !isLoading ? "bg-namava" : "bg-slate-500"
+          }`}
           type="submit"
         >
-          {isLoading ? "در حال ورود ..." : " ورود"}
+          {isLoading ? <Spinner /> : " ورود"}
         </Button>
       </form>
     </>
