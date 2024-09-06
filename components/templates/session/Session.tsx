@@ -10,7 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { FaChevronDown, FaHeart, FaPlay } from "react-icons/fa6";
 
-function Session({ episode, user }: any) {
+function Session({ episode, user, link }: any) {
   const subMenuRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [liked, setLiked] = useState(episode.liked.includes(user));
@@ -26,7 +26,7 @@ function Session({ episode, user }: any) {
       router.push("/login");
     }
 
-    const res = await dislikeEpisode(id, user);
+    const res = await dislikeEpisode(id, user, link);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
@@ -39,13 +39,29 @@ function Session({ episode, user }: any) {
     if (!user) {
       router.push("/login");
     }
-    const res = await likeEpisode(id, user);
+    const res = await likeEpisode(id, user, link);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
     setLiked(!liked);
     if (disliked) setDisliked(false);
   };
+
+  function calculateLikePercentage(episode: any) {
+    const totalLikes = episode.liked.length;
+    const totalDislikes = episode.disliked.length;
+    const totalVotes = totalLikes + totalDislikes;
+
+    // اگر هیچ لایکی وجود نداشته باشد، درصد را صفر در نظر بگیرید
+    if (totalVotes === 0) {
+      return 0;
+    }
+
+    // محاسبه درصد لایک‌ها
+    const likePercentage = (totalLikes * 100) / totalVotes;
+
+    return likePercentage;
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -79,7 +95,9 @@ function Session({ episode, user }: any) {
           <h3 className="text-sm">{episode.title}</h3>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-1 flex-row-reverse">
-              <span className="block mt-1">85%</span>
+              <span className="block mt-1 font-Dana">
+                {calculateLikePercentage(episode).toFixed(0)}%
+              </span>
               <Heart />
             </div>
             <div className="flex items-center gap-x-2">

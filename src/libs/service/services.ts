@@ -664,7 +664,6 @@ export const checkUserSubscription = async () => {
   try {
     const user = await authUser();
 
-
     if (!user) {
       return {
         message: "کاربر مورد نظر یافت نشد",

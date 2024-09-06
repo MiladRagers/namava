@@ -157,6 +157,7 @@ export const deleteEpisode = async (id: string) => {
 export const likeEpisode = async (
   episodeId: string,
   userId: string,
+  seriesLink: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -205,8 +206,7 @@ export const likeEpisode = async (
         }
       );
     }
-
-    
+    revalidatePath(`/series/${seriesLink}`);
 
     return {
       message: "با موفقیت این قسمت لایک شد",
@@ -223,6 +223,7 @@ export const likeEpisode = async (
 export const dislikeEpisode = async (
   episodeId: string,
   userId: string,
+  seriesLink: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -289,7 +290,7 @@ export const dislikeEpisode = async (
       );
     }
 
-    
+    revalidatePath(`/series/${seriesLink}`);
 
     return {
       message: "با موفقیت این قسمت دیس لایک شد",

@@ -68,7 +68,8 @@ async function page({ params, searchParams }: TParams) {
           <Session
             key={episode._id}
             episode={JSON.parse(JSON.stringify(episode))}
-            user={userInfo._id}
+            user={JSON.parse(JSON.stringify(userInfo._id))}
+            link={params.link}
           />
         ))}
       </section>
