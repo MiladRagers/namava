@@ -1,4 +1,5 @@
 "use client";
+import ActiveLike from "@/icons/ActiveLike";
 import Dislike from "@/icons/Dislike";
 import Heart from "@/icons/Heart";
 import Like from "@/icons/Like";
@@ -6,9 +7,13 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaHeart, FaPlay } from "react-icons/fa6";
 
-function Session({ episode }: any) {
+function Session({ episode, user }: any) {
+  console.log(user);
+
   const subMenuRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [liked, setLiked] = useState(episode.liked.includes(user));
+  const [disliked, setDisliked] = useState(episode.disliked.includes(user));
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -50,12 +55,27 @@ function Session({ episode }: any) {
               <Heart />
             </div>
             <div className="flex items-center gap-x-2">
-              <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
-                <Like className="!flex-shrink-0 fill-white stroke-white" />
-              </button>
-              <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
-                <Dislike className="!flex-shrink-0 fill-white stroke-white"  />
-              </button>
+              {liked ? (
+                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                  <ActiveLike className="!flex-shrink-0 fill-white stroke-white" />
+                </button>
+              ) : (
+                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                  <Like className="!flex-shrink-0 fill-white stroke-white" />
+                </button>
+              )}
+              {disliked ? (
+                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                  <ActiveLike
+                    isDislike
+                    className="!flex-shrink-0 fill-white stroke-white"
+                  />
+                </button>
+              ) : (
+                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                  <Dislike className="!flex-shrink-0 fill-white stroke-white" />
+                </button>
+              )}
             </div>
           </div>
           <p className="text-xs/[25px] text-[#aaaaaa] line-clamp-2">

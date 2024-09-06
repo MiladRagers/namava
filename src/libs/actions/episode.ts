@@ -9,6 +9,7 @@ import path from "path";
 import { revalidatePath } from "next/cache";
 import { isValidObjectId } from "mongoose";
 import { checkIsAdmin, deleteImage } from "@/src/utils/serverHelper";
+import { TResponse } from "../types";
 
 export const createNewEpisode = async (data: FormData) => {
   try {
@@ -150,5 +151,156 @@ export const deleteEpisode = async (id: string) => {
     };
   } catch (error) {
     return error;
+  }
+};
+
+export const likeEpisode = async (
+  episodeId: string,
+  userId: string,
+  movieLink: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(episodeId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isLiked = await EpisodeModel.findOne({
+      _id: episodeId,
+      liked: { $in: userId },
+    });
+
+    const isDisLiked = await EpisodeModel.findOne({
+      _id: episodeId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked || isLiked) {
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $pull: {
+            liked: userId,
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $push: {
+            liked: userId,
+          },
+        }
+      );
+    }
+
+    revalidatePath(`/movie/${movieLink}`);
+
+    return {
+      message: "با موفقیت این قسمت لایک شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const dislikeEpisode = async (
+  episodeId: string,
+  userId: string,
+  movieLink: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(episodeId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isLiked = await EpisodeModel.findOne({
+      _id: episodeId,
+      liked: { $in: userId },
+    });
+
+    const isDisLiked = await EpisodeModel.findOne({
+      _id: episodeId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked) {
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $pull: {
+            disliked: userId,
+          },
+        }
+      );
+    } else if (isLiked) {
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $pull: {
+            liked: userId,
+          },
+        }
+      );
+
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await EpisodeModel.findOneAndUpdate(
+        { _id: episodeId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    }
+
+    revalidatePath(`/movie/${movieLink}`);
+
+    return {
+      message: "با موفقیت این قسمت دیس لایک شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
   }
 };

@@ -6,6 +6,7 @@ import Footer from "@/components/modules/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { authUser } from "@/src/utils/serverHelper";
 import { checkUserSubscription } from "../libs/service/services";
+import AuthContextProvider from "../context/AuthContextProvider";
 
 export const metadata: Metadata = {
   title: "تماشای آنلاین فیلم و سریال | نماوا",
@@ -27,14 +28,16 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl" className="font-Iran bg-[#121212]">
       <body>
-        <Navbar
-          user={JSON.parse(JSON.stringify(user))}
-          userSubscription={userSubscription}
-        />
-        {children}
-        <Footer />
-        <FooterMenu />
-        <Toaster />
+        <AuthContextProvider>
+          <Navbar
+            user={JSON.parse(JSON.stringify(user))}
+            userSubscription={userSubscription}
+          />
+          {children}
+          <Footer />
+          <FooterMenu />
+          <Toaster />
+        </AuthContextProvider>
       </body>
     </html>
   );
