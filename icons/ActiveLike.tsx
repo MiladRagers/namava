@@ -5,7 +5,7 @@ type TActiveLike = ComponentProps<"svg"> & {
   isDislike?: boolean;
 };
 
-function ActiveLike({ fill, isDislike, ...rest }: TActiveLike) {
+function ActiveLike({ fill, isDislike, className,...rest }: TActiveLike) {
   return (
     <svg
       {...rest}
@@ -14,7 +14,7 @@ function ActiveLike({ fill, isDislike, ...rest }: TActiveLike) {
       width="40"
       height="40"
       preserveAspectRatio="xMidYMid meet"
-      className={isDislike ? "rotate-180" : ""}
+      className={` ${isDislike ? "rotate-180" : ""} ${className}`}
     >
       <defs>
         <clipPath id="__lottie_element_162">

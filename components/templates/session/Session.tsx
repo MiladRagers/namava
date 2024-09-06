@@ -3,20 +3,48 @@ import ActiveLike from "@/icons/ActiveLike";
 import Dislike from "@/icons/Dislike";
 import Heart from "@/icons/Heart";
 import Like from "@/icons/Like";
+import { dislikeEpisode, likeEpisode } from "@/src/libs/actions/episode";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { FaChevronDown, FaHeart, FaPlay } from "react-icons/fa6";
 
 function Session({ episode, user }: any) {
-  console.log(user);
-
   const subMenuRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [liked, setLiked] = useState(episode.liked.includes(user));
   const [disliked, setDisliked] = useState(episode.disliked.includes(user));
+  const router = useRouter();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleDislike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+
+    const res = await dislikeEpisode(id, user);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setDisliked(!disliked);
+
+    if (liked) setLiked(false);
+  };
+
+  const handleLike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+    const res = await likeEpisode(id, user);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
   };
 
   useEffect(() => {
@@ -56,23 +84,35 @@ function Session({ episode, user }: any) {
             </div>
             <div className="flex items-center gap-x-2">
               {liked ? (
-                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
-                  <ActiveLike className="!flex-shrink-0 fill-white stroke-white" />
+                <button
+                  onClick={() => handleLike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
+                  <ActiveLike className="!flex-shrink-0 w-[24px] h-[24px] fill-white stroke-white" />
                 </button>
               ) : (
-                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                <button
+                  onClick={() => handleLike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
                   <Like className="!flex-shrink-0 fill-white stroke-white" />
                 </button>
               )}
               {disliked ? (
-                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                <button
+                  onClick={() => handleDislike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
                   <ActiveLike
                     isDislike
-                    className="!flex-shrink-0 fill-white stroke-white"
+                    className="!flex-shrink-0 w-[24px] h-[24px] fill-white stroke-white"
                   />
                 </button>
               ) : (
-                <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                <button
+                  onClick={() => handleDislike(episode._id)}
+                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                >
                   <Dislike className="!flex-shrink-0 fill-white stroke-white" />
                 </button>
               )}
