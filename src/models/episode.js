@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import MovieModel from "./movie";
+import UserModel from "@/src/models/user";
 
 const schema = new mongoose.Schema(
   {
@@ -27,6 +28,8 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    liked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
+    disliked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
     video: {
       type: String,
       required: true,

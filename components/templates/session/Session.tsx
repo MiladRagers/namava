@@ -1,7 +1,10 @@
 "use client";
+import Dislike from "@/icons/Dislike";
+import Heart from "@/icons/Heart";
+import Like from "@/icons/Like";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { FaChevronDown, FaPlay } from "react-icons/fa6";
+import { FaChevronDown, FaHeart, FaPlay } from "react-icons/fa6";
 
 function Session({ episode }: any) {
   const subMenuRef = useRef<any>(null);
@@ -39,8 +42,22 @@ function Session({ episode }: any) {
 
           <div className="bg-black/50 absolute inset-0 show-hover"></div>
         </div>
-        <div className="mt-2 space-y-3">
-          <h3 className="text-white">{episode.title}</h3>
+        <div className="mt-2 space-y-3 text-white">
+          <h3 className="text-sm">{episode.title}</h3>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-1 flex-row-reverse">
+              <span className="block mt-1">85%</span>
+              <Heart />
+            </div>
+            <div className="flex items-center gap-x-2">
+              <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                <Like className="!flex-shrink-0 fill-white stroke-white" />
+              </button>
+              <button className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]">
+                <Dislike className="!flex-shrink-0 fill-white stroke-white"  />
+              </button>
+            </div>
+          </div>
           <p className="text-xs/[25px] text-[#aaaaaa] line-clamp-2">
             {episode.description}
           </p>
