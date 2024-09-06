@@ -10,6 +10,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { signUp } from "@/src/libs/actions/auth";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Spinner from "@/components/modules/spinner/Spinner";
 
 function Register() {
   const [isPassword, setIsPassword] = useState(true);
@@ -120,9 +121,9 @@ function Register() {
 
         <Button
           type="submit"
-          className={isValid ? "bg-namava" : "bg-slate-500"}
+          className={`h-[44px] ${isValid ? "bg-namava" : "bg-slate-500"}`}
         >
-          {isLoading ? "در حال ثبت نام ..." : "ثبت نام"}
+          {isLoading ? <Spinner /> : "ثبت نام"}
         </Button>
       </div>
     </form>
