@@ -17,6 +17,7 @@ export type THeaderDetails = {
   info: any;
   subscription: any;
   user?: any;
+  bookmarks?: any;
 };
 
 export type TModal = {

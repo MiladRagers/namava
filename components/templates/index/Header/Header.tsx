@@ -61,6 +61,7 @@ function Header({
             subscription={subscription}
             isKid={isKid}
             info={info}
+            bookmarks={bookmarks}
           />
         )}
         {!isTitle && (

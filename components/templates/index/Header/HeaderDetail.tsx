@@ -12,11 +12,20 @@ import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
+import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
+import { IoCheckmarkSharp } from "react-icons/io5";
 
-function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
+function HeaderDetail({
+  isKid,
+  info,
+  subscription,
+  user,
+  bookmarks,
+}: THeaderDetails) {
   const pathname = usePathname();
-  const [liked, setLiked] = useState(info.liked.includes(user._id));
-  const [disliked, setDisliked] = useState(info.disliked.includes(user._id));
+  const [liked, setLiked] = useState(info.liked.includes(user?._id));
+  const [userBookmarks, setUserBookmarks] = useState(bookmarks);
+  const [disliked, setDisliked] = useState(info.disliked.includes(user?._id));
   const isSinglePage =
     pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
@@ -48,6 +57,20 @@ function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
     }
     setLiked(!liked);
     if (disliked) setDisliked(false);
+  };
+
+  const handleAddToBookmark = async () => {
+    console.log(bookmarks);
+    
+    setUserBookmarks([...bookmarks, info._id]);
+    toast.success(`با موفقیت اضافه شد`);
+    await addOrDeleteBookmark(info._id);
+  };
+
+  const handleRemoveFromBookmark = async () => {
+    setUserBookmarks(bookmarks.filter((id: string) => id !== info._id));
+    toast.success(`با موفقیت حذف شد`);
+    await addOrDeleteBookmark(info._id);
   };
 
   return (
@@ -154,9 +177,21 @@ function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
 
               {isSinglePage && user ? (
                 <>
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Plus />
-                  </button>
+                  {!userBookmarks.includes(info._id) ? (
+                    <button
+                      onClick={handleAddToBookmark}
+                      className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Plus />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleRemoveFromBookmark}
+                      className="flex-center py-3 px-3 w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <IoCheckmarkSharp className="text-xl text-white" />
+                    </button>
+                  )}
                   {liked ? (
                     <button
                       onClick={() => handleLike(info._id)}

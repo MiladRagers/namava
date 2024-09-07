@@ -222,8 +222,6 @@ export const likeMovie = async (
       status: 200,
     };
   } catch (error) {
-    console.log(error);
-
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
