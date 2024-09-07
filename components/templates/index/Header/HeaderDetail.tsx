@@ -5,11 +5,15 @@ import Plus from "@/icons/Plus";
 import { THeaderDetails } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 
 function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
+  const pathname = usePathname();
+  const isSinglePage =
+    pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
 
   return (
@@ -100,7 +104,9 @@ function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
               <Link
                 href={
                   subscription?.hasSubscription
-                    ? `/${info.type === "film" ? "movie" : "series"}/${info.link}`
+                    ? `/${info.type === "film" ? "movie" : "series"}/${
+                        info.link
+                      }`
                     : "/plans"
                 }
                 className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
@@ -111,22 +117,28 @@ function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
               <button className=" py-3 px-5 bg-gray-500/35 hover:bg-white/40 text-white rounded-xl text-[13px]">
                 پیش نمایش
               </button>
-              {/* <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-              <Plus />
-            </button>
-            <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-              <Like />
-            </button>
-            <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-              <Dislike />
-            </button> */}
-              <Link
-                href={`/movie/${info.link}`}
-                className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
-              >
-                <GrCircleInformation className="text-3xl" />
-                اطلاعات بیشتر
-              </Link>
+
+              {isSinglePage ? (
+                <>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Plus />
+                  </button>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Like  className="stroke-white fill-white"/>
+                  </button>
+                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
+                    <Dislike className="stroke-white fill-white" />
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href={`/movie/${info.link}`}
+                  className="hidden md:flex items-center  text-sm gap-x-2 text-white hover:text-namava"
+                >
+                  <GrCircleInformation className="text-3xl" />
+                  اطلاعات بیشتر
+                </Link>
+              )}
             </div>
             <p className="text-xs hidden md:flex text-gray-50 mt-5 items-center gap-x-3">
               ستارگان:
