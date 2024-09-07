@@ -7,13 +7,16 @@ export type THeader = {
   className?: string;
   info?: any;
   onSwipe?: any;
+  bookmarks: any;
   subscription: any;
+  user?: any;
 };
 
 export type THeaderDetails = {
   isKid: boolean | undefined;
   info: any;
   subscription: any;
+  user?: any;
 };
 
 export type TModal = {

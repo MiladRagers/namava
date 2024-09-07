@@ -6,9 +6,11 @@ import SeasonOption from "@/components/templates/Movie/SeasonOption";
 import Header from "@/components/templates/index/Header/Header";
 import Session from "@/components/templates/session/Session";
 import {
+  checkUserSubscription,
   getMovie,
   getRealedMovies,
   getSpecificSeasons,
+  getUserBookmarks,
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
@@ -23,18 +25,25 @@ async function page({ params, searchParams }: TParams) {
     authUser(),
   ]);
 
-  if (!movie) {
-    notFound();
-  }
+  const [seasons, realatedMovies, userBookmarks, subscription]: any =
+    await Promise.all([
+      getSpecificSeasons(movie._id),
+      getRealedMovies(movie.category, movie._id),
+      getUserBookmarks(),
+      checkUserSubscription(),
+    ]);
 
-  const [seasons, realatedMovies]: any = await Promise.all([
-    getSpecificSeasons(movie._id),
-    getRealedMovies(movie.category, movie._id),
-  ]);
+  const userMoviesBookmark = userBookmarks.map(
+    (bookmark: any) => bookmark.movie._id
+  );
 
   const seasonEpisodes = seasons.find(
     (season: any) => season.seasonNumber == activeSeason
   );
+
+  if (!movie) {
+    notFound();
+  }
 
   return (
     <>
@@ -45,6 +54,9 @@ async function page({ params, searchParams }: TParams) {
           img={movie.deskBanner}
           mobileImage={movie.mobileBanner}
           info={JSON.parse(JSON.stringify(movie))}
+          subscription={subscription}
+          bookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
+          user={JSON.parse(JSON.stringify(userInfo))}
         />
         <div className="absolute inset-0 title-overlay"></div>
       </section>
@@ -88,6 +100,7 @@ async function page({ params, searchParams }: TParams) {
             movies={JSON.parse(JSON.stringify(realatedMovies))}
             title={`بر اساس ${movie.title}`}
             link="/"
+            userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
           />
         )}
       </section>

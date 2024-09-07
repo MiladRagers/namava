@@ -1,3 +1,4 @@
+import ActiveLike from "@/icons/ActiveLike";
 import Dislike from "@/icons/Dislike";
 import IMBD from "@/icons/IMBD";
 import Like from "@/icons/Like";
@@ -6,12 +7,14 @@ import { THeaderDetails } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 
-function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
+function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
   const pathname = usePathname();
+  const [liked, setLiked] = useState(info.liked.includes(user));
+  const [disliked, setDisliked] = useState(info.disliked.includes(user));
   const isSinglePage =
     pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
@@ -118,17 +121,32 @@ function HeaderDetail({ isKid, info, subscription }: THeaderDetails) {
                 پیش نمایش
               </button>
 
-              {isSinglePage ? (
+              {isSinglePage && user ? (
                 <>
                   <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
                     <Plus />
                   </button>
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Like  className="stroke-white fill-white"/>
-                  </button>
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Dislike className="stroke-white fill-white" />
-                  </button>
+                  {liked ? (
+                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                      <ActiveLike className="fill-white stroke-white" />
+                    </button>
+                  ) : (
+                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                      <Like className="fill-white stroke-white" />
+                    </button>
+                  )}
+                  {disliked ? (
+                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                      <ActiveLike
+                        isDislike
+                        className="fill-white stroke-white"
+                      />
+                    </button>
+                  ) : (
+                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                      <Dislike className=" fill-white stroke-white" />
+                    </button>
+                  )}
                 </>
               ) : (
                 <Link

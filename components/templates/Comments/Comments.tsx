@@ -15,7 +15,7 @@ type TComments = {
   user: string;
   movieId: string;
   comments: any;
-  movieLink: string;
+  movieLink?: string;
 };
 function Comments({ isKid, user, movieId, comments, movieLink }: TComments) {
   const router = useRouter();
@@ -120,7 +120,7 @@ function Comments({ isKid, user, movieId, comments, movieLink }: TComments) {
                 onShow={setIsShowLoginModal}
                 comment={comment}
                 user={user}
-                movieLink={movieLink}
+                movieLink={movieLink || ""}
               />
             ))
           ) : (

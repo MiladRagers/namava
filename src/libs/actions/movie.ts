@@ -6,6 +6,7 @@ import { writeFileSync } from "fs";
 import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 import path from "path";
+import { TResponse } from "../types";
 
 type TStar = {
   value: string;
@@ -160,3 +161,156 @@ export const deleteMovie = async (id: string) => {
     };
   }
 };
+
+
+export const likeMovie = async (
+  movieId: string,
+  userId: string,
+  movieLink: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(movieId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isLiked = await MovieModel.findOne({
+      _id: movieId,
+      liked: { $in: userId },
+    });
+
+    const isDisLiked = await MovieModel.findOne({
+      _id: movieId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked || isLiked) {
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $pull: {
+            liked: userId,
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $push: {
+            liked: userId,
+          },
+        }
+      );
+    }
+
+    revalidatePath(`/movie/${movieLink}`);
+
+    return {
+      message: "با موفقیت کامنت لایک شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const dislikeMovie = async (
+  movieId: string,
+  userId: string,
+  movieLink: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!userId) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    if (!isValidObjectId(movieId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    const isLiked = await MovieModel.findOne({
+      _id: movieId,
+      liked: { $in: userId },
+    });
+
+    const isDisLiked = await MovieModel.findOne({
+      _id: movieId,
+      disliked: { $in: userId },
+    });
+
+    if (isDisLiked) {
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $pull: {
+            disliked: userId,
+          },
+        }
+      );
+    } else if (isLiked) {
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $pull: {
+            liked: userId,
+          },
+        }
+      );
+
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    } else {
+      await MovieModel.findOneAndUpdate(
+        { _id: movieId },
+        {
+          $push: {
+            disliked: userId,
+          },
+        }
+      );
+    }
+
+    revalidatePath(`/movie/${movieLink}`);
+
+    return {
+      message: "با موفقیت کامنت دیس لایک شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+

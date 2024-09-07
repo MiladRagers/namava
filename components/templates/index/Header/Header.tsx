@@ -16,6 +16,8 @@ function Header({
   info,
   onSwipe,
   subscription,
+  bookmarks,
+  user,
 }: THeader) {
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
@@ -53,7 +55,14 @@ function Header({
             <source src="/images/okazion.mp4" />
           </video>
         )}
-        {!isAboutPage && <HeaderDetail subscription={subscription} isKid={isKid} info={info} />}
+        {!isAboutPage && (
+          <HeaderDetail
+            user={user}
+            subscription={subscription}
+            isKid={isKid}
+            info={info}
+          />
+        )}
         {!isTitle && (
           <div className="absolute left-10 bottom-14 hidden md:flex items-center gap-x-3 z-20">
             <button
