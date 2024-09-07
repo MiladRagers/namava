@@ -134,6 +134,8 @@ const schema = new mongoose.Schema(
         ref: "Season",
       },
     ],
+    liked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
+    disliked: [{ type: mongoose.Types.ObjectId, ref: "User", default: [] }],
   },
   { timestamps: true }
 );

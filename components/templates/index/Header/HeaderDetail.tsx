@@ -1,23 +1,54 @@
+import React, { useState } from "react";
 import ActiveLike from "@/icons/ActiveLike";
 import Dislike from "@/icons/Dislike";
 import IMBD from "@/icons/IMBD";
 import Like from "@/icons/Like";
 import Plus from "@/icons/Plus";
+import { dislikeMovie, likeMovie } from "@/src/libs/actions/movie";
 import { THeaderDetails } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 
 function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
   const pathname = usePathname();
-  const [liked, setLiked] = useState(info.liked.includes(user));
-  const [disliked, setDisliked] = useState(info.disliked.includes(user));
+  const [liked, setLiked] = useState(info.liked.includes(user._id));
+  const [disliked, setDisliked] = useState(info.disliked.includes(user._id));
   const isSinglePage =
     pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
+  const router = useRouter();
+
+  const handleDislike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+
+    const res = await dislikeMovie(id, user._id, info.link);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setDisliked(!disliked);
+
+    if (liked) setLiked(false);
+  };
+
+  const handleLike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+    const res = await likeMovie(id, user._id, info.link);
+    console.log(res);
+
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
+  };
 
   return (
     <>
@@ -127,23 +158,35 @@ function HeaderDetail({ isKid, info, subscription, user }: THeaderDetails) {
                     <Plus />
                   </button>
                   {liked ? (
-                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
-                      <ActiveLike className="fill-white stroke-white" />
+                    <button
+                      onClick={() => handleLike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <ActiveLike className="fill-white stroke-white !w-[25px] !h-[25px]" />
                     </button>
                   ) : (
-                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                    <button
+                      onClick={() => handleLike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
                       <Like className="fill-white stroke-white" />
                     </button>
                   )}
                   {disliked ? (
-                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                    <button
+                      onClick={() => handleDislike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
                       <ActiveLike
                         isDislike
-                        className="fill-white stroke-white"
+                        className="fill-white stroke-white !w-[25px] !h-[25px]"
                       />
                     </button>
                   ) : (
-                    <button className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]">
+                    <button
+                      onClick={() => handleDislike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
                       <Dislike className=" fill-white stroke-white" />
                     </button>
                   )}

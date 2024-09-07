@@ -162,7 +162,6 @@ export const deleteMovie = async (id: string) => {
   }
 };
 
-
 export const likeMovie = async (
   movieId: string,
   userId: string,
@@ -219,10 +218,12 @@ export const likeMovie = async (
     revalidatePath(`/movie/${movieLink}`);
 
     return {
-      message: "با موفقیت کامنت لایک شد",
+      message: "با موفقیت لایک شد",
       status: 200,
     };
   } catch (error) {
+    console.log(error);
+
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
@@ -303,7 +304,7 @@ export const dislikeMovie = async (
     revalidatePath(`/movie/${movieLink}`);
 
     return {
-      message: "با موفقیت کامنت دیس لایک شد",
+      message: "با موفقیت دیس لایک شد",
       status: 200,
     };
   } catch (error) {
@@ -313,4 +314,3 @@ export const dislikeMovie = async (
     };
   }
 };
-
