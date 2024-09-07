@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import ActiveLike from "@/icons/ActiveLike";
 import Dislike from "@/icons/Dislike";
 import IMBD from "@/icons/IMBD";
 import Like from "@/icons/Like";
 import Plus from "@/icons/Plus";
+import toast from "react-hot-toast";
 import { dislikeMovie, likeMovie } from "@/src/libs/actions/movie";
 import { THeaderDetails } from "@/src/libs/types";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
@@ -61,7 +61,7 @@ function HeaderDetail({
 
   const handleAddToBookmark = async () => {
     console.log(bookmarks);
-    
+
     setUserBookmarks([...bookmarks, info._id]);
     toast.success(`با موفقیت اضافه شد`);
     await addOrDeleteBookmark(info._id);
