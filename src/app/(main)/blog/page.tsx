@@ -6,7 +6,7 @@ import React, { Suspense } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
 async function page() {
-  const [articles]: any = await Promise.all([getArticles()]);
+  const articles : any = await getArticles();
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">
       <MainSlider articles={JSON.parse(JSON.stringify(articles))} />
