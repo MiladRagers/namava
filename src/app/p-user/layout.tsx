@@ -1,4 +1,4 @@
-import Sidebar from "@/components/modules/p-user/Sidebar";
+import Sidebar from "@/src/components/modules/p-user/Sidebar";
 import React from "react";
 import { authUser } from "@/src/utils/serverHelper";
 import { redirect } from "next/navigation";

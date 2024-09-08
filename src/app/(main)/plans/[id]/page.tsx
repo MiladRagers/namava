@@ -1,5 +1,5 @@
-import Button from "@/components/modules/auth/Button/Button";
-import PaymentGateway from "@/components/modules/plans/PaymentGateway";
+import Button from "@/src/components/modules/auth/Button/Button";
+import PaymentGateway from "@/src/components/modules/plans/PaymentGateway";
 import { getSubscription } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { notFound } from "next/navigation";

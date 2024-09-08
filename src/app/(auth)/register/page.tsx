@@ -1,6 +1,6 @@
 
-import RegisterForm from "@/components/templates/auth/register/RegisterForm";
-import Logo from "@/icons/Logo";
+import RegisterForm from "@/src/components/templates/auth/register/RegisterForm";
+import Logo from "@/src/icons/Logo";
 import Link from "next/link";
 import React from "react";
 

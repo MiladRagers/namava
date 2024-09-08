@@ -1,5 +1,5 @@
-import Title from "@/components/modules/p-admin/Title";
-import AddNewSession from "@/components/templates/p-admin/film/AddNewSession";
+import Title from "@/src/components/modules/p-admin/Title";
+import AddNewSession from "@/src/components/templates/p-admin/film/AddNewSession";
 import { getAllSeries } from "@/src/libs/service/services";
 import React from "react";
 

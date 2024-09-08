@@ -1,5 +1,5 @@
-import KidSlider from "@/components/modules/kid/KidSlider/KidSlider";
-import AnimsSlider from "@/components/templates/kid/AnimSlider/AnimsSlider";
+import KidSlider from "@/src/components/modules/kid/KidSlider/KidSlider";
+import AnimsSlider from "@/src/components/templates/kid/AnimSlider/AnimsSlider";
 import React from "react";
 
 function Kids() {

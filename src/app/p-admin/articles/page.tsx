@@ -1,7 +1,7 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import AddNewArticle from "@/components/templates/p-admin/article/AddNewArticle";
-import ArticleList from "@/components/templates/p-admin/article/ArticleList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import AddNewArticle from "@/src/components/templates/p-admin/article/AddNewArticle";
+import ArticleList from "@/src/components/templates/p-admin/article/ArticleList";
 import {
   getAllArticles,
   getAllMoviesWithOutPagination,

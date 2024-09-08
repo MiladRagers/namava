@@ -1,6 +1,6 @@
-import Filter from "@/components/modules/Filter/Filter";
-import StatBox from "@/components/modules/p-admin/StatBox";
-import TicketsList from "@/components/templates/p-user/TicketsList";
+import Filter from "@/src/components/modules/Filter/Filter";
+import StatBox from "@/src/components/modules/p-admin/StatBox";
+import TicketsList from "@/src/components/templates/p-user/TicketsList";
 import React from "react";
 import { FaClosedCaptioning } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi2";

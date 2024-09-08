@@ -1,5 +1,5 @@
-import ArticleSlider from "@/components/templates/article/ArticleSlider";
-import MainSlider from "@/components/templates/article/MainSlider";
+import ArticleSlider from "@/src/components/templates/article/ArticleSlider";
+import MainSlider from "@/src/components/templates/article/MainSlider";
 import { getArticles } from "@/src/libs/service/services";
 import Link from "next/link";
 import React from "react";

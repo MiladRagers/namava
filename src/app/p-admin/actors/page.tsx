@@ -1,7 +1,7 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import ActorsList from "@/components/templates/p-admin/actors/ActorsList";
-import AddNewActor from "@/components/templates/p-admin/actors/AddNewActor";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import ActorsList from "@/src/components/templates/p-admin/actors/ActorsList";
+import AddNewActor from "@/src/components/templates/p-admin/actors/AddNewActor";
 import { getAllStars } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";

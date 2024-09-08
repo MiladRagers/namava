@@ -1,8 +1,8 @@
-import MovieSlider from "@/components/modules/main/MovieSlider/MovieSlider";
-import HeaderSlider from "@/components/templates/index/Header/Slider";
-import Slider from "@/components/templates/index/Slider/Slider";
-import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
-import Collections from "@/components/templates/index/Collections/Collections";
+import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
+import HeaderSlider from "@/src/components/templates/index/Header/Slider";
+import Slider from "@/src/components/templates/index/Slider/Slider";
+import StarsSlider from "@/src/components/modules/main/StarsSlider/StarsSlider";
+import Collections from "@/src/components/templates/index/Collections/Collections";
 import {
   checkUserSubscription,
   getAllCollectionSlider,

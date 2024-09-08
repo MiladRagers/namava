@@ -1,7 +1,7 @@
-import Button from "@/components/modules/auth/Button/Button";
-import ProfileBox from "@/components/modules/profileBox/ProfileBox";
-import Logo from "@/icons/Logo";
-import Plus from "@/icons/Plus";
+import Button from "@/src/components/modules/auth/Button/Button";
+import ProfileBox from "@/src/components/modules/profileBox/ProfileBox";
+import Logo from "@/src/icons/Logo";
+import Plus from "@/src/icons/Plus";
 import { authUser } from "@/src/utils/serverHelper";
 import Link from "next/link";
 import React from "react";

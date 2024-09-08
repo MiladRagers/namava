@@ -1,5 +1,5 @@
-import Button from "@/components/modules/auth/Button/Button";
-import Error from "@/icons/Error";
+import Button from "@/src/components/modules/auth/Button/Button";
+import Error from "@/src/icons/Error";
 import Link from "next/link";
 import React from "react";
 

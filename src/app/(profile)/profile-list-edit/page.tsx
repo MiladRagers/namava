@@ -1,5 +1,5 @@
-import Button from "@/components/modules/auth/Button/Button";
-import Logo from "@/icons/Logo";
+import Button from "@/src/components/modules/auth/Button/Button";
+import Logo from "@/src/icons/Logo";
 import Image from "next/image";
 import React from "react";
 import { FaPencil } from "react-icons/fa6";

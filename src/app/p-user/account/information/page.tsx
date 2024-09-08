@@ -1,5 +1,5 @@
-import EditUser from "@/components/templates/p-user/EditUser";
-import EditUserInfo from "@/components/templates/p-user/EditUserInfo";
+import EditUser from "@/src/components/templates/p-user/EditUser";
+import EditUserInfo from "@/src/components/templates/p-user/EditUserInfo";
 
 function page() {
   return (

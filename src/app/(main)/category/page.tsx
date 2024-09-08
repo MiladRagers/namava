@@ -1,4 +1,4 @@
-import CategoryCard from "@/components/templates/category/CategoryCard";
+import CategoryCard from "@/src/components/templates/category/CategoryCard";
 import { getAllCategories, getCategories } from "@/src/libs/service/services";
 import React from "react";
 

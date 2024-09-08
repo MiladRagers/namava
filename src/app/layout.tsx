@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/modules/Navbar/Navbar";
-import FooterMenu from "@/components/modules/FooterMenu/FooterMenu";
-import Footer from "@/components/modules/Footer/Footer";
+import Navbar from "@/src/components/modules/Navbar/Navbar";
+import FooterMenu from "@/src/components/modules/FooterMenu/FooterMenu";
+import Footer from "@/src/components/modules/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { authUser } from "@/src/utils/serverHelper";
 import { checkUserSubscription } from "../libs/service/services";

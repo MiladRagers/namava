@@ -1,6 +1,6 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import SubCategoriesList from "@/components/templates/p-admin/categories/SubCategoriesList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import SubCategoriesList from "@/src/components/templates/p-admin/categories/SubCategoriesList";
 import { getSubCategory } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";

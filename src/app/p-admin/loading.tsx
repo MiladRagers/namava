@@ -1,4 +1,4 @@
-import Loading from "@/icons/Loading";
+import Loading from "@/src/icons/Loading";
 import React from "react";
 
 function loading() {

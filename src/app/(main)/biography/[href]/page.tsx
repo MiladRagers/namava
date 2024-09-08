@@ -1,5 +1,5 @@
-import Movie from "@/components/modules/main/Movie/Movie";
-import ShowMore from "@/components/templates/biography/ShowMore";
+import Movie from "@/src/components/modules/main/Movie/Movie";
+import ShowMore from "@/src/components/templates/biography/ShowMore";
 import { getStar, getStarMovies } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import Image from "next/image";

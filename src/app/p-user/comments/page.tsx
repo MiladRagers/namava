@@ -1,5 +1,5 @@
-import Filter from "@/components/modules/Filter/Filter";
-import CommentsList from "@/components/templates/p-user/CommentsList";
+import Filter from "@/src/components/modules/Filter/Filter";
+import CommentsList from "@/src/components/templates/p-user/CommentsList";
 import React from "react";
 
 function page() {

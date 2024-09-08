@@ -1,5 +1,5 @@
-import Title from "@/components/modules/p-admin/Title";
-import CommentsList from "@/components/templates/p-admin/comments/CommentsList";
+import Title from "@/src/components/modules/p-admin/Title";
+import CommentsList from "@/src/components/templates/p-admin/comments/CommentsList";
 import { getAllComments } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";

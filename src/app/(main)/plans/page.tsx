@@ -1,4 +1,4 @@
-import Plan from "@/components/modules/plans/Plan";
+import Plan from "@/src/components/modules/plans/Plan";
 import { getSubscriptions } from "@/src/libs/service/services";
 import React from "react";
 import { ImWarning } from "react-icons/im";

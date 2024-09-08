@@ -1,6 +1,6 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import ContactsList from "@/components/templates/p-admin/contacts/ContactsList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import ContactsList from "@/src/components/templates/p-admin/contacts/ContactsList";
 import { getAllContacts } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";

@@ -1,4 +1,4 @@
-import Movie from "@/components/modules/main/Movie/Movie";
+import Movie from "@/src/components/modules/main/Movie/Movie";
 import { getCollection } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import Image from "next/image";

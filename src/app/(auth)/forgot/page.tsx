@@ -1,7 +1,7 @@
-import ChangePassword from "@/components/templates/auth/forgot/ChangePassword";
-import SendPhone from "@/components/templates/auth/forgot/SendPhone";
-import VerifyOtp from "@/components/templates/auth/forgot/VerifyOtp";
-import Logo from "@/icons/Logo";
+import ChangePassword from "@/src/components/templates/auth/forgot/ChangePassword";
+import SendPhone from "@/src/components/templates/auth/forgot/SendPhone";
+import VerifyOtp from "@/src/components/templates/auth/forgot/VerifyOtp";
+import Logo from "@/src/icons/Logo";
 import Link from "next/link";
 import React from "react";
 

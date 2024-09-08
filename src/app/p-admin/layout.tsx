@@ -1,5 +1,5 @@
-import Sidebar from "@/components/modules/p-admin/Sidebar";
-import TopBar from "@/components/modules/p-admin/Topbar";
+import Sidebar from "@/src/components/modules/p-admin/Sidebar";
+import TopBar from "@/src/components/modules/p-admin/Topbar";
 import AdminPanelProvider from "@/src/context/AdminPanelProvider";
 import React from "react";
 

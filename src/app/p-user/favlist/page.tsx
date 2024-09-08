@@ -1,4 +1,4 @@
-import FavList from "@/components/templates/p-user/FavList";
+import FavList from "@/src/components/templates/p-user/FavList";
 
 function page() {
   return (

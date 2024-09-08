@@ -7,11 +7,11 @@ import { LiaComments } from "react-icons/lia";
 import { MdArticle } from "react-icons/md";
 
 import { FaRegCircleUser, FaRegHeart, FaStar } from "react-icons/fa6";
-import Folder2 from "@/icons/Folder2";
-import Star from "@/icons/Star";
-import Gift from "@/icons/gift";
-import User from "@/icons/User";
-import Phone from "@/icons/Phone";
+import Folder2 from "@/src/icons/Folder2";
+import Star from "@/src/icons/Star";
+import Gift from "@/src/icons/gift";
+import User from "@/src/icons/User";
+import Phone from "@/src/icons/Phone";
 export const day: any = [];
 export const year: any = [];
 export let genres = [

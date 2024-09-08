@@ -1,10 +1,10 @@
-import Accordion from "@/components/modules/Accordion/Accordion";
-import Button from "@/components/modules/auth/Button/Button";
-import Header from "@/components/templates/index/Header/Header";
-import KidLogo from "@/icons/KidLogo";
-import LapTop from "@/icons/LapTop";
-import TMobile from "@/icons/TMobile";
-import Tv from "@/icons/Tv";
+import Accordion from "@/src/components/modules/Accordion/Accordion";
+import Button from "@/src/components/modules/auth/Button/Button";
+import Header from "@/src/components/templates/index/Header/Header";
+import KidLogo from "@/src/icons/KidLogo";
+import LapTop from "@/src/icons/LapTop";
+import TMobile from "@/src/icons/TMobile";
+import Tv from "@/src/icons/Tv";
 import Image from "next/image";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import Button from "@/components/modules/auth/Button/Button";
+import Button from "@/src/components/modules/auth/Button/Button";
 import { getArticle } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import { FaLink, FaTelegram, FaTwitter, FaWhatsapp } from "react-icons/fa6";
 
 import dynamic from "next/dynamic";
 const ArticleBody = dynamic(
-  () => import("@/components/templates/article/ArticleBody"),
+  () => import("@/src/components/templates/article/ArticleBody"),
   { ssr: false }
 );
 async function ArticlePage({ params }: TParams) {

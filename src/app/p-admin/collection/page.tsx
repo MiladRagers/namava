@@ -1,7 +1,7 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import AddNewCollection from "@/components/templates/p-admin/collection/AddNewCollection";
-import CollectionList from "@/components/templates/p-admin/collection/CollectionList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import AddNewCollection from "@/src/components/templates/p-admin/collection/AddNewCollection";
+import CollectionList from "@/src/components/templates/p-admin/collection/CollectionList";
 import {
   getAllCollcetions,
   getAllMoviesWithOutPagination,

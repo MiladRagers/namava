@@ -1,6 +1,6 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import SessionList from "@/components/templates/p-admin/film/SessionList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import SessionList from "@/src/components/templates/p-admin/film/SessionList";
 import { getAllEpisodes } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
 import React from "react";

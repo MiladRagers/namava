@@ -1,4 +1,4 @@
-import Button from "@/components/modules/auth/Button/Button";
+import Button from "@/src/components/modules/auth/Button/Button";
 import React from "react";
 
 function page() {

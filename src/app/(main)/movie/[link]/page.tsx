@@ -1,8 +1,8 @@
-import MovieSlider from "@/components/modules/main/MovieSlider/MovieSlider";
-import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
-import Comments from "@/components/templates/Comments/Comments";
-import Details from "@/components/templates/Movie/Details";
-import Header from "@/components/templates/index/Header/Header";
+import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
+import StarsSlider from "@/src/components/modules/main/StarsSlider/StarsSlider";
+import Comments from "@/src/components/templates/Comments/Comments";
+import Details from "@/src/components/templates/Movie/Details";
+import Header from "@/src/components/templates/index/Header/Header";
 import {
   checkUserSubscription,
   getMovie,

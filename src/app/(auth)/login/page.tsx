@@ -1,8 +1,8 @@
 
-import LoginForm from "@/components/templates/auth/Login/LoginForm";
-import SendOtpCode from "@/components/templates/auth/Login/OtpLogin";
-import VerifyOtp from "@/components/templates/auth/Login/VerifyOtp";
-import Logo from "@/icons/Logo";
+import LoginForm from "@/src/components/templates/auth/Login/LoginForm";
+import SendOtpCode from "@/src/components/templates/auth/Login/OtpLogin";
+import VerifyOtp from "@/src/components/templates/auth/Login/VerifyOtp";
+import Logo from "@/src/icons/Logo";
 import Link from "next/link";
 import React from "react";
 

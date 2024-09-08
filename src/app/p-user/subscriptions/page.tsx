@@ -1,4 +1,4 @@
-import Button from "@/components/modules/auth/Button/Button";
+import Button from "@/src/components/modules/auth/Button/Button";
 import Link from "next/link";
 import React from "react";
 

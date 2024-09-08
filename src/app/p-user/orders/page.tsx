@@ -1,10 +1,10 @@
-import Table from "@/components/modules/table/Table";
+import Table from "@/src/components/modules/table/Table";
 import React from "react";
 import { FaEye, FaPencil, FaRegCircleXmark, FaTrash } from "react-icons/fa6";
-import Pagination from "@/components/modules/pagination/Pagination";
+import Pagination from "@/src/components/modules/pagination/Pagination";
 import { MdCheckCircleOutline } from "react-icons/md";
 import Link from "next/link";
-import Filter from "@/components/modules/Filter/Filter";
+import Filter from "@/src/components/modules/Filter/Filter";
 
 function page() {
   return (

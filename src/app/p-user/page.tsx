@@ -1,6 +1,6 @@
-import StatBox from "@/components/modules/p-admin/StatBox";
-import LastFavList from "@/components/templates/p-user/LastFavList";
-import LastTickets from "@/components/templates/p-user/LastTickets";
+import StatBox from "@/src/components/modules/p-admin/StatBox";
+import LastFavList from "@/src/components/templates/p-user/LastFavList";
+import LastTickets from "@/src/components/templates/p-user/LastTickets";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi";

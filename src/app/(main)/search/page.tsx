@@ -1,7 +1,7 @@
-import Movie from "@/components/modules/main/Movie/Movie";
-import Filter from "@/components/templates/search/Filter";
-import SearchBox from "@/components/templates/search/Search";
-import SearchMovie from "@/icons/SearchMovie";
+import Movie from "@/src/components/modules/main/Movie/Movie";
+import Filter from "@/src/components/templates/search/Filter";
+import SearchBox from "@/src/components/templates/search/Search";
+import SearchMovie from "@/src/icons/SearchMovie";
 import { getAllSubcategories, searchMovies } from "@/src/libs/service/services";
 import { TSearchParams } from "@/src/libs/types";
 

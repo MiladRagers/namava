@@ -1,4 +1,4 @@
-import AnswerBox from "@/components/templates/p-admin/tickets/AnswerBox";
+import AnswerBox from "@/src/components/templates/p-admin/tickets/AnswerBox";
 import React from "react";
 
 function page() {

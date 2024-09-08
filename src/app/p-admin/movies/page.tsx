@@ -1,7 +1,7 @@
-import Search from "@/components/modules/p-admin/Search";
-import Title from "@/components/modules/p-admin/Title";
-import AddNewFilm from "@/components/templates/p-admin/film/AddNewFilm";
-import FilmList from "@/components/templates/p-admin/film/FilmList";
+import Search from "@/src/components/modules/p-admin/Search";
+import Title from "@/src/components/modules/p-admin/Title";
+import AddNewFilm from "@/src/components/templates/p-admin/film/AddNewFilm";
+import FilmList from "@/src/components/templates/p-admin/film/FilmList";
 import {
   getAllMovies,
   getAllSubcategories,

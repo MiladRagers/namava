@@ -1,10 +1,10 @@
-import MovieSlider from "@/components/modules/main/MovieSlider/MovieSlider";
-import StarsSlider from "@/components/modules/main/StarsSlider/StarsSlider";
-import Comments from "@/components/templates/Comments/Comments";
-import Details from "@/components/templates/Movie/Details";
-import SeasonOption from "@/components/templates/Movie/SeasonOption";
-import Header from "@/components/templates/index/Header/Header";
-import Session from "@/components/templates/session/Session";
+import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
+import StarsSlider from "@/src/components/modules/main/StarsSlider/StarsSlider";
+import Comments from "@/src/components/templates/Comments/Comments";
+import Details from "@/src/components/templates/Movie/Details";
+import SeasonOption from "@/src/components/templates/Movie/SeasonOption";
+import Header from "@/src/components/templates/index/Header/Header";
+import Session from "@/src/components/templates/session/Session";
 import {
   checkUserSubscription,
   getMovie,

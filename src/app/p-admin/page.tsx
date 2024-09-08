@@ -1,9 +1,9 @@
-import Filter from "@/components/modules/Filter/Filter";
-import StatBox from "@/components/modules/p-admin/StatBox";
-import Title from "@/components/modules/p-admin/Title";
-import DurationChart from "@/components/templates/p-admin/DurationChart";
-import RecentUser from "@/components/templates/p-admin/RecentUser";
-import SalesChart from "@/components/templates/p-admin/SalesChart";
+import Filter from "@/src/components/modules/Filter/Filter";
+import StatBox from "@/src/components/modules/p-admin/StatBox";
+import Title from "@/src/components/modules/p-admin/Title";
+import DurationChart from "@/src/components/templates/p-admin/DurationChart";
+import RecentUser from "@/src/components/templates/p-admin/RecentUser";
+import SalesChart from "@/src/components/templates/p-admin/SalesChart";
 import { getAllStats } from "@/src/libs/service/services";
 import { TStats } from "@/src/libs/types";
 import React from "react";

@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/modules/auth/Button/Button";
-import Logo from "@/icons/Logo";
+import Button from "@/src/components/modules/auth/Button/Button";
+import Logo from "@/src/icons/Logo";
 import { addNewProfile } from "@/src/libs/actions/profile";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

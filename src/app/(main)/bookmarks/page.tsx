@@ -1,5 +1,5 @@
 import React from "react";
-import Bookmark from "@/components/templates/bookmarks/Bookmarks";
+import Bookmark from "@/src/components/templates/bookmarks/Bookmarks";
 import { getUserBookmarks } from "@/src/libs/service/services";
 async function Bookmarks() {
   const bookmarks = await getUserBookmarks();

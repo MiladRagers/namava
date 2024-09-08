@@ -1,5 +1,5 @@
-import Input from "@/components/modules/p-admin/Input";
-import Form from "@/components/templates/contact-us/Form";
+import Input from "@/src/components/modules/p-admin/Input";
+import Form from "@/src/components/templates/contact-us/Form";
 import React from "react";
 
 function ContactUsPage() {
