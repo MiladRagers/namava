@@ -40,6 +40,8 @@ export const addOrDeleteBookmark = async (
       };
     }
   } catch (error) {
+    console.log(error);
+    
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,

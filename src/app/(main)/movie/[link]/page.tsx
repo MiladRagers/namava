@@ -4,6 +4,7 @@ import Comments from "@/components/templates/Comments/Comments";
 import Details from "@/components/templates/Movie/Details";
 import Header from "@/components/templates/index/Header/Header";
 import {
+  checkUserSubscription,
   getMovie,
   getRealedMovies,
   getRelatedArticleToMovie,
@@ -15,16 +16,24 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 async function page({ params }: TParams) {
-  const [movie, userInfo, userBookmarks]: any = await Promise.all([
-    getMovie(params.link),
-    authUser(),
-    getUserBookmarks(),
-  ]);
+  const [movie, userInfo, userBookmarks, subscription]: any = await Promise.all(
+    [
+      getMovie(params.link),
+      authUser(),
+      getUserBookmarks(),
+      checkUserSubscription(),
+    ]
+  );
 
   const [realatedMovies, relatedArticle]: any = await Promise.all([
     getRealedMovies(movie.category, movie._id),
     getRelatedArticleToMovie(movie._id),
   ]);
+
+  const userMoviesBookmark = userBookmarks.map(
+    (bookmark: any) => bookmark.movie._id
+  );
+
 
   if (!movie) {
     notFound();
@@ -39,6 +48,9 @@ async function page({ params }: TParams) {
           img={movie.deskBanner}
           mobileImage={movie.mobileBanner}
           info={JSON.parse(JSON.stringify(movie))}
+          subscription={subscription}
+          bookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
+          user={JSON.parse(JSON.stringify(userInfo))}
         />
         <div className="absolute inset-0 title-overlay"></div>
       </section>
@@ -58,6 +70,7 @@ async function page({ params }: TParams) {
             title={`بر اساس ${movie.title}`}
             link="/"
             userBookmarks={JSON.parse(JSON.stringify(userBookmarks))}
+            user={JSON.parse(JSON.stringify(userInfo))}
           />
         )}
       </section>

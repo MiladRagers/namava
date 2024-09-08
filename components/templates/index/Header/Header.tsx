@@ -19,6 +19,8 @@ function Header({
   bookmarks,
   user,
 }: THeader) {
+  console.log(bookmarks);
+  
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
 

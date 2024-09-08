@@ -54,7 +54,7 @@ async function page({ params, searchParams }: TParams) {
           img={movie.deskBanner}
           mobileImage={movie.mobileBanner}
           info={JSON.parse(JSON.stringify(movie))}
-          subscription={subscription}
+          subscription={JSON.parse(JSON.stringify(subscription))}
           bookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
           user={JSON.parse(JSON.stringify(userInfo))}
         />
@@ -101,6 +101,7 @@ async function page({ params, searchParams }: TParams) {
             title={`بر اساس ${movie.title}`}
             link="/"
             userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
+            user={JSON.parse(JSON.stringify(userInfo))}
           />
         )}
       </section>
