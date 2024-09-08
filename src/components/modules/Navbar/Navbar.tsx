@@ -10,8 +10,12 @@ import { usePathname } from "next/navigation";
 import KidLogo from "@/src/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
-function Navbar({ user , userSubscription}: any) {
+import { useAuth } from "@/src/context/AuthContextProvider";
+function Navbar({ user, userSubscription }: any) {
   const pathname = usePathname();
+  const auth = useAuth();
+  console.log(auth);
+  
 
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");

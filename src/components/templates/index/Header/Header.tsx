@@ -1,10 +1,9 @@
 "use client";
-import Image from "next/image";
-import React from "react";
-import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
-import HeaderDetail from "./HeaderDetail";
-import { usePathname } from "next/navigation";
 import { THeader } from "@/src/libs/types";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import HeaderDetail from "./HeaderDetail";
 
 function Header({
   isImage,
@@ -19,8 +18,6 @@ function Header({
   bookmarks,
   user,
 }: THeader) {
-  console.log(bookmarks);
-  
   const pathname = usePathname();
   const isAboutPage = pathname.includes("/about");
 

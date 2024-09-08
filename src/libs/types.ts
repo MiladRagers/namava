@@ -20,7 +20,6 @@ export type THeaderDetails = {
   bookmarks?: any;
 };
 
-
 export type TMovieSlider = {
   title: string;
   link?: string;
@@ -74,6 +73,38 @@ export interface TUser {
 export interface TResponse {
   message: string;
   status: number;
+}
+
+export type UserAuthContextType = {
+  isLogin: boolean;
+  userInfo: User | null;
+};
+
+export interface User {
+  _id: string;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  role: string;
+  profiles: Profile[];
+  profileLimitCount: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  subscriptionEnd: string;
+}
+
+export interface Profile {
+  _id: string;
+  name: string;
+  user: string;
+  ages: number;
+  isLock: boolean;
+  limitsMovies: any[];
+  image: string;
+  type: string;
+  __v: number;
 }
 
 export const baseURL = "http://localhost:3000";

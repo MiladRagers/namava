@@ -5,7 +5,10 @@ import { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     connectToDB();
+    console.log("req sended");
+    
     const user = await authUser();
+
     if (!user) {
       return Response.json({ msg: "User is unauthorized" }, { status: 401 });
     }
