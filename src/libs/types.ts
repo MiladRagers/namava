@@ -20,6 +20,15 @@ export type THeaderDetails = {
   bookmarks?: any;
 };
 
+
+export type TMovieSlider = {
+  title: string;
+  link?: string;
+  movies: any;
+  userBookmarks: any;
+  user: any;
+};
+
 export type TModal = {
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   isShow: Boolean;

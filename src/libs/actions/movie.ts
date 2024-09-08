@@ -167,6 +167,9 @@ export const likeMovie = async (
   userId: string,
   movieLink: string
 ): Promise<TResponse> => {
+
+  console.log(movieId , userId , movieLink);
+  
   try {
     connectToDB();
 

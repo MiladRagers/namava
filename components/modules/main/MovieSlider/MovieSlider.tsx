@@ -1,7 +1,7 @@
 "use client";
 import "swiper/css";
 import "swiper/css/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SliderTitle from "./SiderTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
@@ -17,20 +17,25 @@ import Link from "next/link";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
 import toast from "react-hot-toast";
+import { TMovieSlider } from "@/src/libs/types";
+import { useRouter } from "next/navigation";
+import { dislikeMovie, likeMovie } from "@/src/libs/actions/movie";
+import ActiveLike from "@/icons/ActiveLike";
 
-type TMovieSlider = {
-  title: string;
-  link?: string;
-  movies: any;
-  userBookmarks: any;
-};
-
-function MovieSlider({ title, link, movies, userBookmarks }: TMovieSlider) {
+function MovieSlider({
+  title,
+  link,
+  movies,
+  userBookmarks,
+  user,
+}: TMovieSlider) {
   const [movieId, setMovieId] = useState<string>("");
   const [movieDetail, setMovieDetail] = useState<any>(null);
   const [bookmarks, setBookmarks] = useState(userBookmarks);
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
 
-
+  const router = useRouter();
 
   const handleAddToBookmark = async () => {
     setBookmarks([...bookmarks, movieId]);
@@ -43,6 +48,39 @@ function MovieSlider({ title, link, movies, userBookmarks }: TMovieSlider) {
     toast.success(`با موفقیت حذف شد`);
     await addOrDeleteBookmark(movieId);
   };
+
+  const handleDislike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+
+    const res = await dislikeMovie(id, user._id, movieDetail.link);
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setDisliked(!disliked);
+
+    if (liked) setLiked(false);
+  };
+
+  const handleLike = async (id: string) => {
+    if (!user) {
+      router.push("/login");
+    }
+    const res = await likeMovie(id, user._id, movieDetail.link);
+    console.log(res);
+
+    if (res.status === 200) {
+      toast.success(`${res.message}`);
+    }
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
+  };
+
+  useEffect(() => {
+    setLiked(movieDetail?.liked?.includes(user?._id));
+    setDisliked(movieDetail?.dislike?.includes(user?._id));
+  }, [movieDetail]);
 
   return (
     <div>
@@ -150,12 +188,39 @@ function MovieSlider({ title, link, movies, userBookmarks }: TMovieSlider) {
                       <IoCheckmarkSharp className="text-xl" />
                     </button>
                   )}
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Like fill="white" />
-                  </button>
-                  <button className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]">
-                    <Dislike fill="white" />
-                  </button>
+                  {liked ? (
+                    <button
+                      onClick={() => handleLike(movieDetail._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <ActiveLike className="fill-white stroke-white !w-[25px] !h-[25px]" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleLike(movieDetail._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Like className="fill-white stroke-white" />
+                    </button>
+                  )}
+                  {disliked ? (
+                    <button
+                      onClick={() => handleDislike(movieDetail._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <ActiveLike
+                        isDislike
+                        className="fill-white stroke-white !w-[25px] !h-[25px]"
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleDislike(movieDetail._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Dislike className=" fill-white stroke-white" />
+                    </button>
+                  )}
                   <Link
                     href={
                       movieDetail.type === "film"

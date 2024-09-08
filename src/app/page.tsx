@@ -11,6 +11,7 @@ import {
   getStars,
   getUserBookmarks,
 } from "../libs/service/services";
+import { authUser } from "../utils/serverHelper";
 
 export default async function Home() {
   const [
@@ -20,6 +21,7 @@ export default async function Home() {
     collections,
     userBookmarks,
     subscription,
+    userInfo,
   ]: any = await Promise.all([
     getAllSlidersMovies(),
     getStars(),
@@ -27,6 +29,7 @@ export default async function Home() {
     getAllCollectionSlider(),
     getUserBookmarks(),
     checkUserSubscription(),
+    authUser(),
   ]);
 
   const userMoviesBookmark = userBookmarks.map(
@@ -48,6 +51,7 @@ export default async function Home() {
                 movies={JSON.parse(JSON.stringify(movies[category]))}
                 userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
                 title={`${category}`}
+                user={JSON.parse(JSON.stringify(userInfo))}
               />
             </div>
           );
