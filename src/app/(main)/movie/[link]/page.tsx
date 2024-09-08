@@ -34,7 +34,6 @@ async function page({ params }: TParams) {
     (bookmark: any) => bookmark.movie._id
   );
 
-
   if (!movie) {
     notFound();
   }
@@ -71,7 +70,6 @@ async function page({ params }: TParams) {
             link="/"
             userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
             user={JSON.parse(JSON.stringify(userInfo))}
-
           />
         )}
       </section>

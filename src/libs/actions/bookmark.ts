@@ -3,6 +3,7 @@ import connectToDB from "@/src/configs/db";
 import BookmarkModel from "@/src/models/bookmark";
 import { TResponse } from "../types";
 import { authUser } from "@/src/utils/serverHelper";
+import { revalidatePath } from "next/cache";
 
 export const addOrDeleteBookmark = async (
   movieId: string
@@ -28,20 +29,20 @@ export const addOrDeleteBookmark = async (
         user: user._id,
         movie: movieId,
       });
+      revalidatePath("/bookmarks");
       return {
         message: "با موفقیت به بوک مارک ها اضافه شد",
         status: 201,
       };
     } else {
       await BookmarkModel.findOneAndDelete({ user: user._id, movie: movieId });
+      revalidatePath("/bookmarks");
       return {
         message: "این بوک مارک با موفقیت حذف شد",
         status: 200,
       };
     }
   } catch (error) {
-    console.log(error);
-    
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
