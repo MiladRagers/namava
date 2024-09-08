@@ -6,6 +6,7 @@ import path from "path";
 import { writeFileSync } from "fs";
 import { checkIsAdmin, deleteImage } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
+import { revalidatePath } from "next/cache";
 
 export const createCollection = async (
   data: FormData,
@@ -77,6 +78,7 @@ export const createCollection = async (
       type,
     });
 
+    revalidatePath("/p-admin/collection");
     return {
       message: "موفقیت آمیز بود",
       status: 201,

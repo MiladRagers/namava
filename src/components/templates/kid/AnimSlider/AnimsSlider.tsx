@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function AnimsSlider() {
+function AnimsSlider({ collections } : any) {
   return (
     <div className="pt-16 pb-5 md:py-20 container">
       <Swiper

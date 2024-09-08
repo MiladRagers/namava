@@ -729,10 +729,15 @@ export const getCollection = async (link: string) => {
   }
 };
 
-export const getAllCollectionSlider = async () => {
+export const getAllCollectionSlider = async (type: "adult" | "kid") => {
   try {
     connectToDB();
-    const collections = await CollcetionModel.find({});
+    let collections = null;
+    if (type === "adult") {
+      collections = await CollcetionModel.find({ type: "adult" });
+    } else {
+      collections = await CollcetionModel.find({ type: "kid" });
+    }
     return collections;
   } catch (error) {
     return error;

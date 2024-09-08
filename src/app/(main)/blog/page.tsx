@@ -8,7 +8,6 @@ import { FaChevronLeft } from "react-icons/fa6";
 
 async function page() {
   const articles: TArticle[] = await getArticles();
-  
 
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">

@@ -26,7 +26,7 @@ export default async function Home() {
     getAllSlidersMovies(),
     getStars(),
     getMovies(),
-    getAllCollectionSlider(),
+    getAllCollectionSlider("adult"),
     getUserBookmarks(),
     checkUserSubscription(),
     authUser(),
