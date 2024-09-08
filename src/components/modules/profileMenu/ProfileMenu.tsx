@@ -26,9 +26,6 @@ function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
       } w-[272px] -left-4 top-14 hidden md:block`}
       onMouseLeave={() => onShow(false)}
     >
-      <div className="relative">
-        <ProfileArrow />
-      </div>
       <div>
         <div className="rounded-[12px] overflow-hidden">
           {/* profile header */}
