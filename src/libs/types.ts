@@ -107,4 +107,12 @@ export interface Profile {
   __v: number;
 }
 
+export type TArticle = {
+  title: string;
+  image: string;
+  createdAt: string;
+  readingTime: number;
+  link: string;
+};
+
 export const baseURL = "http://localhost:3000";

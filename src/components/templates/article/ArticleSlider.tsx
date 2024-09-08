@@ -36,6 +36,7 @@ function ArticleSlider({ articles }: any) {
             createdAt={new Date(article.createdAt).toLocaleDateString("fa-IR")}
             image={article.image}
             readingTime={5}
+            link={article.link}
           />
         </SwiperSlide>
       ))}

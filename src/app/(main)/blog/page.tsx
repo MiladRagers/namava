@@ -2,11 +2,11 @@ import ArticleSlider from "@/src/components/templates/article/ArticleSlider";
 import MainSlider from "@/src/components/templates/article/MainSlider";
 import { getArticles } from "@/src/libs/service/services";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
 async function page() {
-  const [articles] : any = await Promise.all([getArticles()]);
+  const [articles]: any = await Promise.all([getArticles()]);
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">
       <MainSlider articles={JSON.parse(JSON.stringify(articles))} />
@@ -34,6 +34,7 @@ async function page() {
             <FaChevronLeft />
           </Link>
         </div>
+
         <ArticleSlider
           articles={JSON.parse(JSON.stringify(articles.reverse()))}
         />

@@ -1,17 +1,11 @@
+import { TArticle } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type TArticle = {
-  title: string;
-  image: string;
-  createdAt: string;
-  readingTime: number;
-};
-
-function ArticleBox({ title, image, createdAt, readingTime }: TArticle) {
+function ArticleBox({ title, image, createdAt, readingTime, link }: TArticle) {
   return (
-    <Link href="/blog/1" className="shadow-2xl">
+    <Link href={`/blog/${link}`} className="shadow-2xl">
       <Image
         src={image}
         alt={image}
