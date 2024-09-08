@@ -37,7 +37,7 @@ function AnimsSlider({ collections }: any) {
       >
         {collections.map((collection: any) => (
           <SwiperSlide key={collection._id}>
-            <Link href={`/kids/collections/${collection.link}`}>
+            <Link title={collection.title} href={`/kids/collections/${collection.link}`}>
               <Image
                 src={collection.mainImage}
                 alt={collection.title}
