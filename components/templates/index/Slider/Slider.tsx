@@ -35,7 +35,7 @@ function Slider({ slides }: any) {
       >
         {[...slides]
           .reverse()
-
+          .slice(0, 15)
           .map((slide: any) => (
             <SwiperSlide key={slide._id}>
               <Link
