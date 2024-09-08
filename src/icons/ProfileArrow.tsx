@@ -7,7 +7,7 @@ function ProfileArrow() {
       width="15"
       height="18"
       viewBox="0 0 100 60"
-      className="absolute !left-[27px] !fill-[#D95C5C] !-top-[13px] "
+      className="absolute left-7 fill-[#D95C5C] bottom-[-6px] "
     >
       <path
         className="svg-c1"
