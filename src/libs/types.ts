@@ -107,12 +107,37 @@ export interface Profile {
   __v: number;
 }
 
-export type TArticle = {
-  title: string;
-  image: string;
-  createdAt: string;
-  readingTime: number;
-  link: string;
-};
+
+
+
+export interface TArticle {
+  _id?: string
+  title: string
+  link: string
+  readingTime: String | Number
+  tags?: string[]
+  movie?: Movie
+  image: string
+  content?: string
+  creator?: Creator
+  isAccept?: boolean
+  isDraft?: boolean
+  createdAt: string
+  updatedAt?: string
+  __v?: number
+  shortDesc?: string
+}
+
+export interface Movie {
+  _id: string
+  title: string
+  link: string
+}
+
+export interface Creator {
+  _id: string
+  name: string
+}
+
 
 export const baseURL = "http://localhost:3000";

@@ -16,7 +16,7 @@ function ArticleBox({ title, image, createdAt, readingTime, link }: TArticle) {
       <div className="bg-namavaBlack rounded-b-md p-3 text-white text-sm space-y-2">
         <div className="font-Dana text-xs text-[#aaa] flex items-center justify-between">
           <span>{createdAt}</span>
-          <span>{readingTime} دقیقه</span>
+          <span>{readingTime as string} دقیقه</span>
         </div>
         <h2 className="line-clamp-1">{title}</h2>
       </div>

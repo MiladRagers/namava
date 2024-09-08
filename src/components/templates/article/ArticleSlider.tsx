@@ -3,8 +3,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArticleBox from "./ArticleBox";
+import { TArticle } from "@/src/libs/types";
 
-function ArticleSlider({ articles }: any) {
+function ArticleSlider({ articles }: { articles: TArticle[] }) {
   return (
     <Swiper
       slidesPerView={4}
@@ -29,7 +30,7 @@ function ArticleSlider({ articles }: any) {
         },
       }}
     >
-      {articles.map((article: any) => (
+      {articles.map((article) => (
         <SwiperSlide key={article._id}>
           <ArticleBox
             title={article.title}

@@ -1,12 +1,15 @@
 import ArticleSlider from "@/src/components/templates/article/ArticleSlider";
 import MainSlider from "@/src/components/templates/article/MainSlider";
 import { getArticles } from "@/src/libs/service/services";
+import { TArticle } from "@/src/libs/types";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
 async function page() {
-  const articles : any = await getArticles();
+  const articles: TArticle[] = await getArticles();
+  
+
   return (
     <div className="max-w-[1200px] container mx-auto  my-24">
       <MainSlider articles={JSON.parse(JSON.stringify(articles))} />

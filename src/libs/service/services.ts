@@ -15,6 +15,7 @@ import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
+import { TArticle } from "../types";
 
 // get all site stat
 
@@ -466,7 +467,7 @@ export const getRelatedArticleToMovie = async (id: string) => {
 };
 
 // get all articles without pagination
-export const getArticles = async () => {
+export const getArticles = async (): Promise<TArticle[]> => {
   try {
     connectToDB();
     const articles = await ArticleModel.find({ isAccept: true }).populate(
@@ -476,7 +477,7 @@ export const getArticles = async () => {
 
     return articles;
   } catch (error) {
-    return error;
+    return [];
   }
 };
 
