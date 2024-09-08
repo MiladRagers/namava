@@ -33,16 +33,13 @@ export default async function Home() {
     (bookmark: any) => bookmark.movie._id
   );
 
-
-  
-
   return (
     <>
       <HeaderSlider
         subscription={JSON.parse(JSON.stringify(subscription))}
         slides={JSON.parse(JSON.stringify(slides))}
       />
-      <Slider />
+      <Slider slides={JSON.parse(JSON.stringify(slides))} />
       <div className="text-white">
         {Object.keys(movies).map(async (category, index) => {
           return (

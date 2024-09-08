@@ -27,6 +27,7 @@ function Slider({ slides, subscription }: any) {
               isImage
               info={slide}
               subscription={subscription}
+              bookmarks={[]}
             />
           </SwiperSlide>
         ))}
