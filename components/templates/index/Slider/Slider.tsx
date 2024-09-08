@@ -14,9 +14,7 @@ function Slider({ slides }: any) {
       <Swiper
         slidesPerView={3}
         spaceBetween={15}
-        // centeredSlides={true}
         autoplay={true}
-        // loop={true}
         className="mySwiper md:!px-[50px]"
         modules={[Navigation, Autoplay]}
         navigation={true}
