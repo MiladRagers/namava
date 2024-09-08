@@ -26,8 +26,7 @@ function HeaderDetail({
   const [liked, setLiked] = useState(info.liked.includes(user?._id));
   const [userBookmarks, setUserBookmarks] = useState(bookmarks);
   const [disliked, setDisliked] = useState(info.disliked.includes(user?._id));
-  const isSinglePage =
-    pathname.includes("/movie") || pathname.includes("/series");
+  const isSinglePage = pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
   const router = useRouter();
 
