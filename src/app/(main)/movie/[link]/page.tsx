@@ -69,8 +69,9 @@ async function page({ params }: TParams) {
             movies={JSON.parse(JSON.stringify(realatedMovies))}
             title={`بر اساس ${movie.title}`}
             link="/"
-            userBookmarks={JSON.parse(JSON.stringify(userBookmarks))}
+            userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
             user={JSON.parse(JSON.stringify(userInfo))}
+
           />
         )}
       </section>
