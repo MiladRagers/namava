@@ -5,8 +5,9 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import Link from "next/link";
 
-function AnimsSlider({ collections } : any) {
+function AnimsSlider({ collections }: any) {
   return (
     <div className="pt-16 pb-5 md:py-20 container">
       <Swiper
@@ -34,78 +35,19 @@ function AnimsSlider({ collections } : any) {
           },
         }}
       >
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/cars.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/digimon.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/elsa.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/dogs.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/garfield.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/hach.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/vampire.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="/images/cartoon/toys.jpg"
-            alt="cars"
-            width={500}
-            height={500}
-            className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
-          />
-        </SwiperSlide>
+        {collections.map((collection: any) => (
+          <SwiperSlide key={collection._id}>
+            <Link href={`/kids/collections/${collection.link}`}>
+              <Image
+                src={collection.mainImage}
+                alt={collection.title}
+                width={500}
+                height={500}
+                className="w-auto  anim-collection h-auto  rounded-full shadow-sm"
+              />
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
