@@ -2,7 +2,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
-import { country, date, orderType, voiceType } from "../../../public/db";
+import { country, date, orderType, voiceType } from "@/public/db";
 import FilterItem from "./FilterItem";
 
 type Filter = {
