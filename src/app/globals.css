@@ -53,6 +53,8 @@ body {
         rgba(255, 255, 255, 0) 10vw,
         rgb(255, 255, 255) 128.875vw
       );
+
+      height: 98vh
     }
   }
 
@@ -387,6 +389,7 @@ input:checked + .slider:before {
     rgba(255, 255, 255, 0.8),
     rgba(255, 255, 255, 0.6)
   );
+  height: 100vh;
 }
 
 /* start about page custom */

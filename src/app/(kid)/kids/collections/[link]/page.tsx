@@ -6,7 +6,7 @@ import React from "react";
 
 async function page({ params }: TParams) {
   const collcetion = await getCollection(params.link as string);
-  const { title, description, desktopBanner, movies, mobileBanner } =
+  const { title, description, desktopBanner, movies, mobileBanner, mainImage } =
     collcetion;
   return (
     <>
@@ -26,17 +26,24 @@ async function page({ params }: TParams) {
           height={1080}
         />
         <div className="title-overlay absolute inset-0"></div>
-        <div className="bottom-24 absolute z-30 container px-10">
-          <h1 className="text-lg text-center md:text-right md:text-3xl">
-            {title}
+        <div className="bottom-8 md:bottom-16 absolute z-30 container px-10">
+          <img
+            src={mainImage}
+            width={1920}
+            height={1080}
+            alt={title}
+            className="w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full mb-2 mx-auto md:mx-0 md:mb-10"
+          />
+          <h1 className="text-lg text-center md:text-right md:text-3xl text-namavaBlack">
+           مجموعه فیلم های   {title}
           </h1>
-          <p className="text-justify line-clamp-3 md:line-clamp-6 max-w-[673px] pt-5 text-sm md:text-base/[28px]">
+          <p className="hidden md:block text-justify text-namavaBlack line-clamp-3 md:line-clamp-6 max-w-[673px] pt-5 text-sm md:text-base/[28px]">
             {description}
           </p>
         </div>
       </div>
 
-      <div className="container grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-16 pt-10 text-white pb-20 -mt-16 relative z-20 ">
+      <div className="container grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-16 pt-10 text-white pb-20 -mt-12 md:-mt-20 relative z-20 ">
         {movies.map((movie: any) => (
           <Movie
             key={movie._id}
