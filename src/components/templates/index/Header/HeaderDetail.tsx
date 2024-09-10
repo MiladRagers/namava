@@ -156,7 +156,7 @@ function HeaderDetail({
               {info.shortDesc}
             </p>
 
-            <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4">
+            <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4 flex-wrap gap-y-3">
               <Link
                 href={
                   subscription?.hasSubscription

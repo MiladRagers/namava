@@ -37,7 +37,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
             alt="slide1.jpg"
             width={1920}
             height={1080}
-            className={`rounded-md w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[150px] md:h-auto ${
+            className={`rounded-md shadow w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[150px] md:h-auto ${
               pathname.includes("/kids/collections") ? "lg:h-[401px]" : ""
             }`}
           />
