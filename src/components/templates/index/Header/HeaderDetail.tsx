@@ -76,13 +76,13 @@ function HeaderDetail({
   return (
     <>
       {isKid ? (
-        <div className="max-w-[90%] mx-auto md:mx-0 md:max-w-[590px] space-y-4 !h-[456px] md:!h-[480px] p-4  rounded-md kid-title top-64 md:top-44 md:right-10 relative z-20">
+        <div className="max-w-[90%] flex items-center justify-center flex-col mx-auto md:mx-0 md:max-w-[590px] space-y-4 !h-[456px] md:!h-[480px] p-4  rounded-md kid-title top-64 md:top-44 md:right-10 relative z-20">
           <Image
             src={info.logo}
             width={1920}
             height={1080}
             alt="oka"
-            className="max-w-[140px] md:max-w-[200px]  max-h-[160px] mx-auto "
+            className="max-w-[160px] md:max-w-[250px]  max-h-[160px] mx-auto "
           />
           <h2 className="text-center font-IranMedium text-lg md:text-xl">
             {info.title}
