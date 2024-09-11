@@ -339,16 +339,12 @@ export const getMovies = async (contentType: "adult" | "kid") => {
       filterObj = { contentType };
     }
 
-    
-    
-
     const allMovies = await MovieModel.find(filterObj).populate(
       "category actors",
       "title link parrent link name"
     );
 
     console.log(allMovies);
-    
 
     const categorizeFilms = (films: any) => {
       const categorized: any = {};
@@ -404,7 +400,8 @@ export const getAllComments = async (page: string) => {
     const comments = await CommentModel.find({})
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (+page - 1))
-      .populate("movie user", "title link name");
+      .populate("movie user", "title link name")
+      .sort({ createdAt: -1 });
 
     const counts = await CommentModel.countDocuments();
 
