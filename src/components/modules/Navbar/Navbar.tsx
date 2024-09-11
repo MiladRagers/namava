@@ -134,10 +134,10 @@ function Navbar({ user, userSubscription }: any) {
             ) : (
               <>
                 <li className="text-sm">
-                  <Link href={"/"}>خانه</Link>
+                  <Link href={"/kids"}>خانه</Link>
                 </li>
                 <li className="text-sm">
-                  <Link href={"/"}>لیست من</Link>
+                  <Link href={"/kids/bookmarks"}>لیست من</Link>
                 </li>
               </>
             )}
