@@ -26,7 +26,8 @@ function HeaderDetail({
   const [liked, setLiked] = useState(info.liked.includes(user?._id));
   const [userBookmarks, setUserBookmarks] = useState(bookmarks);
   const [disliked, setDisliked] = useState(info.disliked.includes(user?._id));
-  const isSinglePage = pathname.includes("/movie") || pathname.includes("/series");
+  const isSinglePage =
+    pathname.includes("/movie") || pathname.includes("/series");
   const age = Number(info?.ageRange);
   const router = useRouter();
 
@@ -75,47 +76,104 @@ function HeaderDetail({
   return (
     <>
       {isKid ? (
-        <div className="max-w-[90%] mx-auto md:mx-0 md:max-w-[590px] space-y-4 md:h-[461px] p-4  rounded-md kid-title top-64 md:top-44 md:right-10 relative z-20">
+        <div className="max-w-[90%] mx-auto md:mx-0 md:max-w-[590px] space-y-4 !h-[456px] md:!h-[480px] p-4  rounded-md kid-title top-64 md:top-44 md:right-10 relative z-20">
           <Image
-            src={"/images/tomTitle.png"}
-            width={450}
-            height={450}
+            src={info.logo}
+            width={1920}
+            height={1080}
             alt="oka"
-            className="w-[125px] md:w-[300px]  mx-auto "
+            className="max-w-[140px] md:max-w-[200px]  max-h-[160px] mx-auto "
           />
           <h2 className="text-center font-IranMedium text-lg md:text-xl">
-            تام و جری
+            {info.title}
           </h2>
-          <p className="text-center text-xs md:text-[15px]/[26px]">
-            جری برای پیدا کردن محل زندگی مورد نظرش به یکی از هتل های بزرگ
-            نیویورک که قرار است یک عروسی مجلل در آن برگزار شود می رود. اما از
-            آنجا که تام همیشه به دنبال جری است، هرج و مرج و خرابی های بسیاری به
-            بار می آورد و...
+          <p className="text-center line-clamp-2 md:line-clamp-6 text-xs md:text-[15px]/[26px]">
+            {info.shortDesc}
           </p>
 
           <div className="flex-center flex-col">
-            <div className="flex items-center flex-col md:flex-row gap-y-5 justify-center md:justify-start gap-x-4 mt-4">
-              <button className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl">
+            <div className="flex items-center flex-col md:flex-row  gap-y-5 justify-center md:justify-start gap-x-4 mt-4">
+              <Link
+                href={
+                  subscription?.hasSubscription
+                    ? `/${info.type === "film" ? "movie" : "series"}/${
+                        info.link
+                      }`
+                    : "/plans"
+                }
+                className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
+              >
                 <FaPlay />
-                خرید اشتراک
-              </button>
+                {subscription?.hasSubscription ? "تماشای فیلم" : "خرید اشتراک"}
+              </Link>
               <div className="flex items-center gap-x-4">
-                <button className="action-btn !bg-white">
-                  <Plus className="!fill-zinc-700" />
-                </button>
-                <button className="action-btn !bg-white">
-                  <Like fill="black" />
-                </button>
-                <button className="action-btn !bg-white">
-                  <Dislike fill="black" />
-                </button>
+                {!userBookmarks.includes(info._id) ? (
+                  <button
+                    onClick={handleAddToBookmark}
+                    className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <Plus />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleRemoveFromBookmark}
+                    className="flex-center py-3 px-3 w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <IoCheckmarkSharp className="text-xl text-white" />
+                  </button>
+                )}
+                {liked ? (
+                  <button
+                    onClick={() => handleLike(info._id)}
+                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <ActiveLike className="fill-white stroke-white !w-[25px] !h-[25px]" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleLike(info._id)}
+                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <Like className="fill-white stroke-white" />
+                  </button>
+                )}
+                {disliked ? (
+                  <button
+                    onClick={() => handleDislike(info._id)}
+                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <ActiveLike
+                      isDislike
+                      className="fill-white stroke-white !w-[25px] !h-[25px]"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleDislike(info._id)}
+                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                  >
+                    <Dislike className=" fill-white stroke-white" />
+                  </button>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-x-2 mt-5">
-              <div className="w-[20px] h-[20px]  rounded-md flex-center font-bold text-sm seven font-Dana">
-                7+
-              </div>
-              <p className="text-xs">مناسب برای سنین بالای ۷ سال</p>
+              <span
+                className={`${
+                  age === 3
+                    ? "three"
+                    : age === 7
+                    ? "seven"
+                    : age === 12
+                    ? "twelve"
+                    : age === 15
+                    ? "fifteen"
+                    : "eighteen"
+                } flex-center text-sm rounded-full text-black font-bold px-1.5`}
+              >
+                {info.ageRange}+
+              </span>
+              <p className="text-xs">مناسب برای سنین بالای {age} سال</p>
             </div>
           </div>
         </div>

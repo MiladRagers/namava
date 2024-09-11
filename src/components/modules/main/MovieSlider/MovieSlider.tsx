@@ -18,7 +18,7 @@ import { IoCheckmarkSharp } from "react-icons/io5";
 import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
 import toast from "react-hot-toast";
 import { TMovieSlider } from "@/src/libs/types";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { dislikeMovie, likeMovie } from "@/src/libs/actions/movie";
 import ActiveLike from "@/src/icons/ActiveLike";
 
@@ -34,6 +34,8 @@ function MovieSlider({
   const [bookmarks, setBookmarks] = useState(userBookmarks);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
+
+  const pathname = usePathname();
 
   const router = useRouter();
 
@@ -114,6 +116,13 @@ function MovieSlider({
               <SwiperSlide
                 key={movie._id}
                 onClick={() => {
+                  if (pathname.includes("/kids")) {
+                    return router.push(
+                      `/kids/${movie.type === "film" ? "movie" : "series"}/${
+                        movie.link
+                      }`
+                    );
+                  }
                   setMovieId(movie._id);
                   setMovieDetail(movie);
                 }}
