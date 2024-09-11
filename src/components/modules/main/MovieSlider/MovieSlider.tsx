@@ -86,7 +86,7 @@ function MovieSlider({
     <div>
       <div className="container">
         <SliderTitle title={title} link={link} key={crypto.randomUUID()} />
-        <div className="my-10  md:h-[21rem]">
+        <div className="mt-10 md:h-[21rem]">
           <Swiper
             slidesPerView={3}
             spaceBetween={20}

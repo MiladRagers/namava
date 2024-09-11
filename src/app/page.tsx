@@ -25,7 +25,7 @@ export default async function Home() {
   ]: any = await Promise.all([
     getAllSlidersMovies(),
     getStars(),
-    getMovies(),
+    getMovies("adult"),
     getAllCollectionSlider("adult"),
     getUserBookmarks(),
     checkUserSubscription(),

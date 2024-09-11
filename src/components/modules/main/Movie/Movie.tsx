@@ -41,7 +41,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
               pathname.includes("/kids/collections") ? "lg:h-[401px]" : ""
             }`}
           />
-          <div className="flex text-xs md:text-sm transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute inset-0  movie-overlay rounded-md">
+          <div className="flex !text-white text-xs md:text-sm transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute inset-0  movie-overlay rounded-md">
             <div className="pb-6 px-2 space-y-2 md:space-y-3">
               <p className="text-xs md:text-[13px]">
                 {type === "film" ? "فیلم" : "سریال"} -{" "}

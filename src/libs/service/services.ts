@@ -329,14 +329,26 @@ export const getStarMovies = async (starId: string) => {
 
 // get all movies
 
-export const getMovies = async () => {
+export const getMovies = async (contentType: "adult" | "kid") => {
   try {
     connectToDB();
 
-    const allMovies = await MovieModel.find({}).populate(
+    let filterObj = {};
+
+    if (contentType === "kid") {
+      filterObj = { contentType };
+    }
+
+    
+    
+
+    const allMovies = await MovieModel.find(filterObj).populate(
       "category actors",
       "title link parrent link name"
     );
+
+    console.log(allMovies);
+    
 
     const categorizeFilms = (films: any) => {
       const categorized: any = {};
