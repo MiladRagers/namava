@@ -2,27 +2,41 @@
 import Button from "@/src/components/modules/auth/Button/Button";
 import Movie from "@/src/components/modules/main/Movie/Movie";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { FaBookmark } from "react-icons/fa6";
 
 function Bookmarks({ bookmarks }: any) {
   const [showStatus, setShowStatus] = useState("bookmark");
+  const pathname = usePathname();
   return (
     <>
       {/* bookmark header */}
       <div className="flex items-center gap-x-6">
         <div
           className={`text-sm md:text-lg bookmarkItem ${
-            showStatus === "bookmark" ? "bookmark--active" : ""
-          }`}
+            showStatus === "bookmark"
+              ? `${
+                  pathname.includes("kids")
+                    ? "!bg-black !text-white"
+                    : "bookmark--active"
+                }`
+              : ""
+          } ${pathname.includes("kids") ? "text-black" : ""}`}
           onClick={() => setShowStatus("bookmark")}
         >
           نشان شده ها
         </div>
         <div
           className={`text-sm md:text-lg bookmarkItem ${
-            showStatus === "wish" ? "bookmark--active" : ""
-          }`}
+            showStatus === "wish"
+              ? `${
+                  pathname.includes("kids")
+                    ? "!bg-black !text-white"
+                    : "bookmark--active"
+                }`
+              : ""
+          } ${pathname.includes("kids") ? "text-black" : ""}`}
           onClick={() => setShowStatus("wish")}
         >
           علاقه مندی ها

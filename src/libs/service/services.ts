@@ -759,7 +759,7 @@ export const getUserBookmarks = async () => {
     const user = await authUser();
     const bookmarks = await BookmarkModel.find({ user: user._id }).populate(
       "movie",
-      "link title mainImage type showTime"
+      "link title mainImage type showTime contentType"
     );
 
     return bookmarks;
