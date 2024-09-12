@@ -27,6 +27,7 @@ function SeasonOption({ seasons }: any) {
         <ul className="flex flex-col gap-y-4 justify-between cursor-pointer hover:child:text-namava">
           {seasons.map((season: any, index: number) => (
             <li
+              key={season._id}
               className={
                 activeSeason === season.seasonNumber ? "text-namava" : ""
               }

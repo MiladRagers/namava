@@ -3,13 +3,14 @@ import { getAllCategories, getCategories } from "@/src/libs/service/services";
 import React from "react";
 
 async function Categories() {
-  const categories : any = await getCategories();
+  const categories: any = await getCategories();
 
   return (
     <div className="text-white container pt-20 pb-10">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
         {categories.map((category: any) => (
           <CategoryCard
+            key={category._id}
             image={category.image}
             title={category.title}
             link={`/category/${category._id}`}

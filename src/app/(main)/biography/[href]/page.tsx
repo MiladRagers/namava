@@ -48,6 +48,7 @@ async function page({ params }: TParams) {
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 gap-y-16 pt-10">
           {actorMovies.map((movie: any) => (
             <Movie
+              key={movie._id}
               title={movie.title}
               image={movie.mainImage}
               isLink
