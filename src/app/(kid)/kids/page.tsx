@@ -9,8 +9,6 @@ async function Kids() {
     getMovies("kid"),
   ]);
 
-  console.log(movies);
-
   return (
     <div>
       <AnimsSlider collections={JSON.parse(JSON.stringify(collections))} />
