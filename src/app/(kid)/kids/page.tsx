@@ -1,25 +1,20 @@
-import KidSlider from "@/src/components/modules/kid/KidSlider/KidSlider";
 import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
 import AnimsSlider from "@/src/components/templates/kid/AnimSlider/AnimsSlider";
 import { getAllCollectionSlider, getMovies } from "@/src/libs/service/services";
 import React from "react";
 
 async function Kids() {
-  const [collections , movies] = await Promise.all([
+  const [collections, movies] = await Promise.all([
     getAllCollectionSlider("kid"),
     getMovies("kid"),
   ]);
 
   console.log(movies);
-  
+
   return (
     <div>
       <AnimsSlider collections={JSON.parse(JSON.stringify(collections))} />
       <div className="space-y-12">
-        {/* <KidSlider title="تازه های کودک" />
-        <KidSlider title="اکشن ها" />
-        <KidSlider title="ماجراجویی" />
-        <KidSlider title="علمی تخیلی" /> */}
         {Object.keys(movies).map(async (category, index) => {
           return (
             <div key={category}>
