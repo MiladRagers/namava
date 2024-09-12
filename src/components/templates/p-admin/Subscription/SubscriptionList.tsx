@@ -40,7 +40,7 @@ function SubscriptionList({ subscriptions, counts }: any) {
         </Table.Header>
         <Table.Body>
           {optimisticSubscriptions.map((subscription: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={subscription._id}>
               <td>{index + 1}</td>
               <td>{subscription.title}</td>
               <td>{subscription.time} روز</td>

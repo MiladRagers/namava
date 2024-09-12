@@ -94,6 +94,7 @@ function SearchBox({
           <div className="flex items-center gap-x-4 flex-wrap">
             {movies.map((movie: any) => (
               <span
+                key={movie._id}
                 onClick={() => {
                   params.set("q", movie.title.trim());
                   setSearchValue(movie.title.trim());

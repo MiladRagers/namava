@@ -41,7 +41,7 @@ function ArticleList({ articles, counts }: any) {
         </Table.Header>
         <Table.Body>
           {optimisticArticles.map((article: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={article._id}>
               <td>{index + 1}</td>
               <td className="!p-0 md:!p-5">
                 <Image
