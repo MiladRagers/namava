@@ -10,9 +10,9 @@ export default function Home() {
       <Header />
       <Slider />
       <div className="text-white">
-        <MovieSlider title="پرطرفدار ها" />
+        {/* <MovieSlider title="پرطرفدار ها" />
         <StarsSlider title="ستارگان" />
-        <Collections title="مجموعه فیلم ها" />
+        <Collections title="مجموعه فیلم ها" /> */}
       </div>
     </>
   );
