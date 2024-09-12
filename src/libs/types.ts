@@ -7,8 +7,8 @@ export type THeader = {
   className?: string;
   info?: any;
   onSwipe?: any;
-  bookmarks: any;
-  subscription: any;
+  bookmarks?: any;
+  subscription?: any;
   user?: any;
 };
 

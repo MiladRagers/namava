@@ -12,6 +12,7 @@ function AboutUs() {
   return (
     <div className="relative">
       <Header
+      
         className="!h-[380px]"
         isImage
         img="/images/intro.jpg"
