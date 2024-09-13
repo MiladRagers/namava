@@ -26,7 +26,7 @@ function Comments({ isKid, user, movieId, comments, movieLink }: TComments) {
       <div
         className={`w-full px-6 py-10 xl:max-w-[1000px] ${
           isKid ? "bg-[#f2f2f2] text-black" : "bg-namavaBlack text-white"
-        } rounded-lg mx-auto`}
+        } rounded-lg mx-auto mt-20`}
       >
         <h3
           className={`text-center text-xl ${

@@ -88,7 +88,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
           </div>
         </div>
         <h3
-          className={`text-xs mt-3 mr-3 ${
+          className={`text-xs mt-3 mr-3 line-clamp-1 ${
             pathname.includes("kids") ? "text-black" : "text-white"
           }`}
         >
