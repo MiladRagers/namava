@@ -64,7 +64,7 @@ function FooterMenu() {
         </li>
         <li>
           <Link
-            href=""
+            href="/bookmarks"
             className="flex items-center flex-col text-lg relative "
           >
             <Folder fill={isKid ? "#6d6c6c" : "#aaa"} />
@@ -75,7 +75,7 @@ function FooterMenu() {
         </li>
         <li>
           <Link
-            href=""
+            href="/p-user"
             className="flex items-center flex-col text-lg relative "
           >
             <More fill={isKid ? "#6d6c6c" : "#aaa"} />
