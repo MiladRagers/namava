@@ -167,8 +167,6 @@ export const likeMovie = async (
   userId: string,
   movieLink: string
 ): Promise<TResponse> => {
-
-  
   try {
     connectToDB();
 
@@ -218,6 +216,7 @@ export const likeMovie = async (
     }
 
     revalidatePath(`/movie/${movieLink}`);
+    revalidatePath("/bookmarks");
 
     return {
       message: "با موفقیت لایک شد",
@@ -302,6 +301,7 @@ export const dislikeMovie = async (
     }
 
     revalidatePath(`/movie/${movieLink}`);
+    revalidatePath("/bookmarks");
 
     return {
       message: "با موفقیت دیس لایک شد",

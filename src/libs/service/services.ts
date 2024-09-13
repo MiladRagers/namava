@@ -767,3 +767,18 @@ export const getUserBookmarks = async () => {
     return error;
   }
 };
+
+export const getAllUserLikesMovie = async () => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    console.log(user._id );
+    
+    const likesMovie = await MovieModel.find({
+      liked: { $in: user._id },
+    })
+    return likesMovie;
+  } catch (error) {
+    return error;
+  }
+};
