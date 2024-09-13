@@ -107,37 +107,48 @@ export interface Profile {
   __v: number;
 }
 
-
-
-
 export interface TArticle {
-  _id?: string
-  title: string
-  link: string
-  readingTime: String | Number
-  tags?: string[]
-  movie?: Movie
-  image: string
-  content?: string
-  creator?: Creator
-  isAccept?: boolean
-  isDraft?: boolean
-  createdAt: string
-  updatedAt?: string
-  __v?: number
-  shortDesc?: string
+  _id?: string;
+  title: string;
+  link: string;
+  readingTime: String | Number;
+  tags?: string[];
+  movie?: Movie;
+  image: string;
+  content?: string;
+  creator?: Creator;
+  isAccept?: boolean;
+  isDraft?: boolean;
+  createdAt: string;
+  updatedAt?: string;
+  __v?: number;
+  shortDesc?: string;
 }
 
 export interface Movie {
-  _id: string
-  title: string
-  link: string
+  _id: string;
+  title: string;
+  link: string;
 }
 
 export interface Creator {
-  _id: string
-  name: string
+  _id: string;
+  name: string;
 }
 
+export interface TWish {
+  _id?: string;
+  title: string;
+  link: string;
+  showTime: string;
+  category: Category;
+  createdAt: string;
+  type: "film" | "series";
+}
+
+export interface Category {
+  _id: string;
+  title: string;
+}
 
 export const baseURL = "http://localhost:3000";

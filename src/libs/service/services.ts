@@ -15,7 +15,7 @@ import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
-import { TArticle } from "../types";
+import { TArticle, TWish } from "../types";
 
 // get all site stat
 
@@ -801,5 +801,22 @@ export const getUserPanelStats = async (userId: string) => {
     };
   } catch (error) {
     return error;
+  }
+};
+
+export const getLikesMovies = async (): Promise<TWish[]> => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    const movies = await MovieModel.find(
+      { liked: { $in: user._id as string } },
+      "title category createdAt link showTime type"
+    ).populate("category", "title");
+
+    console.log(movies);
+    
+    return movies;
+  } catch (error) {
+    return [];
   }
 };
