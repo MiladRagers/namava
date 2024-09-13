@@ -35,28 +35,26 @@ function HeaderDetail({
     if (!user) {
       router.push("/login");
     }
-
+    setDisliked(!disliked);
+    if (liked) setLiked(false);
     const res = await dislikeMovie(id, user._id, info.link);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setDisliked(!disliked);
-
-    if (liked) setLiked(false);
   };
 
   const handleLike = async (id: string) => {
     if (!user) {
       router.push("/login");
     }
+
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
     const res = await likeMovie(id, user._id, info.link);
-    console.log(res);
 
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setLiked(!liked);
-    if (disliked) setDisliked(false);
   };
 
   const handleAddToBookmark = async () => {
