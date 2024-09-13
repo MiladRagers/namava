@@ -12,9 +12,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-function Comment({ onShow, comment, user  , movieLink}: TComment) {
-
-
+function Comment({ onShow, comment, user, movieLink }: TComment) {
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
   const [liked, setLiked] = useState(comment.liked.includes(user));
   const [disliked, setDisliked] = useState(comment.disliked.includes(user));
@@ -25,12 +23,13 @@ function Comment({ onShow, comment, user  , movieLink}: TComment) {
     if (!user) {
       return onShow(true);
     }
-    const res = await likeComment(commentId, user , movieLink);
+
+    setLiked(!liked);
+    if (disliked) setDisliked(false);
+    const res = await likeComment(commentId, user, movieLink);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setLiked(!liked);
-    if (disliked) setDisliked(false);
   };
 
   const handleDislike = async (commentId: string) => {
@@ -38,13 +37,13 @@ function Comment({ onShow, comment, user  , movieLink}: TComment) {
       return onShow(true);
     }
 
-    const res = await dislikeComment(commentId, user , movieLink);
+    setDisliked(!disliked);
+    if (liked) setLiked(false);
+
+    const res = await dislikeComment(commentId, user, movieLink);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setDisliked(!disliked);
-
-    if (liked) setLiked(false);
   };
 
   return (

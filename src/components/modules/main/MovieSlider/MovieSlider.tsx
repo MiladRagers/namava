@@ -56,11 +56,12 @@ function MovieSlider({
       router.push("/login");
     }
 
+    setDisliked(!disliked);
+
     const res = await dislikeMovie(id, user._id, movieDetail.link);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setDisliked(!disliked);
 
     if (liked) setLiked(false);
   };
@@ -69,13 +70,12 @@ function MovieSlider({
     if (!user) {
       router.push("/login");
     }
+    setLiked(!liked);
     const res = await likeMovie(id, user._id, movieDetail.link);
-    console.log(res);
 
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
-    setLiked(!liked);
     if (disliked) setDisliked(false);
   };
 
