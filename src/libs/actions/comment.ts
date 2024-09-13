@@ -8,8 +8,6 @@ import { revalidatePath } from "next/cache";
 import { TResponse } from "../types";
 
 export const sendNewComment = async (formData: FormData, movie: string) => {
-
-
   try {
     connectToDB();
     const user = await authUser();
@@ -112,8 +110,7 @@ export const deleteComment = async (id: string) => {
 
 export const likeComment = async (
   commentId: string,
-  userId: string,
-  movieLink: string
+  userId: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -163,8 +160,6 @@ export const likeComment = async (
       );
     }
 
-    revalidatePath(`/movie/${movieLink}`);
-
     return {
       message: "با موفقیت کامنت لایک شد",
       status: 200,
@@ -179,8 +174,7 @@ export const likeComment = async (
 
 export const dislikeComment = async (
   commentId: string,
-  userId: string,
-  movieLink: string
+  userId: string
 ): Promise<TResponse> => {
   try {
     connectToDB();
@@ -246,8 +240,6 @@ export const dislikeComment = async (
         }
       );
     }
-
-    revalidatePath(`/movie/${movieLink}`);
 
     return {
       message: "با موفقیت کامنت دیس لایک شد",

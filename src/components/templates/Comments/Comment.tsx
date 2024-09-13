@@ -16,6 +16,8 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
   const [isSpoiled, setIsSpoiled] = useState(comment.isSpoiled);
   const [liked, setLiked] = useState(comment.liked.includes(user));
   const [disliked, setDisliked] = useState(comment.disliked.includes(user));
+  const [likeList, setLikeList] = useState<string[]>(comment.liked);
+  const [disLikeList, setDisLikeList] = useState<string[]>(comment.disliked);
   const path = usePathname();
   const isKid = path.includes("/kids");
 
@@ -24,9 +26,13 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
       return onShow(true);
     }
 
+    setLikeList((prev: any) => [...prev, user]);
     setLiked(!liked);
-    if (disliked) setDisliked(false);
-    const res = await likeComment(commentId, user, movieLink);
+    if (disliked) {
+      setDisliked(false);
+      setDisLikeList((prev) => prev.filter((dislike) => dislike !== user));
+    }
+    const res = await likeComment(commentId, user);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
@@ -37,10 +43,14 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
       return onShow(true);
     }
 
+    setDisLikeList((prev: any) => [...prev, user]);
     setDisliked(!disliked);
-    if (liked) setLiked(false);
+    if (liked) {
+      setLiked(false);
+      setLikeList((prev) => prev.filter((dislike) => dislike !== user))
+    }
 
-    const res = await dislikeComment(commentId, user, movieLink);
+    const res = await dislikeComment(commentId, user);
     if (res.status === 200) {
       toast.success(`${res.message}`);
     }
@@ -61,7 +71,7 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
           className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] rounded-full"
         />
         <p>
-          {comment.user.name} -{" "}
+          {comment.user.name} - {" "}
           {new Date(comment.createdAt).toLocaleDateString("fa-IR")}
         </p>
       </div>
@@ -102,7 +112,7 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
                   />
                 )}
                 <span className="font-Dana text-sm">
-                  {comment.liked.length}
+                  {likeList.length}
                 </span>
               </div>
               <div className="flex items-center gap-x-2">
@@ -119,7 +129,7 @@ function Comment({ onShow, comment, user, movieLink }: TComment) {
                   />
                 )}
                 <span className="font-Dana text-sm">
-                  {comment.disliked.length}
+                  {disLikeList.length}
                 </span>
               </div>
             </div>
