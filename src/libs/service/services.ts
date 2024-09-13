@@ -772,12 +772,33 @@ export const getAllUserLikesMovie = async () => {
   try {
     connectToDB();
     const user = await authUser();
-    console.log(user._id );
-    
+    console.log(user._id);
+
     const likesMovie = await MovieModel.find({
       liked: { $in: user._id },
-    })
+    });
     return likesMovie;
+  } catch (error) {
+    return error;
+  }
+};
+
+// user-panel
+
+export const getUserPanelStats = async (userId: string) => {
+  try {
+    connectToDB();
+    const subscription = await checkUserSubscription();
+    const commentsCount = await CommentModel.countDocuments({ user: userId });
+    const wishListCount = await MovieModel.countDocuments({
+      liked: { $in: userId },
+    });
+
+    return {
+      subscription,
+      commentsCount,
+      wishListCount,
+    };
   } catch (error) {
     return error;
   }

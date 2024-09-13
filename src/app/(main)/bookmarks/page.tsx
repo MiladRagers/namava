@@ -9,8 +9,6 @@ async function Bookmarks() {
     getUserBookmarks(),
     getAllUserLikesMovie(),
   ]);
-
-  console.log("13 => " , likesMovies);
   
   return (
     <div className="py-24 container text-white">

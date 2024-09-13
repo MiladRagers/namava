@@ -3,7 +3,7 @@ import { HiOutlineBriefcase } from "react-icons/hi2";
 
 type TStat = {
   title: string;
-  value: number;
+  value: number | string;
   icon: React.ReactNode;
   color: string;
 };

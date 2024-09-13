@@ -32,10 +32,10 @@ function FooterMenu() {
         <li>
           <Link
             href="/"
-            className="flex items-center flex-col text-lg relative "
+            className={`flex items-center flex-col text-lg relative`}
           >
-            <Home fill={isKid ? "#6d6c6c" : "#aaa"} />
-            <span className="block text-[10px] mb-2 text-gray-400 absolute -bottom-8">
+            <Home fill={`${isKid ? "#6d6c6c" : "#aaa"}`} />
+            <span className={`block text-[10px] mb-2 absolute -bottom-8`}>
               خانه
             </span>
           </Link>
