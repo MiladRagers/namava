@@ -27,7 +27,7 @@ function Header({
         className={`${className} header-video  ${
           isKid || (isAboutPage && !className)
             ? "min-h-screen md:min-h-screen"
-            : "min-h-[70vh] md:min-h-[95vh]"
+            : "min-h-[72vh] md:min-h-[95vh]"
         }`}
       >
         {isImage ? (

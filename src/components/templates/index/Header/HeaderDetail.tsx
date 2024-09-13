@@ -212,26 +212,30 @@ function HeaderDetail({
               {info.shortDesc}
             </p>
 
-            <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4 flex-wrap gap-y-3">
-              <Link
-                href={
-                  subscription?.hasSubscription
-                    ? `/${info.type === "film" ? "movie" : "series"}/${
-                        info.link
-                      }`
-                    : "/plans"
-                }
-                className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
-              >
-                <FaPlay />
-                {subscription?.hasSubscription ? "تماشای فیلم" : "خرید اشتراک"}
-              </Link>
-              <button className=" py-3 px-5 bg-gray-500/35 hover:bg-white/40 text-white rounded-xl text-[13px]">
-                پیش نمایش
-              </button>
+            <div className="flex items-center justify-center md:justify-start gap-x-4 mt-4 flex-col md:flex-row gap-y-3">
+              <div className="flex items-center gap-x-3">
+                <Link
+                  href={
+                    subscription?.hasSubscription
+                      ? `/${info.type === "film" ? "movie" : "series"}/${
+                          info.link
+                        }`
+                      : "/plans"
+                  }
+                  className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
+                >
+                  <FaPlay />
+                  {subscription?.hasSubscription
+                    ? "تماشای فیلم"
+                    : "خرید اشتراک"}
+                </Link>
+                <button className=" py-3 px-5 bg-gray-500/35 hover:bg-white/40 text-white rounded-xl text-[13px]">
+                  پیش نمایش
+                </button>
+              </div>
 
               {isSinglePage && user ? (
-                <>
+                <div className="flex items-center gap-x-3">
                   {!userBookmarks.includes(info._id) ? (
                     <button
                       onClick={handleAddToBookmark}
@@ -280,7 +284,7 @@ function HeaderDetail({
                       <Dislike className=" fill-white stroke-white" />
                     </button>
                   )}
-                </>
+                </div>
               ) : (
                 <Link
                   href={`/movie/${info.link}`}

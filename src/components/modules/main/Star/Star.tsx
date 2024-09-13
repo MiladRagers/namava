@@ -12,7 +12,7 @@ function Star({ src, title, link }: Star) {
     <>
       <Link
         href={`/biography/${link}`}
-        className="block rounded-full w-[100px] h-[100px] sm:w-[140px] sm:h-[140px] md:w-[190px] md:h-[190px]"
+        className="block rounded-full w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[190px] md:h-[190px]"
         title={title}
       >
         <Image
@@ -20,7 +20,7 @@ function Star({ src, title, link }: Star) {
           width={400}
           height={500}
           alt={title}
-          className="rounded-full w-[100px] h-[100px] sm:w-[140px] sm:h-[140px] md:w-[190px] md:h-[190px]"
+          className="rounded-full w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[190px] md:h-[190px]"
         />
       </Link>
       <h3 className="text-center mt-3 text-xs md:text-sm">{title}</h3>

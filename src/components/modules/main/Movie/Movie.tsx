@@ -37,7 +37,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
             alt="slide1.jpg"
             width={1920}
             height={1080}
-            className={`rounded-md shadow w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[150px] md:h-auto ${
+            className={`rounded-md shadow w-full lg:w-full lg:h-[280px] object-cover md:w-auto h-[160px] md:h-auto ${
               pathname.includes("/kids/collections") ? "lg:h-[401px]" : ""
             }`}
           />
@@ -72,7 +72,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
             alt="slide1.jpg"
             width={490}
             height={500}
-            className="rounded-md w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[150px] md:h-auto"
+            className="rounded-md w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[160px] md:h-auto"
           />
           <div className="flex text-xs md:text-sm transition-all group-hover:opacity-100 group-hover:visible  duration-100 opacity-0 invisible  justify-end flex-col absolute inset-0  movie-overlay rounded-md">
             <div className="pb-6 px-2 space-y-2 md:space-y-3">
