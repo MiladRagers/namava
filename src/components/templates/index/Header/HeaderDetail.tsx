@@ -58,7 +58,6 @@ function HeaderDetail({
   };
 
   const handleAddToBookmark = async () => {
-    console.log(bookmarks);
 
     setUserBookmarks([...bookmarks, info._id]);
     toast.success(`با موفقیت اضافه شد`);

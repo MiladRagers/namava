@@ -85,7 +85,6 @@ function FilterItem({
     const from = searchParams.get(key);
     const to = searchParams.get(key);
 
-    console.log(from);
 
     if (from !== null) {
       params.set(key, value);
@@ -102,7 +101,6 @@ function FilterItem({
     if (isOpen) {
       const height = subMenuRef.current.scrollHeight;
       subMenuRef.current.style.height = height + "px";
-      console.log(subMenuRef.current);
     } else {
       subMenuRef.current.style.height = 0 + "px";
     }

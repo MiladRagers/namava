@@ -31,7 +31,6 @@ function AddNewArticle({ movies }: any) {
     resolver: zodResolver(Article),
   });
 
-  console.log(errors);
 
   const moviesOption = movies.map((movie: any) => ({
     id: movie._id,
