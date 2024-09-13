@@ -2,6 +2,7 @@ import React from "react";
 import { FiLogOut } from "react-icons/fi";
 import SidebarLink from "./SidebarLink";
 import { authUser } from "@/src/utils/serverHelper";
+import Logout from "../../templates/p-user/Logout";
 
 async function Sidebar() {
   const user = await authUser();
@@ -21,12 +22,7 @@ async function Sidebar() {
         </div>
       </div>
       <SidebarLink />
-      <div className="mt-2 cursor-pointer">
-        <span className="flex  gap-x-4 font-DanaMedium p-2 rounded-md">
-          <FiLogOut className="text-[22px]" />
-          خروج
-        </span>
-      </div>
+      <Logout />
     </div>
   );
 }
