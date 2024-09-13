@@ -204,6 +204,13 @@ export const likeMovie = async (
           },
         }
       );
+
+      revalidatePath(`/movie/${movieLink}`);
+
+      return {
+        message: "از لایک ها  حذف شد",
+        status: 200,
+      };
     } else {
       await MovieModel.findOneAndUpdate(
         { _id: movieId },
@@ -271,6 +278,13 @@ export const dislikeMovie = async (
           },
         }
       );
+
+      revalidatePath(`/movie/${movieLink}`);
+
+      return {
+        message: "از دیس لایک ها  حذف شد",
+        status: 200,
+      };
     } else if (isLiked) {
       await MovieModel.findOneAndUpdate(
         { _id: movieId },
