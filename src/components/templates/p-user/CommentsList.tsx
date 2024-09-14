@@ -8,7 +8,7 @@ import Modal from "../../modules/modals/Modal";
 import EmptyBox from "../../modules/p-admin/EmptyBox";
 
 function CommentsList({ comments, count, status }: any) {
-  let commnetsList = [];
+  let commnetsList = comments;
 
   if (status === "all") {
     commnetsList = comments;
