@@ -15,7 +15,7 @@ import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
-import { TArticle, TWish } from "../types";
+import { IWishList, TArticle, TWish } from "../types";
 
 // get all site stat
 
@@ -804,19 +804,30 @@ export const getUserPanelStats = async (userId: string) => {
   }
 };
 
-export const getLikesMovies = async (): Promise<TWish[]> => {
+export const getLikesMovies = async (page: number): Promise<IWishList> => {
   try {
     connectToDB();
     const user = await authUser();
     const movies = await MovieModel.find(
       { liked: { $in: user._id as string } },
-      "title category createdAt link showTime type"
-    ).populate("category", "title");
+      "title category createdAt link showTime type mainImage range IMDB"
+    )
+      .populate("category", "title")
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
 
-    console.log(movies);
-    
-    return movies;
+    const count = await MovieModel.countDocuments({
+      liked: { $in: user._id as string },
+    });
+
+    return {
+      count,
+      movies,
+    };
   } catch (error) {
-    return [];
+    return {
+      count: 0,
+      movies: [],
+    };
   }
 };

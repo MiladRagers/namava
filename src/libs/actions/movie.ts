@@ -328,3 +328,39 @@ export const dislikeMovie = async (
     };
   }
 };
+
+export const deleteUserLike = async (
+  movieId: string,
+  userId: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+    if (!isValidObjectId(movieId) || !isValidObjectId(userId)) {
+      return {
+        message: "ایدی مورد نظر معتبر نمیباشد",
+        status: 422,
+      };
+    }
+
+    await MovieModel.findOneAndUpdate(
+      { _id: movieId },
+      {
+        $pull: {
+          liked: userId,
+        },
+      }
+    );
+
+    revalidatePath("/p-user/favlist");
+
+    return {
+      message: "از لایک ها حذف شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را چک کنید",
+      status: 500,
+    };
+  }
+};

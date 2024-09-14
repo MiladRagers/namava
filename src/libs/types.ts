@@ -136,6 +136,11 @@ export interface Creator {
   name: string;
 }
 
+export interface IWishList {
+  movies: TWish[];
+  count: number;
+}
+
 export interface TWish {
   _id?: string;
   title: string;
@@ -144,6 +149,9 @@ export interface TWish {
   category: Category;
   createdAt: string;
   type: "film" | "series";
+  mainImage?: string;
+  range: number | string;
+  IMDB?: number;
 }
 
 export interface Category {
