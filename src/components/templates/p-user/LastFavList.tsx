@@ -3,6 +3,7 @@ import { IWishList } from "@/src/libs/types";
 import Link from "next/link";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import LastFavItem from "./LastFavItem";
+import { FaHeart } from "react-icons/fa6";
 
 async function LastFavList() {
   const { movies }: IWishList = await getLikesMovies();
@@ -21,9 +22,14 @@ async function LastFavList() {
       </div>
       <div className="overflow-hidden max-h-[225px] md:max-h-[365px] recent-box overflow-y-auto">
         <div className="my-4 space-y-4">
-          {movies.map((movie) => (
+          {movies.length ? movies.map((movie) => (
             <LastFavItem key={movie._id} movie={movie} />
-          ))}
+          )) : (
+            <div className="bg-namava flex-center  lg:mt-[40px] flex-col gap-y-4 py-12 lg:py-28 text-white rounded-md shadow">
+              <FaHeart className="text-2xl md:text-3xl lg:text-4xl"/>
+             <p className="text-sm md:text-base"> هیچ فیلم یا سریالی را به مورد علاقه ها اضافه نکردید</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
