@@ -7,7 +7,21 @@ import DetailModal from "../../modules/modals/DetailModal";
 import Modal from "../../modules/modals/Modal";
 import EmptyBox from "../../modules/p-admin/EmptyBox";
 
-function CommentsList({ comments, count }: any) {
+function CommentsList({ comments, count, status }: any) {
+  let commnetsList = [];
+
+  if (status === "all") {
+    commnetsList = comments;
+  }
+
+  if (status === "accepted") {
+    commnetsList = comments.filter((comment: any) => comment.isAccept);
+  }
+
+  if(status == "unaccepted"){
+    commnetsList = comments.filter((comment: any) => !comment.isAccept);
+  }
+
   return (
     <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -21,7 +35,7 @@ function CommentsList({ comments, count }: any) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {comments.map((comment: any, index: number) => (
+          {commnetsList.map((comment: any, index: number) => (
             <Table.Row>
               <td
                 className={`text-white ${

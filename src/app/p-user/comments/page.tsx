@@ -16,12 +16,12 @@ async function page({ searchParams }: TSearchParams) {
           { label: "همه", slug: "all" },
           { label: "تایید شده", slug: "accepted" },
           { label: "تایید نشده", slug: "unaccepted" },
-          { label: "آخرین", slug: "latest" },
         ]}
       />
       <CommentsList
         comments={JSON.parse(JSON.stringify(comments))}
         count={count}
+        status={searchParams?.status}
       />
     </div>
   );

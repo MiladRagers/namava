@@ -815,7 +815,8 @@ export const getLikesMovies = async (page?: number): Promise<IWishList> => {
     )
       .populate("category", "title")
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
+      .skip(ITEM_PER_PAGE * (page || 1 - 1))
+      .sort({ createdAt: -1 });
 
     const count = await MovieModel.countDocuments({
       liked: { $in: user._id as string },
@@ -840,7 +841,8 @@ export const getAllUserComments = async (page: number) => {
     const comments = await CommentModel.find({ user: user._id })
       .populate("movie user", "title link name score")
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .sort({ createdAt: -1 });
 
     const count = await CommentModel.countDocuments({ user: user._id });
 
