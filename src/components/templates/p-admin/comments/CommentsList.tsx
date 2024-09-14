@@ -9,6 +9,7 @@ import {
   acceptAndRejectComment,
   deleteComment,
 } from "@/src/libs/actions/comment";
+import { formatDate } from "@/src/utils/funcs";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import {
@@ -90,7 +91,7 @@ function CommentsList({ comments, counts }: any) {
                 </div>
               </td>
               <td>{comment.isAccept ? "تایید شده" : "تایید نشده"}</td>
-              <td>{new Date(comment.createdAt).toLocaleDateString("fa-IR")}</td>
+              <td>{formatDate(comment.createdAt)}</td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
                   <Modal>

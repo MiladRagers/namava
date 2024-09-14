@@ -16,6 +16,7 @@ import CollcetionModel from "@/src/models/collection";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 import { IWishList, TArticle, TWish } from "../types";
+import { User } from "@/src/validators/frontend";
 
 // get all site stat
 
@@ -829,5 +830,25 @@ export const getLikesMovies = async (page: number): Promise<IWishList> => {
       count: 0,
       movies: [],
     };
+  }
+};
+
+export const getAllUserComments = async (page: number) => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    const comments = await CommentModel.find({ user: user._id })
+      .populate("movie user", "title link name score")
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+
+    const count = await CommentModel.countDocuments({ user: user._id });
+
+    return {
+      count,
+      comments,
+    };
+  } catch (error) {
+    return error;
   }
 };

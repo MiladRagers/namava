@@ -1,9 +1,13 @@
+"use client";
 import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
-import React from "react";
-import { FaEye, FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
+import { formatDate } from "@/src/utils/funcs";
+import { FaEye, FaRegStar, FaStar } from "react-icons/fa6";
+import DetailModal from "../../modules/modals/DetailModal";
+import Modal from "../../modules/modals/Modal";
+import EmptyBox from "../../modules/p-admin/EmptyBox";
 
-function CommentsList() {
+function CommentsList({ comments, count }: any) {
   return (
     <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -17,73 +21,53 @@ function CommentsList() {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <td className="bg-red-700 text-white">1</td>
-            <td>میلاد سلامیان</td>
-            <td>کاپیتان آمریکا</td>
-            <td>
-              <div className="flex items-center gap-x-0.5 justify-center">
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-              </div>
-            </td>
-            <td>تایید نشده</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaEye className="text-namava text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td className="bg-red-700 text-white">1</td>
-            <td>میلاد سلامیان</td>
-            <td>کاپیتان آمریکا</td>
-            <td>
-              <div className="flex items-center gap-x-0.5 justify-center">
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-              </div>
-            </td>
-            <td>تایید نشده</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaEye className="text-namava text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
-          <Table.Row>
-            <td className="bg-red-700 text-white">1</td>
-            <td>میلاد سلامیان</td>
-            <td>کاپیتان آمریکا</td>
-            <td>
-              <div className="flex items-center gap-x-0.5 justify-center">
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-                <FaRegStar className="text-amber-400" />
-              </div>
-            </td>
-            <td>تایید نشده</td>
-            <td>1403/04/05</td>
-            <td>
-              <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                <FaEye className="text-namava text-base md:text-lg" />
-              </div>
-            </td>
-          </Table.Row>
+          {comments.map((comment: any, index: number) => (
+            <Table.Row>
+              <td
+                className={`text-white ${
+                  comment.isAccept ? "bg-green-700" : "bg-red-700"
+                }`}
+              >
+                {index + 1}
+              </td>
+              <td>{comment.user.name}</td>
+              <td>{comment.movie.title}</td>
+              <td>
+                <div className="flex items-center gap-x-0.5 justify-center">
+                  {Array(comment.score)
+                    .fill(0)
+                    .map((star, index) => (
+                      <FaStar className="text-amber-400" key={index} />
+                    ))}
 
+                  {Array(5 - comment.score)
+                    .fill(0)
+                    .map((star, index) => (
+                      <FaRegStar className="text-amber-400" key={index} />
+                    ))}
+                </div>
+              </td>
+              <td>{comment.isAccept ? "تایید شده" : "تایید نشده"}</td>
+              <td>{formatDate(comment.createdAt)}</td>
+              <td className="flex items-center justify-center">
+                <Modal>
+                  <Modal.Open name="detail">
+                    <FaEye className="text-blue-600 text-base md:text-lg" />
+                  </Modal.Open>
+                  <Modal.Page name="detail">
+                    <DetailModal msg={comment.content} />
+                  </Modal.Page>
+                </Modal>
+              </td>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <Pagination />
+      {comments.length > 0 ? (
+        <Pagination count={count} />
+      ) : (
+        <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
+      )}
     </div>
   );
 }
