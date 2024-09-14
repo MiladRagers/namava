@@ -1,18 +1,18 @@
 "use client";
 import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
-import { IWishList, TWish } from "@/src/libs/types";
+import { useAuth } from "@/src/context/AuthContextProvider";
+import { deleteUserLike } from "@/src/libs/actions/movie";
+import { IWishList } from "@/src/libs/types";
 import { formatDate } from "@/src/utils/funcs";
 import Image from "next/image";
-import React, { useOptimistic } from "react";
-import { FaPencil, FaRegStar, FaStar, FaTrash } from "react-icons/fa6";
-import Modal from "../../modules/modals/Modal";
-import ConfirmModal from "../../modules/modals/ConfirmModal";
-import EmptyBox from "../../modules/p-admin/EmptyBox";
 import Link from "next/link";
-import { deleteUserLike } from "@/src/libs/actions/movie";
-import { useAuth } from "@/src/context/AuthContextProvider";
+import { useOptimistic } from "react";
 import toast from "react-hot-toast";
+import { FaTrash } from "react-icons/fa6";
+import ConfirmModal from "../../modules/modals/ConfirmModal";
+import Modal from "../../modules/modals/Modal";
+import EmptyBox from "../../modules/p-admin/EmptyBox";
 
 function FavList({ movies, count }: IWishList) {
   const { userInfo } = useAuth();
