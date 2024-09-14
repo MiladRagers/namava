@@ -67,6 +67,10 @@ const schema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    subscriptionStart: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );
