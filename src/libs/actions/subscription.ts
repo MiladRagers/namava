@@ -112,6 +112,7 @@ export const addSubscription = async (durationInDay: number) => {
     await UserModel.findByIdAndUpdate(`${user._id}`, {
       $set: {
         subscriptionEnd: endDate,
+        subscriptionStart: new Date().toISOString(),
       },
     });
 
