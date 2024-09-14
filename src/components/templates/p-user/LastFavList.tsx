@@ -1,12 +1,11 @@
-import React from "react";
+import { getLikesMovies } from "@/src/libs/service/services";
+import { IWishList } from "@/src/libs/types";
+import Link from "next/link";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import LastFavItem from "./LastFavItem";
-import Link from "next/link";
-import { getLikesMovies } from "@/src/libs/service/services";
-import { TWish } from "@/src/libs/types";
 
 async function LastFavList() {
-  const movies: TWish[] = await getLikesMovies();
+  const { movies }: IWishList = await getLikesMovies();
 
   return (
     <div className="bg-namavaBlack rounded-md border border-gray-800 shadow py-4 md:pb-6 md:pt-5 px-3 md:px-6">

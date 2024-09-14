@@ -805,7 +805,7 @@ export const getUserPanelStats = async (userId: string) => {
   }
 };
 
-export const getLikesMovies = async (page: number): Promise<IWishList> => {
+export const getLikesMovies = async (page?: number): Promise<IWishList> => {
   try {
     connectToDB();
     const user = await authUser();
