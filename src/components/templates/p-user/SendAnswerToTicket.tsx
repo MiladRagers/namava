@@ -17,11 +17,19 @@ function SendAnswerToTicket() {
       className="mt-10"
     >
       <textarea
-      rows={8}
+        rows={8}
+        {...register("body", {
+          required: "لطفا متن خود را بنویسید",
+        })}
         className="block w-full p-3 md:p-5 text-sm md:text-base bg-[#121212]  border border-transparent focus:border-gray-200  rounded-2xl transition-colors"
         name="text"
         placeholder="پاسخ ..."
       ></textarea>
+      {errors.body && (
+        <span className={` text-xs md:text-sm text-red-600`}>
+          {errors?.body?.message as string}
+        </span>
+      )}
       <div className="flex gap-x-2 justify-end mt-2.5">
         <button
           className="bg-blue-600 text-white py-2 px-5 rounded-md shadow-blue"
