@@ -16,6 +16,7 @@ function SendTicketForm({ departments }: any) {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(NewTicket),
@@ -29,9 +30,11 @@ function SendTicketForm({ departments }: any) {
     setIsLoading(true);
     const res = await sendNewTicket({ ...data, departmentId, subDepartmentId });
     if (res.status === 201) {
+      reset()
       setIsLoading(false);
       return toast.success(`${res.message}`);
     }
+    reset()
     setIsLoading(false);
     return toast.error(`${res.message}`);
   };

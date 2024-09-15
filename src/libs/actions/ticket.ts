@@ -47,3 +47,53 @@ export const sendNewTicket = async (data: any): Promise<TResponse> => {
     };
   }
 };
+
+export const answerToTicket = async (data: any) => {
+  try {
+    connectToDB();
+
+    const user = await authUser();
+    if (!user) {
+      return {
+        message: "کاربر مورد نظر لاگین نیست",
+        status: 401,
+      };
+    }
+
+    const {
+      title,
+      body,
+      priority,
+      department,
+      subDepartment,
+      replyTo,
+      isFromUserPanel,
+    } = data;
+
+    if (!title || !body || !priority || !department) {
+      return {
+        message: "اطلاعات را به درستی بفرستید",
+      };
+    }
+
+    await TicketModel.create({
+      title,
+      body,
+      priority,
+      department,
+      subDepartment,
+      user: user._id,
+      hasAnswer: false,
+      isAnswer: true,
+      replyTo,
+      isFromUserPanel,
+    });
+
+    return {
+      message: "پاسخ شما با موفقیت  ثبت شد",
+      status: 201,
+    };
+  } catch (err) {
+    return Response.json({ msg: err }, { status: 500 });
+  }
+};
