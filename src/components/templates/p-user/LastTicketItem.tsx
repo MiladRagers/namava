@@ -11,7 +11,7 @@ function LastTicketItem({ ticket }: { ticket: ILastTicket }) {
     >
       <div className="space-y-3">
         <h4>{ticket.title}</h4>
-        <div className="bg-white text-[#121212] flex-center py-2 rounded-md">
+        <div className="bg-white w-[110px] text-[#121212] flex-center py-2 rounded-md">
           {ticket.department.title}
         </div>
       </div>

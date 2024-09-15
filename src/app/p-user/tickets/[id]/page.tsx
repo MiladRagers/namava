@@ -30,7 +30,7 @@ async function page({ params }: TParams) {
 
       {/* reply answer */}
 
-      {!ticketInfo?.isOpen ? (
+      {ticketInfo?.isOpen ? (
         <SendAnswerToTicket />
       ) : (
         <div className="bg-namava text-xs md:text-lg  text-white font-DanaDemiBold text-center rounded-lg py-8 mt-52">
