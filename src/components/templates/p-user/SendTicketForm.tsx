@@ -8,21 +8,32 @@ import Input from "../../modules/p-admin/Input";
 import { priority } from "@/public/db";
 import SelectBox from "../../modules/p-admin/SelectBox";
 import Button from "../../modules/auth/Button/Button";
+import { sendNewTicket } from "@/src/libs/actions/ticket";
+import toast from "react-hot-toast";
+import Spinner from "../../modules/spinner/Spinner";
 
 function SendTicketForm({ departments }: any) {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(NewTicket),
   });
   const [departmentId, setDepartmentId] = useState<String | null>(null);
   const [subDepartmentId, setSubDepartmentId] = useState<String | null>(null);
   const [subDepartments, setSubDepartments] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendNewTicketHandler = async (data: any) => {
-    console.log(data);
+    setIsLoading(true);
+    const res = await sendNewTicket({ ...data, departmentId, subDepartmentId });
+    if (res.status === 201) {
+      setIsLoading(false);
+      return toast.success(`${res.message}`);
+    }
+    setIsLoading(false);
+    return toast.error(`${res.message}`);
   };
 
   useEffect(() => {
@@ -96,6 +107,7 @@ function SendTicketForm({ departments }: any) {
           placeholder={"موضوع تیکت را وارد کنید ..."}
           name={"title"}
           type={"text"}
+          disable={isLoading}
         />
       </div>
       <div>
@@ -108,10 +120,13 @@ function SendTicketForm({ departments }: any) {
           placeholder={"متن  تیکت را وارد کنید ..."}
           name={"body"}
           type={"textarea"}
+          disable={isLoading}
         />
       </div>
       <div className="flex items-center justify-end">
-        <Button className="!w-full md:!w-[10%]">ارسال تیکت</Button>
+        <Button disabled={isLoading} className="!w-full md:!w-[10%]">
+          {isLoading ? <Spinner /> : "ارسال تیکت"}
+        </Button>
       </div>
     </form>
   );
