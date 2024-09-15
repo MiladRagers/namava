@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../modules/p-admin/Input";
 import { priority } from "@/public/db";
 import SelectBox from "../../modules/p-admin/SelectBox";
+import Button from "../../modules/auth/Button/Button";
 
 function SendTicketForm({ departments }: any) {
   const {
@@ -35,7 +36,6 @@ function SendTicketForm({ departments }: any) {
 
     getAllSubdepartments();
   }, [departmentId]);
-
 
   return (
     <form
@@ -111,9 +111,7 @@ function SendTicketForm({ departments }: any) {
         />
       </div>
       <div className="flex items-center justify-end">
-        <button className="bg-namava p-3 rounded-md text-white flex-center gap-x-2">
-          ارسال تیکت
-        </button>
+        <Button className="!w-full md:!w-[10%]">ارسال تیکت</Button>
       </div>
     </form>
   );
