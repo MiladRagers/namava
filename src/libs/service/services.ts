@@ -13,10 +13,10 @@ import EpisodeModel from "@/src/models/episode";
 import SubscriptionModel from "@/src/models/subscription";
 import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
+import DepartmentModel from "@/src/models/department";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 import { IWishList, TArticle, TWish } from "../types";
-import { User } from "@/src/validators/frontend";
 
 // get all site stat
 
@@ -850,6 +850,15 @@ export const getAllUserComments = async (page: number) => {
       count,
       comments,
     };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllDepartments = async () => {
+  try {
+    const departments = await DepartmentModel.find({});
+    return departments;
   } catch (error) {
     return error;
   }

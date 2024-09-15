@@ -1,10 +1,9 @@
 import Filter from "@/src/components/modules/Filter/Filter";
 import StatBox from "@/src/components/modules/p-admin/StatBox";
+import SendNewTicket from "@/src/components/templates/p-user/SendNewTicket";
 import TicketsList from "@/src/components/templates/p-user/TicketsList";
-import React from "react";
 import { FaClosedCaptioning } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi2";
-import { LiaComments } from "react-icons/lia";
 import { MdAccessTime } from "react-icons/md";
 
 function page() {
@@ -20,12 +19,12 @@ function page() {
         ]}
       />
       <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-white gap-3 md:gap-5 mt-5">
-        <StatBox
+        {/* <StatBox
           icon={<LiaComments className="text-2xl md:text-3xl lg:text-4xl" />}
           title="تعداد کامنت ها"
           color="bg-[#075985]"
           value={29232}
-        />
+        /> */}
         <StatBox
           icon={
             <HiOutlineBriefcase className="text-2xl md:text-3xl lg:text-4xl" />
@@ -48,6 +47,8 @@ function page() {
           color="bg-red-600"
           value={29232}
         />
+
+        <SendNewTicket />
       </div>
       <TicketsList />
     </div>

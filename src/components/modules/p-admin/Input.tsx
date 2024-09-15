@@ -51,7 +51,7 @@ function Input({
         {errors[name] && (
           <span
             className={`absolute ${
-              labelClassName ? "top-[85px]" : "top-24"
+              labelClassName ? "top-[85px]" : "-bottom-6"
             } text-xs md:text-sm text-red-600`}
           >
             {errors[name].message}

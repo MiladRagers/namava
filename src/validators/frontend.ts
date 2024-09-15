@@ -405,9 +405,21 @@ export const Collcetion = z.object({
     { message: "بنر موبایل باید آپلود شود" }
   ),
 
-  type: z
-  .string()
-  .min(1, { message: "نوع محتوا این اثر را انتخاب کنید" }),
+  type: z.string().min(1, { message: "نوع محتوا این اثر را انتخاب کنید" }),
 });
 
-export type TCollection = z.infer<typeof Collcetion>;
+export const NewTicket = z.object({
+  title: z
+    .string()
+    .min(3, { message: "حداقل 3 کاراکتر برای عنوان الزامی است" }),
+
+  body: z
+    .string({ required_error: "متن تیکت را وارد کنید" })
+    .min(3, { message: "متن تیکت حداقل باید 3 کارکتر باشد" })
+    .max(1000, { message: "متن تیکت باید 1000 کاراکتر داشته باشد" }),
+  priority: z
+    .string()
+    .min(1, { message: "لطفا اولویت تیکت خود را انتخاب کنید" }),
+});
+
+export type TNewTicket = z.infer<typeof NewTicket>;

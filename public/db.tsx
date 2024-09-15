@@ -233,6 +233,12 @@ export const banks = [
   { id: 5, name: "بانک پارسیان", icon: "ParsianEPay.png" },
 ];
 
+export const priority = [
+  { id: 1, value: "1", label: "زیاد" },
+  { id: 2, value: "2", label: "متوسط" },
+  { id: 3, value: "3", label: "کم" },
+];
+
 generateMiladi();
 generateShamsi();
 generateDate();
