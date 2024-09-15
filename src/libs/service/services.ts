@@ -804,7 +804,7 @@ export const getUserPanelStats = async (userId: string) => {
       subscription,
       commentsCount,
       wishListCount,
-      ticketsCount
+      ticketsCount,
     };
   } catch (error) {
     return error;
@@ -879,6 +879,24 @@ export const getLastUserTickets = async () => {
       .lean();
 
     return tickets;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getSpecificTicketInfo = async (ticketId: string) => {
+  try {
+    const ticket = await TicketModel.findOne({ _id: ticketId })
+      .populate("user", "name role")
+      .lean();
+    const answerTicket = await TicketModel.find({ replyTo: ticketId })
+      .populate("user", "name role")
+      .lean();
+
+    return {
+      ticketInfo: ticket,
+      tickets: answerTicket,
+    };
   } catch (error) {
     return error;
   }
