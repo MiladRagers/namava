@@ -14,9 +14,10 @@ import SubscriptionModel from "@/src/models/subscription";
 import BookmarkModel from "@/src/models/bookmark";
 import CollcetionModel from "@/src/models/collection";
 import DepartmentModel from "@/src/models/department";
+import TicketModel from "@/src/models/ticket";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
-import { IWishList, TArticle, TWish } from "../types";
+import { ILastTicket, IWishList, TArticle, TWish } from "../types";
 
 // get all site stat
 
@@ -859,6 +860,20 @@ export const getAllDepartments = async () => {
   try {
     const departments = await DepartmentModel.find({});
     return departments;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getLastUserTickets = async () => {
+  try {
+    const user = await authUser();
+    const tickets = await TicketModel.find({ isAnswer: false, user: user._id })
+      .sort({ _id: -1 })
+      .populate("department")
+      .lean();
+
+    return tickets as ILastTicket[];
   } catch (error) {
     return error;
   }
