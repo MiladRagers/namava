@@ -9,8 +9,6 @@ import { FaTicket } from "react-icons/fa6";
 async function LastTickets() {
   const tickets = (await getLastUserTickets()) as ILastTicket[];
 
-  console.log(tickets);
-
   return (
     <div className="bg-namavaBlack rounded-md border  border-gray-800 shadow py-4 md:pb-6 md:pt-5 px-3 md:px-6">
       <div className="text-white flex items-center justify-between border-b border-gray-600 pb-1">
@@ -25,7 +23,7 @@ async function LastTickets() {
       </div>
       <div className="overflow-hidden max-h-[225px] md:max-h-[365px] recent-box overflow-y-auto">
         <div className="my-4 space-y-4">
-          {tickets.length  ? (
+          {tickets.length ? (
             tickets.map((ticket) => (
               <LastTicketItem key={ticket._id} ticket={ticket} />
             ))

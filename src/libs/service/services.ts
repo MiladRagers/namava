@@ -795,11 +795,16 @@ export const getUserPanelStats = async (userId: string) => {
     const wishListCount = await MovieModel.countDocuments({
       liked: { $in: userId },
     });
+    const ticketsCount = await TicketModel.countDocuments({
+      isAnswer: false,
+      user: userId,
+    });
 
     return {
       subscription,
       commentsCount,
       wishListCount,
+      ticketsCount
     };
   } catch (error) {
     return error;
@@ -873,7 +878,7 @@ export const getLastUserTickets = async () => {
       .populate("department")
       .lean();
 
-    return tickets as ILastTicket[];
+    return tickets;
   } catch (error) {
     return error;
   }

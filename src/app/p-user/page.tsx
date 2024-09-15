@@ -10,7 +10,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import { LiaComments } from "react-icons/lia";
 async function page() {
   const user = await authUser();
-  const { subscription, commentsCount, wishListCount }: any =
+  const { subscription, commentsCount, wishListCount, ticketsCount }: any =
     await getUserPanelStats(user._id);
   return (
     <div>
@@ -39,7 +39,7 @@ async function page() {
           }
           title="تعداد تیکت ها"
           color="bg-[#3730a3]"
-          value={29232}
+          value={`${ticketsCount} تا`}
         />
         <StatBox
           icon={<FaRegHeart className="text-2xl md:text-3xl lg:text-4xl" />}
