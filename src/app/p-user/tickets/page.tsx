@@ -2,11 +2,19 @@ import Filter from "@/src/components/modules/Filter/Filter";
 import StatBox from "@/src/components/modules/p-admin/StatBox";
 import SendNewTicket from "@/src/components/templates/p-user/SendNewTicket";
 import TicketsList from "@/src/components/templates/p-user/TicketsList";
+import {
+  getAllUserTicket,
+  getLastUserTickets,
+} from "@/src/libs/service/services";
+import { ILastTicket, IUserTicket, TSearchParams } from "@/src/libs/types";
 import { FaClosedCaptioning } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import { MdAccessTime } from "react-icons/md";
 
-function page() {
+async function page({ searchParams }: TSearchParams) {
+  const { tickets, ticketsCount } = (await getAllUserTicket(
+    +searchParams?.page || 1
+  )) as IUserTicket;
   return (
     <div>
       <Filter
@@ -50,7 +58,10 @@ function page() {
 
         <SendNewTicket />
       </div>
-      <TicketsList />
+      <TicketsList
+        tickets={JSON.parse(JSON.stringify(tickets))}
+        ticketsCount={ticketsCount}
+      />
     </div>
   );
 }

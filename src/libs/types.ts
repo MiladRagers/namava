@@ -159,30 +159,37 @@ export interface Category {
   title: string;
 }
 
-
 export interface ILastTicket {
-  _id: string
-  title: string
-  body: string
-  priority: number
-  department: Department
-  subDepartment: string
-  user: string
-  isFromUserPanel: boolean
-  isAnswer: boolean
-  isOpen: boolean
-  createdAt: string
-  updatedAt: string
-  __v: number
+  _id: string;
+  title: string;
+  body: string;
+  priority: number;
+  department: Department;
+  subDepartment: {
+    title: string;
+  };
+  user: {
+    name: string;
+  };
+  isFromUserPanel: boolean;
+  isAnswer: boolean;
+  isOpen: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 interface Department {
-  _id: string
-  title: string
-  createdAt: string
-  updatedAt: string
-  __v: number
+  _id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
+export interface IUserTicket {
+  tickets: ILastTicket[];
+  ticketsCount: number;
+}
 
 export const baseURL = "http://localhost:3000";

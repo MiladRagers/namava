@@ -875,10 +875,35 @@ export const getLastUserTickets = async () => {
     const user = await authUser();
     const tickets = await TicketModel.find({ isAnswer: false, user: user._id })
       .sort({ _id: -1 })
-      .populate("department")
+      .populate("department subDepartment user", "name title")
       .lean();
 
     return tickets;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllUserTicket = async (page: number) => {
+  try {
+    const user = await authUser();
+    const tickets = await TicketModel.find({ isAnswer: false, user: user._id })
+      .sort({ _id: -1 })
+      .populate("department subDepartment user", "name title")
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .sort({ createdAt: -1 })
+      .lean();
+
+    const ticketsCount = await TicketModel.countDocuments({
+      isAnswer: false,
+      user: user._id,
+    });
+
+    return {
+      tickets,
+      ticketsCount,
+    };
   } catch (error) {
     return error;
   }
