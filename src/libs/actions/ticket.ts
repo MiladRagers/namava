@@ -5,6 +5,7 @@ import { authUser } from "@/src/utils/serverHelper";
 import { TResponse } from "../types";
 import TicketModel from "@/src/models/ticket";
 import { isValidObjectId } from "mongoose";
+import { revalidatePath } from "next/cache";
 
 export const sendNewTicket = async (data: any): Promise<TResponse> => {
   try {
@@ -48,7 +49,7 @@ export const sendNewTicket = async (data: any): Promise<TResponse> => {
   }
 };
 
-export const answerToTicket = async (data: any) => {
+export const answerToTicket = async (data: any): Promise<TResponse> => {
   try {
     connectToDB();
 
@@ -73,6 +74,7 @@ export const answerToTicket = async (data: any) => {
     if (!title || !body || !priority || !department) {
       return {
         message: "اطلاعات را به درستی بفرستید",
+        status: 422,
       };
     }
 
@@ -89,11 +91,17 @@ export const answerToTicket = async (data: any) => {
       isFromUserPanel,
     });
 
+    revalidatePath(`/p-user/tickets/${replyTo}`);
+    revalidatePath("/p-user/tickets");
+
     return {
       message: "پاسخ شما با موفقیت  ثبت شد",
       status: 201,
     };
   } catch (err) {
-    return Response.json({ msg: err }, { status: 500 });
+    return {
+      message: "اتصال خود را بررسی کنید",
+      status: 500,
+    };
   }
 };

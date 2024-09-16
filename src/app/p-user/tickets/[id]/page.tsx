@@ -31,7 +31,9 @@ async function page({ params }: TParams) {
       {/* reply answer */}
 
       {ticketInfo?.isOpen ? (
-        <SendAnswerToTicket />
+        <SendAnswerToTicket
+          ticketInfo={JSON.parse(JSON.stringify(ticketInfo))}
+        />
       ) : (
         <div className="bg-namava text-xs md:text-lg  text-white font-DanaDemiBold text-center rounded-lg py-8 mt-52">
           این چت در تاریخ
