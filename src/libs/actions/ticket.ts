@@ -18,7 +18,10 @@ export const sendNewTicket = async (data: any): Promise<TResponse> => {
       };
     }
 
-    const { title, body, priority, departmentId, subDepartmentId } = data;
+    
+
+    const { title, body, priority, departmentId, subDepartmentId ,status } = data;
+    console.log(status);
 
     if (!isValidObjectId(departmentId) || !isValidObjectId(subDepartmentId)) {
       return {
@@ -35,6 +38,7 @@ export const sendNewTicket = async (data: any): Promise<TResponse> => {
       subDepartment: subDepartmentId,
       user: user._id,
       isOpen: true,
+      status,
     });
 
     return {
@@ -77,6 +81,15 @@ export const answerToTicket = async (data: any): Promise<TResponse> => {
         status: 422,
       };
     }
+
+    await TicketModel.findOneAndUpdate(
+      { _id: replyTo },
+      {
+        $set: {
+          status: "answered",
+        },
+      }
+    );
 
     await TicketModel.create({
       title,

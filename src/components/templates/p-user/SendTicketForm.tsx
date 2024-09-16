@@ -28,13 +28,18 @@ function SendTicketForm({ departments }: any) {
 
   const sendNewTicketHandler = async (data: any) => {
     setIsLoading(true);
-    const res = await sendNewTicket({ ...data, departmentId, subDepartmentId });
+    const res = await sendNewTicket({
+      ...data,
+      departmentId,
+      subDepartmentId,
+      status: "pending",
+    });
     if (res.status === 201) {
-      reset()
+      reset();
       setIsLoading(false);
       return toast.success(`${res.message}`);
     }
-    reset()
+    reset();
     setIsLoading(false);
     return toast.error(`${res.message}`);
   };
@@ -50,6 +55,8 @@ function SendTicketForm({ departments }: any) {
 
     getAllSubdepartments();
   }, [departmentId]);
+
+
 
   return (
     <form

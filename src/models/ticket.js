@@ -47,6 +47,11 @@ const schema = new mongoose.Schema(
       type: Boolean,
       required: false,
     },
+    status: {
+      type: String,
+      enum: ["answered", "pending"],
+      required: false,
+    },
   },
   { timestamps: true }
 );

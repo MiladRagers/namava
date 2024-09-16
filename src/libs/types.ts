@@ -176,6 +176,7 @@ export interface ILastTicket {
   isOpen: boolean;
   createdAt: string;
   updatedAt: string;
+  status : "pending" | "answered"
   __v: number;
 }
 

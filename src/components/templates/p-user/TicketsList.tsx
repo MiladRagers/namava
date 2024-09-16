@@ -39,11 +39,11 @@ function TicketsList({ tickets, ticketsCount }: IUserTicket) {
               <td>
                 <div
                   className={`${
-                    ticket.isAnswer ? "bg-green-600" : "bg-red-600"
+                    ticket.status === "answered" ? "bg-green-600" : "bg-red-600"
                   } py-2 rounded-md font-IranMedium`}
                 >
-                  {ticket.isAnswer && "پاسخ داده شده"}
-                  {!ticket.isAnswer && "در انتظار پاسخ"}
+                  {ticket.status === "answered" && "پاسخ داده شده"}
+                  {ticket.status === "pending" && "در انتظار پاسخ"}
                 </div>
               </td>
               <td>
