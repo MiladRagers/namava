@@ -194,6 +194,7 @@ export interface IUserTicket {
   answeredCount?: number;
   pendingCount?: number;
   closeCount?: number;
+  filter: string;
 }
 
 export const baseURL = "http://localhost:3000";

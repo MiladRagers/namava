@@ -8,7 +8,24 @@ import React from "react";
 import { FaEye } from "react-icons/fa6";
 import EmptyBox from "../../modules/p-admin/EmptyBox";
 
-function TicketsList({ tickets, ticketsCount }: IUserTicket) {
+function TicketsList({ tickets, ticketsCount, filter }: IUserTicket) {
+  let ticketList = tickets;
+
+  if (filter === "all") {
+    ticketList = tickets;
+  }
+
+  if (filter === "answer") {
+    ticketList = tickets.filter((ticket) => ticket.status === "answered");
+  }
+
+  if (filter === "pending") {
+    ticketList = tickets.filter((ticket) => ticket.status === "pending");
+  }
+
+  if (filter === "close") {
+    ticketList = tickets.filter((ticket) => !ticket.isOpen);
+  }
   return (
     <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -23,7 +40,7 @@ function TicketsList({ tickets, ticketsCount }: IUserTicket) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {tickets.map((ticket, index) => (
+          {ticketList.map((ticket, index) => (
             <Table.Row key={ticket._id}>
               <td>{index + 1}</td>
               <td>{ticket.user.name}</td>
@@ -57,7 +74,7 @@ function TicketsList({ tickets, ticketsCount }: IUserTicket) {
           ))}
         </Table.Body>
       </Table>
-      {tickets.length > 0 ? (
+      {ticketList.length > 0 ? (
         <Pagination count={ticketsCount} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
