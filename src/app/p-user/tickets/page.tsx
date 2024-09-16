@@ -12,9 +12,8 @@ import { HiOutlineBriefcase } from "react-icons/hi2";
 import { MdAccessTime } from "react-icons/md";
 
 async function page({ searchParams }: TSearchParams) {
-  const { tickets, ticketsCount } = (await getAllUserTicket(
-    +searchParams?.page || 1
-  )) as IUserTicket;
+  const { tickets, ticketsCount, answeredCount, pendingCount, closeCount } =
+    (await getAllUserTicket(+searchParams?.page || 1)) as IUserTicket;
   return (
     <div>
       <Filter
@@ -39,13 +38,13 @@ async function page({ searchParams }: TSearchParams) {
           }
           title="پاسخ داده شده"
           color="bg-amber-600"
-          value={29232}
+          value={`${answeredCount} تا`}
         />
         <StatBox
           icon={<MdAccessTime className="text-2xl md:text-3xl lg:text-4xl" />}
           title="در انتظار پاسخ"
           color="bg-[#3730a3]"
-          value={29232}
+          value={`${pendingCount} تا`}
         />
         <StatBox
           icon={
@@ -53,7 +52,7 @@ async function page({ searchParams }: TSearchParams) {
           }
           title="بسته شده"
           color="bg-red-600"
-          value={29232}
+          value={`${closeCount} تا`}
         />
 
         <SendNewTicket />

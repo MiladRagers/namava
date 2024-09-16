@@ -900,10 +900,22 @@ export const getAllUserTicket = async (page: number) => {
       user: user._id,
     });
 
+    const answeredCount = await TicketModel.countDocuments({
+      status: "answered",
+    });
+    const pendingCount = await TicketModel.countDocuments({
+      status: "pending",
+    });
+    const closeCount = await TicketModel.countDocuments({
+      isOpen: false,
+    });
 
     return {
       tickets,
       ticketsCount,
+      answeredCount,
+      pendingCount,
+      closeCount,
     };
   } catch (error) {
     return error;

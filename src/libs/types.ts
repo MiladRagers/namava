@@ -176,7 +176,7 @@ export interface ILastTicket {
   isOpen: boolean;
   createdAt: string;
   updatedAt: string;
-  status : "pending" | "answered"
+  status: "pending" | "answered";
   __v: number;
 }
 
@@ -191,6 +191,9 @@ interface Department {
 export interface IUserTicket {
   tickets: ILastTicket[];
   ticketsCount: number;
+  answeredCount?: number;
+  pendingCount?: number;
+  closeCount?: number;
 }
 
 export const baseURL = "http://localhost:3000";
