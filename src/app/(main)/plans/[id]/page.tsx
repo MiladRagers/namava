@@ -53,6 +53,7 @@ async function page({ params }: TParams) {
       <PaymentGateway
         totalPrice={price - (price * discount) / 100}
         time={time}
+        title={title}
       />
     </div>
   );

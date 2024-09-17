@@ -10,9 +10,11 @@ import { useRouter } from "next/navigation";
 function PaymentGateway({
   totalPrice,
   time,
+  title,
 }: {
   totalPrice: number;
   time: number;
+  title: string;
 }) {
   const router = useRouter();
   const [activeBank, setActiveBank] = useState("");
@@ -22,7 +24,7 @@ function PaymentGateway({
       return toast.error("لطفا یک درگاه را انتخاب کنید");
     }
 
-    const res: any = await addSubscription(time);
+    const res: any = await addSubscription(time, totalPrice, title);
     if (res?.status === 200) {
       router.push("/");
       return toast.success(`${res.message}`);

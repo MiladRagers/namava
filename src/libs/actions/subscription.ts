@@ -1,6 +1,7 @@
 "use server";
 import connectToDB from "@/src/configs/db";
 import SubscriptionModel from "@/src/models/subscription";
+import OrderModel from "@/src/models/order";
 import UserModel from "@/src/models/user";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { Subscription, TSubscription } from "@/src/validators/frontend";
@@ -96,7 +97,11 @@ export const deleteSubscription = async (id: string) => {
   }
 };
 
-export const addSubscription = async (durationInDay: number) => {
+export const addSubscription = async (
+  durationInDay: number,
+  price: number,
+  title: string
+) => {
   try {
     connectToDB();
     const user = await authUser();
@@ -114,6 +119,13 @@ export const addSubscription = async (durationInDay: number) => {
         subscriptionEnd: endDate,
         subscriptionStart: new Date().toISOString(),
       },
+    });
+
+    await OrderModel.create({
+      title,
+      orderNumber: Math.floor(Math.random() * 999999999999999999),
+      totalPrice: price,
+      status: "pay",
     });
 
     return {
