@@ -47,7 +47,7 @@ export const getAllStats = async () => {
       moviesCount,
       latestUsers,
       subscriptionCount,
-      sumationOfOrder
+      sumationOfOrder,
     };
   } catch (error) {
     return error;
@@ -957,13 +957,31 @@ export const getAllUserOrders = async (page: number) => {
       .skip(ITEM_PER_PAGE * (page - 1))
       .sort({ createdAt: -1 });
 
-    console.log(orders);
-
     const orderCount = await OrderModel.countDocuments({ user: user._id });
 
     return {
       orders,
       orderCount,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllTickets = async (page: number) => {
+  try {
+    connectToDB();
+    const tickets = await TicketModel.find({isAnswer : false})
+      .populate("user department subDepartment", "name username title")
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .sort({ createdAt: -1 });
+
+    const ticketsCount = await TicketModel.countDocuments({isAnswer : false});
+
+    return {
+      tickets,
+      ticketsCount,
     };
   } catch (error) {
     return error;
