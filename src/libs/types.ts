@@ -204,7 +204,7 @@ export interface IOrders {
   title: string;
   orderNumber: string;
   totalPrice: number;
-  status: string;
+  status: "pay" | "pending";
   user: string;
   createdAt: string;
   updatedAt: string;
@@ -214,4 +214,5 @@ export interface IOrders {
 export interface IOrdersList {
   orders: IOrders[];
   orderCount: number;
+  filter?: string;
 }

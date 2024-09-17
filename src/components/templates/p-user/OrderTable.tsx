@@ -5,9 +5,20 @@ import { FaEye, FaRegCircleXmark } from "react-icons/fa6";
 import Pagination from "../../modules/pagination/Pagination";
 import Table from "../../modules/table/Table";
 import EmptyBox from "../../modules/p-admin/EmptyBox";
-import { IOrdersList } from "@/src/libs/types";
+import { IOrders, IOrdersList } from "@/src/libs/types";
 
-function OrderTable({ orders , orderCount }: IOrdersList) {
+function OrderTable({ orders, orderCount, filter }: IOrdersList) {
+  let ordersList = orders;
+
+  if (filter === "all") {
+    ordersList = orders;
+  }
+  if (filter === "success") {
+    ordersList = orders.filter((order) => order.status === "pay");
+  }
+  if (filter === "unsuccess") {
+    ordersList = orders.filter((order) => order.status === "pending");
+  }
   return (
     <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -21,7 +32,7 @@ function OrderTable({ orders , orderCount }: IOrdersList) {
           <th></th>
         </Table.Header>
         <Table.Body>
-          {orders.map((order: any, index: number) => (
+          {ordersList.map((order: any, index: number) => (
             <Table.Row>
               <td>{index + 1}</td>
               <td> {new Date(order.createdAt).toLocaleString("fa")}</td>
@@ -51,7 +62,7 @@ function OrderTable({ orders , orderCount }: IOrdersList) {
           ))}
         </Table.Body>
       </Table>
-      {orders.length > 0 ? (
+      {ordersList.length > 0 ? (
         <Pagination count={orderCount} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />

@@ -15,12 +15,12 @@ async function page({ searchParams }: TSearchParams) {
           { label: "همه", slug: "all" },
           { label: "موفق", slug: "success" },
           { label: "ناموفق", slug: "unsuccess" },
-          { label: "پرداخت", slug: "paid" },
         ]}
       />
       <OrderTable
         orderCount={orderCount}
         orders={JSON.parse(JSON.stringify(orders))}
+        filter={searchParams?.status}
       />
     </div>
   );
