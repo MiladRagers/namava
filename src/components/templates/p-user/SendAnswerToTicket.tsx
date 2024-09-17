@@ -7,7 +7,13 @@ import toast from "react-hot-toast";
 import Button from "../../modules/auth/Button/Button";
 import Spinner from "../../modules/spinner/Spinner";
 
-function SendAnswerToTicket({ ticketInfo }: { ticketInfo: ILastTicket }) {
+function SendAnswerToTicket({
+  ticketInfo,
+  isFromUserPanel = true,
+}: {
+  ticketInfo: ILastTicket;
+  isFromUserPanel?: boolean;
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -23,6 +29,7 @@ function SendAnswerToTicket({ ticketInfo }: { ticketInfo: ILastTicket }) {
       ...ticketInfo,
       replyTo: ticketInfo._id,
       body: data.body,
+      isFromUserPanel: isFromUserPanel,
     };
     const res = await answerToTicket(answerObj);
     setIsLoading(false);

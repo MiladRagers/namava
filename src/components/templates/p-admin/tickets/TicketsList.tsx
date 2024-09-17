@@ -85,7 +85,7 @@ function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
                         }
                       />
                     </Modal.Page>
-                    <Link href={"/p-admin/tickets/njbsnbxsb"}>
+                    <Link href={`/p-admin/tickets/${ticket._id}`}>
                       <FaEye className="text-namava text-base md:text-lg" />
                     </Link>
                   </Modal>
