@@ -1,3 +1,5 @@
+export const baseURL = "http://localhost:3000";
+
 export type THeader = {
   isImage?: boolean;
   isTitle?: boolean;
@@ -197,4 +199,19 @@ export interface IUserTicket {
   filter: string;
 }
 
-export const baseURL = "http://localhost:3000";
+export interface IOrders {
+  _id: string;
+  title: string;
+  orderNumber: string;
+  totalPrice: number;
+  status: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface IOrdersList {
+  orders: IOrders[];
+  orderCount: number;
+}

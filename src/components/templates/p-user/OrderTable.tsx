@@ -5,8 +5,9 @@ import { FaEye, FaRegCircleXmark } from "react-icons/fa6";
 import Pagination from "../../modules/pagination/Pagination";
 import Table from "../../modules/table/Table";
 import EmptyBox from "../../modules/p-admin/EmptyBox";
+import { IOrdersList } from "@/src/libs/types";
 
-function OrderTable({ orders , count }: any) {
+function OrderTable({ orders , orderCount }: IOrdersList) {
   return (
     <div className="users-list mt-5 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -51,7 +52,7 @@ function OrderTable({ orders , count }: any) {
         </Table.Body>
       </Table>
       {orders.length > 0 ? (
-        <Pagination count={count} />
+        <Pagination count={orderCount} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
       )}

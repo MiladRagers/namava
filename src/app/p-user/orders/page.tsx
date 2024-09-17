@@ -1,12 +1,12 @@
 import Filter from "@/src/components/modules/Filter/Filter";
 import OrderTable from "@/src/components/templates/p-user/OrderTable";
 import { getAllUserOrders } from "@/src/libs/service/services";
-import { TSearchParams } from "@/src/libs/types";
+import { IOrdersList, TSearchParams } from "@/src/libs/types";
 
 async function page({ searchParams }: TSearchParams) {
-  const { orders, orderCount }: any = await getAllUserOrders(
+  const { orders, orderCount } = (await getAllUserOrders(
     +searchParams?.page
-  );
+  )) as IOrdersList;
   return (
     <div className="text-white">
       <Filter
@@ -19,7 +19,7 @@ async function page({ searchParams }: TSearchParams) {
         ]}
       />
       <OrderTable
-        count={orderCount}
+        orderCount={orderCount}
         orders={JSON.parse(JSON.stringify(orders))}
       />
     </div>

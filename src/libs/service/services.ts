@@ -950,6 +950,9 @@ export const getAllUserOrders = async (page: number) => {
       .skip(ITEM_PER_PAGE * (page - 1))
       .sort({ createdAt: -1 });
 
+    console.log(orders);
+    
+
     const orderCount = await OrderModel.countDocuments({ user: user._id });
 
     return {
