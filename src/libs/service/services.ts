@@ -1,23 +1,24 @@
 import { ITEM_PER_PAGE } from "@/public/db";
 import connectToDB from "@/src/configs/db";
-import CategoryModel from "@/src/models/category";
-import MenuModel from "@/src/models/menu";
-import UserModel from "@/src/models/user";
-import StarModel from "@/src/models/stars";
 import SeasonModel from "@/src/models/Season";
-import ContactModel from "@/src/models/contactus";
-import MovieModel from "@/src/models/movie";
-import CommentModel from "@/src/models/comments";
 import ArticleModel from "@/src/models/article";
-import EpisodeModel from "@/src/models/episode";
-import SubscriptionModel from "@/src/models/subscription";
 import BookmarkModel from "@/src/models/bookmark";
+import CategoryModel from "@/src/models/category";
 import CollcetionModel from "@/src/models/collection";
+import CommentModel from "@/src/models/comments";
+import ContactModel from "@/src/models/contactus";
 import DepartmentModel from "@/src/models/department";
+import EpisodeModel from "@/src/models/episode";
+import MenuModel from "@/src/models/menu";
+import MovieModel from "@/src/models/movie";
+import StarModel from "@/src/models/stars";
+import SubscriptionModel from "@/src/models/subscription";
 import TicketModel from "@/src/models/ticket";
+import UserModel from "@/src/models/user";
+import OrderModel from "@/src/models/order";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
-import { ILastTicket, IWishList, TArticle, TWish } from "../types";
+import { IWishList, TArticle } from "../types";
 
 // get all site stat
 
@@ -934,6 +935,26 @@ export const getSpecificTicketInfo = async (ticketId: string) => {
     return {
       ticketInfo: ticket,
       tickets: answerTicket,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllUserOrders = async (page: number) => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    const orders = await OrderModel.find({ user: user._id })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .sort({ createdAt: -1 });
+
+    const orderCount = await OrderModel.countDocuments({ user: user._id });
+
+    return {
+      orders,
+      orderCount,
     };
   } catch (error) {
     return error;
