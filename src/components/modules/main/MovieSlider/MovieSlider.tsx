@@ -126,6 +126,7 @@ function MovieSlider({
                   setMovieId(movie._id);
                   setMovieDetail(movie);
                 }}
+                className="movie-slide"
               >
                 <div
                   className={`transition-all group ${
