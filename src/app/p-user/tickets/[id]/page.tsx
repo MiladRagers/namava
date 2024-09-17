@@ -8,8 +8,7 @@ async function page({ params }: TParams) {
   const { ticketInfo, tickets }: any = await getSpecificTicketInfo(
     params?.id as string
   );
-  console.log(ticketInfo);
-  
+
   return (
     <div className="bg-namavaBlack text-white rounded-md  p-[18px] shadow h-full">
       <h3 className="text-xl font-DanaDemiBold border-b border-b-gray-500 pb-4">
