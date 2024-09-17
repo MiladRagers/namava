@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import UserModel from "./user";
 const schema = new mongoose.Schema(
   {
     title: {
@@ -19,6 +19,10 @@ const schema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["pay", "pending"],
+    },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
     },
   },
   {

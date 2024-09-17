@@ -126,6 +126,7 @@ export const addSubscription = async (
       orderNumber: Math.floor(Math.random() * 999999999999999999),
       totalPrice: price,
       status: "pay",
+      user: user._id,
     });
 
     return {
