@@ -1,12 +1,13 @@
 import EmptyBox from "@/src/components/modules/p-admin/EmptyBox";
 import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
+import { IPanelTicket } from "@/src/libs/types";
 import { formatDate } from "@/src/utils/funcs";
 import Link from "next/link";
 import React from "react";
 import { FaCheck, FaEye, FaTrash, FaXmark } from "react-icons/fa6";
 
-function TicketsList({ tickets, count }: any) {
+function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -68,7 +69,7 @@ function TicketsList({ tickets, count }: any) {
         </Table.Body>
       </Table>
       {tickets.length > 0 ? (
-        <Pagination count={count} />
+        <Pagination count={ticketsCount} />
       ) : (
         <EmptyBox title="اطلاعات مورد نظر یافت نشد" />
       )}

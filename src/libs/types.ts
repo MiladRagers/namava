@@ -200,6 +200,11 @@ export interface IUserTicket {
   filter: string;
 }
 
+export interface IPanelTicket {
+  tickets: ILastTicket[];
+  ticketsCount: number;
+}
+
 export interface IOrders {
   _id: string;
   title: string;
