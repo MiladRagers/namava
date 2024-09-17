@@ -31,6 +31,12 @@ export const getAllStats = async () => {
       subscriptionEnd: { $ne: null },
     });
 
+    const orders = await OrderModel.find({});
+    const sumationOfOrder = orders.reduce(
+      (curr, num) => curr + num.totalPrice,
+      0
+    );
+
     const latestUsers = await UserModel.find({}, "name profiles createdAt")
       .sort({ createdAt: -1 })
       .limit(10)
@@ -41,6 +47,7 @@ export const getAllStats = async () => {
       moviesCount,
       latestUsers,
       subscriptionCount,
+      sumationOfOrder
     };
   } catch (error) {
     return error;
@@ -951,7 +958,6 @@ export const getAllUserOrders = async (page: number) => {
       .sort({ createdAt: -1 });
 
     console.log(orders);
-    
 
     const orderCount = await OrderModel.countDocuments({ user: user._id });
 

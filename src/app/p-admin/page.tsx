@@ -12,7 +12,7 @@ import { LuUsers } from "react-icons/lu";
 import { RiMovie2Line } from "react-icons/ri";
 
 async function MainPage() {
-  const { usersCount, moviesCount, latestUsers , subscriptionCount} =
+  const { usersCount, moviesCount, latestUsers , subscriptionCount , sumationOfOrder} =
     (await getAllStats()) as TStats;
   return (
     <div className="text-white">
@@ -54,7 +54,7 @@ async function MainPage() {
           }
           title="مقدار فروش"
           color="bg-[#166534]"
-          value={29232}
+          value={`${sumationOfOrder.toLocaleString("fa-IR")} تومان`}
         />
         <StatBox
           icon={<LuUsers className="text-2xl md:text-3xl lg:text-4xl" />}

@@ -63,6 +63,7 @@ export type TStats = {
   moviesCount: number;
   latestUsers: TUser[];
   subscriptionCount: number;
+  sumationOfOrder: number;
 };
 
 export interface TUser {
