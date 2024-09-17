@@ -81,14 +81,16 @@ export const answerToTicket = async (data: any): Promise<TResponse> => {
       };
     }
 
-    await TicketModel.findOneAndUpdate(
-      { _id: replyTo },
-      {
-        $set: {
-          status: "answered",
-        },
-      }
-    );
+    if (!isFromUserPanel) {
+      await TicketModel.findOneAndUpdate(
+        { _id: replyTo },
+        {
+          $set: {
+            status: "answered",
+          },
+        }
+      );
+    }
 
     await TicketModel.create({
       title,
