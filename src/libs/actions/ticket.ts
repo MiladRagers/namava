@@ -1,7 +1,7 @@
 "use server";
 
 import connectToDB from "@/src/configs/db";
-import { authUser } from "@/src/utils/serverHelper";
+import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { TResponse } from "../types";
 import TicketModel from "@/src/models/ticket";
 import { isValidObjectId } from "mongoose";
@@ -18,9 +18,8 @@ export const sendNewTicket = async (data: any): Promise<TResponse> => {
       };
     }
 
-    
-
-    const { title, body, priority, departmentId, subDepartmentId ,status } = data;
+    const { title, body, priority, departmentId, subDepartmentId, status } =
+      data;
     console.log(status);
 
     if (!isValidObjectId(departmentId) || !isValidObjectId(subDepartmentId)) {
@@ -114,6 +113,43 @@ export const answerToTicket = async (data: any): Promise<TResponse> => {
   } catch (err) {
     return {
       message: "اتصال خود را بررسی کنید",
+      status: 500,
+    };
+  }
+};
+
+export const closeOrOpenTheTickets = async (
+  id: string,
+  status: boolean
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+
+    if (!checkIsAdmin()) {
+      return {
+        message: "شما به این روت دسترسی ندارید",
+        status: 401,
+      };
+    }
+
+    await TicketModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          isOpen: status ? false : true,
+        },
+      }
+    );
+
+    revalidatePath("/p-admin/tickets");
+
+    return {
+      message: `تیکت با موفقیت ${status ? "بسته" : "باز"} شد`,
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "لطفا اتصال خود را به اینترنت چک کنید",
       status: 500,
     };
   }

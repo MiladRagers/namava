@@ -1,13 +1,26 @@
+"use client";
+import ConfirmModal from "@/src/components/modules/modals/ConfirmModal";
+import Modal from "@/src/components/modules/modals/Modal";
 import EmptyBox from "@/src/components/modules/p-admin/EmptyBox";
 import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
+import { closeOrOpenTheTickets } from "@/src/libs/actions/ticket";
 import { IPanelTicket } from "@/src/libs/types";
 import { formatDate } from "@/src/utils/funcs";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 import { FaCheck, FaEye, FaTrash, FaXmark } from "react-icons/fa6";
 
 function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
+  const openOrCloseTicketHandler = async (id: string, status: boolean) => {
+    const res = await closeOrOpenTheTickets(id, status);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+
+    return toast.error(`${res?.message}`);
+  };
   return (
     <div className="users-list mt-10 overflow-hidden bg-namavaBlack  rounded-md">
       <Table>
@@ -22,7 +35,7 @@ function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {tickets.map((ticket: any, index: number) => (
+          {tickets.map((ticket, index) => (
             <Table.Row>
               <td
                 className={
@@ -53,15 +66,29 @@ function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
               </td>
               <td>
                 <div className="flex items-center justify-center gap-x-3 md:gap-x-6 child:cursor-pointer">
-                  <FaTrash className="text-red-600 text-base md:text-lg" />
-                  {ticket.isOpen ? (
-                    <FaXmark className="text-red-500 text-base md:text-lg" />
-                  ) : (
-                    <FaCheck className="text-green-500 text-base md:text-lg" />
-                  )}
-                  <Link href={"/p-admin/tickets/njbsnbxsb"}>
-                    <FaEye className="text-namava text-base md:text-lg" />
-                  </Link>
+                  <Modal>
+                    <FaTrash className="text-red-600 text-base md:text-lg" />
+                    <Modal.Open name="action">
+                      {ticket.isOpen ? (
+                        <FaXmark className="text-red-600 text-base md:text-lg" />
+                      ) : (
+                        <FaCheck className="text-green-500 text-base md:text-lg" />
+                      )}
+                    </Modal.Open>
+                    <Modal.Page name="action">
+                      <ConfirmModal
+                        title={`آیا از ${
+                          ticket.isOpen ? "بستن" : "باز کردن"
+                        } تیکت اطمینان دارید ؟`}
+                        onAction={() =>
+                          openOrCloseTicketHandler(ticket._id, ticket?.isOpen)
+                        }
+                      />
+                    </Modal.Page>
+                    <Link href={"/p-admin/tickets/njbsnbxsb"}>
+                      <FaEye className="text-namava text-base md:text-lg" />
+                    </Link>
+                  </Modal>
                 </div>
               </td>
             </Table.Row>

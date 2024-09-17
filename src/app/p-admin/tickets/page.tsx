@@ -1,8 +1,8 @@
+import React from "react";
 import Title from "@/src/components/modules/p-admin/Title";
 import TicketsList from "@/src/components/templates/p-admin/tickets/TicketsList";
 import { getAllTickets } from "@/src/libs/service/services";
 import { IPanelTicket, TSearchParams } from "@/src/libs/types";
-import React from "react";
 
 async function Ticketspage({ searchParams }: TSearchParams) {
   const { tickets, ticketsCount } = (await getAllTickets(

@@ -73,8 +73,6 @@ export const acceptAndRejectComment = async (status: boolean, id: string) => {
       status: 200,
     };
   } catch (error) {
-    console.log(error);
-
     return {
       message: "لطفا اتصال خود را به اینترنت چک کنید",
       status: 500,
