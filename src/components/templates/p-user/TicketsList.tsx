@@ -14,15 +14,12 @@ function TicketsList({ tickets, ticketsCount, filter }: IUserTicket) {
   if (filter === "all") {
     ticketList = tickets;
   }
-
   if (filter === "answer") {
     ticketList = tickets.filter((ticket) => ticket.status === "answered");
   }
-
   if (filter === "pending") {
     ticketList = tickets.filter((ticket) => ticket.status === "pending");
   }
-
   if (filter === "close") {
     ticketList = tickets.filter((ticket) => !ticket.isOpen);
   }

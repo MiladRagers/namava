@@ -1,40 +1,20 @@
-import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
 import HeaderSlider from "@/src/components/templates/index/Header/Slider";
 import Slider from "@/src/components/templates/index/Slider/Slider";
-import StarsSlider from "@/src/components/modules/main/StarsSlider/StarsSlider";
-import Collections from "@/src/components/templates/index/Collections/Collections";
+import { Suspense } from "react";
+import MainSlider from "../components/templates/index/mainSlider/MainSlider";
+import Loading from "../icons/Loading";
 import {
   checkUserSubscription,
-  getAllCollectionSlider,
-  getAllSlidersMovies,
-  getMovies,
-  getStars,
-  getUserBookmarks,
+  getAllSlidersMovies
 } from "../libs/service/services";
 import { authUser } from "../utils/serverHelper";
 
 export default async function Home() {
-  const [
-    slides,
-    allStars,
-    movies,
-    collections,
-    userBookmarks,
-    subscription,
-    userInfo,
-  ]: any = await Promise.all([
+  const [slides, subscription]: any = await Promise.all([
     getAllSlidersMovies(),
-    getStars(),
-    getMovies("adult"),
-    getAllCollectionSlider("adult"),
-    getUserBookmarks(),
     checkUserSubscription(),
     authUser(),
   ]);
-
-  const userMoviesBookmark = userBookmarks.map(
-    (bookmark: any) => bookmark.movie._id
-  );
 
   return (
     <>
@@ -43,25 +23,9 @@ export default async function Home() {
         slides={JSON.parse(JSON.stringify(slides))}
       />
       <Slider slides={JSON.parse(JSON.stringify(slides))} />
-      <div className="text-white">
-        {Object.keys(movies).map(async (category, index) => {
-          return (
-            <div key={category}>
-              <MovieSlider
-                movies={JSON.parse(JSON.stringify(movies[category]))}
-                userBookmarks={JSON.parse(JSON.stringify(userMoviesBookmark))}
-                title={`${category}`}
-                user={JSON.parse(JSON.stringify(userInfo))}
-              />
-            </div>
-          );
-        })}
-        <StarsSlider allStars={allStars} title="ستارگان" />
-        <Collections
-          collections={JSON.parse(JSON.stringify(collections))}
-          title="مجموعه فیلم ها"
-        />
-      </div>
+      <Suspense fallback={<Loading />}>
+        <MainSlider />
+      </Suspense>
     </>
   );
 }
