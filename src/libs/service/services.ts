@@ -22,22 +22,36 @@ import { IWishList, TArticle } from "../types";
 
 // get all site stat
 
-export const getAllStats = async () => {
+export const getAllStats = async (startDate: string) => {
   try {
     connectToDB();
-    const usersCount = await UserModel.countDocuments();
-    const moviesCount = await MovieModel.countDocuments();
-    const subscriptionCount = await UserModel.countDocuments({
-      subscriptionEnd: { $ne: null },
-    });
+    let filterByDate = {};
 
-    const orders = await OrderModel.find({});
+    // تبدیل startDate به Date
+    if (startDate) {
+      const start = new Date(startDate);
+      const end = new Date(); // تاریخ امروز
+      filterByDate = {
+        createdAt: {
+          $gte: start,
+          $lte: end,
+        },
+      };
+    }
+
+    const usersCount = await UserModel.countDocuments(filterByDate);
+    const moviesCount = await MovieModel.countDocuments(filterByDate);
+
+    const orders = await OrderModel.find(filterByDate);
     const sumationOfOrder = orders.reduce(
       (curr, num) => curr + num.totalPrice,
       0
     );
 
-    const latestUsers = await UserModel.find({}, "name profiles createdAt")
+    const latestUsers = await UserModel.find(
+      filterByDate,
+      "name profiles createdAt"
+    )
       .sort({ createdAt: -1 })
       .limit(10)
       .populate("profiles", "image name");
@@ -46,7 +60,7 @@ export const getAllStats = async () => {
       usersCount,
       moviesCount,
       latestUsers,
-      subscriptionCount,
+      subscriptionCount : orders.length,
       sumationOfOrder,
     };
   } catch (error) {
@@ -971,13 +985,13 @@ export const getAllUserOrders = async (page: number) => {
 export const getAllTickets = async (page: number) => {
   try {
     connectToDB();
-    const tickets = await TicketModel.find({isAnswer : false})
+    const tickets = await TicketModel.find({ isAnswer: false })
       .populate("user department subDepartment", "name username title")
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1))
       .sort({ createdAt: -1 });
 
-    const ticketsCount = await TicketModel.countDocuments({isAnswer : false});
+    const ticketsCount = await TicketModel.countDocuments({ isAnswer: false });
 
     return {
       tickets,

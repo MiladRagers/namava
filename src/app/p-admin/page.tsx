@@ -5,32 +5,43 @@ import DurationChart from "@/src/components/templates/p-admin/DurationChart";
 import RecentUser from "@/src/components/templates/p-admin/RecentUser";
 import SalesChart from "@/src/components/templates/p-admin/SalesChart";
 import { getAllStats } from "@/src/libs/service/services";
-import { TStats } from "@/src/libs/types";
-import React from "react";
+import { TSearchParams, TStats } from "@/src/libs/types";
+import { authUser } from "@/src/utils/serverHelper";
+import { subDays } from "date-fns";
 import { HiOutlineBanknotes, HiOutlineBriefcase } from "react-icons/hi2";
 import { LuUsers } from "react-icons/lu";
 import { RiMovie2Line } from "react-icons/ri";
 
-async function MainPage() {
-  const { usersCount, moviesCount, latestUsers , subscriptionCount , sumationOfOrder} =
-    (await getAllStats()) as TStats;
+async function MainPage({ searchParams }: TSearchParams) {
+  const numOfDays = !searchParams?.last ? 7 : searchParams?.last;
+
+  const numQuery = subDays(new Date(), numOfDays).toISOString();
+
+  const {
+    usersCount,
+    moviesCount,
+    latestUsers,
+    subscriptionCount,
+    sumationOfOrder,
+  } = (await getAllStats(numQuery)) as TStats;
+  const user = await authUser();
   return (
     <div className="text-white">
       <div className="flex flex-col md:flex-row gap-y-6 items-center justify-between">
         <div className="flex md:hidden items-center gap-x-4 text-gray-300">
           <img
-            src="/images/user.png"
+            src={user?.profiles[0].image}
             className="w-[36px] h-[36px] rounded-full"
-            alt="default-user.jpg"
+            alt={user.name}
           />
           <div>
-            <h2>میلاد سلامیان</h2>
+            <h2>{user.name}</h2>
             <h6 className="text-xs text-gray-400">مدیریت اصلی</h6>
           </div>
         </div>
         <Title name="داشبورد اطلاعات" />
         <Filter
-          filterField="status"
+          filterField="last"
           options={[
             { label: "7 روز گذشته", slug: "7" },
             { label: "30 روز گذشته", slug: "30" },
