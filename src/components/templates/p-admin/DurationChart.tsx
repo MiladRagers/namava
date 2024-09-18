@@ -12,45 +12,30 @@ import {
 function DurationChart() {
   const startDataDark = [
     {
-      duration: "1 اشتراک",
-      value: 2,
+      duration: "اشتراک 30 روزه",
+      value: 30,
       color: "#b91c1c",
     },
     {
-      duration: "2 اشتراک",
-      value: 4,
-      color: "#c2410c",
+      duration: "اشتراک 60 روزه",
+      value: 60,
+      color: "#7e22ce",
     },
     {
-      duration: "3 اشتراک",
-      value: 2,
-      color: "#a16207",
-    },
-    {
-      duration: "4 اشتراک",
-      value: 1,
-      color: "#4d7c0f",
-    },
-    {
-      duration: "5 اشتراک",
-      value: 3,
-      color: "#15803d",
-    },
-    {
-      duration: "6-12 اشتراک",
-      value: 7,
-      color: "#0f766e",
-    },
-    {
-      duration: "20-13 اشتراک",
-      value: 3,
+      duration: "اشتراک 90 روزه",
+      value: 90,
       color: "#1d4ed8",
     },
     {
-      duration: "+21 اشتراک",
-      value: 2,
-      color: "#7e22ce",
+      duration: "اشتراک 120",
+      value: 120,
+      color: "#a16207",
     },
+    
+    
+    
+    
+    
   ];
 
   const windowWidth: any = typeof window !== "undefined" && window.innerWidth;

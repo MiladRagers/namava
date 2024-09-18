@@ -78,7 +78,7 @@ function HeaderDetail({
             src={info.logo}
             width={1920}
             height={1080}
-            alt="oka"
+            alt={info.title}
             className="max-w-[160px] md:max-w-[250px]  max-h-[160px] mx-auto "
           />
           <h2 className="text-center font-IranMedium text-lg md:text-xl">
