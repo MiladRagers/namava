@@ -36,7 +36,7 @@ function TicketsList({ tickets, ticketsCount }: IPanelTicket) {
         </Table.Header>
         <Table.Body>
           {tickets.map((ticket, index) => (
-            <Table.Row>
+            <Table.Row key={ticket._id}>
               <td
                 className={
                   ticket.status === "answered" ? "bg-green-600" : "bg-red-600"
