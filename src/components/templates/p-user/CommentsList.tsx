@@ -36,7 +36,7 @@ function CommentsList({ comments, count, status }: any) {
         </Table.Header>
         <Table.Body>
           {commnetsList.map((comment: any, index: number) => (
-            <Table.Row>
+            <Table.Row key={comment._id}>
               <td
                 className={`text-white ${
                   comment.isAccept ? "bg-green-700" : "bg-red-700"

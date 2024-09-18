@@ -9,7 +9,7 @@ async function page() {
     <div className="bg-namavaBlack p-8 w-full  rounded-md md:w-1/2 mx-auto text-white">
       <ul className="w-full text-sm space-y-6">
         {user.profiles.map((profile: any , index : number) => (
-          <li className="flex items-center justify-between">
+          <li className="flex items-center justify-between" key={profile._id}>
             <div className="flex items-center gap-x-3">
               <Image
                 src={profile.image}

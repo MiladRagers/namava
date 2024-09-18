@@ -32,8 +32,8 @@ function OrderTable({ orders, orderCount, filter }: IOrdersList) {
           <th></th>
         </Table.Header>
         <Table.Body>
-          {ordersList.map((order: any, index: number) => (
-            <Table.Row>
+          {ordersList.map((order, index) => (
+            <Table.Row key={order._id}>
               <td>{index + 1}</td>
               <td> {new Date(order.createdAt).toLocaleString("fa")}</td>
               <td>{order.title}</td>
