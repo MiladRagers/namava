@@ -23,37 +23,6 @@ function SalesChart({ numDays, orders }: ISalesChart) {
     background: "#18212f",
   };
 
-  const fakeData = [
-    { label: "1 تیر", totalSales: 480, extrasSales: 20 },
-    { label: "2 تیر", totalSales: 580, extrasSales: 100 },
-    { label: "3 تیر", totalSales: 550, extrasSales: 150 },
-    { label: "4 تیر", totalSales: 600, extrasSales: 50 },
-    { label: "5 تیر", totalSales: 700, extrasSales: 150 },
-    { label: "6 تیر", totalSales: 800, extrasSales: 150 },
-    { label: "7 تیر", totalSales: 700, extrasSales: 200 },
-    { label: "8 تیر", totalSales: 650, extrasSales: 200 },
-    { label: "9 تیر", totalSales: 600, extrasSales: 300 },
-    { label: "10 تیر", totalSales: 550, extrasSales: 100 },
-    { label: "11 تیر", totalSales: 700, extrasSales: 100 },
-    { label: "12 تیر", totalSales: 800, extrasSales: 200 },
-    { label: "13 تیر", totalSales: 700, extrasSales: 100 },
-    { label: "14 تیر", totalSales: 810, extrasSales: 50 },
-    { label: "15 تیر", totalSales: 950, extrasSales: 250 },
-    { label: "16 تیر", totalSales: 970, extrasSales: 100 },
-    { label: "17 تیر", totalSales: 900, extrasSales: 200 },
-    { label: "18 تیر", totalSales: 950, extrasSales: 300 },
-    { label: "19 تیر", totalSales: 850, extrasSales: 200 },
-    { label: "20 تیر", totalSales: 900, extrasSales: 100 },
-    { label: "21 تیر", totalSales: 800, extrasSales: 300 },
-    { label: "22 تیر", totalSales: 950, extrasSales: 200 },
-    { label: "23 تیر", totalSales: 1100, extrasSales: 300 },
-    { label: "24 تیر", totalSales: 1200, extrasSales: 400 },
-    { label: "25 تیر", totalSales: 1250, extrasSales: 300 },
-    { label: "26 تیر", totalSales: 1400, extrasSales: 450 },
-    { label: "27 تیر", totalSales: 1500, extrasSales: 500 },
-    { label: "28 تیر", totalSales: 1400, extrasSales: 600 },
-    { label: "29 تیر", totalSales: 1450, extrasSales: 400 },
-  ];
 
   const allDates = eachDayOfInterval({
     start: subDays(new Date(), numDays - 1),
@@ -120,7 +89,7 @@ function SalesChart({ numDays, orders }: ISalesChart) {
             stroke={colors.extrasSales.stroke}
             fill={colors.extrasSales.fill}
             strokeWidth="2"
-            name="مقدار اضافی"
+            name="مقدار تخفیف"
             unit="تومان"
           />
 
