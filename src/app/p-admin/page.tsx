@@ -23,6 +23,7 @@ async function MainPage({ searchParams }: TSearchParams) {
     latestUsers,
     subscriptionCount,
     sumationOfOrder,
+    orders,
   } = (await getAllStats(numQuery)) as TStats;
   const user = await authUser();
   return (
@@ -85,7 +86,10 @@ async function MainPage({ searchParams }: TSearchParams) {
         <RecentUser users={JSON.parse(JSON.stringify(latestUsers))} />
       </div>
       <div>
-        <SalesChart />
+        <SalesChart
+          orders={JSON.parse(JSON.stringify(orders))}
+          numDays={+numOfDays}
+        />
       </div>
     </div>
   );

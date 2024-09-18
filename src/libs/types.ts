@@ -64,6 +64,7 @@ export type TStats = {
   latestUsers: TUser[];
   subscriptionCount: number;
   sumationOfOrder: number;
+  orders: IOrders[];
 };
 
 export interface TUser {
@@ -214,6 +215,7 @@ export interface IOrders {
   user: string;
   createdAt: string;
   updatedAt: string;
+  discount: number;
   __v: number;
 }
 
@@ -221,4 +223,16 @@ export interface IOrdersList {
   orders: IOrders[];
   orderCount: number;
   filter?: string;
+}
+
+export interface ISalesChart {
+  numDays: number;
+  orders: IOrders[];
+}
+
+export interface IPaymentGateway {
+  totalPrice: number;
+  time: number;
+  title: string;
+  discount: number;
 }

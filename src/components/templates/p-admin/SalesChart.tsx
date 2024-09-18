@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import { ISalesChart } from "@/src/libs/types";
+import { formatDate } from "@/src/utils/funcs";
+import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import {
   Area,
   AreaChart,
@@ -11,7 +13,9 @@ import {
   YAxis,
 } from "recharts";
 
-function SalesChart() {
+function SalesChart({ numDays, orders }: ISalesChart) {
+  const windowWidth: any = typeof window !== "undefined" && window.innerWidth;
+
   const colors = {
     totalSales: { stroke: "#4f46e5", fill: "#4f46e5" },
     extrasSales: { stroke: "#22c55e", fill: "#22c55e" },
@@ -51,15 +55,31 @@ function SalesChart() {
     { label: "29 تیر", totalSales: 1450, extrasSales: 400 },
   ];
 
-  const windowWidth: any = typeof window !== "undefined" && window.innerWidth;
+  const allDates = eachDayOfInterval({
+    start: subDays(new Date(), numDays - 1),
+    end: new Date(),
+  });
+
+  const data = allDates.map((date) => {
+    return {
+      label: format(date, "MMM dd"),
+      totalSales: orders
+        ?.filter((order) => isSameDay(date, new Date(order.createdAt)))
+        .reduce((acc, cur) => acc + cur.totalPrice, 0),
+      extrasSales: orders
+        ?.filter((order) => isSameDay(date, new Date(order.createdAt)))
+        .reduce((acc, cur) => acc + cur.discount, 0),
+    };
+  });
 
   return (
     <div className="bg-namavaBlack mt-5 rounded-md border border-gray-800 pt-6 pb-3 pl-0 pr-6 md:px-6">
       <h2 className="text-base font-IranMedium md:text-xl mb-4">
-        فروش از 1 تیر تا 31 تیر
+        فروش از <span className="text-namava text-lg">{`${formatDate(allDates[0])}`}</span> تا
+        <span className="text-namava text-lg">{` ${formatDate(allDates.at(-1))}`}</span>
       </h2>
       <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={fakeData}>
+        <AreaChart data={data}>
           <XAxis
             dataKey="label"
             tick={{

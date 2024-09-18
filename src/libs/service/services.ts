@@ -60,8 +60,9 @@ export const getAllStats = async (startDate: string) => {
       usersCount,
       moviesCount,
       latestUsers,
-      subscriptionCount : orders.length,
+      subscriptionCount: orders.length,
       sumationOfOrder,
+      orders,
     };
   } catch (error) {
     return error;

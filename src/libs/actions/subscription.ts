@@ -100,7 +100,8 @@ export const deleteSubscription = async (id: string) => {
 export const addSubscription = async (
   durationInDay: number,
   price: number,
-  title: string
+  title: string,
+  discount: number
 ) => {
   try {
     connectToDB();
@@ -127,6 +128,7 @@ export const addSubscription = async (
       totalPrice: price,
       status: "pay",
       user: user._id,
+      discount,
     });
 
     return {

@@ -6,16 +6,14 @@ import Button from "../auth/Button/Button";
 import toast from "react-hot-toast";
 import { addSubscription } from "@/src/libs/actions/subscription";
 import { useRouter } from "next/navigation";
+import { IPaymentGateway } from "@/src/libs/types";
 
 function PaymentGateway({
   totalPrice,
   time,
   title,
-}: {
-  totalPrice: number;
-  time: number;
-  title: string;
-}) {
+  discount,
+}: IPaymentGateway) {
   const router = useRouter();
   const [activeBank, setActiveBank] = useState("");
 
@@ -24,7 +22,7 @@ function PaymentGateway({
       return toast.error("لطفا یک درگاه را انتخاب کنید");
     }
 
-    const res: any = await addSubscription(time, totalPrice, title);
+    const res: any = await addSubscription(time, totalPrice, title , discount);
     if (res?.status === 200) {
       router.push("/");
       return toast.success(`${res.message}`);
