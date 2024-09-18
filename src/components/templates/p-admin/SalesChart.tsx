@@ -74,10 +74,10 @@ function SalesChart({ numDays, orders }: ISalesChart) {
 
   return (
     <div className="bg-namavaBlack mt-5 rounded-md border border-gray-800 pt-6 pb-3 pl-0 pr-6 md:px-6">
-      <h2 className="text-base font-IranMedium md:text-xl mb-4">
+      <div className="text-base font-IranMedium md:text-xl mb-4">
         فروش از <span className="text-namava text-lg">{`${formatDate(allDates[0])}`}</span> تا
         <span className="text-namava text-lg">{` ${formatDate(allDates.at(-1))}`}</span>
-      </h2>
+      </div>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={data}>
           <XAxis
