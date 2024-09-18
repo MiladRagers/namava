@@ -11,8 +11,16 @@ export function middleware(request: NextRequest) {
       NextResponse.next();
     }
   }
+
+  if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
+    if (accessToken) {
+      return NextResponse.redirect(new URL("/", request.url));
+    } else {
+      NextResponse.next();
+    }
+  }
 }
 
 export const config = {
-  matcher: ["/plans/:path*", "/p-user/:path*"],
+  matcher: ["/plans/:path*", "/p-user/:path*" , "/login" , "/register"],
 };

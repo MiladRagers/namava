@@ -1,16 +1,16 @@
+import { useAuth } from "@/src/context/AuthContextProvider";
 import Logo from "@/src/icons/Logo";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { CiShoppingBasket } from "react-icons/ci";
-import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
+import { FaLaptop, FaMagnifyingGlass, FaUser, FaXmark } from "react-icons/fa6";
 import { FiFilm, FiYoutube } from "react-icons/fi";
 import { GiFilmStrip } from "react-icons/gi";
 import { IoHomeOutline } from "react-icons/io5";
 import { LuBaby, LuPopcorn } from "react-icons/lu";
-import { PiFilmReel } from "react-icons/pi";
 import { TbLogin2 } from "react-icons/tb";
 import Overlay from "../Overlay/Overlay";
-import { usePathname } from "next/navigation";
 
 interface MobileNavbar {
   isOpen: boolean;
@@ -18,7 +18,10 @@ interface MobileNavbar {
 }
 
 function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
+  const [search, setSearch] = useState("");
+  const { userInfo, isLogin } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
   useEffect(() => {
     onOpen(false);
   }, [pathname]);
@@ -38,9 +41,18 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
             <input
               type="text"
               placeholder="جستجو کنید"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="bg-none outline-none border-none text-[13px] "
             />
-            <button className="bg-namavaBlack text-white p-1 rounded-sm">
+            <button
+              onClick={() => {
+                if (search) {
+                  router.push(`/search?q=${search}`);
+                }
+              }}
+              className="bg-namavaBlack text-white p-1 rounded-sm"
+            >
               <FaMagnifyingGlass />
             </button>
           </div>
@@ -93,12 +105,6 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
               </Link>
             </li>
             <li>
-              <Link href="" className="flex items-center gap-x-3 text-lg">
-                <PiFilmReel />
-                <span className="text-sm">پردیس</span>
-              </Link>
-            </li>
-            <li>
               <Link
                 href="/blog"
                 className={`flex items-center gap-x-3 text-lg ${
@@ -113,17 +119,47 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
         </div>
         <div>
           <ul className="text-white space-y-6">
-            <li>
-              <Link
-                href={"/login"}
-                className={`flex items-center gap-x-2 text-2xl ${
-                  pathname === "/login" ? "active" : ""
-                }`}
-              >
-                <TbLogin2 />
-                <span className="text-sm">ورود | ثبت نام</span>
-              </Link>
-            </li>
+            {!isLogin ? (
+              <li>
+                <Link
+                  href={"/login"}
+                  className={`flex items-center gap-x-2 text-2xl ${
+                    pathname === "/login" ? "active" : ""
+                  }`}
+                >
+                  <TbLogin2 />
+                  <span className="text-sm">ورود | ثبت نام</span>
+                </Link>
+              </li>
+            ) : userInfo?.role === "ADMIN" ? (
+              <li>
+                <Link
+                  href={"/p-admin"}
+                  className={`flex items-center gap-x-2 text-2xl ${
+                    pathname === "/p-admin" ? "active" : ""
+                  }`}
+                >
+                  <FaLaptop />
+                  <span className="text-sm">پنل مدیریت</span>
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
+
+            {isLogin && (
+              <li>
+                <Link
+                  href={"/p-user"}
+                  className={`flex items-center gap-x-2 text-2xl ${
+                    pathname === "/p-user" ? "active" : ""
+                  }`}
+                >
+                  <FaUser />
+                  <span className="text-sm">پنل کاربری</span>
+                </Link>
+              </li>
+            )}
             <li>
               <Link
                 href={"/plans"}

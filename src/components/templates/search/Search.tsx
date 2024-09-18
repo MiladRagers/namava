@@ -89,9 +89,9 @@ function SearchBox({
       </div>
 
       {q?.length > 2 && movies.length > 2 && (
-        <div className="flex items-center gap-x-8 mt-3 text-sm">
-          <span className="text-[#aaa]">کلمات مشابه : </span>{" "}
-          <div className="flex items-center gap-x-4 flex-wrap">
+        <div className="hidden md:flex items-center gap-x-8 mt-3 text-sm">
+          <span className="text-[#aaa] ">کلمات مشابه : </span>{" "}
+          <div className=" flex items-center gap-x-4 flex-wrap">
             {movies.map((movie: any) => (
               <span
                 key={movie._id}
