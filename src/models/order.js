@@ -28,6 +28,10 @@ const schema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    time: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,

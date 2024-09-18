@@ -1,4 +1,5 @@
 "use client";
+import { prepareData } from "@/src/utils/funcs";
 import React from "react";
 import {
   Cell,
@@ -9,34 +10,30 @@ import {
   Tooltip,
 } from "recharts";
 
-function DurationChart() {
-  const startDataDark = [
+function DurationChart({orders }: any) {
+  const startData = [
     {
       duration: "اشتراک 30 روزه",
-      value: 30,
+      value: 0,
       color: "#b91c1c",
     },
     {
       duration: "اشتراک 60 روزه",
-      value: 60,
+      value: 0,
       color: "#7e22ce",
     },
     {
       duration: "اشتراک 90 روزه",
-      value: 90,
+      value: 0,
       color: "#1d4ed8",
     },
     {
-      duration: "اشتراک 120",
-      value: 120,
+      duration: "اشتراک 180",
+      value: 0,
       color: "#a16207",
     },
-    
-    
-    
-    
-    
   ];
+  const data = prepareData(startData, orders);
 
   const windowWidth: any = typeof window !== "undefined" && window.innerWidth;
 
@@ -46,7 +43,7 @@ function DurationChart() {
       <ResponsiveContainer height={267}>
         <PieChart>
           <Pie
-            data={startDataDark}
+            data={data}
             dataKey="value"
             nameKey="duration"
             paddingAngle={2}
@@ -55,7 +52,7 @@ function DurationChart() {
             outerRadius={110}
             innerRadius={85}
           >
-            {startDataDark.map((entry) => (
+            {data.map((entry : any) => (
               <Cell
                 key={entry.duration}
                 fill={entry.color}
@@ -67,7 +64,7 @@ function DurationChart() {
           <Tooltip
             wrapperStyle={{
               fontSize: windowWidth > 768 ? "16px" : "12px",
-              fontFamily :"Dana"
+              fontFamily: "Dana",
             }}
           />
 
@@ -79,7 +76,7 @@ function DurationChart() {
               width={135}
               iconSize={12}
               iconType="circle"
-              wrapperStyle={{fontFamily :"Dana"}}
+              wrapperStyle={{ fontFamily: "Dana" }}
             />
           )}
 
@@ -87,7 +84,11 @@ function DurationChart() {
             verticalAlign="bottom"
             layout="horizontal"
             align="right"
-            wrapperStyle={{ marginTop: "20px", fontSize: "14px" , fontFamily :"Dana" }}
+            wrapperStyle={{
+              marginTop: "20px",
+              fontSize: "14px",
+              fontFamily: "Dana",
+            }}
             iconType="circle"
           />
         </PieChart>

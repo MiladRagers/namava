@@ -55,6 +55,7 @@ async function page({ params }: TParams) {
         time={time}
         title={title}
         discount={(price * discount) / 100}
+        
       />
     </div>
   );

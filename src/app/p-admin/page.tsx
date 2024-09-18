@@ -4,7 +4,7 @@ import Title from "@/src/components/modules/p-admin/Title";
 import DurationChart from "@/src/components/templates/p-admin/DurationChart";
 import RecentUser from "@/src/components/templates/p-admin/RecentUser";
 import SalesChart from "@/src/components/templates/p-admin/SalesChart";
-import { getAllStats } from "@/src/libs/service/services";
+import { getAllOrders, getAllStats } from "@/src/libs/service/services";
 import { TSearchParams, TStats } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
 import { subDays } from "date-fns";
@@ -25,7 +25,7 @@ async function MainPage({ searchParams }: TSearchParams) {
     sumationOfOrder,
     orders,
   } = (await getAllStats(numQuery)) as TStats;
-  const user = await authUser();
+  const [user, allOrders] = await Promise.all([authUser(), getAllOrders()]);
   return (
     <div className="text-white">
       <div className="flex flex-col md:flex-row gap-y-6 items-center justify-between">
@@ -82,7 +82,7 @@ async function MainPage({ searchParams }: TSearchParams) {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
-        <DurationChart />
+        <DurationChart orders={JSON.parse(JSON.stringify(allOrders))} />
         <RecentUser users={JSON.parse(JSON.stringify(latestUsers))} />
       </div>
       <div>

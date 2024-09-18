@@ -983,6 +983,17 @@ export const getAllUserOrders = async (page: number) => {
   }
 };
 
+export const getAllOrders = async () => {
+  try {
+    connectToDB();
+    const orders = await OrderModel.find({ status: "pay" });
+
+    return orders;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getAllTickets = async (page: number) => {
   try {
     connectToDB();

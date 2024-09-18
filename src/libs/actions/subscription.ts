@@ -129,6 +129,7 @@ export const addSubscription = async (
       status: "pay",
       user: user._id,
       discount,
+      time: durationInDay,
     });
 
     return {
