@@ -6,7 +6,7 @@ import SelectBox from "@/src/components/modules/p-admin/SelectBox";
 import Spinner from "@/src/components/modules/spinner/Spinner";
 import { ContentType } from "@/public/db";
 import { createCollection } from "@/src/libs/actions/collection";
-import { Collcetion, TCollection } from "@/src/validators/frontend";
+import { Collcetion } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -28,11 +28,11 @@ function AddNewCollection({ movies }: any) {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<TCollection>({
+  } = useForm<any>({
     resolver: zodResolver(Collcetion),
   });
 
-  const createNewCollection = async (data: TCollection) => {
+  const createNewCollection = async (data: any) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
