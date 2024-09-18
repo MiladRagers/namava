@@ -1,4 +1,3 @@
-import { useAuth } from "@/src/context/AuthContextProvider";
 import Logo from "@/src/icons/Logo";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -15,11 +14,12 @@ import Overlay from "../Overlay/Overlay";
 interface MobileNavbar {
   isOpen: boolean;
   onOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  user: any;
 }
 
-function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
+function MobileNavbar({ isOpen, onOpen, user }: MobileNavbar) {
   const [search, setSearch] = useState("");
-  const { userInfo, isLogin } = useAuth();
+
   const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
@@ -119,7 +119,7 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
         </div>
         <div>
           <ul className="text-white space-y-6">
-            {!isLogin ? (
+            {!user ? (
               <li>
                 <Link
                   href={"/login"}
@@ -131,7 +131,7 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
                   <span className="text-sm">ورود | ثبت نام</span>
                 </Link>
               </li>
-            ) : userInfo?.role === "ADMIN" ? (
+            ) : user?.role === "ADMIN" ? (
               <li>
                 <Link
                   href={"/p-admin"}
@@ -147,7 +147,7 @@ function MobileNavbar({ isOpen, onOpen }: MobileNavbar) {
               ""
             )}
 
-            {isLogin && (
+            {user && (
               <li>
                 <Link
                   href={"/p-user"}

@@ -188,7 +188,7 @@ function Navbar({ user, userSubscription }: any) {
         </div>
       </div>
       {/* mobile menu */}
-      {!isKid && <MobileNavbar isOpen={isOpen} onOpen={setIsOpen} />}
+      {!isKid && <MobileNavbar user={user} isOpen={isOpen} onOpen={setIsOpen} />}
     </>
   );
 }
