@@ -1,14 +1,25 @@
 "use client";
 import LockModal from "@/src/components/modules/modals/LockModal";
-import React, { useEffect, useRef, useState } from "react";
+import { deletePasswordProfile } from "@/src/libs/actions/profile";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
-function Lock() {
+function Lock({ profile }: any) {
   const [isShowLockModal, setIsShowLockModal] = useState(false);
   const switchRef = useRef<HTMLInputElement>(null);
 
-  const handleSwitch = (e: any) => {
+  const handleSwitch = async (e: any) => {
+    console.log(e.target.checked);
+
     if (e.target.checked) {
       setIsShowLockModal(true);
+    } else {
+      const res = await deletePasswordProfile(profile._id);
+      if (res?.status === 200) {
+        return toast.success(`${res?.message}`);
+      }
+
+      return toast.error(`${res?.message}`);
     }
   };
 
@@ -18,11 +29,22 @@ function Lock() {
         <div className="flex w-full items-center justify-between">
           <div className="text-lg">
             <span>قفل پروفایل : </span>
-            <span className="text-red-600">غیر فعال</span>
+            <span
+              className={`${
+                profile.password ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {profile.password ? "فعال" : "غیر فعال"}
+            </span>
           </div>
           <div>
             <label className="switch">
-              <input type="checkbox" onChange={handleSwitch} ref={switchRef} />
+              <input
+                type="checkbox"
+                defaultChecked={profile.password}
+                onChange={handleSwitch}
+                ref={switchRef}
+              />
               <span className="slider round"></span>
             </label>
           </div>

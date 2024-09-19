@@ -6,6 +6,7 @@ import UserModel from "@/src/models/user";
 import { writeFileSync } from "fs";
 import connectToDB from "@/src/configs/db";
 import { revalidatePath } from "next/cache";
+import { TResponse } from "../types";
 export const addNewProfile = async (formData: FormData) => {
   try {
     connectToDB();
@@ -69,6 +70,39 @@ export const addNewProfile = async (formData: FormData) => {
   } catch (error) {
     return {
       message: "اتصال خودتان را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const deletePasswordProfile = async (id: string): Promise<TResponse> => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    if (!user) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+    await ProfileModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          password: "",
+        },
+      }
+    );
+
+    revalidatePath(`/profile-list-edit/${id}`);
+
+    return {
+      message: "قفل پروفایل با موفقیت برداشته شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
       status: 500,
     };
   }

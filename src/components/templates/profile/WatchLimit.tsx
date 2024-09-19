@@ -8,12 +8,12 @@ import EditProfile from "./EditProfile";
 import TitleLimit from "./TitleLimit";
 
 function WatchLimit({ profile }: any) {
-  const [age, setAge] = useState(3);
+  const [age, setAge] = useState(profile.ages);
   return (
     <>
       <EditProfile profile={profile} />
       <Ages setAge={setAge} age={age} />
-      <Lock />
+      <Lock profile={profile} />
       {age < 12 && <TimeLimit />}
       <TitleLimit />
       <Actions />
