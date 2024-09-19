@@ -1,10 +1,14 @@
 import Logo from "@/src/icons/Logo";
 import Image from "next/image";
-import React, { useState } from "react";
 import { FaPencil } from "react-icons/fa6";
 
-function EditProfile({ profile }: any) {
-  const [tempImage, setTempImage] = useState(null);
+function EditProfile({
+  profile,
+  tempImage,
+  setTempImage,
+  setProfileName,
+  profileName,
+}: any) {
   return (
     <div className="text-white">
       <div className="flex items-center justify-center flex-col space-y-4">
@@ -18,21 +22,27 @@ function EditProfile({ profile }: any) {
             className="relative flex-center group cursor-pointer w-[100px] md:w-[150px] h-[100px] md:h-[150px]"
           >
             <Image
-              src={profile.image}
+              src={tempImage ? URL.createObjectURL(tempImage) : profile.image}
               alt={profile.name}
               width={150}
               height={150}
-              className="rounded-full"
+              className="rounded-full w-[150px] h-[150px]"
             />
             <div className="absolute opacity-0  md:group-hover:opacity-100 group-hover:visible transition-all invisible bg-black/50 inset-0 rounded-full flex-center">
               <FaPencil className="text-lg" />
             </div>
           </label>
-          <input type="file" id="profile-uploader" hidden />
+          <input
+            type="file"
+            id="profile-uploader"
+            hidden
+            onChange={(e: any) => setTempImage(e.target.files[0])}
+          />
           <div className="grow md:pt-4 space-y-5">
             <input
               type="text"
-              defaultValue={profile.name}
+              value={profileName}
+              onChange={(e) => setProfileName(e.target.value)}
               placeholder="نام پروفایل"
               className="w-full text-sm md:text-base outline-none bg-gray-500/30 h-[52px] rounded-xl px-4 placeholder:text-white"
             />

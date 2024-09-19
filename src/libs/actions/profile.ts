@@ -91,6 +91,7 @@ export const deletePasswordProfile = async (id: string): Promise<TResponse> => {
       {
         $set: {
           password: "",
+          isLock: false,
         },
       }
     );
@@ -130,6 +131,7 @@ export const addPasswordInProfile = async (
       {
         $set: {
           password: hashedPassword,
+          isLock: true,
         },
       }
     );
@@ -138,6 +140,46 @@ export const addPasswordInProfile = async (
 
     return {
       message: "قفل پروفایل با موفقیت اضافه شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const updateProfile = async (data: any) => {
+  try {
+    connectToDB();
+    const { age, image, limitesMovies, profileId, profileName } = data;
+
+    const isNew = typeof image === "object" ? true : false;
+    let imageText = null;
+    if (isNew) {
+      imageText = `/uploads/${Date.now() + image.name}`;
+      const mainPath = path.join(process.cwd(), "public" + imageText);
+      const mainBuffer = Buffer.from(await image.arrayBuffer());
+      writeFileSync(mainPath, mainBuffer);
+    }
+
+    await ProfileModel.findOneAndUpdate(
+      { _id: profileId },
+      {
+        $set: {
+          image: imageText ? imageText : image,
+          ages: age,
+          name: profileName,
+          limitsMovies: limitesMovies,
+        },
+      }
+    );
+
+    revalidatePath(`/profile-list-edit/${profileId}`);
+
+    return {
+      message: "پروفایل با موفقیت بروزرسانی شد",
       status: 200,
     };
   } catch (error) {
