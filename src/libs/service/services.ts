@@ -1013,3 +1013,16 @@ export const getAllTickets = async (page: number) => {
     return error;
   }
 };
+
+// profiles
+
+export const getSpecificProfile = async (id: string) => {
+  try {
+    connectToDB();
+    const user = await authUser();
+    const profile = user.profiles.filter((profile: any) => profile._id === id);
+    return profile;
+  } catch (error) {
+    return error;
+  }
+};

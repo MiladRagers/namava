@@ -2,10 +2,7 @@ import Button from "@/src/components/modules/auth/Button/Button";
 import EditProfileBox from "@/src/components/modules/profileBox/EditProfileBox";
 import Logo from "@/src/icons/Logo";
 import { authUser } from "@/src/utils/serverHelper";
-import Image from "next/image";
-import React from "react";
-import { FaPencil } from "react-icons/fa6";
-import { IoIosLock } from "react-icons/io";
+import Link from "next/link";
 
 async function EditProfile() {
   const user = await authUser();
@@ -23,9 +20,12 @@ async function EditProfile() {
             <EditProfileBox key={profile._id} profile={profile} />
           ))}
         </div>
-        <Button className="max-w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
+        <Link
+          href="/"
+          className="max-w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40"
+        >
           <span className="text-xs">بازگشت</span>
-        </Button>
+        </Link>
       </div>
     </div>
   );
