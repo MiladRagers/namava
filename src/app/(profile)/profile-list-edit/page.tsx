@@ -20,10 +20,10 @@ async function EditProfile() {
         </h1>
         <div className="flex items-center justify-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
           {user.profiles.map((profile: any) => (
-            <EditProfileBox profile={profile} />
+            <EditProfileBox key={profile._id} profile={profile} />
           ))}
         </div>
-        <Button className="max-w-[200px] !bg-gray-500/40 mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
+        <Button className="max-w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
           <span className="text-xs">بازگشت</span>
         </Button>
       </div>
