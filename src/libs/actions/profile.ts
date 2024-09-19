@@ -7,6 +7,7 @@ import { writeFileSync } from "fs";
 import connectToDB from "@/src/configs/db";
 import { revalidatePath } from "next/cache";
 import { TResponse } from "../types";
+import { hashPassword } from "@/src/utils/auth";
 export const addNewProfile = async (formData: FormData) => {
   try {
     connectToDB();
@@ -98,6 +99,45 @@ export const deletePasswordProfile = async (id: string): Promise<TResponse> => {
 
     return {
       message: "قفل پروفایل با موفقیت برداشته شد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const addPasswordInProfile = async (
+  id: string,
+  password: string
+): Promise<TResponse> => {
+  try {
+    connectToDB();
+    connectToDB();
+    const user = await authUser();
+    if (!user) {
+      return {
+        message: "ابتدا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    const hashedPassword = await hashPassword(password);
+    await ProfileModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          password: hashedPassword,
+        },
+      }
+    );
+
+    revalidatePath(`/profile-list-edit/${id}`);
+
+    return {
+      message: "قفل پروفایل با موفقیت اضافه شد",
       status: 200,
     };
   } catch (error) {

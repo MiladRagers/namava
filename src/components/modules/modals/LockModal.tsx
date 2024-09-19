@@ -1,12 +1,33 @@
-import React from "react";
-import { FaXmark } from "react-icons/fa6";
 import useCloseOutSideClick from "@/src/hooks/useOutSideClick";
-import Button from "../auth/Button/Button";
-import ModalContainer from "./ModalContainer";
+import { addPasswordInProfile } from "@/src/libs/actions/profile";
 import { TModal } from "@/src/libs/types";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { FaXmark } from "react-icons/fa6";
+import Button from "../auth/Button/Button";
+import Spinner from "../spinner/Spinner";
+import ModalContainer from "./ModalContainer";
 
-function LockModal({ onClose, isShow }: TModal) {
+function LockModal({
+  onClose,
+  isShow,
+  password,
+  onPassword,
+  profileId,
+}: TModal) {
   const { ref } = useCloseOutSideClick(onClose, false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const setPasswordHandler = async () => {
+    setIsLoading(true);
+    const res = await addPasswordInProfile(profileId, password);
+    setIsLoading(false);
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+    setIsLoading(false);
+    return toast.error(`${res?.message}`);
+  };
   return (
     <ModalContainer isShow={isShow ? true : false}>
       <div
@@ -28,11 +49,15 @@ function LockModal({ onClose, isShow }: TModal) {
         </h3>
         <input
           type="password"
+          value={password}
+          onChange={(e) => onPassword(e.target.value)}
           className="outline-none w-full px-3 py-3.5 text-black rounded-xl mt-5 text-left"
           dir="ltr"
         />
         <div className="w-full mt-8 flex items-center gap-x-5">
-          <Button className="!font-Iran">تایید کد</Button>
+          <Button className="!font-Iran" onClick={setPasswordHandler}>
+            {isLoading ? <Spinner /> : "تایید کد"}
+          </Button>
           <Button className="!font-Iran !bg-gray-500/50 hover:bg-white/40">
             بازگشت
           </Button>

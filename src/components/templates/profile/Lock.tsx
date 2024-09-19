@@ -6,11 +6,10 @@ import toast from "react-hot-toast";
 
 function Lock({ profile }: any) {
   const [isShowLockModal, setIsShowLockModal] = useState(false);
+  const [password, setPassword] = useState("");
   const switchRef = useRef<HTMLInputElement>(null);
 
   const handleSwitch = async (e: any) => {
-    console.log(e.target.checked);
-
     if (e.target.checked) {
       setIsShowLockModal(true);
     } else {
@@ -56,7 +55,13 @@ function Lock({ profile }: any) {
       </div>
 
       {isShowLockModal && (
-        <LockModal onClose={setIsShowLockModal} isShow={isShowLockModal} />
+        <LockModal
+          profileId={profile._id}
+          password={password}
+          onPassword={setPassword}
+          onClose={setIsShowLockModal}
+          isShow={isShowLockModal}
+        />
       )}
     </>
   );
