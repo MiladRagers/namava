@@ -37,7 +37,11 @@ const schema = new mongoose.Schema({
     },
   },
   limitsMovies: [
-    { type: mongoose.Types.ObjectId, req: "Movie", required: false },
+    {
+      type: mongoose.Types.ObjectId,
+      req: "Movie",
+      default: [],
+    },
   ],
   image: {
     type: String,

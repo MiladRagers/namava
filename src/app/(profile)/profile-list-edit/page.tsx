@@ -1,11 +1,14 @@
 import Button from "@/src/components/modules/auth/Button/Button";
+import EditProfileBox from "@/src/components/modules/profileBox/EditProfileBox";
 import Logo from "@/src/icons/Logo";
+import { authUser } from "@/src/utils/serverHelper";
 import Image from "next/image";
 import React from "react";
 import { FaPencil } from "react-icons/fa6";
 import { IoIosLock } from "react-icons/io";
 
-function EditProfile() {
+async function EditProfile() {
+  const user = await authUser();
   return (
     <div className="text-white">
       <div className="flex items-center justify-center">
@@ -16,54 +19,9 @@ function EditProfile() {
           کدام پروفایل را میخواهید ویرایش کنید؟
         </h1>
         <div className="flex items-center justify-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
-          <div>
-            <div className="relative flex-center">
-              <Image
-                src="/images/user.png"
-                width={150}
-                height={150}
-                alt="user.png"
-                className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
-              />
-              <div className="absolute  bg-black/50 inset-0 rounded-full flex-center">
-                <FaPencil className="text-3xl" />
-              </div>
-            </div>
-            <h2 className="text-center mt-3">بزرگسال</h2>
-          </div>
-          <div>
-            <div className="relative flex-center">
-              <Image
-                src="/images/kidProfile.png"
-                width={150}
-                height={150}
-                alt="user.png"
-                className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
-              />
-              <div className="absolute  bg-black/50 inset-0 rounded-full flex-center">
-                <FaPencil className="text-3xl" />
-              </div>
-            </div>
-            <h2 className="text-center mt-3">کودک</h2>
-          </div>
-          <div>
-            <div className="relative flex-center">
-              <Image
-                src="/images/customProfile.jpg"
-                width={150}
-                height={150}
-                alt="user.png"
-                className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
-              />
-              <div className="absolute  bg-black/50 inset-0 rounded-full flex-center">
-                <FaPencil className="text-3xl" />
-              </div>
-              <div className="absolute -right-1 bottom-0 w-10 h-10 bg-namavaBlack rounded-full flex-center">
-                <IoIosLock className="text-xl" />
-              </div>
-            </div>
-            <h2 className="text-center mt-3">میلاد</h2>
-          </div>
+          {user.profiles.map((profile: any) => (
+            <EditProfileBox profile={profile} />
+          ))}
         </div>
         <Button className="max-w-[200px] !bg-gray-500/40 mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40">
           <span className="text-xs">بازگشت</span>
