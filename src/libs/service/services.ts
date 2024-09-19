@@ -11,6 +11,7 @@ import DepartmentModel from "@/src/models/department";
 import EpisodeModel from "@/src/models/episode";
 import MenuModel from "@/src/models/menu";
 import MovieModel from "@/src/models/movie";
+import ProfileModel from "@/src/models/profile";
 import StarModel from "@/src/models/stars";
 import SubscriptionModel from "@/src/models/subscription";
 import TicketModel from "@/src/models/ticket";
@@ -1019,10 +1020,13 @@ export const getAllTickets = async (page: number) => {
 export const getSpecificProfile = async (id: string) => {
   try {
     connectToDB();
-    const user = await authUser();
-  
+
+    const profile = await ProfileModel.findOne({ _id: id }).populate(
+      "limitsMovies",
+      "title link"
+    );
+
     
-    const profile = user.profiles.find((profile: any) => String(profile._id) === id);
     return profile;
   } catch (error) {
     return error;

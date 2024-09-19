@@ -506,8 +506,8 @@ function Error() {
           y2="150.041"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#41B3CC"></stop>
-          <stop offset="1" stop-color="#2E679C"></stop>
+          <stop stopColor="#41B3CC"></stop>
+          <stop offset="1" stopColor="#2E679C"></stop>
         </linearGradient>
         <linearGradient
           id="paint1_linear_32790_68089"
@@ -517,8 +517,8 @@ function Error() {
           y2="62.6851"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#43C0F5"></stop>
-          <stop offset="1" stop-color="#3884CB"></stop>
+          <stop stopColor="#43C0F5"></stop>
+          <stop offset="1" stopColor="#3884CB"></stop>
         </linearGradient>
         <linearGradient
           id="paint2_linear_32790_68089"
@@ -528,8 +528,8 @@ function Error() {
           y2="62.6851"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#43C0F5"></stop>
-          <stop offset="1" stop-color="#3884CB"></stop>
+          <stop stopColor="#43C0F5"></stop>
+          <stop offset="1" stopColor="#3884CB"></stop>
         </linearGradient>
         <clipPath id="clip0_32790_68089">
           <rect

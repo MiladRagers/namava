@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import UserModel from "./user";
+import movieModel from "./movie";
 const schema = new mongoose.Schema({
   name: {
     type: String,
@@ -39,7 +40,7 @@ const schema = new mongoose.Schema({
   limitsMovies: [
     {
       type: mongoose.Types.ObjectId,
-      req: "Movie",
+      ref: "Movie",
       default: [],
     },
   ],
