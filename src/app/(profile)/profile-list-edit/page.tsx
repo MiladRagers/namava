@@ -1,4 +1,3 @@
-import Button from "@/src/components/modules/auth/Button/Button";
 import EditProfileBox from "@/src/components/modules/profileBox/EditProfileBox";
 import Logo from "@/src/icons/Logo";
 import { authUser } from "@/src/utils/serverHelper";
@@ -22,7 +21,7 @@ async function EditProfile() {
         </div>
         <Link
           href="/"
-          className="max-w-[200px] mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40"
+          className="w-[200px] h-[50px] rounded-lg text-base md:text-lg mt-20 flex items-center justify-center gap-x-2 bg-gray-500/40"
         >
           <span className="text-xs">بازگشت</span>
         </Link>

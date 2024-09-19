@@ -1,9 +1,10 @@
 import Logo from "@/src/icons/Logo";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { FaPencil } from "react-icons/fa6";
 
-function EditProfile() {
+function EditProfile({ profile }: any) {
+  const [tempImage, setTempImage] = useState(null);
   return (
     <div className="text-white">
       <div className="flex items-center justify-center flex-col space-y-4">
@@ -12,10 +13,13 @@ function EditProfile() {
       </div>
       <div className="max-w-[700px] mx-auto">
         <div className="flex items-center md:items-start gap-x-3 md:gap-x-8 px-4 md:px-10 py-6 md:py-[30px] bg-namavaBlack rounded-xl mt-10">
-          <label htmlFor="profile-uploader" className="relative flex-center group cursor-pointer w-[100px] md:w-[150px] h-[100px] md:h-[150px]">
+          <label
+            htmlFor="profile-uploader"
+            className="relative flex-center group cursor-pointer w-[100px] md:w-[150px] h-[100px] md:h-[150px]"
+          >
             <Image
-              src="/images/customProfile.jpg"
-              alt="user.svg"
+              src={profile.image}
+              alt={profile.name}
               width={150}
               height={150}
               className="rounded-full"
@@ -28,10 +32,14 @@ function EditProfile() {
           <div className="grow md:pt-4 space-y-5">
             <input
               type="text"
+              defaultValue={profile.name}
               placeholder="نام پروفایل"
               className="w-full text-sm md:text-base outline-none bg-gray-500/30 h-[52px] rounded-xl px-4 placeholder:text-white"
             />
-            <label htmlFor="profile-uploader" className="text-[#6eb8ff] block text-xs md:text-base font-IranMedium">
+            <label
+              htmlFor="profile-uploader"
+              className="text-[#6eb8ff] block text-xs md:text-base font-IranMedium"
+            >
               انتخاب تصویر
             </label>
           </div>

@@ -1020,7 +1020,9 @@ export const getSpecificProfile = async (id: string) => {
   try {
     connectToDB();
     const user = await authUser();
-    const profile = user.profiles.filter((profile: any) => profile._id === id);
+  
+    
+    const profile = user.profiles.find((profile: any) => String(profile._id) === id);
     return profile;
   } catch (error) {
     return error;
