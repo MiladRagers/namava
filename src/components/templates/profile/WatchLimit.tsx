@@ -8,8 +8,10 @@ import EditProfile from "./EditProfile";
 import Lock from "./Lock";
 import TimeLimit from "./TimeLimit";
 import TitleLimit from "./TitleLimit";
+import { useRouter } from "next/navigation";
 
 function WatchLimit({ profile, movies }: any) {
+  const router = useRouter();
   const [age, setAge] = useState(profile.ages);
   const [limites, setLimites] = useState<any[]>(profile.limitsMovies);
   const [tempImage, setTempImage] = useState(null);
@@ -20,9 +22,6 @@ function WatchLimit({ profile, movies }: any) {
     _id: movie._id,
   }));
 
-  console.log(typeof tempImage);
-  
-
   const updateProfileHandler = async () => {
     const formData = new FormData();
     formData.append("age", age);
@@ -30,11 +29,12 @@ function WatchLimit({ profile, movies }: any) {
     formData.append("limitesMovies", JSON.stringify(limites));
     formData.append("profileId", profile._id);
     formData.append("profileName", profileName);
-    
+
     setIsLoading(true);
     const res = await updateProfile(formData);
     setIsLoading(false);
     if (res?.status === 200) {
+      router.push(`/profile-list`);
       return toast.success(`${res?.message}`);
     }
     setIsLoading(false);
