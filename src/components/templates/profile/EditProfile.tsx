@@ -38,7 +38,7 @@ function EditProfile({
             hidden
             onChange={(e: any) => setTempImage(e.target.files[0])}
           />
-          <div className="grow md:pt-4 space-y-5">
+          <div className="grow md:pt-4 space-y-5 md:space-y-5">
             <input
               type="text"
               value={profileName}
