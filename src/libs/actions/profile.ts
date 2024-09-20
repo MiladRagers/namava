@@ -150,17 +150,21 @@ export const addPasswordInProfile = async (
   }
 };
 
-export const updateProfile = async (data: any) => {
+export const updateProfile = async (data: FormData) => {
   try {
     connectToDB();
-    const { age, image, limitesMovies, profileId, profileName } = data;
 
-    const isNew = typeof image === "object" ? true : false;
+    const { age, profileImage, limitesMovies, profileId, profileName }: any =
+      Object.fromEntries(data);
+
+    const isNew = typeof profileImage === "object" ? true : false;
+    console.log(isNew);
+
     let imageText = null;
     if (isNew) {
-      imageText = `/uploads/${Date.now() + image.name}`;
+      imageText = `/uploads/${Date.now() + profileImage.name}`;
       const mainPath = path.join(process.cwd(), "public" + imageText);
-      const mainBuffer = Buffer.from(await image.arrayBuffer());
+      const mainBuffer = Buffer.from(await profileImage.arrayBuffer());
       writeFileSync(mainPath, mainBuffer);
     }
 
@@ -168,10 +172,10 @@ export const updateProfile = async (data: any) => {
       { _id: profileId },
       {
         $set: {
-          image: imageText ? imageText : image,
+          image: imageText ? imageText : profileImage,
           ages: age,
           name: profileName,
-          limitsMovies: limitesMovies,
+          limitsMovies: JSON.parse(limitesMovies),
         },
       }
     );
@@ -183,6 +187,8 @@ export const updateProfile = async (data: any) => {
       status: 200,
     };
   } catch (error) {
+    console.log(error);
+
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,

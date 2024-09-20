@@ -1,13 +1,13 @@
 "use client";
+import { updateProfile } from "@/src/libs/actions/profile";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Button from "../../modules/auth/Button/Button";
 import Ages from "./Ages";
 import EditProfile from "./EditProfile";
 import Lock from "./Lock";
 import TimeLimit from "./TimeLimit";
 import TitleLimit from "./TitleLimit";
-import { updateProfile } from "@/src/libs/actions/profile";
-import toast from "react-hot-toast";
 
 function WatchLimit({ profile, movies }: any) {
   const [age, setAge] = useState(profile.ages);
@@ -20,16 +20,19 @@ function WatchLimit({ profile, movies }: any) {
     _id: movie._id,
   }));
 
+  console.log(typeof tempImage);
+  
+
   const updateProfileHandler = async () => {
-    const data = {
-      age,
-      image: tempImage ? tempImage : profile.image,
-      limitesMovies: limites,
-      profileId: profile._id,
-      profileName
-    };
+    const formData = new FormData();
+    formData.append("age", age);
+    formData.append("profileImage", tempImage ? tempImage : profile.image);
+    formData.append("limitesMovies", JSON.stringify(limites));
+    formData.append("profileId", profile._id);
+    formData.append("profileName", profileName);
+    
     setIsLoading(true);
-    const res = await updateProfile(data);
+    const res = await updateProfile(formData);
     setIsLoading(false);
     if (res?.status === 200) {
       return toast.success(`${res?.message}`);
