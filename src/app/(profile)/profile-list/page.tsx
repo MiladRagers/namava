@@ -24,7 +24,7 @@ async function ProfileList() {
         <h1 className="text-xl md:text-3xl">چه کسی تماشا می‌کند؟</h1>
         <div className="flex-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
           {user.profiles.map((profile: any) => (
-            <ProfileBox profile={profile} key={profile._id} />
+            <ProfileBox profile={JSON.parse(JSON.stringify(profile))} key={profile._id} />
           ))}
           <Link href={"/add-profile"}>
             <div className="flex items-center justify-center bg-gray-500/40 rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
