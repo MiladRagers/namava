@@ -4,17 +4,22 @@ import { Suspense } from "react";
 import MainSlider from "../components/templates/index/mainSlider/MainSlider";
 import Loading from "../icons/Loading";
 import {
+  checkUserProfile,
   checkUserSubscription,
-  getAllSlidersMovies
+  getAllSlidersMovies,
 } from "../libs/service/services";
-import { authUser } from "../utils/serverHelper";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const [slides, subscription]: any = await Promise.all([
+  const [slides, subscription, profile]: any = await Promise.all([
     getAllSlidersMovies(),
     checkUserSubscription(),
-    authUser(),
+    checkUserProfile(),
   ]);
+
+  if (profile.type === "kid") {
+    redirect("/kids");
+  }
 
   return (
     <>

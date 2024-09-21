@@ -20,6 +20,7 @@ import OrderModel from "@/src/models/order";
 import { authUser, checkIsAdmin } from "@/src/utils/serverHelper";
 import { isValidObjectId } from "mongoose";
 import { IWishList, TArticle } from "../types";
+import { cookies } from "next/headers";
 
 // get all site stat
 
@@ -369,8 +370,6 @@ export const getMovies = async (contentType: "adult" | "kid") => {
       "category actors",
       "title link parrent link name"
     );
-
-    console.log(allMovies);
 
     const categorizeFilms = (films: any) => {
       const categorized: any = {};
@@ -798,7 +797,6 @@ export const getAllUserLikesMovie = async () => {
   try {
     connectToDB();
     const user = await authUser();
-    console.log(user._id);
 
     const likesMovie = await MovieModel.find({
       liked: { $in: user._id },
@@ -1026,8 +1024,31 @@ export const getSpecificProfile = async (id: string) => {
       "title link"
     );
 
-    
     return profile;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const checkUserProfile = async () => {
+  try {
+    connectToDB();
+
+    const user = await authUser();
+
+    if (!user) {
+      return {
+        message: "لطفا لاگین کنید",
+        status: 401,
+      };
+    }
+
+    const profileId = cookies().get("profile")?.value;
+   
+
+    const currentProfile = await ProfileModel.findOne({ _id: profileId });
+
+    return currentProfile || user.profiles[0]._id;
   } catch (error) {
     return error;
   }
