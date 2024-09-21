@@ -35,7 +35,9 @@ export type TModal = {
   isShow: Boolean;
   password: string;
   onPassword: any;
-  profileId: string;
+  title: string;
+  desc: string;
+  onAction : any
 };
 
 export type TComment = {

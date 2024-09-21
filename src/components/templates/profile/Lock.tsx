@@ -1,6 +1,6 @@
 "use client";
 import LockModal from "@/src/components/modules/modals/LockModal";
-import { deletePasswordProfile } from "@/src/libs/actions/profile";
+import { addPasswordInProfile, deletePasswordProfile } from "@/src/libs/actions/profile";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -20,6 +20,16 @@ function Lock({ profile }: any) {
 
       return toast.error(`${res?.message}`);
     }
+  };
+
+  const setPasswordHandler = async () => {
+    const res = await addPasswordInProfile(profile._id, password);
+
+    if (res?.status === 200) {
+      return toast.success(`${res?.message}`);
+    }
+
+    return toast.error(`${res?.message}`);
   };
 
   return (
@@ -56,11 +66,13 @@ function Lock({ profile }: any) {
 
       {isShowLockModal && (
         <LockModal
-          profileId={profile._id}
           password={password}
           onPassword={setPassword}
           onClose={setIsShowLockModal}
           isShow={isShowLockModal}
+          title="لطفا یک قفل چهار رقمی به عنوان رمز پروفایل انتخاب کنید."
+          desc="هنگام ورود به پروفایل این رمز از شما دریافت خواهد شد."
+          onAction={setPasswordHandler}
         />
       )}
     </>

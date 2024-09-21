@@ -16,7 +16,10 @@ async function EditProfile() {
         </h1>
         <div className="flex items-center justify-center  flex-wrap gap-y-8 gap-x-10 mt-10 md:mt-20 child:md:cursor-pointer">
           {user.profiles.map((profile: any) => (
-            <EditProfileBox key={profile._id} profile={profile} />
+            <EditProfileBox
+              key={profile._id}
+              profile={JSON.parse(JSON.stringify(profile))}
+            />
           ))}
         </div>
         <Link

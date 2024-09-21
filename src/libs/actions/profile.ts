@@ -7,7 +7,7 @@ import { writeFileSync } from "fs";
 import connectToDB from "@/src/configs/db";
 import { revalidatePath } from "next/cache";
 import { TResponse } from "../types";
-import { hashPassword } from "@/src/utils/auth";
+import { hashPassword, verifyPassword } from "@/src/utils/auth";
 export const addNewProfile = async (formData: FormData) => {
   try {
     connectToDB();
@@ -189,6 +189,34 @@ export const updateProfile = async (data: FormData) => {
   } catch (error) {
     console.log(error);
 
+    return {
+      message: "اتصال خود را به اینترنت چک کنید",
+      status: 500,
+    };
+  }
+};
+
+export const checkUserProfilePassword = async (
+  profileId: string,
+  password: string
+): Promise<TResponse> => {
+  try {
+    await connectToDB();
+    const profile = await ProfileModel.findOne({ _id: profileId });
+    const isValidPassword = await verifyPassword(password, profile.password);
+
+    if(!isValidPassword){
+      return {
+        message: "رمز پروفایل نادرست میباشد",
+        status: 404,
+      };
+    }
+
+    return {
+      message: "رمز عبور صحیح میباشد",
+      status: 200,
+    };
+  } catch (error) {
     return {
       message: "اتصال خود را به اینترنت چک کنید",
       status: 500,

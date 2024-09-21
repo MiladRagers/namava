@@ -13,21 +13,14 @@ function LockModal({
   isShow,
   password,
   onPassword,
-  profileId,
+  title,
+  desc,
+  onAction
 }: TModal) {
   const { ref } = useCloseOutSideClick(onClose, false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const setPasswordHandler = async () => {
-    setIsLoading(true);
-    const res = await addPasswordInProfile(profileId, password);
-    setIsLoading(false);
-    if (res?.status === 200) {
-      return toast.success(`${res?.message}`);
-    }
-    setIsLoading(false);
-    return toast.error(`${res?.message}`);
-  };
+  
   return (
     <ModalContainer isShow={isShow ? true : false}>
       <div
@@ -42,10 +35,10 @@ function LockModal({
           />
         </div>
         <h3 className="text-center mt-5">
-          لطفا یک قفل چهار رقمی به عنوان رمز پروفایل انتخاب کنید.
+          {title}
         </h3>
         <h3 className="text-center mt-5 text-red-300">
-          هنگام ورود به پروفایل این رمز از شما دریافت خواهد شد.
+          {desc}
         </h3>
         <input
           type="password"
@@ -55,10 +48,10 @@ function LockModal({
           dir="ltr"
         />
         <div className="w-full mt-8 flex items-center gap-x-5">
-          <Button className="!font-Iran" onClick={setPasswordHandler}>
+          <Button className="!font-Iran" onClick={onAction}>
             {isLoading ? <Spinner /> : "تایید کد"}
           </Button>
-          <Button className="!font-Iran !bg-gray-500/50 hover:bg-white/40">
+          <Button onClick={() => onClose(false)} className="!font-Iran !bg-gray-500/50 hover:bg-white/40">
             بازگشت
           </Button>
         </div>
