@@ -1,14 +1,14 @@
-import React from "react";
-import Button from "../auth/Button/Button";
+import { profileLinks } from "@/public/db";
 import ProfileArrow from "@/src/icons/ProfileArrow";
 import Image from "next/image";
-import { LuSettings } from "react-icons/lu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ProfileBox from "./ProfileBox";
-import { profileLinks } from "@/public/db";
-import ProfileLink from "./ProfileLink";
+import React, { useEffect, useState } from "react";
+import { LuSettings } from "react-icons/lu";
+import Button from "../auth/Button/Button";
 import Logout from "./Logout";
+import ProfileBox from "./ProfileBox";
+import ProfileLink from "./ProfileLink";
 
 type TProfileMenu = {
   isShow: boolean;
@@ -19,6 +19,18 @@ type TProfileMenu = {
 
 function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
   const url = usePathname();
+  const [activeProfile, setActiveProfile] = useState<any>(null);
+  const profileId = document.cookie.split("=")[1];
+
+  useEffect(() => {
+    const getActiveProfile = async () => {
+      const res = await fetch(`/api/auth/profile`);
+      const result = await res.json();
+      setActiveProfile(result);
+    };
+    getActiveProfile();
+  }, []);
+
   return (
     <div
       className={`absolute profile-container rounded-[12px] ${
@@ -57,13 +69,13 @@ function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
               >
                 <div className="flex items-center gap-x-2">
                   <Image
-                    src="/images/user.png"
-                    alt="user"
+                    src={activeProfile?.image}
+                    alt={activeProfile?.name}
                     width={30}
                     height={30}
                     className="rounded-full"
                   />
-                  <span>بزرگسال</span>
+                  <span>{activeProfile?.name}</span>
                 </div>
                 <div className="flex items-center gap-x-1">
                   <LuSettings className="text-lg text-gray-600 group-hover:text-blue-600" />
@@ -72,9 +84,12 @@ function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
               </Link>
             </div>
             <div className="mt-2 space-y-3 border-b border-b-gray-300 pb-2">
-              {user.profiles.slice(1, 4).map((profile: any) => (
-                <ProfileBox {...profile} key={profile._id} />
-              ))}
+              {user.profiles
+                .slice(1, 4)
+                .filter((profile: any) => profile._id !== profileId)
+                .map((profile: any) => (
+                  <ProfileBox {...profile} key={profile._id} />
+                ))}
             </div>
             <div className="space-y-4 mt-4 mb-2">
               {!url.includes("/kids") &&

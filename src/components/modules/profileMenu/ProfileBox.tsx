@@ -1,11 +1,23 @@
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
 import { BiLock } from "react-icons/bi";
 
-function ProfileBox({ image, name, isLock }: any) {
+function ProfileBox({ image, name, type, isLock, _id }: any) {
+  const router = useRouter();
+  const handleNavigation = () => {
+    if (type === "kid") {
+      document.cookie = `profile = ${_id}; path=/`;
+      location.reload();
+      router.push(`/kids`);
+    } else {
+      router.push(`/`);
+    }
+  };
   return (
-    <Link href={"/profile-list"} className="flex items-center justify-between">
+    <div
+      onClick={handleNavigation}
+      className="flex items-center justify-between cursor-pointer"
+    >
       <div className="flex items-center gap-x-2">
         <Image
           src={image}
@@ -17,7 +29,7 @@ function ProfileBox({ image, name, isLock }: any) {
         <span>{name}</span>
       </div>
       {isLock && <BiLock className="text-base text-gray-600" />}
-    </Link>
+    </div>
   );
 }
 
