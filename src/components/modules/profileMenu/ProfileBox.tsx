@@ -23,6 +23,7 @@ function ProfileBox({ image, name, type, isLock, _id }: any) {
           alt={image}
           width={1920}
           height={1080}
+          priority
           className="rounded-full h-[30px] w-[30px]"
         />
         <span>{name}</span>

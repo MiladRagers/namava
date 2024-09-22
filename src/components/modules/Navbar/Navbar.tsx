@@ -12,7 +12,7 @@ import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
 function Navbar({ user, userSubscription }: any) {
   const pathname = usePathname();
-
+  const [activeProfile, setActiveProfile] = useState<any>(null);
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
 
@@ -52,6 +52,16 @@ function Navbar({ user, userSubscription }: any) {
 
     return () => document.removeEventListener("scroll", scrollHandler);
   }, [pathname]);
+
+  useEffect(() => {
+    const getActiveProfile = async () => {
+      const res = await fetch(`/api/auth/profile`);
+      const result = await res.json();
+
+      setActiveProfile(result);
+    };
+    getActiveProfile();
+  }, []);
 
   if (
     pathname.includes("/login") ||
@@ -156,10 +166,11 @@ function Navbar({ user, userSubscription }: any) {
             <div className="relative">
               <Link href={""} onMouseEnter={() => setIsShowProfile(true)}>
                 <Image
-                  src={"/images/user.png"}
-                  alt="user.png"
+                  src={activeProfile?.image ?? "/images/user.png"}
+                  alt={"userprofile"}
                   width={40}
                   height={40}
+                  priority
                   className="rounded-full w-[30px] h-[30px] lg:w-10 lg:h-10 shrink-0"
                 />
               </Link>
@@ -168,6 +179,7 @@ function Navbar({ user, userSubscription }: any) {
                 onShow={setIsShowProfile}
                 user={user}
                 userSubscription={userSubscription}
+                activeProfile={activeProfile}
               />
             </div>
           ) : (
@@ -188,7 +200,9 @@ function Navbar({ user, userSubscription }: any) {
         </div>
       </div>
       {/* mobile menu */}
-      {!isKid && <MobileNavbar user={user} isOpen={isOpen} onOpen={setIsOpen} />}
+      {!isKid && (
+        <MobileNavbar user={user} isOpen={isOpen} onOpen={setIsOpen} />
+      )}
     </>
   );
 }

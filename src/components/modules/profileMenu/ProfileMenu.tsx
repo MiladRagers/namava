@@ -3,7 +3,7 @@ import ProfileArrow from "@/src/icons/ProfileArrow";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { LuSettings } from "react-icons/lu";
 import Button from "../auth/Button/Button";
 import Logout from "./Logout";
@@ -14,22 +14,19 @@ type TProfileMenu = {
   isShow: boolean;
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
   user: any;
+  activeProfile?: any;
   userSubscription?: { hasSubscription: boolean; remainingDays: number };
 };
 
-function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
+function ProfileMenu({
+  isShow,
+  onShow,
+  activeProfile,
+  user,
+  userSubscription,
+}: TProfileMenu) {
   const url = usePathname();
-  const [activeProfile, setActiveProfile] = useState<any>(null);
-  const profileId = document.cookie.split("=")[1];
-
-  useEffect(() => {
-    const getActiveProfile = async () => {
-      const res = await fetch(`/api/auth/profile`);
-      const result = await res.json();
-      setActiveProfile(result);
-    };
-    getActiveProfile();
-  }, []);
+  const profileId = document?.cookie.split("=")[1];
 
   return (
     <div
@@ -69,10 +66,12 @@ function ProfileMenu({ isShow, onShow, user, userSubscription }: TProfileMenu) {
               >
                 <div className="flex items-center gap-x-2">
                   <Image
-                    src={activeProfile?.image}
-                    alt={activeProfile?.name}
+                    src={activeProfile?.image ?? "/images/user.png"}
+                    alt="user-profile"
                     width={30}
                     height={30}
+                    priority={false}
+                  
                     className="rounded-full"
                   />
                   <span>{activeProfile?.name}</span>
