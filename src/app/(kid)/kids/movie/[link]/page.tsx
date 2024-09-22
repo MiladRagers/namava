@@ -1,28 +1,25 @@
 import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
-import LoginModal from "@/src/components/modules/modals/LoginModal";
 import Comments from "@/src/components/templates/Comments/Comments";
 import Header from "@/src/components/templates/index/Header/Header";
 import {
   checkUserSubscription,
   getMovie,
   getRealedMovies,
-  getUserBookmarks,
+  getUserBookmarks
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
 
 async function KidSinglePage({ params }: TParams) {
-  const [movie, userInfo, userBookmarks, subscription]: any = await Promise.all(
-    [
+  const [movie, userInfo, userBookmarks, subscription]: any =
+    await Promise.all([
       getMovie(params.link),
       authUser(),
       getUserBookmarks(),
       checkUserSubscription(),
-    ]
-  );
+
+    ]);
 
   const realatedMovies: any = await getRealedMovies(movie.category, movie._id);
 

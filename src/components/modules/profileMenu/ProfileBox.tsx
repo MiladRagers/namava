@@ -7,7 +7,6 @@ function ProfileBox({ image, name, type, isLock, _id }: any) {
   const handleNavigation = () => {
     if (type === "kid") {
       document.cookie = `profile = ${_id}; path=/`;
-      location.reload();
       router.push(`/kids`);
     } else {
       router.push(`/`);

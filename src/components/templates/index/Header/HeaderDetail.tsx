@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,6 +23,7 @@ function HeaderDetail({
   bookmarks,
 }: THeaderDetails) {
   const pathname = usePathname();
+  const [activeProfile, setActiveProfile] = useState<any>({});
   const [liked, setLiked] = useState(info.liked.includes(user?._id));
   const [userBookmarks, setUserBookmarks] = useState(bookmarks);
   const [disliked, setDisliked] = useState(info.disliked.includes(user?._id));
@@ -58,7 +59,6 @@ function HeaderDetail({
   };
 
   const handleAddToBookmark = async () => {
-
     setUserBookmarks([...bookmarks, info._id]);
     toast.success(`با موفقیت اضافه شد`);
     await addOrDeleteBookmark(info._id);
@@ -69,6 +69,15 @@ function HeaderDetail({
     toast.success(`با موفقیت حذف شد`);
     await addOrDeleteBookmark(info._id);
   };
+
+  useEffect(() => {
+    const getActiveProfile = async () => {
+      const res = await fetch(`/api/auth/profile`);
+      const profile = await res.json();
+      setActiveProfile(profile);
+    };
+    getActiveProfile();
+  }, []);
 
   return (
     <>
@@ -88,90 +97,100 @@ function HeaderDetail({
             {info.shortDesc}
           </p>
 
-          <div className="flex-center flex-col">
-            <div className="flex items-center flex-col md:flex-row  gap-y-5 justify-center md:justify-start gap-x-4 mt-4">
-              <Link
-                href={
-                  subscription?.hasSubscription
-                    ? `/${info.type === "film" ? "movie" : "series"}/${
-                        info.link
-                      }`
-                    : "/plans"
-                }
-                className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
-              >
-                <FaPlay />
-                {subscription?.hasSubscription ? "تماشای فیلم" : "خرید اشتراک"}
-              </Link>
-              <div className="flex items-center gap-x-4">
-                {!userBookmarks.includes(info._id) ? (
-                  <button
-                    onClick={handleAddToBookmark}
-                    className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <Plus />
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleRemoveFromBookmark}
-                    className="flex-center py-3 px-3 w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <IoCheckmarkSharp className="text-xl text-white" />
-                  </button>
-                )}
-                {liked ? (
-                  <button
-                    onClick={() => handleLike(info._id)}
-                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <ActiveLike className="fill-white stroke-white !w-[25px] !h-[25px]" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleLike(info._id)}
-                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <Like className="fill-white stroke-white" />
-                  </button>
-                )}
-                {disliked ? (
-                  <button
-                    onClick={() => handleDislike(info._id)}
-                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <ActiveLike
-                      isDislike
-                      className="fill-white stroke-white !w-[25px] !h-[25px]"
-                    />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleDislike(info._id)}
-                    className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
-                  >
-                    <Dislike className=" fill-white stroke-white" />
-                  </button>
-                )}
+          {activeProfile?.limitsMovies?.includes(info._id) ? (
+            <div className="bg-[#d95c5c] text-xs md:text-sm/[24px] py-4 px-4 rounded-md text-center">
+              کاربر گرامی، محتوای مورد نظر به علت محدودیت اعمال شده از جانب صاحب
+              حساب در دسترس نیست.
+            </div>
+          ) : (
+            <div className="flex-center flex-col">
+              <div className="flex items-center flex-col md:flex-row  gap-y-5 justify-center md:justify-start gap-x-4 mt-4">
+                <Link
+                  href={
+                    subscription?.hasSubscription
+                      ? `/${info.type === "film" ? "movie" : "series"}/${
+                          info.link
+                        }`
+                      : "/plans"
+                  }
+                  className="bg-white hover:bg-namava hover:text-white flex items-center gap-x-2 justify-between text-xs py-3 px-5 rounded-xl"
+                >
+                  <FaPlay />
+                  {subscription?.hasSubscription
+                    ? "تماشای فیلم"
+                    : "خرید اشتراک"}
+                </Link>
+                <div className="flex items-center gap-x-4">
+                  {!userBookmarks.includes(info._id) ? (
+                    <button
+                      onClick={handleAddToBookmark}
+                      className="flex-center py-3 px-3  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Plus />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleRemoveFromBookmark}
+                      className="flex-center py-3 px-3 w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <IoCheckmarkSharp className="text-xl text-white" />
+                    </button>
+                  )}
+                  {liked ? (
+                    <button
+                      onClick={() => handleLike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <ActiveLike className="fill-white stroke-white !w-[25px] !h-[25px]" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleLike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Like className="fill-white stroke-white" />
+                    </button>
+                  )}
+                  {disliked ? (
+                    <button
+                      onClick={() => handleDislike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <ActiveLike
+                        isDislike
+                        className="fill-white stroke-white !w-[25px] !h-[25px]"
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleDislike(info._id)}
+                      className="flex-center w-[49px] h-[49px]  bg-gray-500/35  rounded-full text-[13px]"
+                    >
+                      <Dislike className=" fill-white stroke-white" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-x-2 mt-5">
-              <span
-                className={`${
-                  age === 3
-                    ? "three"
-                    : age === 7
-                    ? "seven"
-                    : age === 12
-                    ? "twelve"
-                    : age === 15
-                    ? "fifteen"
-                    : "eighteen"
-                } flex-center text-sm rounded-full text-black font-bold px-1.5`}
-              >
-                {info.ageRange}+
-              </span>
-              <p className="text-xs">مناسب برای سنین بالای {age} سال</p>
-            </div>
+          )}
+
+          <div className="flex items-center gap-x-2 mt-5">
+            <span
+              className={`${
+                age === 3
+                  ? "three"
+                  : age === 7
+                  ? "seven"
+                  : age === 12
+                  ? "twelve"
+                  : age === 15
+                  ? "fifteen"
+                  : "eighteen"
+              } flex-center text-sm rounded-full text-black font-bold px-1.5`}
+            >
+              {info.ageRange}+
+            </span>
+            <p className="text-xs">مناسب برای سنین بالای {age} سال</p>
           </div>
         </div>
       ) : (

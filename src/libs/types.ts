@@ -37,7 +37,7 @@ export type TModal = {
   onPassword: any;
   title: string;
   desc: string;
-  onAction : any
+  onAction: any;
 };
 
 export type TComment = {
