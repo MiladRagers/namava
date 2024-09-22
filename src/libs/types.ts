@@ -33,11 +33,11 @@ export type TMovieSlider = {
 export type TModal = {
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   isShow: Boolean;
-  password: string;
-  onPassword: any;
-  title: string;
-  desc: string;
-  onAction: any;
+  password?: string;
+  onPassword?: any;
+  title?: string;
+  desc?: string;
+  onAction?: any;
 };
 
 export type TComment = {

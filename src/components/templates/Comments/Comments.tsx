@@ -140,7 +140,7 @@ function Comments({ isKid, user, movieId, comments, movieLink }: TComments) {
         </div>
       </div>
       {isShowLoginModal && (
-        <LoginModal isShow={isShowLoginModal} onClose={setIsShowLoginModal} />
+        <LoginModal isShow={isShowLoginModal} onClose={setIsShowLoginModal}  />
       )}
     </>
   );
