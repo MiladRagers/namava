@@ -754,7 +754,7 @@ export const getCollection = async (link: string) => {
     connectToDB();
     const collection = await CollcetionModel.findOne({ link }).populate(
       "movies",
-      "link title mainImage type showTime"
+      "link title mainImage type showTime contentType"
     );
 
     return collection;

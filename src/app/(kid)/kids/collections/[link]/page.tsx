@@ -8,6 +8,7 @@ async function page({ params }: TParams) {
   const collcetion = await getCollection(params.link as string);
   const { title, description, desktopBanner, movies, mobileBanner, mainImage } =
     collcetion;
+
   return (
     <>
       <div className="relative z-20 kid-layout min-h-[65vh] md:min-h-[100vh] text-white mt-16">
@@ -35,7 +36,7 @@ async function page({ params }: TParams) {
             className="w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full mb-2 mx-auto md:mx-0 md:mb-10"
           />
           <h1 className="text-lg text-center md:text-right md:text-3xl text-namavaBlack">
-           مجموعه فیلم های   {title}
+            مجموعه فیلم های {title}
           </h1>
           <p className="hidden md:block text-justify text-namavaBlack line-clamp-3 md:line-clamp-6 max-w-[673px] pt-5 text-sm md:text-base/[28px]">
             {description}
@@ -52,6 +53,7 @@ async function page({ params }: TParams) {
             link={movie.link}
             type={movie.type}
             showTime={movie.showTime}
+            contentType={movie.contentType}
             isLink
           />
         ))}

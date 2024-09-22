@@ -1,27 +1,36 @@
 "use client";
 import Heart from "@/src/icons/Heart";
+import { IMovie } from "@/src/libs/types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
-interface Movie {
-  image: string;
-  title: string;
-  link: string;
-  isLink?: boolean;
-  type: string;
-  showTime: string;
-}
-function Movie({ image, title, link, isLink, type, showTime }: Movie) {
+function Movie({
+  image,
+  title,
+  contentType,
+  link,
+  isLink,
+  type,
+  showTime,
+}: IMovie) {
   const router = useRouter();
   const pathname = usePathname();
   const handleMovieNavigation = async () => {
     if (isLink) {
       if (type === "film") {
-        router.push(`/movie/${link}`);
+        if (contentType === "adult") {
+          router.push(`/movie/${link}`);
+        } else {
+          router.push(`/kids/movie/${link}`);
+        }
       } else {
-        router.push(`/series/${link}`);
+        if (contentType === "adult") {
+          router.push(`/series/${link}`);
+        } else {
+          router.push(`/kids/series/${link}`);
+        }
       }
     }
   };
@@ -69,7 +78,7 @@ function Movie({ image, title, link, isLink, type, showTime }: Movie) {
         <div className="relative">
           <Image
             src={image}
-            alt="slide1.jpg"
+            alt={title}
             width={490}
             height={500}
             className="rounded-md w-full lg:w-full lg:h-[270px] object-cover md:w-auto h-[160px] md:h-auto"

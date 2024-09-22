@@ -1,9 +1,10 @@
+"use client";
 import { profileLinks } from "@/public/db";
 import ProfileArrow from "@/src/icons/ProfileArrow";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LuSettings } from "react-icons/lu";
 import Button from "../auth/Button/Button";
 import Logout from "./Logout";
@@ -16,6 +17,7 @@ type TProfileMenu = {
   user: any;
   activeProfile?: any;
   userSubscription?: { hasSubscription: boolean; remainingDays: number };
+  setActiveProfile: any;
 };
 
 function ProfileMenu({
@@ -24,9 +26,24 @@ function ProfileMenu({
   activeProfile,
   user,
   userSubscription,
+  setActiveProfile,
 }: TProfileMenu) {
+  const [profileId, setProfileId] = useState("");
   const url = usePathname();
-  const profileId = document?.cookie.split("=")[1];
+
+  useEffect(() => {
+    const getActiveProfile = async () => {
+      const res = await fetch(`/api/auth/profile`);
+      const result = await res.json();
+      setActiveProfile(result);
+    };
+    getActiveProfile();
+  }, []);
+
+  useEffect(() => {
+    const id = document.cookie.split("=")[1];
+    setProfileId(id);
+  }, []);
 
   return (
     <div
@@ -71,7 +88,6 @@ function ProfileMenu({
                     width={30}
                     height={30}
                     priority={false}
-                  
                     className="rounded-full"
                   />
                   <span>{activeProfile?.name}</span>

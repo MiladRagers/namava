@@ -241,3 +241,14 @@ export interface IPaymentGateway {
   title: string;
   discount: number;
 }
+
+
+export interface IMovie {
+  image: string;
+  title: string;
+  link: string;
+  isLink?: boolean;
+  type: string;
+  showTime: string;
+  contentType?: "adult" | "kid";
+}

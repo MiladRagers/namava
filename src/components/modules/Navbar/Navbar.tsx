@@ -53,16 +53,6 @@ function Navbar({ user, userSubscription }: any) {
     return () => document.removeEventListener("scroll", scrollHandler);
   }, [pathname]);
 
-  useEffect(() => {
-    const getActiveProfile = async () => {
-      const res = await fetch(`/api/auth/profile`);
-      const result = await res.json();
-
-      setActiveProfile(result);
-    };
-    getActiveProfile();
-  }, []);
-
   if (
     pathname.includes("/login") ||
     pathname.includes("/register") ||
@@ -180,6 +170,7 @@ function Navbar({ user, userSubscription }: any) {
                 user={user}
                 userSubscription={userSubscription}
                 activeProfile={activeProfile}
+                setActiveProfile={setActiveProfile}
               />
             </div>
           ) : (
