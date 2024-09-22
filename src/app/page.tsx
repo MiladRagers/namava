@@ -1,14 +1,14 @@
 import HeaderSlider from "@/src/components/templates/index/Header/Slider";
 import Slider from "@/src/components/templates/index/Slider/Slider";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import MiniSpinner from "../components/modules/spinner/MiniSpinner";
 import MainSlider from "../components/templates/index/mainSlider/MainSlider";
-import Loading from "../icons/Loading";
 import {
   checkUserProfile,
   checkUserSubscription,
   getAllSlidersMovies,
 } from "../libs/service/services";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
   const [slides, subscription, profile]: any = await Promise.all([
@@ -28,7 +28,7 @@ export default async function Home() {
         slides={JSON.parse(JSON.stringify(slides))}
       />
       <Slider slides={JSON.parse(JSON.stringify(slides))} />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<MiniSpinner />}>
         <MainSlider />
       </Suspense>
     </>
