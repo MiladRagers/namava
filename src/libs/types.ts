@@ -87,6 +87,7 @@ export interface TResponse {
 export type UserAuthContextType = {
   isLogin: boolean;
   userInfo: User | null;
+  activeProfile: any;
 };
 
 export interface User {
@@ -242,7 +243,6 @@ export interface IPaymentGateway {
   discount: number;
 }
 
-
 export interface IMovie {
   image: string;
   title: string;
@@ -252,3 +252,12 @@ export interface IMovie {
   showTime: string;
   contentType?: "adult" | "kid";
 }
+
+
+export type TProfileMenu = {
+  isShow: boolean;
+  onShow: React.Dispatch<React.SetStateAction<boolean>>;
+  user: any;
+  activeProfile?: any;
+  userSubscription?: { hasSubscription: boolean; remainingDays: number };
+};

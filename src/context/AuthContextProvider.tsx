@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { baseURL, UserAuthContextType } from "../libs/types";
+import { usePathname } from "next/navigation";
 
 const UserAuthContext = createContext({} as UserAuthContextType);
 
@@ -10,7 +11,9 @@ type TAuthContextProvider = {
 
 function AuthContextProvider({ children }: TAuthContextProvider) {
   const [userInfo, setUserInfo] = useState(null);
+  const [activeProfile, setActiveProfile] = useState<any>(null);
   const [isLogin, setIsLogin] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -18,7 +21,8 @@ function AuthContextProvider({ children }: TAuthContextProvider) {
 
       if (res.status === 200) {
         const userData = await res.json();
-        setUserInfo(userData);
+        setUserInfo(userData.user);
+        setActiveProfile(userData.currentProfile);
         setIsLogin(true);
       } else {
         setUserInfo(null);
@@ -27,10 +31,10 @@ function AuthContextProvider({ children }: TAuthContextProvider) {
     };
 
     getUserInfo();
-  }, []);
+  }, [pathname]);
 
   return (
-    <UserAuthContext.Provider value={{ userInfo, isLogin }}>
+    <UserAuthContext.Provider value={{ userInfo, isLogin, activeProfile }}>
       {children}
     </UserAuthContext.Provider>
   );

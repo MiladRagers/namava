@@ -10,9 +10,10 @@ import { usePathname } from "next/navigation";
 import KidLogo from "@/src/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
+import { useAuth } from "@/src/context/AuthContextProvider";
 function Navbar({ user, userSubscription }: any) {
+  const { activeProfile } = useAuth();
   const pathname = usePathname();
-  const [activeProfile, setActiveProfile] = useState<any>(null);
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
 
@@ -170,7 +171,7 @@ function Navbar({ user, userSubscription }: any) {
                 user={user}
                 userSubscription={userSubscription}
                 activeProfile={activeProfile}
-                setActiveProfile={setActiveProfile}
+                
               />
             </div>
           ) : (

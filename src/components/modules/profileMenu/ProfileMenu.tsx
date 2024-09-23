@@ -10,15 +10,9 @@ import Button from "../auth/Button/Button";
 import Logout from "./Logout";
 import ProfileBox from "./ProfileBox";
 import ProfileLink from "./ProfileLink";
+import { TProfileMenu } from "@/src/libs/types";
 
-type TProfileMenu = {
-  isShow: boolean;
-  onShow: React.Dispatch<React.SetStateAction<boolean>>;
-  user: any;
-  activeProfile?: any;
-  userSubscription?: { hasSubscription: boolean; remainingDays: number };
-  setActiveProfile: any;
-};
+
 
 function ProfileMenu({
   isShow,
@@ -26,19 +20,9 @@ function ProfileMenu({
   activeProfile,
   user,
   userSubscription,
-  setActiveProfile,
 }: TProfileMenu) {
   const [profileId, setProfileId] = useState("");
   const url = usePathname();
-
-  useEffect(() => {
-    const getActiveProfile = async () => {
-      const res = await fetch(`/api/auth/profile`);
-      const result = await res.json();
-      setActiveProfile(result);
-    };
-    getActiveProfile();
-  }, []);
 
   useEffect(() => {
     const id = document.cookie.split("=")[1];
