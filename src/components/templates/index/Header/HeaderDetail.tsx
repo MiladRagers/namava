@@ -14,6 +14,7 @@ import { FaPlay } from "react-icons/fa6";
 import { GrCircleInformation } from "react-icons/gr";
 import { addOrDeleteBookmark } from "@/src/libs/actions/bookmark";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { useAuth } from "@/src/context/AuthContextProvider";
 
 function HeaderDetail({
   isKid,
@@ -23,7 +24,7 @@ function HeaderDetail({
   bookmarks,
 }: THeaderDetails) {
   const pathname = usePathname();
-  const [activeProfile, setActiveProfile] = useState<any>({});
+  const { activeProfile } = useAuth();
   const [liked, setLiked] = useState(info.liked.includes(user?._id));
   const [userBookmarks, setUserBookmarks] = useState(bookmarks);
   const [disliked, setDisliked] = useState(info.disliked.includes(user?._id));
@@ -69,15 +70,6 @@ function HeaderDetail({
     toast.success(`با موفقیت حذف شد`);
     await addOrDeleteBookmark(info._id);
   };
-
-  useEffect(() => {
-    const getActiveProfile = async () => {
-      const res = await fetch(`/api/auth/profile`);
-      const profile = await res.json();
-      setActiveProfile(profile);
-    };
-    getActiveProfile();
-  }, []);
 
   return (
     <>

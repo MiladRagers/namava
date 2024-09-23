@@ -1044,11 +1044,31 @@ export const checkUserProfile = async () => {
     }
 
     const profileId = cookies().get("profile")?.value;
-   
 
     const currentProfile = await ProfileModel.findOne({ _id: profileId });
 
     return currentProfile || user.profiles[0]._id;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getMoviesByCategory = async (categoryId: string) => {
+  try {
+    const movies = await MovieModel.find({ isSlider: true })
+      .populate("actors", "name link")
+      .populate({
+        path: "category",
+        populate: {
+          path: "parrent",
+        },
+      });
+
+    const allMovies = movies.filter(
+      (movie) => String(movie.category.parrent._id) === categoryId
+    );
+
+    return allMovies;
   } catch (error) {
     return error;
   }
