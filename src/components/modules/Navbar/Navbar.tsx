@@ -11,8 +11,12 @@ import KidLogo from "@/src/icons/KidLogo";
 import Button from "../auth/Button/Button";
 import ProfileMenu from "../profileMenu/ProfileMenu";
 import { useAuth } from "@/src/context/AuthContextProvider";
+import useCategoryName from "@/src/hooks/useCategoryName";
 function Navbar({ user, userSubscription }: any) {
   const { activeProfile } = useAuth();
+  const category: any = useCategoryName();
+  console.log(category);
+
   const pathname = usePathname();
   const [isShowProfile, setIsShowProfile] = useState(false);
   let navBar = useRef<any>("");
@@ -113,7 +117,9 @@ function Navbar({ user, userSubscription }: any) {
                   </Link>
                 </li>
                 <li className={pathname.includes("category") ? "active" : ""}>
-                  <Link href={"/category"}>دسته بندی</Link>
+                  <Link href={"/category"}>
+                    دسته بندی {category ? `(${category?.title ?? ""})` : ""}
+                  </Link>
                 </li>
                 {user.role === "ADMIN" && (
                   <li>
@@ -171,7 +177,6 @@ function Navbar({ user, userSubscription }: any) {
                 user={user}
                 userSubscription={userSubscription}
                 activeProfile={activeProfile}
-                
               />
             </div>
           ) : (

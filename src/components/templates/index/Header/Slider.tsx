@@ -7,8 +7,6 @@ import Header from "./Header";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 function Slider({ slides, subscription }: any) {
-  console.log(slides);
-  
   const [swipe, setSwipe] = useState();
   return (
     <div>
