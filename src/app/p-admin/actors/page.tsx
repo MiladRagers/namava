@@ -4,7 +4,13 @@ import ActorsList from "@/src/components/templates/p-admin/actors/ActorsList";
 import AddNewActor from "@/src/components/templates/p-admin/actors/AddNewActor";
 import { getAllStars } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "بازیگران",
+  description: "از این صفحه میتوان برای مدیریت بازیگر  ها استفاده کرد",
+};
 
 async function ActorsPage({ searchParams }: TAdminPage) {
   const { stars, counts }: any = await getAllStars(

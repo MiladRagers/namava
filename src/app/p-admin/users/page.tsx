@@ -5,6 +5,13 @@ import UsersList from "@/src/components/templates/p-admin/users/UsersList";
 import { getAllUsers } from "@/src/libs/service/services";
 import Search from "@/src/components/modules/p-admin/Search";
 import { TAdminPage } from "@/src/libs/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "کاربران",
+  description: "از این صفحه میتوان برای مدیریت کاربران استفاده کرد",
+  keywords: "اضافه کردن ، حذف کردن ، ویرایش کردن",
+};
 
 async function UsersPage({ searchParams }: TAdminPage) {
   const { users, counts }: any = await getAllUsers(

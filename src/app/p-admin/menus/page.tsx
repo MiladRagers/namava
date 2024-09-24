@@ -4,7 +4,13 @@ import AddNewMenu from "@/src/components/templates/p-admin/menus/AddNewMenu";
 import MenusList from "@/src/components/templates/p-admin/menus/MenusList";
 import { getAllMenus } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "منو ها",
+  description: "از این صفحه میتوان برای مدیریت منو  ها استفاده کرد",
+};
 
 async function MenusPage({ searchParams }: TAdminPage) {
   const { allMenus, counts }: any = await getAllMenus(

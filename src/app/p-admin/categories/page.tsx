@@ -4,7 +4,13 @@ import AddCategories from "@/src/components/templates/p-admin/categories/AddCate
 import CategoriesList from "@/src/components/templates/p-admin/categories/CategoriesList";
 import { getAllCategories } from "@/src/libs/service/services";
 import { TAdminPage } from "@/src/libs/types";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "دسته بندی ها",
+  description: "از این صفحه میتوان برای مدیریت دسته بندی ها استفاده کرد",
+};
 
 async function CategoriesPage({ searchParams }: TAdminPage) {
   const { categories, counts }: any = await getAllCategories(
