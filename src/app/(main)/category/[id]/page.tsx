@@ -34,7 +34,7 @@ export default async function Home({ params }: TParams) {
       />
       <Slider slides={JSON.parse(JSON.stringify(slides))} />
       <Suspense fallback={<MiniSpinner />}>
-        <MainSlider />
+        <MainSlider categoryId={params.id as string} />
       </Suspense>
     </>
   );

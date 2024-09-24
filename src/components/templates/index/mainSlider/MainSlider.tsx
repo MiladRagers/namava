@@ -10,11 +10,11 @@ import {
 } from "@/src/libs/service/services";
 import { authUser } from "@/src/utils/serverHelper";
 
-async function MainSlider() {
+async function MainSlider({ categoryId }: { categoryId?: string }) {
   const [allStars, movies, collections, userBookmarks, userInfo]: any =
     await Promise.all([
       getStars(),
-      getMovies("adult"),
+      getMovies("adult" ,categoryId ),
       getAllCollectionSlider("adult"),
       getUserBookmarks(),
       authUser(),

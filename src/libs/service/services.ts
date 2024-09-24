@@ -356,7 +356,10 @@ export const getStarMovies = async (starId: string) => {
 
 // get all movies
 
-export const getMovies = async (contentType: "adult" | "kid") => {
+export const getMovies = async (
+  contentType: "adult" | "kid",
+  categoryId?: string
+) => {
   try {
     connectToDB();
 
@@ -366,10 +369,26 @@ export const getMovies = async (contentType: "adult" | "kid") => {
       filterObj = { contentType };
     }
 
-    const allMovies = await MovieModel.find(filterObj).populate(
-      "category actors",
-      "title link parrent link name"
-    );
+    let allMovies = null;
+    if (!categoryId) {
+      allMovies = await MovieModel.find(filterObj).populate(
+        "category actors",
+        "title link parrent link name"
+      );
+    } else {
+      const movies = await MovieModel.find(filterObj)
+        .populate("category actors", "title link parrent link name")
+        .populate({
+          path: "category",
+          populate: {
+            path: "parrent",
+          },
+        });
+
+      allMovies = movies.filter(
+        (movie) => String(movie.category.parrent._id) === categoryId
+      );
+    }
 
     const categorizeFilms = (films: any) => {
       const categorized: any = {};
