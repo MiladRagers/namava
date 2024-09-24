@@ -124,12 +124,7 @@ export const getSubCategory = async (
 export const getCategories = async () => {
   try {
     connectToDB();
-    const isAdmin = await checkIsAdmin();
-    if (!isAdmin) {
-      return {
-        message: "این بخش فقط برای کاربرانی با نقش ادمین مجاز است",
-      };
-    }
+
     const categories = await CategoryModel.find({ parrent: null });
 
     return categories;

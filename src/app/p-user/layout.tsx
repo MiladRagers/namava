@@ -3,7 +3,10 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "%s | پنل کاربری",
+  title: {
+    template: "%s | پنل کاربری",
+    default: "پنل کاربری",
+  },
   description:
     "در این پنل میتوانید اطلاعات و عملکرد و کارکرد اکانت خود را بررسی کنید",
 };
