@@ -1,6 +1,12 @@
-import Input from "@/src/components/modules/p-admin/Input";
 import Form from "@/src/components/templates/contact-us/Form";
-import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ارتباط با ما",
+  description:
+    "از طریق این صفحه میتوانید با ادمین های سایت و دهکده آنلاین نماوا در ارتباط باشید",
+  keywords :"ایمیل ، ارتباط ، تماس با ما ، پشتیبانی ، 24 ساعته ، شبانه روز"
+};
 
 function ContactUsPage() {
   return (
@@ -19,7 +25,7 @@ function ContactUsPage() {
         </div>
       </div>
 
-      <Form/>
+      <Form />
     </div>
   );
 }

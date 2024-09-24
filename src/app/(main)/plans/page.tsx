@@ -1,7 +1,13 @@
 import Plan from "@/src/components/modules/plans/Plan";
 import { getSubscriptions } from "@/src/libs/service/services";
+import { Metadata } from "next";
 import React from "react";
 import { ImWarning } from "react-icons/im";
+
+export const metadata: Metadata = {
+  title: "خرید اشتراک",
+  description: "از این بخش امکان خرید اشتراک وجود دارد",
+};
 
 async function page() {
   const subscriptions: any = await getSubscriptions();

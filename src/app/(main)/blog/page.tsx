@@ -2,9 +2,17 @@ import ArticleSlider from "@/src/components/templates/article/ArticleSlider";
 import MainSlider from "@/src/components/templates/article/MainSlider";
 import { getArticles } from "@/src/libs/service/services";
 import { TArticle } from "@/src/libs/types";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa6";
+
+export const metadata: Metadata = {
+  title: "مقاله های ما",
+  description:
+    "در این صفحه تمامی مقاله های سایت ما را مشاهده میکنید که هر یک از آنها در مورد یکی از آثار فیلم و سریال میباشد",
+  keywords: "مقاله ها ، خواندنی ، جالب ، راز آلود ",
+};
 
 async function page() {
   const articles: TArticle[] = await getArticles();

@@ -15,7 +15,6 @@ import useCategoryName from "@/src/hooks/useCategoryName";
 function Navbar({ user, userSubscription }: any) {
   const { activeProfile } = useAuth();
   const category: any = useCategoryName();
-  console.log(category);
 
   const pathname = usePathname();
   const [isShowProfile, setIsShowProfile] = useState(false);

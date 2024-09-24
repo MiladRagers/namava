@@ -4,6 +4,14 @@ import SearchBox from "@/src/components/templates/search/Search";
 import SearchMovie from "@/src/icons/SearchMovie";
 import { getAllSubcategories, searchMovies } from "@/src/libs/service/services";
 import { TSearchParams } from "@/src/libs/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "جستجو کنید",
+  description:
+    "در این صفحه امکان جستجو ، فیلتر کردن و مرتب سازی تمام فیلم و سریال های داخل سایت میباشد",
+  keywords: "سرچ ، جستجو ، فیلتر ، مرتب سازی",
+};
 
 async function SearchPage({ searchParams }: TSearchParams) {
   const [movies, categories]: any = await Promise.all([
@@ -63,12 +71,6 @@ async function SearchPage({ searchParams }: TSearchParams) {
       </div>
     </div>
   );
-}
-
-export async function generateMetadata() {
-  return {
-    title: "جستجو",
-  };
 }
 
 export default SearchPage;

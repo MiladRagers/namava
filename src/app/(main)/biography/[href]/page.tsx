@@ -2,9 +2,18 @@ import Movie from "@/src/components/modules/main/Movie/Movie";
 import ShowMore from "@/src/components/templates/biography/ShowMore";
 import { getStar, getStarMovies } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import Image from "next/image";
-import React from "react";
-import { FaChevronDown } from "react-icons/fa6";
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const { href } = params;
+  const { name, bio } = await getStar(href as string);
+  return {
+    title: `بیوگرافی ${name}`,
+    description: `${bio} در این صفحه بیوگرافی ستاره محبوب شما ${name} است پس بریم که داستان زندگی این سوپر استار رو بشنویم`,
+    keywords :"بیوگرافی ، بازیگر ، سوپر استار ، زندگی نامه",
+  };
+}
 
 async function page({ params }: TParams) {
   const { href } = params;

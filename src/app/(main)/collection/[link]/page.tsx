@@ -1,6 +1,7 @@
 import Movie from "@/src/components/modules/main/Movie/Movie";
 import { getCollection } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 
@@ -46,11 +47,21 @@ async function page({ params }: TParams) {
             type={movie.type}
             showTime={movie.showTime}
             isLink
+            contentType={movie.contentType}
           />
         ))}
       </div>
     </>
   );
+}
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const collection = await getCollection(params.link as string);
+  return {
+    title: `${collection.title}`,
+    description: `${collection.description}`,
+    keywords: `مجموعه فیلم ، ${collection.title} ، یکپارچه ، اطلاعات ، لیست`,
+  };
 }
 
 export default page;

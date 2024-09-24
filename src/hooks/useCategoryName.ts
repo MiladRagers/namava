@@ -2,7 +2,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function useCategoryName() {
-  const [category, setCategory] = useState<any>({});
+  const [category, setCategory] = useState<any>(null);
   const { id } = useParams();
   const pathname = usePathname();
 
@@ -13,10 +13,12 @@ function useCategoryName() {
       setCategory(category);
     };
 
-    getCategoryName();
+    if (id) {
+      getCategoryName();
+    }
   }, [pathname]);
 
-  if (Object.keys(category).length > 1) {
+  if (category) {
     return category;
   } else {
     return false;

@@ -1,7 +1,15 @@
 import EditProfileBox from "@/src/components/modules/profileBox/EditProfileBox";
 import Logo from "@/src/icons/Logo";
 import { authUser } from "@/src/utils/serverHelper";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "ویرایش پروفایل",
+  description: "از این صفحه میتوانید برای ویرایش یک پروفایل استفاده کنید",
+  keywords: "پروفایل ، ویرایش ، رایگان",
+};
+
 
 async function EditProfile() {
   const user = await authUser();

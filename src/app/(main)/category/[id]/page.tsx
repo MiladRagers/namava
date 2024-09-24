@@ -5,9 +5,11 @@ import Slider from "@/src/components/templates/index/Slider/Slider";
 import {
   checkUserProfile,
   checkUserSubscription,
+  getCategoryInfo,
   getMoviesByCategory,
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
@@ -38,4 +40,13 @@ export default async function Home({ params }: TParams) {
       </Suspense>
     </>
   );
+}
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const category: any = await getCategoryInfo(params.id as string);
+  return {
+    title: `فیلم و سریال ${category.title}`,
+    description: `${category.description}`,
+    keywords: `${category.title} ، اطلاعات ، فیلتر ، دسته بندی`,
+  };
 }

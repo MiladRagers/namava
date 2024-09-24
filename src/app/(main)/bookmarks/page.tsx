@@ -4,6 +4,16 @@ import {
   getAllUserLikesMovie,
   getUserBookmarks,
 } from "@/src/libs/service/services";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "مورد علاقه ها | نشان شده ها",
+  description :"در این صفحه میتوانید فیلم هایی که آنها رو نشان کردید رو مشاهده کنید",
+  keywords :"نشان شده ، مورد علاقه"
+};
+
+
 async function Bookmarks() {
   const [bookmarks, likesMovies] = await Promise.all([
     getUserBookmarks(),

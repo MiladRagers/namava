@@ -5,12 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaLink, FaTelegram, FaTwitter, FaWhatsapp } from "react-icons/fa6";
-
 import dynamic from "next/dynamic";
+import { Metadata } from "next";
 const ArticleBody = dynamic(
   () => import("@/src/components/templates/article/ArticleBody"),
   { ssr: false }
 );
+
+
 async function ArticlePage({ params }: TParams) {
   const article = await getArticle(params.link as string);
 
@@ -124,5 +126,16 @@ async function ArticlePage({ params }: TParams) {
     </>
   );
 }
+
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const article = await getArticle(params.link as string);
+  return {
+    title: `${article.title}`,
+    description: `محتوا مقاله مورد نظر در این صفحه قابل خواندن میباشد`,
+    keywords:"مقاله ، محتوا ، کلمات کلیدی ، نویسنده",
+  };
+}
+
 
 export default ArticlePage;

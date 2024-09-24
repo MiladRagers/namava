@@ -1,6 +1,13 @@
 import CategoryCard from "@/src/components/templates/category/CategoryCard";
-import { getAllCategories, getCategories } from "@/src/libs/service/services";
-import React from "react";
+import { getCategories } from "@/src/libs/service/services";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "دسته بندی ها",
+  description:
+    "این صفحه مربوط به انواع دسته بندی ها در سایت نماوا میباشد و شما میتوانید فیلم های خود را در هر دسته بندی بت پروتکب مشاهدهکنید",
+  keywords: "دسته بندی ، اکشن ، کمدی",
+};
 
 async function Categories() {
   const categories: any = await getCategories();
@@ -19,12 +26,6 @@ async function Categories() {
       </div>
     </div>
   );
-}
-
-export async function generateMetadata() {
-  return {
-    title: "دسته بندی ها",
-  };
 }
 
 export default Categories;

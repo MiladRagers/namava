@@ -2,6 +2,7 @@ import Button from "@/src/components/modules/auth/Button/Button";
 import PaymentGateway from "@/src/components/modules/plans/PaymentGateway";
 import { getSubscription } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 async function page({ params }: TParams) {
@@ -55,10 +56,18 @@ async function page({ params }: TParams) {
         time={time}
         title={title}
         discount={(price * discount) / 100}
-        
       />
     </div>
   );
+}
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const subscription = await getSubscription(params?.id as string);
+  return {
+    title: `${subscription.title}`,
+    description: `صفحه خرید اشتراک ${subscription.title} در نماوا`,
+    keywords: `خرید اشتراک ، ${subscription.title}`,
+  };
 }
 
 export default page;

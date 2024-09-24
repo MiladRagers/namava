@@ -5,14 +5,22 @@ import KidLogo from "@/src/icons/KidLogo";
 import LapTop from "@/src/icons/LapTop";
 import TMobile from "@/src/icons/TMobile";
 import Tv from "@/src/icons/Tv";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "درباره سایت ما",
+  description:
+    "تماشای آنلاین جدیدترین فیلم ها، سریال ها، انیمیشن ها و همچنین پخش زنده‌ مسابقات ورزشی در نماوا. برای مشاهده‌ی محتوای دلخواهتان ثبت‌نام کنید. ما در دهکده نماوا به تمامی نیاز های شما برای تماشای فیلم و سریال های روز داریم ، هر نوع فیلمی یا سریالی در هر نوع ژانر در این دهکده تماشایی وجود دارد فقط کافی است راجع آن سرچ و جستجو داشته باشید ، ارادتمند شما میلاد سلامیان",
+  keywords:
+    "نماوا ، تماشای فیلم ، سریال ، آنلاین ، بدون محدودیت ، رایگان ، اشتراکی",
+};
 
 function AboutUs() {
   return (
     <div className="relative">
       <Header
-      
         className="!h-[380px]"
         isImage
         img="/images/intro.jpg"
@@ -323,9 +331,15 @@ function AboutUs() {
               پشتیبانی ۲۴ ساعته
             </h3>
             <div className="px-[46px] py-[24px] rounded-xl space-y-6 bg-namavaBlack max-w-[592px] mx-auto mt-10">
-              <h2 className="text-base md:text-xl mx-auto text-center">هفت روز هفته، ۲۴ ساعت شبانه‌روز پاسخگوی شما هستیم.</h2>
-              <h4 className="text-base md:text-lg mx-auto text-center">شماره تماس : ۹۱۰۰۰۱۱۱-۰۲۱</h4>
-              <h6 className="text-base md:text-lg mx-auto text-center">ایمیل : support@namava.ir</h6>
+              <h2 className="text-base md:text-xl mx-auto text-center">
+                هفت روز هفته، ۲۴ ساعت شبانه‌روز پاسخگوی شما هستیم.
+              </h2>
+              <h4 className="text-base md:text-lg mx-auto text-center">
+                شماره تماس : ۹۱۰۰۰۱۱۱-۰۲۱
+              </h4>
+              <h6 className="text-base md:text-lg mx-auto text-center">
+                ایمیل : support@namava.ir
+              </h6>
             </div>
           </div>
         </div>

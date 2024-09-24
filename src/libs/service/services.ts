@@ -1092,3 +1092,14 @@ export const getMoviesByCategory = async (categoryId: string) => {
     return error;
   }
 };
+
+export const getCategoryInfo = async (categoryId: string) => {
+  try {
+    await connectToDB();
+    const category = await CategoryModel.findOne({ _id: categoryId });
+
+    return category;
+  } catch (error) {
+    return error;
+  }
+};

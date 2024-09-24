@@ -9,7 +9,10 @@ import { checkUserSubscription } from "../libs/service/services";
 import AuthContextProvider from "../context/AuthContextProvider";
 
 export const metadata: Metadata = {
-  title: "تماشای آنلاین فیلم و سریال | نماوا",
+  title: {
+    template: '%s | نماوا',
+    default: 'تماشای آنلاین فیلم و سریال | نماوا',
+  },
   description:
     "تماشای آنلاین فیلم و سریال در سایت فیلم نماوا. دانلود و تماشای آنلاین جدیدترین فیلم و سریال ایرانی و خارجی با قابلیت دانلود رایگان در نماوا.",
   icons: {

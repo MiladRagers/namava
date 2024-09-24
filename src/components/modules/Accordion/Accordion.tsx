@@ -24,18 +24,26 @@ function Accordion({ title, children }: AccordionTitle) {
   }, [isOpen]);
 
   return (
-    <div className="text-white bg-[#222327] px-3 py-5  md:p-6 md:rounded-xl">
+    <div
+      onClick={handleToggle}
+      className="text-white bg-[#222327] px-3 py-5  md:p-6 md:rounded-xl md:cursor-pointer"
+    >
       <div
-        onClick={handleToggle}
-        className={`md:cursor-pointer flex items-center justify-between ${isOpen ?"pb-2 border-b border-b-gray-500" :""} `}
+        className={`md:cursor-pointer flex items-center justify-between ${
+          isOpen ? "pb-2 border-b border-b-gray-500" : ""
+        } `}
       >
-        <p className="text-xs/[25px] md:text-base max-w-[260px] md:max-w-[600px]">{title}</p>
+        <p className="text-xs/[25px] md:text-base max-w-[260px] md:max-w-[600px]">
+          {title}
+        </p>
         <BiChevronDown
           className={`text-2xl ${isOpen ? "rotate-180" : ""} transition-all`}
         />
       </div>
       <div className={`submenu`} ref={subMenuRef}>
-        <p className="pt-3 text-xs/[25px] md:text-sm/[25px] text-gray-300">{children}</p>
+        <p className="pt-3 text-xs/[25px] md:text-sm/[25px] text-gray-300">
+          {children}
+        </p>
       </div>
     </div>
   );

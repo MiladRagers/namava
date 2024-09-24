@@ -12,6 +12,7 @@ import {
 } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
 import { authUser } from "@/src/utils/serverHelper";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -84,6 +85,15 @@ async function page({ params }: TParams) {
       </section>
     </>
   );
+}
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const movie : any = await  getMovie(params.link);
+  return {
+    title: `${movie.title}`,
+    description: `${movie.shortDesc}`,
+    keywords:`فیلم ، سریال ، نماوا ، ${movie.title}`,
+  };
 }
 
 export default page;
