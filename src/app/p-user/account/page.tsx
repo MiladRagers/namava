@@ -1,11 +1,12 @@
 import { checkUserSubscription } from "@/src/libs/service/services";
 import { formatDate } from "@/src/utils/funcs";
 import { authUser } from "@/src/utils/serverHelper";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 
 async function page() {
-  const [user, subscription] : any = await Promise.all([
+  const [user, subscription]: any = await Promise.all([
     authUser(),
     checkUserSubscription(),
   ]);
@@ -90,6 +91,14 @@ async function page() {
       </div>
     </>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await authUser();
+  return {
+    title: `اطلاعات ${user.name}`,
+    description: `در این صفحه میتوانید اطلاعات خودتان (${user.name}) را مشاهده کنید`,
+  };
 }
 
 export default page;

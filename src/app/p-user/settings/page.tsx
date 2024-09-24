@@ -1,7 +1,12 @@
 import { authUser } from "@/src/utils/serverHelper";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title :"تنظیمات حساب کاربری"
+}
 
 async function page() {
   const user = await authUser();

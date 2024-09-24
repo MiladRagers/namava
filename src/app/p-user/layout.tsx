@@ -1,7 +1,13 @@
 import Sidebar from "@/src/components/modules/p-user/Sidebar";
+import { Metadata } from "next";
 import React from "react";
-import { authUser } from "@/src/utils/serverHelper";
-import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "%s | پنل کاربری",
+  description:
+    "در این پنل میتوانید اطلاعات و عملکرد و کارکرد اکانت خود را بررسی کنید",
+};
+
 function UserLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex  gap-x-5 container my-28">

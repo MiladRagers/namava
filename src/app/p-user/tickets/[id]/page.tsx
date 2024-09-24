@@ -2,6 +2,7 @@ import AnswerBox from "@/src/components/templates/p-admin/tickets/AnswerBox";
 import SendAnswerToTicket from "@/src/components/templates/p-user/SendAnswerToTicket";
 import { getSpecificTicketInfo } from "@/src/libs/service/services";
 import { TParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import React from "react";
 
 async function page({ params }: TParams) {
@@ -50,6 +51,14 @@ async function page({ params }: TParams) {
       )}
     </div>
   );
+}
+
+export async function generateMetadata({ params }: TParams): Promise<Metadata> {
+  const { ticketInfo }: any = await getSpecificTicketInfo(params?.id as string);
+  return {
+    title: `${ticketInfo.title}`,
+    description: `برای مشاهده و ادامه بحث با ${ticketInfo.title}`,
+  };
 }
 
 export default page;

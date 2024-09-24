@@ -6,9 +6,14 @@ import {
   getAllUserTicket
 } from "@/src/libs/service/services";
 import { IUserTicket, TSearchParams } from "@/src/libs/types";
+import { Metadata } from "next";
 import { FaClosedCaptioning } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import { MdAccessTime } from "react-icons/md";
+
+export const metadata: Metadata = {
+  title :"لیست تیکت ها"
+}
 
 async function page({ searchParams }: TSearchParams) {
   const { tickets, ticketsCount, answeredCount, pendingCount, closeCount } =

@@ -1,5 +1,10 @@
 import EditUser from "@/src/components/templates/p-user/EditUser";
 import EditUserInfo from "@/src/components/templates/p-user/EditUserInfo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ویرایش اطلاعات کاربری",
+};
 
 function page() {
   return (

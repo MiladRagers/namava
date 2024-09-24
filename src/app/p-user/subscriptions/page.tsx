@@ -2,9 +2,15 @@ import Button from "@/src/components/modules/auth/Button/Button";
 import { checkUserSubscription } from "@/src/libs/service/services";
 import { formatDate } from "@/src/utils/funcs";
 import { authUser } from "@/src/utils/serverHelper";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { FaShop } from "react-icons/fa6";
+
+export const metadata: Metadata = {
+  title :"وضعیت اشتراک"
+}
+
 
 async function page() {
   const [user, subscription]: any = await Promise.all([

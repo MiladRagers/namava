@@ -1,6 +1,11 @@
 import SendTicketForm from "@/src/components/templates/p-user/SendTicketForm";
 import { getAllDepartments } from "@/src/libs/service/services";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "ارسال تیکت جدید ",
+};
 
 async function page() {
   const departments = await getAllDepartments();
