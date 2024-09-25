@@ -12,8 +12,6 @@ import ProfileBox from "./ProfileBox";
 import ProfileLink from "./ProfileLink";
 import { TProfileMenu } from "@/src/libs/types";
 
-
-
 function ProfileMenu({
   isShow,
   onShow,

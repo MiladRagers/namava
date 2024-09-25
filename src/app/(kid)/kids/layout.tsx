@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "تماشای آنلاین انیمیشن، انیمه و کارتون - نماوا",
   description:
     "نماوا کودک، آرشیو بهترین انیمیشن ها، بهترین انیمه های سریالی، انیمه دوبله فارسی، انیمیشن و کارتون، انیمه سینمایی، انیمه ژاپنی، بهترین انیمه های جهان، انیمه و انیمیشن",
-  icons: {
-    icon: "/images/namava.png",
-  },
 };
 
 function KidLayout({ children }: { children: React.ReactNode }) {

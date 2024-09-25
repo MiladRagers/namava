@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     const currentProfile = await ProfileModel.findOne({ _id: profileId });
 
     return Response.json({
-      currentProfile: currentProfile || user.profiles[0]._id,
+      currentProfile: currentProfile || user.profiles[0],
       user,
     });
   } catch (error) {
