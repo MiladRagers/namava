@@ -80,7 +80,7 @@ function HeaderDetail({
             width={1920}
             height={1080}
             alt={info.title}
-            className="max-w-[160px] md:max-w-[250px]  max-h-[160px] mx-auto "
+            className="max-w-[160px] md:max-w-[200px]  max-h-[200px] mx-auto "
           />
           <h2 className="text-center font-IranMedium text-lg md:text-xl">
             {info.title}

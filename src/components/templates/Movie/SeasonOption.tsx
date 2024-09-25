@@ -23,7 +23,7 @@ function SeasonOption({ seasons }: any) {
       <p className="font-Dana text-sm md:text-base">فصل {activeSeason}</p>
       <FaChevronDown className="text-base md:text-lg" />
 
-      <div className="absolute flex py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75 justify-center bg-white top-12 right-0 z-20 w-[150px] rounded-md">
+      <div className="absolute flex py-4 opacity-0 shadow invisible group-hover:opacity-100 group-hover:visible transition-all delay-75 justify-center bg-white top-12 right-0 z-20 w-[150px] rounded-md">
         <ul className="flex flex-col gap-y-4 justify-between cursor-pointer hover:child:text-namava">
           {seasons.map((season: any, index: number) => (
             <li

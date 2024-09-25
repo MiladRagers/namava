@@ -126,7 +126,7 @@ function Navbar({ user, userSubscription }: any) {
                   </li>
                 )}
                 <li>
-                  <Link href={"/kids"}>کودکان</Link>
+                  <Link href={"/profile-list"}>کودکان</Link>
                 </li>
                 <li>
                   <Link

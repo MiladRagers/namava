@@ -319,12 +319,21 @@ export const getMovie = async (link: any) => {
 
 // get related movies
 
-export const getRealedMovies = async (category: string, id: string) => {
+export const getRealedMovies = async (
+  category: string,
+  id: string,
+  type?: string
+) => {
   try {
+    let filterObj = {};
+    if (type) {
+      filterObj = { contentType: type };
+    }
     connectToDB();
     const relatedMovies = await MovieModel.find({
       category,
       _id: { $ne: id },
+      ...filterObj,
     }).populate("actors", "link name");
 
     return relatedMovies;

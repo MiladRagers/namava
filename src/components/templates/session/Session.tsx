@@ -10,7 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { FaChevronDown, FaHeart, FaPlay } from "react-icons/fa6";
 
-function Session({ episode, user, link }: any) {
+function Session({ episode, user, link, isKid }: any) {
   const subMenuRef = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [liked, setLiked] = useState(episode.liked.includes(user));
@@ -83,62 +83,100 @@ function Session({ episode, user, link }: any) {
             className="w-full rounded-md h-[223px]"
           />
           <div className="absolute z-20 bottom-4 px-4 right-0 left-0 flex items-center justify-between">
-            <span className="bg-zinc-900 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all text-white text-sm px-2 py-1 rounded-md font-Dana">
+            <span
+              className={`bg-zinc-900 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all text-white text-sm px-2 py-1 rounded-md font-Dana`}
+            >
               {episode.time} دقیقه
             </span>
             <FaPlay className="text-[#aaa] text-xl show-hover" />
           </div>
 
-          <div className="bg-black/50 absolute inset-0 show-hover"></div>
+          <div className="bg-black/50 rounded-md absolute inset-0 show-hover"></div>
         </div>
-        <div className="mt-2 space-y-3 text-white">
+        <div
+          className={`mt-2 space-y-3 ${isKid ? "text-black" : "text-white"}`}
+        >
           <h3 className="text-sm">{episode.title}</h3>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-1 flex-row-reverse">
               <span className="block mt-1 font-Dana">
                 {calculateLikePercentage(episode).toFixed(0)}%
               </span>
-              <Heart />
+              <Heart className="fill-red-600" />
             </div>
             <div className="flex items-center gap-x-2">
               {liked ? (
                 <button
                   onClick={() => handleLike(episode._id)}
-                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                  className={`flex-center py-3 px-3 w-[33px] h-[33px] ${
+                    isKid ? "bg-[#f2f2f2]" : "bg-gray-500/35 "
+                  } rounded-full text-[13px]`}
                 >
-                  <ActiveLike className="!flex-shrink-0 w-[24px] h-[24px] fill-white stroke-white" />
+                  <ActiveLike
+                    isKid={isKid}
+                    className={`!flex-shrink-0 w-[24px] h-[24px] ${
+                      isKid
+                        ? "!fill-black !stroke-black"
+                        : "!fill-white !stroke-white "
+                    }`}
+                  />
                 </button>
               ) : (
                 <button
                   onClick={() => handleLike(episode._id)}
-                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                  className={`flex-center py-3 px-3 w-[33px] h-[33px] rounded-full text-[13px] ${
+                    isKid ? "bg-[#f2f2f2]" : "bg-gray-500/35 "
+                  }`}
                 >
-                  <Like className="!flex-shrink-0 fill-white stroke-white" />
+                  <Like
+                    className={`!flex-shrink-0 ${
+                      isKid
+                        ? "fill-black stroke-black"
+                        : "fill-white stroke-white "
+                    }`}
+                  />
                 </button>
               )}
               {disliked ? (
                 <button
                   onClick={() => handleDislike(episode._id)}
-                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                  className={`flex-center py-3 px-3 w-[33px] h-[33px]  ${
+                    isKid ? "bg-[#f2f2f2]" : "bg-gray-500/35 "
+                  }  rounded-full text-[13px]`}
                 >
                   <ActiveLike
                     isDislike
-                    className="!flex-shrink-0 w-[24px] h-[24px] fill-white stroke-white"
+                    isKid={isKid}
+                    className={`!flex-shrink-0 w-[24px] h-[24px] ${
+                      isKid
+                        ? "!fill-black !stroke-black"
+                        : "!fill-white !stroke-white "
+                    }`}
                   />
                 </button>
               ) : (
                 <button
                   onClick={() => handleDislike(episode._id)}
-                  className="flex-center py-3 px-3 w-[33px] h-[33px]  bg-gray-500/35  rounded-full text-[13px]"
+                  className={`flex-center py-3 px-3 w-[33px] h-[33px]  ${
+                    isKid ? "bg-[#f2f2f2]" : "bg-gray-500/35 "
+                  } rounded-full text-[13px]`}
                 >
-                  <Dislike className="!flex-shrink-0 fill-white stroke-white" />
+                  <Dislike
+                    className={`!flex-shrink-0 ${
+                      isKid
+                        ? "fill-black stroke-black"
+                        : "fill-white stroke-white "
+                    }`}
+                  />
                 </button>
               )}
             </div>
           </div>
-          <p className="text-xs/[25px] text-[#aaaaaa] line-clamp-2">
-            {episode.description}
-          </p>
+          {!isKid && (
+            <p className="text-xs/[25px] text-[#aaaaaa] line-clamp-2">
+              {episode.description}
+            </p>
+          )}
         </div>
       </div>
       <div className="block md:hidden bg-[#222327] rounded-md">

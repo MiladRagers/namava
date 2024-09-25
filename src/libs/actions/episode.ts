@@ -206,7 +206,7 @@ export const likeEpisode = async (
         }
       );
     }
-    revalidatePath(`/series/${seriesLink}`);
+    // revalidatePath(`/series/${seriesLink}`);
 
     return {
       message: "با موفقیت این قسمت لایک شد",
@@ -290,7 +290,7 @@ export const dislikeEpisode = async (
       );
     }
 
-    revalidatePath(`/series/${seriesLink}`);
+    // revalidatePath(`/series/${seriesLink}`);
 
     return {
       message: "با موفقیت این قسمت دیس لایک شد",
