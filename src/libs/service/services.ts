@@ -282,10 +282,14 @@ export const getAllMovies = async (page: number, search: string) => {
 
 // get sliders for home page
 
-export const getAllSlidersMovies = async () => {
+export const getAllSlidersMovies = async (type?: string) => {
   try {
+    let filterObj = {};
+    if (type) {
+      filterObj = { type };
+    }
     connectToDB();
-    return await MovieModel.find({ isSlider: true }).populate(
+    return await MovieModel.find({ isSlider: true, ...filterObj }).populate(
       "actors",
       "name link"
     );
@@ -362,7 +366,8 @@ export const getStarMovies = async (starId: string) => {
 
 export const getMovies = async (
   contentType: "adult" | "kid",
-  categoryId?: string
+  categoryId?: string,
+  type?: "film" | "series"
 ) => {
   try {
     connectToDB();
@@ -371,6 +376,10 @@ export const getMovies = async (
 
     if (contentType === "kid") {
       filterObj = { contentType };
+    }
+
+    if (type) {
+      filterObj = { ...filterObj, type };
     }
 
     let allMovies = null;

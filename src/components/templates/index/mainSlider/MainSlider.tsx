@@ -9,12 +9,13 @@ import {
   getUserBookmarks,
 } from "@/src/libs/service/services";
 import { authUser } from "@/src/utils/serverHelper";
+import { TMainSlider } from "@/src/libs/types";
 
-async function MainSlider({ categoryId }: { categoryId?: string }) {
+async function MainSlider({ categoryId, type }: TMainSlider) {
   const [allStars, movies, collections, userBookmarks, userInfo]: any =
     await Promise.all([
       getStars(),
-      getMovies("adult" ,categoryId ),
+      getMovies("adult", categoryId, type),
       getAllCollectionSlider("adult"),
       getUserBookmarks(),
       authUser(),

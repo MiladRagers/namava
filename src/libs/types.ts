@@ -253,11 +253,15 @@ export interface IMovie {
   contentType?: "adult" | "kid";
 }
 
-
 export type TProfileMenu = {
   isShow: boolean;
   onShow: React.Dispatch<React.SetStateAction<boolean>>;
   user: any;
   activeProfile?: any;
   userSubscription?: { hasSubscription: boolean; remainingDays: number };
+};
+
+export type TMainSlider = {
+  categoryId?: string;
+  type?: "film" | "series";
 };

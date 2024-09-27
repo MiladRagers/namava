@@ -1,19 +1,36 @@
-import MovieSlider from "@/src/components/modules/main/MovieSlider/MovieSlider";
-import Header from "@/src/components/templates/index/Header/Header";
+import HeaderSlider from "@/src/components/templates/index/Header/Slider";
 import Slider from "@/src/components/templates/index/Slider/Slider";
-import StarsSlider from "@/src/components/modules/main/StarsSlider/StarsSlider";
-import Collections from "@/src/components/templates/index/Collections/Collections";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import MiniSpinner from "@/src/components/modules/spinner/MiniSpinner";
+import MainSlider from "@/src/components/templates/index/mainSlider/MainSlider";
+import {
+  checkUserProfile,
+  checkUserSubscription,
+  getAllSlidersMovies,
+} from "@/src/libs/service/services";
 
-export default function Home() {
+export default async function Home() {
+  const [slides, subscription, profile]: any = await Promise.all([
+    getAllSlidersMovies("film"),
+    checkUserSubscription(),
+    checkUserProfile(),
+  ]);
+
+  if (profile.type === "kid") {
+    redirect("/kids");
+  }
+
   return (
     <>
-      <Header />
-      <Slider />
-      <div className="text-white">
-        {/* <MovieSlider title="پرطرفدار ها" />
-        <StarsSlider title="ستارگان" />
-        <Collections title="مجموعه فیلم ها" /> */}
-      </div>
+      <HeaderSlider
+        subscription={JSON.parse(JSON.stringify(subscription))}
+        slides={JSON.parse(JSON.stringify(slides))}
+      />
+      <Slider slides={JSON.parse(JSON.stringify(slides))} />
+      <Suspense fallback={<MiniSpinner />}>
+        <MainSlider type="film"  />
+      </Suspense>
     </>
   );
 }
