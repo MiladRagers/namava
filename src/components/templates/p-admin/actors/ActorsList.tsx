@@ -6,6 +6,7 @@ import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
 import { deleteActor } from "@/src/libs/actions/star";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaPencil, FaTrash } from "react-icons/fa6";
@@ -69,7 +70,9 @@ function ActorsList({ stars, counts }: { stars: any; counts: number }) {
                       <ConfirmModal onAction={deleteStar} id={star._id} />
                     </Modal.Page>
                   </Modal>
-                  <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  <Link href={`/p-admin/actors/${star._id}`}>
+                    <FaPencil className="text-sky-600 text-base md:text-lg" />
+                  </Link>
                 </div>
               </td>
             </Table.Row>

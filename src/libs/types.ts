@@ -266,7 +266,7 @@ export type TMainSlider = {
   type?: "film" | "series";
 };
 
-export interface IAddUser {
+export type TForm = {
   status?: "create" | "update";
-  user?: any;
-}
+  [key: string]: any;
+};

@@ -10,10 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createNewUser, updateUser } from "@/src/libs/actions/user";
 import toast from "react-hot-toast";
 import Spinner from "@/src/components/modules/spinner/Spinner";
-import { IAddUser } from "@/src/libs/types";
+import { TForm } from "@/src/libs/types";
 import { useRouter } from "next/navigation";
 
-function AddUser({ status = "create", user }: IAddUser) {
+function AddUser({ status = "create", user }: TForm) {
   const router = useRouter();
   const { _id, ...info } = user ?? {};
 

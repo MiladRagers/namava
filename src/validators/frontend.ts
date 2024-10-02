@@ -140,6 +140,27 @@ export const Actor = z.object({
   ),
 });
 
+export const UpdateActor = z.object({
+  name: z
+    .string({ required_error: "نام ستاره را وارد کنید" })
+    .min(3, { message: "نام حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "نام باید 30 کاراکتر داشته باشد" }),
+  bio: z
+    .string()
+    .min(8, { message: "بیوگرافی حداقل باید 8 کارکتر داشته باشد" })
+    .max(3000, {
+      message: "بیوگرافی حداکثر باید 3000 کارکتر داشته باشد",
+    }),
+
+  link: z
+    .string({ required_error: "لینک را وارد کنید" })
+    .min(3, { message: "لینک  حداقل باید 3 کارکتر باشد" })
+    .max(30, { message: "لینک  باید 30 کاراکتر داشته باشد" }),
+  twitter: z.string().optional(),
+  instagram: z.string().optional(),
+  image: z.any(),
+});
+
 export type TActor = z.infer<typeof Actor>;
 
 // movie schema

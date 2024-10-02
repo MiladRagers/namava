@@ -214,6 +214,16 @@ export const getStar = async (link: string) => {
   }
 };
 
+export const getActor = async (id: string) => {
+  try {
+    await connectToDB();
+    const star = await StarModel.findOne({ _id: id });
+    return star;
+  } catch (error) {
+    return error;
+  }
+};
+
 // get all menus with pagination and search
 export const getAllMenus = async (page: number, search: string) => {
   try {
