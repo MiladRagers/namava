@@ -7,6 +7,7 @@ import { updateUser } from "@/src/libs/actions/user";
 import { TForm } from "@/src/libs/types";
 import { Actor, TActor, UpdateActor } from "@/src/validators/frontend";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -15,6 +16,7 @@ import { RiArticleLine } from "react-icons/ri";
 
 function AddNewActor({ status, actor }: TForm) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { _id, ...info } = actor ?? {};
 
   const {
@@ -23,7 +25,7 @@ function AddNewActor({ status, actor }: TForm) {
     reset,
     formState: { errors, isValid },
   } = useForm<TActor>({
-    resolver: zodResolver(UpdateActor),
+    resolver: zodResolver(status === "create" ? Actor : UpdateActor),
     defaultValues: actor ? info : {},
   });
 
@@ -51,11 +53,10 @@ function AddNewActor({ status, actor }: TForm) {
       const res = await updateActor(actor._id, actorData);
       if (res?.status === 200) {
         setIsLoading(false);
-        reset();
+        router.push("/p-admin/actors");
         return toast.success(`${res?.message}`);
       }
       toast.error(`${res?.message}`);
-      reset();
     }
   };
   return (
