@@ -48,7 +48,7 @@ export const deleteUser = async (userId: string) => {
 export const createNewUser = async (body: TUser) => {
   try {
     connectToDB();
-    const { name, username, phone, email, password, bio } = body;
+    const { name, username, phone, email, password, biography } = body;
 
     const validateFields = User.safeParse(body);
 
@@ -78,7 +78,7 @@ export const createNewUser = async (body: TUser) => {
       email,
       password: hashedPassword,
       phone,
-      biography: bio,
+      biography,
     });
 
     const profiles = [
@@ -185,7 +185,7 @@ export const updateUser = async (
       };
     }
 
-    revalidatePath(`/p-admin/users/${user._id}`);
+    revalidatePath(`/p-admin/users`);
 
     return {
       message: "کاربر مورد نظر با موفقیت آپدیت شد",

@@ -1,18 +1,22 @@
 "use client";
 import Button from "@/src/components/modules/auth/Button/Button";
 import Input from "@/src/components/modules/p-admin/Input";
-import { TUser, User } from "@/src/validators/frontend";
+import { TUser, UpdateUserSchema, User } from "@/src/validators/frontend";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserAstronaut } from "react-icons/fa";
 import { FaEnvelope, FaInfo, FaLock, FaPhone, FaUser } from "react-icons/fa6";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createNewUser } from "@/src/libs/actions/user";
+import { createNewUser, updateUser } from "@/src/libs/actions/user";
 import toast from "react-hot-toast";
 import Spinner from "@/src/components/modules/spinner/Spinner";
 import { IAddUser } from "@/src/libs/types";
+import { useRouter } from "next/navigation";
 
-function AddUser({ status = "create" }: IAddUser) {
+function AddUser({ status = "create", user }: IAddUser) {
+  const router = useRouter();
+  const { _id, ...info } = user ?? {};
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -20,18 +24,30 @@ function AddUser({ status = "create" }: IAddUser) {
     reset,
     formState: { errors, isValid },
   } = useForm<TUser>({
-    resolver: zodResolver(User),
+    resolver: zodResolver(user ? UpdateUserSchema : User),
+    defaultValues: info,
   });
 
   const submitHandler = async (data: TUser) => {
     setIsLoading(true);
-    const res = await createNewUser(data);
-    if (res?.status === 201) {
-      setIsLoading(false);
-      reset();
-      return toast.success(`${res?.message}`);
+    if (status === "create") {
+      const res = await createNewUser(data);
+      if (res?.status === 201) {
+        setIsLoading(false);
+        reset();
+        return toast.success(`${res?.message}`);
+      }
+      toast.error(`${res?.message}`);
+    } else {
+      const res = await updateUser(_id, data);
+      if (res?.status === 200) {
+        setIsLoading(false);
+        reset();
+        router.push("/p-admin/users");
+        return toast.success(`${res?.message}`);
+      }
+      toast.error(`${res?.message}`);
     }
-    toast.error(`${res?.message}`);
     setIsLoading(false);
   };
   return (
@@ -100,7 +116,7 @@ function AddUser({ status = "create" }: IAddUser) {
         errors={errors}
         register={register}
         icon={<FaInfo className={`text-xl`} />}
-        name="bio"
+        name="biography"
         title="بیوگرافی خلاصه"
         disable={isLoading}
       />

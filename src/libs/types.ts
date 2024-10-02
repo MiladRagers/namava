@@ -48,7 +48,7 @@ export type TComment = {
 };
 
 export type TParams = {
-  params: { [key: string]: string | string[] | undefined };
+  params?: { [key: string]: string | string[] | undefined };
   searchParams?: { [key: string]: string };
 };
 
@@ -268,4 +268,5 @@ export type TMainSlider = {
 
 export interface IAddUser {
   status?: "create" | "update";
+  user?: any;
 }

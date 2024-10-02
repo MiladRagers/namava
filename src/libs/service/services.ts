@@ -1116,3 +1116,15 @@ export const getCategoryInfo = async (categoryId: string) => {
     return error;
   }
 };
+
+export const getUserInfo = async (id: string) => {
+  try {
+    const user = await UserModel.findOne(
+      { _id: id },
+      "name username phone email biography"
+    );
+    return user;
+  } catch (error) {
+    return error;
+  }
+};
