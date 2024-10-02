@@ -28,9 +28,7 @@ export const User = z.object({
       message: " رمز عبور باید حداکثر 30 کاراکتر داشته باشد",
     }),
 
-  biography: z.string().max(1000, {
-    message: "بیوگرافی حداکثر باید 1000 کارکتر داشته باشد",
-  }),
+  biography: z.string().optional(),
 });
 
 export type TUser = z.infer<typeof User>;
