@@ -265,3 +265,7 @@ export type TMainSlider = {
   categoryId?: string;
   type?: "film" | "series";
 };
+
+export interface IAddUser {
+  status?: "create" | "update";
+}

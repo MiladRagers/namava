@@ -10,7 +10,6 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "کاربران",
   description: "از این صفحه میتوان برای مدیریت کاربران استفاده کرد",
-  keywords: "اضافه کردن ، حذف کردن ، ویرایش کردن",
 };
 
 async function UsersPage({ searchParams }: TAdminPage) {

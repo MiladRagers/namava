@@ -6,6 +6,7 @@ import Pagination from "@/src/components/modules/pagination/Pagination";
 import Table from "@/src/components/modules/table/Table";
 import { changeUserRole, deleteUser } from "@/src/libs/actions/user";
 import { getRemainingDays } from "@/src/utils/funcs";
+import Link from "next/link";
 import React, { useOptimistic } from "react";
 import toast from "react-hot-toast";
 import { FaCheck, FaPencil, FaTrash, FaXmark } from "react-icons/fa6";
@@ -96,7 +97,9 @@ function UsersList({ users, counts }: TUser) {
                     />
                   </Modal.Page>
                 </Modal>
-                <FaPencil className="text-sky-600 text-base md:text-lg" />
+                <Link href={`/p-admin/users/${user._id}`}>
+                  <FaPencil className="text-sky-600 text-base md:text-lg" />
+                </Link>
               </td>
             </Table.Row>
           ))}

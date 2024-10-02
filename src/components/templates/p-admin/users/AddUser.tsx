@@ -10,8 +10,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createNewUser } from "@/src/libs/actions/user";
 import toast from "react-hot-toast";
 import Spinner from "@/src/components/modules/spinner/Spinner";
+import { IAddUser } from "@/src/libs/types";
 
-function AddUser() {
+function AddUser({ status = "create" }: IAddUser) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -22,7 +23,7 @@ function AddUser() {
     resolver: zodResolver(User),
   });
 
-  const createNewUserHandler = async (data: TUser) => {
+  const submitHandler = async (data: TUser) => {
     setIsLoading(true);
     const res = await createNewUser(data);
     if (res?.status === 201) {
@@ -35,7 +36,7 @@ function AddUser() {
   };
   return (
     <form
-      onSubmit={handleSubmit(createNewUserHandler)}
+      onSubmit={handleSubmit(submitHandler)}
       className="bg-namavaBlack rounded-lg p-6 shadow my-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6"
     >
       <Input
@@ -110,7 +111,11 @@ function AddUser() {
           disabled={isLoading}
           className={`${isValid ? "" : "!bg-slate-600 "} h-[44px]`}
         >
-          {isLoading ? <Spinner /> : "ایجاد کاربر"}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            `${status === "create" ? "ایجاد کاربر" : "ویرایش کاربر"}`
+          )}
         </Button>
         <Button className="bg-red-700" onClick={() => reset()}>
           لغو

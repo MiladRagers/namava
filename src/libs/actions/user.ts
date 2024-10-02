@@ -7,12 +7,13 @@ import { isValidObjectId } from "mongoose";
 import { TUser, User } from "@/src/validators/frontend";
 import { hashPassword } from "@/src/utils/auth";
 import { checkIsAdmin } from "@/src/utils/serverHelper";
+import { TResponse } from "../types";
 
 export const deleteUser = async (userId: string) => {
   try {
     connectToDB();
 
-    if (!isValidObjectId) {
+    if (!isValidObjectId(userId)) {
       return {
         message: "ایدی مد نظر معتبر نمی باشد",
         status: 422,
@@ -139,6 +140,55 @@ export const changeUserRole = async (id: string, role: string) => {
 
     return {
       message: "نقش کاربر با موفقیت تغییر کرد",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      message: "اتصال اینترنت خود را بررسی کنید",
+      status: 500,
+    };
+  }
+};
+
+export const updateUser = async (
+  userId: string,
+  data: any
+): Promise<TResponse> => {
+  try {
+    if (!isValidObjectId(userId)) {
+      return {
+        message: "ایدی مد نظر معتبر نمی باشد",
+        status: 422,
+      };
+    }
+
+    const hashedPassword = await hashPassword(data.password);
+
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          name: data.name,
+          username: data.username,
+          email: data.email,
+          password: hashedPassword,
+          phone: data.phone,
+          biography: data.biography,
+        },
+      }
+    );
+
+    if (!user) {
+      return {
+        message: "کاربر مورد نظر برای آپدیت یافت نشد",
+        status: 404,
+      };
+    }
+
+    revalidatePath(`/p-admin/users/${user._id}`);
+
+    return {
+      message: "کاربر مورد نظر با موفقیت آپدیت شد",
       status: 200,
     };
   } catch (error) {
